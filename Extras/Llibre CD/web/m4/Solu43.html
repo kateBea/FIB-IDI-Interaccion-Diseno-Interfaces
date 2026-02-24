@@ -1,0 +1,68 @@
+<html lang="CA">
+<HEAD><TITLE>M4.Exercisis.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+</HEAD>
+
+<BODY>
+<A NAME="inici"></a>
+<br>
+
+<div class=tit2>Solució exercici 4.3</div>
+
+    <P>Primer hem de dur el punt <I>A</i> a l'origen amb una
+ translació <IMG WIDTH="32" HEIGHT="25" ALIGN="MIDDLE" BORDER="0"
+ SRC="imatges/S43-img1.gif" ALT="$T_{-A}$">, el que portarà al punt
+ <I>A</i> a l'origen de coordenades i al punt <I>B</i> a la posició
+ <I>(4, -1, -8)</i>. A continuació girarem al voltant de l'eix
+ <i>z</i> amb una rotació <IMG WIDTH="110" HEIGHT="31" ALIGN="MIDDLE"
+ BORDER="0" SRC="imatges/S43-img2.gif"
+ ALT="$R_z(\sin^{-1}(\frac{1}{\sqrt{17}}))$">, el que durà al punt
+ <I>B</i> al pla <I>xz</i>, deixant al punt <I>A</i> fix. Finalment
+ girarem al voltant de l'eix <i>y</i> amb una rotació <IMG WIDTH="109"
+ HEIGHT="31" ALIGN="MIDDLE" BORDER="0" SRC="imatges/S43-img3.gif"
+ ALT="$R_y(-\sin^{-1}(\frac{8}{9})) $">, el que tornarà a deixar fix
+ el punt <I>A</i>, però durà al punt <I>B</i> a la posició demanada a
+ l'enunciat. </P>
+
+    <P> Les matrius corresponents són:
+<div class=formula><IMG WIDTH="159" HEIGHT="81"
+ SRC="imatges/S43-img4.gif"
+ ALT="\begin{displaymath}
+T_{-A}=\begin{bmatrix}
+1 & 0 & 0 & -2 \\  0 & 1 & 0 & -1 \\  0 & 0 & 1 & -3 \\  0 & 0 & 0 & 1 \end{bmatrix}\end{displaymath}"></div>
+
+<div class=formula><IMG WIDTH="281" HEIGHT="87"
+ SRC="imatges/S43-img5.gif"
+ ALT="\begin{displaymath}
+R_z(\sin^{-1}(\frac{1}{\sqrt{17}}))=\begin{bmatrix}
+ \frac{4...
+ ...7}} & 0 & 0 \\  0 & 0 & 1 & 0 \\  0 & 0 & 0 & 1
+ \end{bmatrix}\end{displaymath}">
+</div>
+
+<p class=noind>i
+
+<div class=formula>
+<IMG WIDTH="263" HEIGHT="88"
+ SRC="imatges/S43-img6.gif"
+ ALT="\begin{displaymath}
+R_y(-\sin^{-1}(\frac{8}{9}))=\begin{bmatrix}
+ \frac{\sqrt{17...
+ ...{9} & 0 & \frac{\sqrt{17}}{9} & 0\\  0 & 0 & 0 & 1\end{bmatrix}\end{displaymath}">
+</div>
+
+<P> Podeu comprovar que el resultat d'aplicar la primera al punt <I>B</i> (en coordenades homogènies) és <I>(4,-1,-8,1)</i>, el resultat d'aplicar la segona a aquest resultat és <I>(17<sup>&frac12;</sup>,0,-8,1)</i>, i el resultat d'aplicar la tercera matriu a aquest darrer és <I>(9,0,0,1)</i> tal com es demanava.
+
+<P> Naturalment podeu també multiplicar les matrius entre sí per a obtenir una única transformació que relitzi la tasca demanada. La matriu resultant és
+<div class=formula><IMG WIDTH="328" HEIGHT="112"
+ SRC="imatges/S43-img7.gif"
+ ALT="\begin{displaymath}
+\left [\begin {array}{cccc} 4/9&-1/9&-{\frac {8}{9}}&{\frac ...
+ ...3}}\,\sqrt {17}\\ \noalign{\medskip}0&0&0&1\end {array}\right ]\end{displaymath}">
+</div>
+
+
+<p align=right><a href='javascript:this.close();'>tancar</a>
+</BODY>
+</HTML>

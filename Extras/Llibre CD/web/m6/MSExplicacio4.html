@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M6.1 Procés de visualització 3D.MapaSensible.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("vis3D","estr");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+<a href="MSTransmet3.html">[Anterior]</a>
+<a href="MatriuPersOrto.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Subprocessos.
+<span class=tit2>Transformació Ortogonal / Perspectiva</span>
+</div>
+
+<P>
+Aquest procés modifica les coordenades dels vèrtexs del model
+transformat deformant els objectes de l'escena. A la sortida, la
+piràmide de visió s'ha transformat en un prisma rectangular
+normalitzat, en que la coordenada z varia entre -1 (en el pla zProp) i
++1 (en el pla zLluny); les coordenades x,y també varien entre -1 i +1
+independentment del valor de la coordenada z. Evidentment, la
+transformació a aplicar és diferent segons el tipus de càmera. Si
+estem en tipus axonomètric, l'únic que cal fer és un escalat uniforme de
+les coordenades per a que tant la
+<A CLASS="glossari" HREF="javascript:glossari('Fin2D.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">finestra 2D</A> com l'intèrval zProp-zLluny passin a estar normalitzats entre -1 i +1. En canvi, si el
+tipus de càmera és perspectiva, la transformació ha de deformar
+l'espai interior a la <A CLASS="glossari" HREF="javascript:glossari('PiramVis.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">piràmide de visió</A> per a convertir-lo en un
+espai prismàtic normalitzat. Aquesta deformació de l'espai deforma
+tots els objectes de dins de la piràmide, de manera que els més
+llunyans queden més petits en relació als més propers. En altres
+paraules, la imatge que es veu projectada des del punt O abans de la
+transformació de perspectiva és la mateixa que s'obté observant des de
+l'infinit - en projecció axonomètrica - l'escena deformada.
+
+<p>
+El model geomètric final queda modificat, però només pel que fa a les
+coordenades dels vèrtexs. La informació topològica continguda a les
+taules de cares i arestes del <A CLASS="glossari" HREF="javascript:glossari('ModelTr.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">model transformat</A> es manté
+invariant. Al model resultant li direm <A CLASS="glossari" HREF="javascript:glossari('ModelObs.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">model de l'observador</A>.
+
+<br><br>
+<DIV CLASS="nav">
+<a href="MSTransmet3.html">[Anterior]</a>
+<a href="MatriuPersOrto.html">[Següent]</a>
+</div>
+</BODY>
+</HTML>

@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M7.1 Procés de visualització 2D.Sistemes de coordenades.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("vis3D","proc");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+[Anterior]
+<a href="SCAp2.html">[Següent]</a>
+<a href="object.html">[Apartat anterior]</a>
+</div>
+<br><br>
+
+<div class=tit1>Procés de visualització 3D</div>
+
+<P>
+El procés de visualització fa les transformacions i operacions
+necessàries per veure en pantalla el que es veuria desde la <A
+CLASS="glossari"
+HREF="javascript:glossari('camara.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">càmera virtual</A> .  El
+resultat apareix a una <A CLASS="glossari"
+HREF="javascript:glossari('Vista.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">vista</A> dins la <A
+CLASS="glossari"
+HREF="javascript:glossari('FinGraf.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">finestra gràfica</A> (la
+vista pot representar-se a un tros de la finestra gràfica però
+habitualment ocupa tota la finestra).
+
+<P>
+Dins del procés de visualització hi ha dues etapes, que s'anomenen
+procés de visualització 3D i 2D. El procés de visualització 3D inclou
+les transformacions que parteixen del model 3D de l'escena i generen
+la geometria de la projecció 2D que veurem en pantalla, encara en
+coordenades de l'aplicació. El <a href="../m7/main71.html">procés de
+visualització 2D</A> (que es veu en el següent capítol) parteix
+d'aquesta darrera projecció 2D, la transforma a coordenades de
+dispositiu i aplica totes les operacions de realisme i rasterització
+necessàries per obtenir la imatge final a la vista dins la finestra
+gràfica. En aquest capítol ens centrarem en el procés de visualització
+3D.
+
+<div class=tit2>Sistemes de coordenades</div>
+
+<UL>
+<LI><B>Sistema de coordenades de l'aplicació:</B> és el sistema de
+coordenades que ha servit per modelar l'escena. Tant el seu origen de
+coordenades com la direcció i orientació dels seus eixos s'han definit
+durant la fase de modelatge, i són independents de la posició de
+l'observador. Podeu veure un exemple de <A HREF="../m6/SCAp2.html"
+target="principal">Sistema de coordenades de l'aplicació</A>.
+</LI>
+<LI><B>Sistema de coordenades de l'observador:</B> Aquest sistema de
+coordenades està lligat a la càmera i per tant a l'observador.
+L'observador el veu centrat a la vista, amb l'eix x horitzontal i
+l'eix y vertical. En canvi el sistema de coordenades de l'aplicació
+apareix a la vista en una posició arbitrària a l'espai, funció de la
+posició i orientació de la càmera.  <!-- El següent exemple no és ben
+bé el que voldriem.... @@@@ Podeu veure un exemple de <a
+href="../m6/main62.html">Sistema de coordenades de l'observador</A>.
+-->
+</LI>
+</UL>
+
+
+<br><br>
+<DIV CLASS="nav">
+[Anterior]
+<a href="SCAp2.html">[Següent]</a>
+<a href="object.html">[Apartat anterior]</a>
+</div>
+</BODY>
+</HTML>

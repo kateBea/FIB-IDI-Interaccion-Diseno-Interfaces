@@ -1,0 +1,106 @@
+<html>
+<head>
+	<title>onsoc</title>
+	<SCRIPT LANGUAGE="JavaScript1.2">
+		var CapAct;
+
+		var img;
+
+		function getElement (nom)
+		{
+			var elem;
+
+			if (document.getElementByID)
+			{
+				elem = document.getElementById(nom);
+			}
+			else if (document.all)
+			{
+				// Codi Internet Explorer
+
+				elem = document.all[nom];
+			}
+			else if (document.layers)
+			{
+				elem = document.layers[nom];
+			}
+
+			return elem;
+		}
+
+
+		function amaga (elem)
+		{
+			if (elem.style)
+			{
+				// Codi Internet Explorer
+
+				elem.style.visibility = "hidden";
+			}
+			else
+			{
+				elem.visibility = "hidden";
+			}
+		}
+
+
+		function visible (elem)
+		{
+			if (elem.style)
+			{
+				// Codi Internet Explorer
+
+				elem.style.visibility = "visible";
+			}
+			else
+			{
+				elem.visibility = "visible";
+			}
+		}
+
+
+		function init()
+		{
+			CapAct = "intro";
+
+			if (document.getElementById)
+			{
+				img = document.getElementById("titol");
+			}
+			else if (document.all)
+			{
+				// Codi Internet Explorer
+
+				img = document.all["titol"];
+			}
+		}
+
+
+		function passara (Cap)
+		{
+			if (Cap != CapAct)
+			{
+				CapAct = Cap;
+
+				if ((CapAct == "") || (CapAct == "intro"))
+				{
+					img.src = "imatges/heads/null.gif";
+				}
+				else
+				{
+					img.src = "imatges/heads/" + Cap + ".jpg";
+				}
+			}
+		}
+	</SCRIPT>
+</head>
+
+<body BGCOLOR="#336699" TOPMARGIN="0" onload="init();">
+	<table BORDER="0" WIDTH="100%">
+		<tr>
+			<td ALIGN="LEFT" VALIGN="TOP" height="29"><img name="titol" id="titol" src="imatges/heads/null.gif" alt="" border="0" title="titol"></td>
+			<td ALIGN="RIGHT" VALIGN="TOP" height="29"><img src="imatges/heads/logopalt.gif" alt="" height="26" width="85" border="0"> </td>
+		</tr>
+	</table>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("realvirt","visester");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m5d01t06t01.html">[Anterior]</a>
+<a href="m5d01t06t03.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Visió estereoscòpica.
+<span class=tit2>Càlcul del parell estereoscòpic.</span>
+<span class=tit3>Configuracions possibles</span>
+</div>
+
+<p>Com hem dit abans, els paràmetres de la càmera virtual depenen fortament de la posició de la pantalla
+real respecte l'observador
+real. Així doncs distingirem entre aquestes tres configuracions:</p>
+
+<ul>
+  <li><b>Pantalla fixa amb head-tracking</b>
+
+  <br>Aquesta és la configuració que adopten els sistemes estereoscòpics
+  basats en projecció, com ara la CAVE o les taules estereoscòpiques. Es
+  caracteritza perquè <b>les pantalles de projecció són estàtiques </b>i
+  perquè el sistema coneix en tot moment la <b>posició dels ulls </b>de l'observador.
+<br><br></li>
+  <li><b>Pantalla mòbil amb head-tracking</b>
+
+  <br>Aquesta és la configuració dels cascos estereoscòpics. Es caracteritza
+  perquè <b>les pantalles segueixen els moviments del cap de l'usuari</b>, de
+  forma que sempre estan situades davant dels seus ulls, i perquè el sistema
+  coneix en tot moment la <b>posició i orientació del cap</b> de l'usuari.
+<br><br></li>
+  <li><b>Pantalla clàssica sense tracking</b>
+
+  <br>Aquesta és la configuració dels sistemes de realitat virtual de baix
+  cost, doncs no requereix cap dispositiu de realitat virtual especialitzat. Es
+  caracteritza perquè <b>no s'utilitza cap sistema de posicionament</b> (<i>tracking</i>),
+  per la qual cosa el sistema no disposa de dades sobre la posició real de l'usuari.
+<br></li>
+</ul>
+
+<p>En tots els casos volem fer servir el model clàssic de càmera virtual.
+Recordem que el model de càmera virtual d'OpenGL inclou aquests paràmetres:</p>
+
+<ul>
+  <b>
+  <li>Paràmetres per la transformació de visualització </b>(és a dir, per
+  fer el pas de coordenades de
+    l'aplicació a coordenades de l'observador):&nbsp;
+  <ul>
+    <li>Posició de l'observador <b>eye,</b></li>
+    <li>Centre de l'escena
+  <b>center,&nbsp;</b></li>
+    <li>Vector cap amunt <b>up.</li>
+  </ul>
+  </li>
+</ul>
+</b>
+
+<ul>
+  <b>
+  <li>Paràmetres per la transformació de perspectiva </b>(és a dir, per fer
+  el pas de coordenades de l'observador
+    a coordenades normalitzades):
+  <ul>
+    <li>Distància del pla de retallat
+      anterior <b>near</b>,&nbsp;</li>
+    <li>Distància del pla de retallat posterior <b>far</b>,&nbsp;</li>
+    <li>Coordenades <b>left</b>, <b>right</b>, <b>bottom</b> i <b>top</b> de la
+      base anterior de la piràmide de visió.</li>
+  </ul>
+  </li>
+</ul>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m5d01t06t01.html">[Anterior]</a>
+<a href="m5d01t06t03.html">[Següent]</a>
+</div>
+</body>
+</html>

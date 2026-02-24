@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","ombres");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m3b18_OmbresProjExercicis.html">[Anterior]</a>
+<a href="m3b20t10_OmbresOpenGL.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Ombres.
+<span class=tit2>Càlcul per volums d'ombres</span>
+</div>
+
+<p> En aquest cas, l'algorisme es basa en considerar que les ombres
+que generen els objectes de l'escena són volums cònics o
+piramidals. Aquest mètode és útil quan l'ombra es projecta sobre
+moltes superfícies o bé sobre objectes complexes amb un nombre elevat
+de cares planes. Observeu per exemple la següent escena:
+
+<br>
+<div align=center><img src="imatges/ShadowsWithShadowVolume.png"></div>
+
+<p> A l'escena veieu una habitació amb tres objectes i una font de
+llum. Els tres objectes són el triangle vermell, el con i l'esfera de
+color marró. La font de llum és puntual, i es troba al centre de la
+petita esfera que trobem al damunt del triangle. Fixeu-vos que l'ombra
+del triangle es projecta sobre els altres dos objectes (con i esfera)
+a més de projectar-se sobre el terra texturat i les parets. Les ombres
+no planes que es generen sobre el con i l'esfera no les podem generar
+amb el mètode de projecció d'ombres, ens cal algun algorisme més
+sofisticat. Veurem ara com fer-ho amb la tècnica dels volums d'ombra.
+
+<p>Un volum d'ombra (<i>shadow volume</i>) és el volum invisible de
+l'espai que queda a l'ombra d'un objecte.  En objectes polièdrics, és
+un volum piramidal (tronc de piràmide) definit per la unió de la font
+de llum amb els vèrtexs de la silueta de l'objecte que produeix
+l'ombra quan el veiem des d'aquesta font de llum. A la següent figura,
+l'objecte que produeix l'ombra és el triangle, i la silueta des del
+focus de llum és ell mateix. La figura ens mostra el tros de volum que
+veiem dins l'habitació:
+
+<br>
+<div align=center><img src="imatges/SolidShadowVolume.png"></div>
+
+<p>En tot cas, en lloc de treballar amb el volum piramidal
+semi-infinit, el que farem serà considerar el volum intersecció amb el
+fustrum de visió, que és ja finit. A les arestes de la silueta de
+l'objecte que produeix l'ombra les anomenarem arestes del contorn. El
+volum d'ombra es sosté sobre les arestes del contorn i separa els
+polígons que veuen la font dels que no la veuen.
+
+<p>Un cop construïts els <i>shadow volumes</i>, podem dir que un
+polígon qualsevol de l'escena és a l'ombra si es troba dins del
+<i>shadow volume</i>.  Si etiquetem els polígons laterals de la
+piràmide del volum d'ombra (els polígons que es formem unint el focus
+de llum amb cada una de les arestes del contorn) com "polígons de
+cara" i "polígons d'esquena" respecte el punt de vista, podem dir que
+un punt d'un polígon de l'escena és a l'ombra si entre ell i el punt
+de vista, el segment recte que els uneix travessa més polígons de cara
+que polígons d'esquena.  Fixeu-vos, a la figura següent, què passa amb
+les parts del con i de l'esfera que són a l'ombra i amb les que no hi
+són:
+
+<br>
+<div align=center><img src="imatges/SemitranspSolidVolume.png"></div>
+<br>
+
+
+<h2>Subapartats:</h2>
+
+<UL>
+	<LI><a href="m3b20t10_OmbresOpenGL.html" target="principal">Programació de volums d'ombra en OpenGL</a></LI>
+	<LI><a href="m3b20t20_OmbresExercicis.html" target="principal">Exemples i exercicis</a></LI>
+	<LI><a href="m3b20t30_OmbresVolFinal.html" target="principal">Volums d'ombra: consideracions finals</a></LI>
+</UL>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m3b18_OmbresProjExercicis.html">[Anterior]</a>
+<a href="m3b20t10_OmbresOpenGL.html">[Següent]</a>
+</div>
+</body>
+</html>

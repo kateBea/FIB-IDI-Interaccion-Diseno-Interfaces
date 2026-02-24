@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("realvirt","arquit");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m5b01t01_ArqComponents.html">[Anterior]</a>
+<a href="m5b01t03_ArqNivells.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Arquitectura.
+<span class=tit2>Funcionament d'un sistema de realitat virtual</span>
+</div>
+
+<p>El funcionament d'un sistema típic de realitat virtual, en
+funció dels elements hardware i software descrits anteriorment, es descriu a
+continuació.</p>
+
+<p>Les accions de l'usuari són enregistrades en temps real
+pels <b>perifèrics d'entrada</b> o sensors. Un requeriment bàsic és
+capturar la posició del cap de l'usuari (segons el sistema de visualització,
+bastarà conèixer la posició del cap o necessitarem també la seva orientació
+en l'espai), encara que també és freqüent capturar els moviments de la mà
+i dels dits de la mà. Aquesta informació s'envia al computador, on es
+processada pels mòduls de recollida i <b>tractament de dades d'entrada</b>.
+Un cop les accions de l'usuari estan en un format adient, s'utilitzen a la
+part de <b>simulació</b>, tant per introduir possibles canvis en el món virtual
+(per exemple, l'usuari ha mogut una cadira i aquest canvi s'ha de reflectir
+en el model geomètric) com per generar les imatges, sons i altres dades per
+completar la simulació sensorial. En el cas de la simulació visual, els
+algorismes de <b>síntesi d'imatges</b> calculen una imatge al frame buffer
+amb els paràmetres de càmera virtual corresponents a la posició i orientació
+del cap de l'usuari. La informació digital del frame buffer és tradueix en
+un senyal de vídeo per la placa gràfica i aquest senyal es tradueix en una
+imatge física en el dispositiu de visualització. El mateix passa amb els
+estímuls per la resta dels sentits, que són calculats pels algorismes de
+simulació, traduïts en senyals digitals pel hardware i finalment convertits en
+estímuls físics pels <b>dispositius de sortida</b>.</p>
+
+<div ALIGN="center"><img border="0" src="imatges/arquitecturas.jpg" width="550" height="383"></div>
+
+<p>Les etapes descrites anteriorment completen un cicle que s'ha
+de repetir contínuament el més ràpidament possible com perquè l'usuari
+sigui incapaç de percebre el retard. En aquest sentit, cal distingir entre les <b>freqüències
+d'actualització</b> (freqüència amb la que els sensors envien les dades de
+posició, freqüència amb que es repinten les imatges...) i el <b>temps de
+latència </b>(que és el temps que passa des que es produeix un
+esdeveniment, com per exemple un moviment del cap, fins que té resposta per
+part del sistema i es visualitza la imatge amb el nou punt de vista). Encara que
+estan molt relacionades, cal tenir present la diferència entre ambdues
+magnituds, com posa de manifest la següent comparació. Un sistema amb una
+freqüència d'actualització molt elevada, com són 60 Hz, però un temps de
+latència també molt gran, per exemple 4 segons, serà capaç de detectar
+moviments ràpids de l'usuari (doncs es prenen mostres de la seva posició
+cada 1/60 de segon), però des que l'usuari fa un moviment del cap fins a
+que rep la imatge corresponent passa prou temps com perquè es pugui parlar d'interactivitat.
+En canvi, un sistema amb una freqüència d'actualització de 10 Hz però una
+latència de 0.2 segons, serà més interactiu, encara que les imatges es
+percebran a salts i no com una seqüència contínua.</p>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m5b01t01_ArqComponents.html">[Anterior]</a>
+<a href="m5b01t03_ArqNivells.html">[Següent]</a>
+</div>
+</body>
+</html>

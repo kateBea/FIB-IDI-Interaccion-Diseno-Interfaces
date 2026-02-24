@@ -1,0 +1,229 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html lang="CA">
+
+<head>
+
+<title></title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+
+<script type="text/javascript" src="../upc.js"></script>
+
+<SCRIPT>
+
+top.passara("visreal","textu");
+
+</SCRIPT>
+
+<BODY>
+
+<DIV CLASS="nav">
+
+<a href="m3e30t12_TextGenDirEx1.html">[Anterior]</a>
+
+<a href="m3e30t16_TextGenDirEx3.html">[Següent]</a>
+
+</div>
+
+<br><br>
+
+
+
+<div class=tit1>Textures.
+
+<span class=tit2>Aplicació de textures planes.</span>
+
+<span class=tit3>Parametrització directa: Parametrització Directa d'un cub</span>
+
+</div>
+
+
+
+<p> Si volem "embolicar" una textura sobre totes les cares d'un
+
+poliedre seguint un procediment similar al vist en la texturació
+
+d'un polígon, hauriem de definir una funció de parametrització
+
+diferent per cadascuna de les seves cares.
+
+
+
+<p> Els sistemes de coordenades locals entre cares veïnes haurien de
+
+garantir continuitat en l'orientació de la textura. Tanmateix la
+
+definició de la "vista" de la textura per a cada cara hauria de tenir
+
+en consideració aquesta continuitat, altrament tindrem la sensació que
+
+hem retallat trossos de la textura (paper) i els hem enganxat de
+
+manera arbitrària en les cares.
+
+
+
+<p> Aconseguir les condicions anteriors per a un poliedre qualsevol és
+
+complicat. A continuació veurem un exemple concret per a texturar
+
+un cub amb una textura plana. El procediment que utilitzarem es pot
+
+estendre amb més o menys dificultat a tot poliedre que es pot
+
+desplegar sobre un pla. Tanmateix, no podrem garantir continuitat
+
+total de la textura sobre el poliedre, dit en paraules col·loquials
+
+haurem de "tallar/doblegar" el paper (la textura) per a poder fer la
+
+texturació.
+
+
+
+<p>Imaginem que tallem el cub per un conjunt de les seves arestes de
+
+manera que aconseguim desplegar les seves cares sobre un pla. Hi ha
+
+diferents possibilitats, a la finestra esquerra de l'applet de
+
+demostració en podeu observar una de elles. Escalem l'objecte
+
+resultant (o si voleu la textura) de manera que tot l'objecte quedi
+
+dins del paper (textura). A cada cara li correspon un tros (vista) de
+
+la textura que si l'enganxem en la cara i tornem a reconstruir el cub
+
+(doblegar) ens donaria com a resultat el cub texturat.
+
+
+
+<!--<center><img src="imatges/TextGenDirectCub.png"></center>-->
+
+
+
+<p>Fixeu-vos que l'algorisme de texturació del cub tindria les
+
+següents etapes:
+
+
+
+<ol>
+
+<li> Determinacio del desplegament a efectuar. Consisteix en pensar
+
+per quines arestes tallem i quines seran les que mantindran el lligam
+
+entre les cares.</li>
+
+
+
+<li> Per a cada cara i segons el desplegament definit, determinar
+
+l'orientació del sistema de parametrització local. Cares veïnes han de
+
+tenir un eix de coordenades local paral·lel amb la seva aresta de
+
+lligam en el desplegament (així garantim continuitat en l'orientació
+
+de la textura).</li>
+
+
+
+<li> Per a cada cara determinar el tros de textura que li correspon
+
+d'acord amb el desplegament efectuat.</li>
+
+
+
+<li> Per a cada cara, determinar la seva funció específica de
+
+parametrització directa.</li>
+
+</ol>
+
+
+
+<p class=exercici><span class=exernum>Exercici 4.4:</span> En l'applet
+
+següent si seleccioneu l'objecte <i>cub senser</i> i una textura,
+
+podreu observar en la finestra de l'esquerra el cub desplegat sobre la
+
+textura i el cub texturat resultant en la finestra de la dreta. Si
+
+roteu el cub notareu salts en la textura al voltant d'alguna de les
+
+arestes; però també els obtindríem si emboliquéssim el cub amb un
+
+paper.
+
+
+
+<div align=center>
+
+		<applet code="Interficie.class" archive="Textures.jar,../comuns.jar" height=346 width=500>
+		</applet>
+
+</div>
+
+
+
+<p class=exercici><span class=exernum>Exercici 4.5:</span> Determineu
+
+les funcions de parametrització directa per a cadascuna de les cares
+
+d'un cub de manera que apliquem sobre el cub senser una textura plana
+
+concreta. Heu te tenir especial atenció en l'ordre d'assignació de les
+
+coordenades de textura. Potser podeu utilitzar la funció de
+
+parametrització de polígons dissenyada en l'exercici 4.3. Comproveu
+
+amb una execució manual de l'algorisme el seu funcionament.
+
+
+
+<p class=exercici><span class=exernum>Exercici avançat 4.6:</span>
+
+Després dels exemples analitzats, dissenyeu una funció de
+
+parametrització directa per un cilindre i una esfera. Noteu que els
+
+punts del cilidre es poden expressar en coordenades cilíndriques i en
+
+l'esfera en esfèriques. En els dos casos es requereixen només dues
+
+coordenades (angle + alçada o dos angles). Com els seu rang de valors és
+
+conegut es pot normalitzar per a que estigui comprès entre [0,1] i per
+
+tant directament tenim coordenades normalitzades de textura. Noteu que
+
+en el cas de l'esfera és impossible un mapatge sense distorsió
+
+(rebregar el paper).
+
+
+
+
+
+<br><br>
+
+<DIV CLASS="nav">
+
+<a href="m3e30t12_TextGenDirEx1.html">[Anterior]</a>
+
+<a href="m3e30t16_TextGenDirEx3.html">[Següent]</a>
+
+</div>
+
+</body>
+
+</html>
+

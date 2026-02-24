@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M5.4.Representeció d'objectes Sòlids </TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;
+charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("model","soli");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+      <A HREF="main54-2.html">[Anterior]</a>
+      <a href="main54-4.html">[Següent]</a>
+     </div>
+<br><br>
+
+<div class="tit1">Representació d'objectes Sòlids.
+<span class="tit2">Equació d'Euler</span>
+</div>
+
+<P>
+Si suposem que definim la frontera del <A CLASS="glossari"
+HREF="javascript:glossari('solid.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">sòlid</A> mitjançant una <A CLASS="glossari"
+HREF="javascript:glossari('representExplicita.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">representació explícita</A>
+amb tres taules amb les cares, arestes i vèrtexs, en tot objecte sòlid
+es compleix l'anomenada Equació d'Euler:
+</P>
+
+<center>
+<span class=form>Cares + Vèrtexs = Arestes + 2 * ( Components - Forats )</span>
+</center>
+
+<P>
+El nombre de cares de l'objecte més el nombre de vèrtexs ha de ser
+   igual al nombre d'arestes més dues vegades el nombre de components
+   connexes menys el nombre de forats passants. El nombre de components
+   connexes és el nombre de parts separades de què consta l'objecte, i
+   habitualment val 1; dins de cada component connexa és possible anar
+   d'un punt interior qualsevol a un altre sense sortir del component.
+</P>
+
+<P>
+En el següent exemple podeu veure un cas d'objecte amb un component
+   i un forat passant:
+</P>
+
+<CENTER>
+<TABLE><TR><TD>
+  <APPLET CODE ="AppletRep.class" archive="AppletRep.jar,../comuns.jar" WIDTH=220 HEIGHT=280>
+  <PARAM NAME=AppId VALUE="2">
+  <PARAM NAME=fichero0 VALUE="/DAT/modelFr6.dat">
+  <PARAM NAME=fichero1 VALUE="/DAT/modelFr6b.dat">
+  <PARAM NAME=Angx VALUE="0.0">
+  <PARAM NAME=Angy VALUE="0.0">
+  </APPLET>
+</TD></TR></TABLE>
+</CENTER>
+
+<P class=exercici><span class=exernum>Exercici: </span> 
+Comproveu que es compleix l'equació d'Euler en
+aquest objecte.
+
+
+<br><br>
+<span class=sollnk>
+<A HREF="javascript:oWin('solucio54-3.html','*','400','200','no','no','no','yes')"
+onMouseOver="window.status='Resposta';return true"
+onMouseOut="window.status='';return true">[Solució]</A></span>
+
+<br><br>
+<DIV CLASS="nav">
+      <A HREF="main54-2.html">[Anterior]</a>
+      <a href="main54-4.html">[Següent]</a>
+  </div>
+
+</BODY>
+
+</HTML>
+

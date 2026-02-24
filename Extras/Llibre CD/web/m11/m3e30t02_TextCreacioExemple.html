@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","textu");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m3e30t01_TextCreacio.html">[Anterior]</a>
+<a href="m3e30t03_TextCreacioAdvan.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Textures.
+<span class=tit2>Aplicació de textures planes.</span>
+<span class=tit3>Exemple d'especificació de textura amb OpenGL</span>
+</div>
+
+<p> A continuació un tros de codi OpenGL comentat en què podeu
+observar les comandes més importants d'especificació/creació de
+textures i la importància del seu ordre.
+
+<Pre class=algoritme>
+    /* Obtenció de dos identificadors de textura no utilitzats per a
+       designar dos nous objectes textura */
+
+    <b> glGenTextures </b>(2,&texIden);
+
+    /* Especificació de dos Objectes Textura.
+       Totes les comandes especificades entre crides successives a
+       <b>glBinTexture</b> forman part del mateix Objecte Textura.
+       Analitzarem algunes d'aquestes comandes en l'apartat
+       <a href="m3e30t30_TextFiltratge.html">Filtratge.</a> */
+
+    <b> glBinTexture </b>(GL_TEXTURE_2D, texIden[0]);
+    <b> glTexParameter</b>(...);
+    <b> ... </b>;
+    <b> glTexImage </b>(GL_TEXTURE_2D, 0, GL_RGBA, Image1Width,
+                 Image1Height,0,GL_RGBA, GL_UNSIGGNED_BYTE,
+                 Image1)
+
+    /* Segon Objecte Textura */
+
+    <b> glBinTexture </b>(GL_TEXTURE_2D, texIden[1]);
+    <b> ... </b>;
+    <b> glTexImage </b>(GL_TEXTURE_2D, 0, GL_RGBA, Image2Width,
+                 Image2Height,0,GL_RGBA, GL_UNSIGGNED_BYTE,
+                 Image2);
+
+     /* La Imatge1 pasarà a ser la textura activa */
+
+     <b> glBinTexture </b>(GL_TEXTURE_2D, texInden[0]);
+
+     /* Habilitació de la utilització de textures */
+
+     <b> glEnable </b>(GL_TEXTURE_2D);
+
+     /* Visualització de l'escena. Als polígons als que s'indiqui
+        coordenades de textura, s'els assignarà la textura de la Imatge1 */
+
+     <b> display </b>(void);
+</pre>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m3e30t01_TextCreacio.html">[Anterior]</a>
+<a href="m3e30t03_TextCreacioAdvan.html">[Següent]</a>
+</div>
+</body>
+</html>

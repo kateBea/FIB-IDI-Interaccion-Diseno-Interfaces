@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("realvirt","perif");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m5c02t01_Entrada.html">[Anterior]</a>
+<a href="m5c02t01t01t01_posMag.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Perifèrics.
+<span class=tit2>Dispositius d'entrada.</span>
+<span class=tit3>Posicionadors</span>
+</div>
+
+<p>Els posicionadors són sensors que tenen com a missió
+capturar la <b>posició</b> i/o <b>orientació</b> d'un objecte real i enviar
+aquesta informació al computador.</p>
+
+<div class=tit3><b>Prestacions</b></div>
+
+<p>Hi ha posicionadors que només enregistren la <b>posició</b>
+d'un objecte, i per tant se'n diu que mesuren tres graus de llibertat (en
+anglès, <i>degrees of freedom</i>, DOF). Aquests tres graus són les tres
+coordenades X, Y, Z de l'objecte respecte un sistema de coordenades conegut
+que proporciona el posicionador.</p>
+
+<p>D'altres posicionadors només enregistren l'<b>orientació</b>
+d'un objecte. En aquest cas també tenim tres graus de llibertat, que són els
+angles de rotació sobre els eixos X, Y i Z. Aquests angles reben noms
+particulars en realitat virtual, especialment quan mesurem la orientació del
+cap:</p>
+
+<div align="center">
+  <center>
+  <table BORDER="1" CELLSPACING="1" CELLPADDING="4" WIDTH=75%>
+    <tr>
+      <td VALIGN="TOP"><b>
+        yaw </b>(<b>azimuth</b>)</td>
+      <td VALIGN="TOP">
+        Angle de rotació respecte l'eix vertical. Aquest angle varia per
+        exemple quan mirem de dreta a esquerra.
+        </td>
+      <td VALIGN="TOP">
+        <img border="0" src="imatges/humanserie2.gif" width="120" height="120"></td>
+    </tr>
+    <tr>
+      <td VALIGN="TOP"><b>
+        pitch </b>(<b>elevation</b>)</td>
+      <td VALIGN="TOP">
+        Angle de rotació respecte un eix horitzontal que uneix les dues
+        orelles. Aquest angle mesura l'elevació respecte l'horitzó, i
+        varia per exemple quan mirem de dalt a baix.
+      </td>
+      <td VALIGN="TOP">
+        <img border="0" src="imatges/humanserie3.gif" width="120" height="120"></td>
+    </tr>
+    <tr>
+      <td VALIGN="TOP"><b>
+        roll</b></td>
+      <td VALIGN="TOP">
+        Angle de rotació respecte l'eix determinat per la direcció de
+        visió. Aquesta angle varia per exemple quan apropem el cap a l'espatlla.
+        </td>
+      <td VALIGN="TOP">
+        <img border="0" src="imatges/humanserie1.gif" width="120" height="120"></td>
+    </tr>
+  </table>
+  </center>
+</div>
+
+<p>Finalment, la tercera classe de posicionadors proporcionen <b>posició
+i orientació </b>de l'objecte rastrejat, per la qual cosa s'anomenen
+posicionadors amb sis graus de llibertat (6 DOF <i>trackers</i>).</p>
+
+<div class=tit3><b>Aplicacions</b></div>
+
+<p>L'ús habitual dels posicionadors en realitat virtual és
+per capturar els moviments del cap del participant, la qual cosa permet generar
+les imatges d'acord amb el seu punt de vista.</p>
+
+<p>També és freqüent enregistrar els moviments de la mà per
+permetre a l'usuari interactuar amb els objectes de l'escena de forma
+natural. Accions com agafar o moure objectes de l'escena es poden realitzar de
+forma molt més intuïtiva mitjançant un reconeixement dels moviments del
+participant.</p>
+
+<p>Alguns sistemes immersius fan servir una representació
+virtual del cos del participant (anomenada avatar) que s'obté mitjançant un
+conjunt de sensors situats en determinades articulacions clau del participant.
+En aquest cas, normalment es tria un conjunt reduït d'articulacions i punts
+clau (com ara peus, turmells, genolls, colzes, espatlles, etc.) a partir dels
+quals es reconstrueix el cos complet. La fotografia següent mostra un sistema
+de captura de moviment integral (<i>cortesia de Ascension Technologies</i>):</p>
+
+<div ALIGN="center"><img border="0" src="imatges/ms2s.jpg" width="230" height="313"></div>
+
+<p>Aquests sensors també s'utilitzen per enregistrar els moviments de
+l'usuari en aplicacions que no són de realitat virtual. És el cas de
+l'anàlisi dels moviments dels esportistes d'alta competició que duen a
+terme algunes aplicacions usades pels centres d'alt rendiment, així
+com les seqüències de moviments que es capturen a partir d'un actor
+real i que s'apliquen a un caràcter virtual. D'aquesta forma, es pot
+aconseguir que l'actor virtual faci uns moviments molt més complicats
+i realistes dels que es podrien aconseguir amb altres mètodes. Aquesta
+tècnica s'utilitza actualment en molts jocs i també en dibuixos
+animats, com s'aprecia en la següent fotografia (<i>cortesia de
+Ascension Technologies</i>):</p>
+
+<div ALIGN="center"><img border="0" src="imatges/bodytracking.jpg" width="175" height="175"></div>
+
+<div class=tit3><b>Tecnologies</b></div>
+
+<p>Els posicionadors que es comercialitzen actualment es poden
+classificar en diferents categories segons la tecnologia que utilitzen:</p>
+
+<UL>
+	<LI><a href="m5c02t01t01t01_posMag.html" target="principal">Posicionadors magnètics</a></LI>
+	<LI><a href="m5c02t01t01t02_posOpt.html" target="principal">Posicionadors òptics</a></LI>
+	<LI><a href="m5c02t01t01t03_posAcus.html" target="principal">Posicionadors acústics</a></LI>
+	<LI><a href="m5c02t01t01t04_posMec.html" target="principal">Posicionadors mecànics</a></LI>
+	<LI><a href="m5c02t01t01t05_posIne.html" target="principal">Posicionadors d'inèrcia</a></LI>
+</UL>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m5c02t01_Entrada.html">[Anterior]</a>
+<a href="m5c02t01t01t01_posMag.html">[Següent]</a>
+</div>
+</body>
+</html>

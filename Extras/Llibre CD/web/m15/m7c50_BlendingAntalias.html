@@ -1,0 +1,188 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("opengl","extop");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m7c40_Buffers.html">[Anterior]</a>
+<a href="m7c60_Textures.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Extensió de crides d'OpenGL.
+<span class=tit2> Combinació d'imatges (<i>blending</i>) i <i>antialiasing</i></span>
+</div>
+
+<P>
+<div class=tit3><B> <i>Blending</i> </B></div>
+
+<P>
+Quan no tenim <i>blending</i> cada nou fragment sobreescriu qualsevol
+valor de color del <i>frame buffer</i>, com si el fragment fos
+totalment opac. Amb el <i>blending</i> activat, per contra, es pot
+controlar com (i en quina quantitat de) el color existent ha de ser
+combinat amb el valor del nou fragment a pintar. Sovint el valor de la
+component alfa del color és la que s'utilitza per a fer aquesta
+combinació (<i>alpha blending</i>).
+
+<P>
+La forma més natural de pensar en operacions de <i>blending</i> és
+pensar en les components RGB d'un fragment com la representació del
+seu color i la component alfa com la representació de la seva
+opacitat. Fragments transparents tindran doncs menys opacitat i per
+tant un valor d'alfa petit.
+
+<P>
+Durant el <i>blending</i>, els valors del color del fragment que
+arriba nou (el font, <i>source</i>) es combinen amb els valors del
+color del píxel corresponent en el <i>frame buffer</i> (el destí,
+<i>destination</i>). Primer cal especificar quins són els factors que
+afecten al color dels fragments, font (<i>source</i>) i destí
+(<i>destination</i>). Aquests factors tenen també components RGBA que
+es multipliquen per cada component del color corresponent. Després es
+combinen aquests dos resultats (font i destí) per a aconseguir el
+resultat final. La següent fórmula representa aquest resultat tenint
+en compte que el factor a aplicar al fragment font és (S<sub>r</sub>,
+S<sub>g</sub>, S<sub>b</sub>,S<sub>a</sub>), el color del fragment
+font és (R<sub>s</sub>,G<sub>s</sub>,B<sub>s</sub>,A<sub>s</sub>), el
+factor a aplicar al destí és
+(D<sub>r</sub>,D<sub>g</sub>,D<sub>b</sub>,D<sub>a</sub>) i el color
+del destí és
+(R<sub>d</sub>,G<sub>d</sub>,B<sub>d</sub>,A<sub>d</sub>). Cada una de
+les components resultants és restringida al rang [0,1].
+
+<P>
+<center>(R<sub>s</sub>S<sub>r</sub>+R<sub>d</sub>D<sub>r</sub>,G<sub>s</sub>S<sub>g</sub>+G<sub>d</sub>D<sub>g</sub>,B<sub>s</sub>S<sub>b</sub>+B<sub>d</sub>D<sub>b</sub>,A<sub>s</sub>S<sub>a</sub>+A<sub>d</sub>D<sub>a</sub>)</center>
+
+<P>
+Per a poder tenir el <i>blending</i> activat, cal cridar a la funció
+<b>glEnable</b> passant-li com a paràmetre GL_BLEND. Per a
+desactivar-lo haurem de passar aquest mateix valor com a paràmetre de
+la crida <b>glDisable</b>.
+
+<a name="glBlendFunc"></a>
+<P>
+I per a donar els valors dels factors que cal aplicar al font i al
+destí en el càlcul que vèiem, usarem la crida <b>glBlendFunc</b> a la
+que li passarem dues constants: una per a especificar com es calcula
+el factor del fragment font i una altra per a especificar com es
+calcula el factor del destí.
+
+<pre class=algoritme>
+          void <b>glBlendFunc</b> (GLenum sfactor, GLenum dfactor);
+</pre>
+
+<P>
+Aquesta crida controla com han de ser combinats els valors del
+fragment que s'està processant (el font) amb el que ja és al <i>frame
+buffer</i> (el destí). El paràmetre <i>sfactor</i> indica com calcular
+el factor pel fragment font i el paràmetre <i>dfactor</i> indica com
+calcular el factor pel destí. La següent taula ens mostra quines són
+les constants que es poden usar per aquests paràmetres i quin és el
+seu significat, així com si es pot usar per tots dos paràmetres o
+només per un d'ells.
+
+<P>
+<center>
+<table border="2" class=materials>
+<thead>
+<tr><th>Constant</th><th>Factor rellevant</th><th>Factor <i>blending</i> calculat</th></tr>
+</thead>
+<tbody><tr><td>GL_ZERO</td><td align=center>font o destí</td><td align=center>(0,0,0,0)</td></tr>
+<tbody><tr><td>GL_ONE</td><td align=center>font o destí</td><td align=center>(1,1,1,1)</td></tr>
+<tbody><tr><td>GL_DST_COLOR</td><td align=center>font</td><td align=center>(R<sub>d</sub>,G<sub>d</sub>,B<sub>d</sub>,A<sub>d</sub>)</td></tr>
+<tbody><tr><td>GL_SRC_COLOR</td><td align=center>destí</td><td align=center>(R<sub>s</sub>,G<sub>s</sub>,B<sub>s</sub>,A<sub>s</sub>)</td></tr>
+<tbody><tr><td>GL_ONE_MINUS_DST_COLOR</td><td align=center>font</td><td align=center>(1,1,1,1)-(R<sub>d</sub>,G<sub>d</sub>,B<sub>d</sub>,A<sub>d</sub>)</td></tr>
+<tbody><tr><td>GL_ONE_MINUS_SRC_COLOR</td><td align=center>destí</td><td align=center>(1,1,1,1)-(R<sub>s</sub>,G<sub>s</sub>,B<sub>s</sub>,A<sub>s</sub>)</td></tr>
+<tbody><tr><td>GL_SRC_ALPHA</td><td align=center>font o destí</td><td align=center>(A<sub>s</sub>,A<sub>s</sub>,A<sub>s</sub>,A<sub>s</sub>)</td></tr>
+<tbody><tr><td>GL_ONE_MINUS_SRC_ALPHA</td><td align=center>font o destí</td><td align=center>(1,1,1,1)-(A<sub>s</sub>,A<sub>s</sub>,A<sub>s</sub>,A<sub>s</sub>)</td></tr>
+<tbody><tr><td>GL_DST_ALPHA</td><td align=center>font o destí</td><td align=center>(A<sub>d</sub>,A<sub>d</sub>,A<sub>d</sub>,A<sub>d</sub>)</td></tr>
+<tbody><tr><td>GL_ONE_MINUS_DST_ALPHA</td><td align=center>font o destí</td><td align=center>(1,1,1,1)-(A<sub>d</sub>,A<sub>d</sub>,A<sub>d</sub>,A<sub>d</sub>)</td></tr>
+<tbody><tr><td>GL_SRC_ALPHA_SATURATE</td><td align=center>font</td><td align=center>(f,f,f,1); f=min(A<sub>s</sub>,1-A<sub>d</sub>)</td></tr>
+<tbody><tr><td>GL_CONSTANT_COLOR</td><td align=center>font o destí</td><td align=center>(R<sub>c</sub>,G<sub>c</sub>,B<sub>c</sub>,A<sub>c</sub>)</td></tr>
+<tbody><tr><td>GL_ONE_MINUS_CONSTANT_COLOR</td><td align=center>font o destí</td><td align=center>(1,1,1,1)-(R<sub>c</sub>,G<sub>c</sub>,B<sub>c</sub>,A<sub>c</sub>)</td></tr>
+<tbody><tr><td>GL_CONSTANT_ALPHA</td><td align=center>font o destí</td><td align=center>(A<sub>c</sub>,A<sub>c</sub>,A<sub>c</sub>,A<sub>c</sub>)</td></tr>
+<tbody><tr><td>GL_ONE_MINUS_CONSTANT_ALPHA</td><td align=center>font o destí</td><td align=center>(1,1,1,1)-(A<sub>c</sub>,A<sub>c</sub>,A<sub>c</sub>,A<sub>c</sub>)</td></tr>
+</table></center>
+
+<P>
+Cal aclarir que les constants GL_CONSTANT_COLOR,
+GL_ONE_MINUS_CONSTANT_COLOR, GL_CONSTANT_ALPHA i
+GL_ONE_MINUS_CONSTANT_ALPHA només estan suportades si la implementació
+d'OpenGL suporta el <i>imaging subset</i>, que és una extensió a
+OpenGL 1.2. Per a poder averiguar les extensions que hi ha en una
+certa implementació es pot fer mitjançant la crida <a
+href="m7c70_Interrogacio.html#glGetString"><b>glGetString</b></a>
+(GL_EXTENSIONS) que ens retornarà un string amb la llista d'extensions
+que la implementació d'OpenGL suporta.
+
+<P>
+En el cas d'aquest llibre, hem vist exemples de l'ús del
+<i>blending</i> usant els valors d'alfa en l'apartat
+d'<i>antialiasing</i> al capítol 11, tant per <a
+href="../m11/m3f20_AntialiasingLinies.html">línies</a> com per <a
+href="../m11/m3f30t10_AntialPoligOpenGL.html">polígons</a>.
+
+<P>
+<div class=tit3><B> <i>Antialiasing</i> </B></div>
+
+<P>
+Com ja hem comentat en l'apartat de <a
+href="m7c30_PuntLiniaPoligonPixel.html"> punts, línies, polígons i
+píxels</a>, es pot activar o desactivar el suavitzat per punts, línies
+o polígons passant-li a les crides <b>glEnable</b> i <b>glDisable</b>
+els paràmetres GL_POINT_SMOOTH, GL_LINE_SMOOTH o GL_POLYGON_SMOOTH
+respectivament.
+
+<a name="glHint"></a>
+<P>
+Les tècniques per a fer <A class=glossari Href="javascript:glossari('aliasing.html')"><i>antialiasing</i></A> estan explicades a <a
+href="../m11/m3f10_Antialiasing.html">l'apartat corresponent</a> del capítol 11. En aquest punt,
+doncs, el que farem és concretar la utilització de la crida
+<b>glHint</b> i les possibilitats en els seus paràmetres.
+
+<pre class=algoritme>
+          void <b>glHint</b> (GLenum target, GLenum hint)
+</pre>
+
+<P>
+Aquesta crida permet indicar-li a OpenGL si el que ens interessa més
+és la qualitat de la imatge o que es calculi ràpid. Els paràmetres que
+rep són, per una banda el comportament que es vol controlar,
+<i>target</i>, i per l'altre banda el que es vol aconseguir del
+comportament, <i>hint</i>.
+
+<P>
+Pel primer paràmetre (<i>target</i>) els possibles valors que es poden
+tenir són: GL_POINT_SMOOTH_HINT, que afecta al pintat de punts;
+GL_LINE_SMOOTH_HINT, que afecta al pintat de línies;
+GL_POLYGON_SMOOTH_HINT, que afecta al pintat de polígons; GL_FOG_HINT,
+afecta al càlcul per a simular boira; i
+GL_PERSPECTIVE_CORRECTION_HINT, afecta a la interpolació amb les
+coordenades de textura. Els dos últims valors no afecten al tema
+d'<i>antialiasing</i> que tractem, per tant no ens allargarem
+explicant els seus efectes (si voleu més informació podeu consultar
+les <a href="../manpages/index.html">pàgines del manual</a>
+(<i>manpages</i>) o la referència al llibre <a
+href="../Biblio.html#OpenGLGuide">[OpenGL Programming Guide]</a>).
+
+<P>
+El segon paràmetre, <i>hint</i>, pot tenir els valors: GL_FASTEST, que
+indica que es vol escollir l'opció de càlcul més ràpid; GL_NICEST, que
+indica que es vol escollir l'opció que produeix més qualitat en la
+imatge; o GL_DONT_CARE, que indica que no hi ha cap preferència en
+especial.
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m7c40_Buffers.html">[Anterior]</a>
+<a href="m7c60_Textures.html">[Següent]</a>
+</div>
+</body>
+</html>

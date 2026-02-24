@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M6.1 Procés de visualització 3D.MapaSensible.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("vis3D","estr");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+<a href="MSExplicacio7.html">[Anterior]</a>
+<a href="MSExplicacio8.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Subprocessos.
+<span class=tit2>Algorisme per a la visualització en filferros 6</span>
+</div>
+
+<p>
+<PRE class=algoritme>
+/* Dibuix efectiu de les arestes de l'objecte */
+
+<B>Per</B> i <B>en</B> [1..na] <B>fer</B>
+   k1 := Arestes[i].P1
+   k2 := Arestes[i].P2
+   x1 := PuntsDisp[k1].x
+   y1 := PuntsDisp[k1].y
+   x2 := PuntsDisp[k2].x
+   y2 := PuntsDisp[k2].y
+   Linia (x1, y1, x2, y2)
+<B>fper</B>
+</PRE>
+
+<div class=tit3><b>Observacions</b></div>
+
+<ul>
+<li><B>Linia</B> és el procediment del paquet gràfic 2D que dibuixa
+un segment des de (x1,y1) fins (x2,y2) en coordenades de dispositiu. Es
+suposa que el procediment <i>Linia</i> s'encarrega de fer el clipping 2D.
+</li>
+</ul>
+
+<br><br>
+<DIV CLASS="nav">
+<a href="MSExplicacio7.html">[Anterior]</a>
+<a href="MSExplicacio8.html">[Següent]</a>
+</div>
+</BODY>
+</HTML>

@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M7.1 Procés de visualització 2D.Sistemes de coordenades.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("vis3D","cam");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+<a href="main62.html">[Anterior]</a>
+<a href="CentreEsc.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class="tit1">Model de la càmera. 
+<span class="tit2">Posició de l'observador</span>
+</div>
+
+<p>
+És el lloc de l'espai on es situa
+          l'observador amb la càmera virtual. Es troba situat a un punt de
+          l'espai que anomenarem O.
+
+<p class=exercici>
+           <span class=exernum>Exercici:</span> a la següent escena
+           senzilla, proveu de modificar la posició de l'observador i
+           veieu com va canviant la imatge que obtenim a la <A
+           CLASS="glossari"
+           HREF="javascript:glossari('Vista.html','*','400','300','no','no','no','yes')"
+           onMouseOver="window.status='Glossari';return true"
+           onMouseOut="window.status='';return true">vista</A> a la <A
+           CLASS="glossari"
+           HREF="javascript:glossari('FinGraf.html','*','400','300','no','no','no','yes')"
+           onMouseOver="window.status='Glossari';return true"
+           onMouseOut="window.status='';return true">finestra
+           gràfica</A> (abans podeu consultar el funcionament
+           d'aquesta <A
+           HREF="javascript:MuestraFin('VisuInter.html','500','400','yes')"
+           title="">visualització interactiva</A> ). Podeu canviar
+           interactivament els paràmetres de visualització.
+
+ <!--
+                 Applet 2 que visualitza el cub
+                 Botó de modificació del punt O
+                 visualització del frustrum i del sist de
+                       coordenades de l'observador -->
+<p>
+<!--<p>-->
+ <CENTER>
+   <table>
+   <tr><td>
+  <APPLET CODE ="AppletG2.class" archive="AppletG2.jar,../comuns.jar" WIDTH=640 HEIGHT=480>
+  <PARAM NAME=NApplet VALUE="1">
+  <PARAM NAME=Vrpx    VALUE="5.0">
+  <PARAM NAME=Vrpy    VALUE="5.0">
+  <PARAM NAME=Vrpz    VALUE="5.0">
+  <PARAM NAME=Angx    VALUE="30.0">
+  <PARAM NAME=Angy    VALUE="45.0">
+  <PARAM NAME=Angz    VALUE="0.0">
+  <PARAM NAME=D       VALUE="20.0">
+  <PARAM NAME=Winy    VALUE="5.0">
+  <PARAM NAME=Zfar    VALUE="105.0">
+  <PARAM NAME=Znear   VALUE="1.0">
+  <PARAM NAME=fich    VALUE="">
+  <PARAM NAME=AngExtx VALUE ="30.0">
+  <PARAM NAME=AngExty VALUE="10.0">
+  <PARAM NAME=fichero VALUE="/DAT/2cuboG.dat">
+  <PARAM NAME=Camara VALUE="1">
+  <PARAM NAME=Alfa VALUE="15.0">
+  </APPLET>
+  </td></TR>
+  </table>
+  </CENTER>
+
+
+<p class=exercici>Cal que situeu l'observador de manera que els cubs
+          es vegin el més grans possible dins la vista, però
+          sense quedar retallats.  
+
+<br><br>
+<DIV CLASS="nav">
+<a href="main62.html">[Anterior]</a>
+<a href="CentreEsc.html">[Següent]</a>
+</div>
+</BODY>
+</HTML>

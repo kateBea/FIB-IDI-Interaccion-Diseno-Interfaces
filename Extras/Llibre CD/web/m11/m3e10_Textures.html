@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","textu");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+[Anterior]
+<a href="m3e20_TextConceptes.html">[Següent]</a>
+<a href="m3d10_intro.html">[Apartat anterior]</a>
+</div>
+<br><br>
+
+<div class=tit1>Textures.
+<span class=tit2>Introducció</span>
+</div>
+
+<p>La visualització d'escenes seguint les tècniques estudiades en els
+capítols anteriors genera imatges raonablement realistes però amb objectes
+amb un aspecte que podriem qualificar de plastificat. Això és degut a
+que la major part de materials tenen una superfície no uniforme
+respecte al seu color i granulositat. Pensem, per exemple, en les
+betes de la fusta, la pell d'una taronja o l'estucat d'una
+paret. Aquests aspectes que podriem anomenar <i>detalls
+superficials</i> o de <i>textura</i> dels objectes, són difícils de
+representar geomètricament donat que comportaria generar objectes amb
+un nombre intractable de cares i, a més a més, una tasca inviable de
+modelatge i un cost de tractament posterior (visualització per
+exemple) que no permetria la interacció en temps real.
+
+<p> En aquesta secció estudiarem diferents tècniques que ens permetran
+simular visualment la textura dels objectes. A més a més, veurem com
+aquestes tècniques ens poden ajudar a simular altres fenòmens, com les
+reflexions entre objectes, que milloraran el realisme de l'escena amb
+un cost computacional raonable.
+
+<p> El principi bàsic de la simulació de la textura dels objectes
+consisteix en considerar que els paràmetres que defineixen les
+propietats del material (color difós i especular, trasparència,
+constants de reflexió especular,...) poden variar al llarg de la seva
+superfície i/o volum. La seva variabilitat en comptes de calcular-se
+analíticament, s'emmagatzema de manera discretitzada en una taula
+(<i>buffer</i> en nomenclatura anglosaxona) que s'anomena
+<i>textura</i>. En el moment de calcular el model d'il·luminació d'un
+punt de la superfície d'un objecte, es substitueix alguna de les seves
+propietats per un valor de la taula. Segons la seva dimensió parlarem
+de textures d'una dimensió, de textures planes (dos dimensions) o de
+volum (tres dimensions).
+
+<p> És important tenir sempre present que els valors de la textura
+s'utilitzen per a modificar els paràmetres que intervenen en les
+fórmules del còmput del color; però mai modifiquen els models
+geomètrics dels objectes. Usualment el paràmetre que s'emmagatzema és
+el color difós. Per aquest motiu, la determinació de la textura a
+aplicar a un punt, (<i>texture-mapping</i>) es coneix també com
+mapat de color (<i>color-mapping</i>).
+
+<!-- <p> En el passador de diapositives següent veureu imatges a on s'han
+utilitzat textures per aconseguir diferents efectes. En el peu de
+figura trobareu indicada la utilització de la textura: modificació
+color difós, trasparència, perturbació de la normal... Al llarg
+d'aquesta secció s'explicaran els procediments utilitzats per a la seva
+obtenció.-->
+
+<p>En la figura següent podeu observar varies imatges a on s'han
+utilitzat textures per aconseguir diferents efectes.
+
+<center>
+<div><img src="imatges/isaText.png"></div>
+</center>
+
+<p> Fent una mica d'història, ens trobem que la utilització de les
+textures per a incrementar el realisme de les imatges es va començar a
+utilitzar al començament de la dècada dels 80. No obstant, ha estat el
+desenvolupament dels jocs per computador i l'abaratiment del cost de
+les tarjes gràfiques el que ha fet que siguin una eina pràcticament
+indispensable en tota aplicació gràfica.
+
+<p>Des d'un punt de vista docent, d'aplicabilitat i de recerca, es
+poden distingir diferents aspectes a estudiar en la utilització de les
+textures que abarquen des de com generar la textura per una
+determinada utilitat (síntesi de textures), fins com explicitar quín
+valor de textura s'associa a un punt (parametrització de textures) o
+com incorporar les textures en els algorismes de determinació de
+visibilitat (mapat de textures).
+
+<p>En aquest llibre hem optat per una explicació pràctica
+d'utilització de textures. És per això que ens centrarem en textures
+planes (2D) i la seva utilització en z-buffer (OpenGL). Per tant,
+considerarem objectes limitats per cares planes i que el paràmetre que
+es guarda en la textura és el color. Mostrarem diferents aplicacions
+i també inclourem un breu apartat de síntesi de textures.
+
+
+<h2>subapartats</h2>
+
+<ul>
+<li><a href= "m3e20_TextConceptes.html">Definicions Generals</a></li>
+<li><a href= "m3e30_TextMapejat.html">Aplicació de textures planes</a></li>
+<li><a href= "m3e40_TextSintesi.html">Síntesi de textures</a></li>
+<li><a href= "m3e50_TextUtilitzacio.html">Exemples d'efectes d'utilització de textures</a></li>
+</ul>
+
+
+<br><br>
+<DIV CLASS="nav">
+[Anterior]
+<a href="m3e20_TextConceptes.html">[Següent]</a>
+<a href="m3d10_intro.html">[Apartat anterior]</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","reflex");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m3d40_ObjectesVirtuals.html">[Anterior]</a>
+<a href="m3d43_StencilBuffer.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Reflexions.
+<span class=tit2>Objectes virtuals.</span>
+<span class=tit3>Exemple d'implementació en OpenGL</span>
+</div>
+
+<P>El següent tros de pseudocodi il·lustra els passos principals a
+seguir per a implementar el mètode descrit en OpenGL. Com d'altres
+exemples no representa un programa complet, sino un esquelet en què
+apareixen les crides a OpenGL més rellevants en aquest cas. També com
+abans, els comentaris són enllaços a explicacions més detallades.
+
+<pre class=algoritme>
+   /* Comencem amb els buffers buits: */
+   <b>glClear</b>(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+
+   <a href="m3d42t10_PintaReflex.html">/* Primer pintem els objectes virtuals */</a>
+   <b>glPushMatrix</b>();
+   <b>glScalef</b>(-1.f, 1.f, 1.f);
+   <b>glTranslatef</b>(-200.f, 0.f, 0.f);
+   <b>glLightfv</b>(GL_LIGHT0, GL_POSITION, lightpos);
+   <b>glCullFace</b>(GL_FRONT);
+   pintaEscena();
+
+   <a href="m3d42t20_PartReal.html">/* Pintem ara els objectes reals */</a>
+   <b>glPopMatrix</b>();
+   <b>glLightfv</b>(GL_LIGHT0, GL_POSITION, lightpos);
+   <b>glCullFace</b>(GL_BACK);
+   <b>glColor4d</b>(1., 1., 1., 0.15);
+   <b>glEnable</b>(GL_BLEND);
+   <b>glBlendFunc</b>(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+   pintaPoligonMirall();
+   <b>glDisable</b>(GL_BLEND);
+   pintaEscena();
+</pre>
+
+<P>En aquest algorisme es distingeixen dues parts. La primera correspon
+al dibuixat dels objectes virtuals, i la segona al de l'escena real,
+on el polígon del mirall té un tractament especial (ja que es pinta
+amb transparència per a donar-ne més realisme).
+
+<P>Si es prefereix, es pot obtenir el mateix resultat, per miralls
+neutres, modificant els colors de l'escena de tal manera que quan
+pintem els objectes virtuals totes les intensitats apareixen atenuades
+per una mateixa constant. Això no permet, tanmateix, modelar miralls
+tintats, sinó sols miralls normals.
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m3d40_ObjectesVirtuals.html">[Anterior]</a>
+<a href="m3d43_StencilBuffer.html">[Següent]</a>
+</div>
+</body>
+</html>

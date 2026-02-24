@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","trasat");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+[Anterior]
+<a href="m3a20t10_RayTracFisica.html">[Següent]</a>
+<a href="m3a15_Objectius.html">[Apartat anterior]</a>
+</div>
+<br><br>
+
+<div class=tit1>Traçat de Raigs </div>
+
+<p> El Traçat de Raigs, <i>Ray-Tracing</i> en nomenclatura
+anglosaxona, es classifica com un model d'il·luminació global donat
+que per al càlcul del color d'un punt requereix conèixer la informació
+de tota l'escena.  Complementa els models empírics (locals) en poder
+simular ombres, objectes reflectors (miralls) i transparents. És a
+dir, pot simular l'efecte de reflexions i refraccions de llums.
+
+<p> Donat un punt <i>Q</i> que pertany a una superfície <i>S</i>, el
+seu color <i>I<sub>&#955</sub>(Q)</i>, es calcularà segons l'expressió:
+
+<p><center>  <i>I<sub>&#955;</sub>(Q)</i> = <i>I<sub>&#955;f</sub>(Q)</i> + <i>I<sub>&#955;R</sub>(Q)</i> + <i>I<sub>&#955;T</sub>(Q)</i> </center>
+
+<p class=noind> a on:
+
+<ul>
+<li> El terme <i>I<sub>&#955;f</sub>(Q)</i>, representa el color
+en <i>Q</i> degut a la llum incident dels focus.</li>
+<li> El terme <i>I<sub>&#955;R</sub>(Q)</i>, representa el color en
+<i>Q</i> degut a la llum que li arriba reflectida d'altres
+objectes de l'escena.</li>
+<li> El terme <i>I<sub>&#955;T</sub>(Q)</i>, representa el color en
+<i>Q</i> degut a la llum que li arriba transmesa a travès del
+material al que pertany el punt.</li>
+</ul>
+
+<p> Noteu que calcular totes les transmissions possibles de llum entre
+objectes, la seva acumulació i incidència en cada punt de l'escena és
+una tasca computacionalment inviable. És per això que Ray-Tracing
+calcula només les inter-reflexions de llum en punts de superfícies
+d'elevada especularitat (siguin reflectants o transmissores). Aquesta
+simplificació és coherent amb el fet que és en aquestes superfícies
+en les que realment es poden observar aquests efectes, serveixin
+d'exemple els miralls. D'altra banda en superfícies especulars pures,
+les direccions de la llum incident i de la llum que es reflecteix/transmet
+queda determinada unívocament en funció de les <a
+href="../m11/m3a20t10_RayTracFisica.html"> lleis de la física
+elemental </a>, fet que simplicarà els càlculs com tot seguit
+analitzarem.
+
+<p> Sintetitzant, l'algorime de Ray-Tracing per a calcular el color d'un
+punt <b>Q</b> visible per l'observador, en comptes de partir dels
+raigs de llum dels focus, analitzar les seves reflexions especulars
+en objectes i veure quines fan incidència en el punt,
+realitzarà el proceciment invers. Tenint en consideració la direcció
+de visió d'un punt que pertany a un reflector/transmissor, calcula la
+direcció d'incidència de llums procedents d'altres objectes que es
+pugui reflectir/transmetre en aquesta direcció. Si
+aquests raigs intersequen amb algún objecte de l'escena, calcula el
+seu color i l'acumula al del punt <b>Q</b>.
+
+<!--<p> <center> <img src="imatges/BackForwRay.png"> </center>-->
+
+<p> Concretament segueix el següent procediment:
+
+<ol>
+<li> <i>Determinació de la llum dels focus incident en el
+punt</i>. Per a cada focus de llum es calcula el raig que l'uneix amb
+el punt. S'analitza si aquest raig interseca algun objecte. Si no
+s'hi troba cap intersecció, el focus és visible des del punt i
+s'aplica el model empíric corresponent per analitzar el seu color
+degut a aquest focus. Altrament el focus no és visible, dit d'altre
+manera no arriba la llum del focus al punt i, per tant, aquest es
+troba a l'ombra del focus degut a un objecte de l'escena que
+interseca la seva llum. Fixeu-vos que amb aquest procediment
+s'afegeix la funcionalitat de còmput d'ombres</li>
+<li><i>Determinació de la llum incident procedent de reflexió entre
+objectes</i>. Si la superfície a la qual pertany el punt es pot
+considerar un reflector, es calcula la direcció d'incidència d'una
+llum potencial que en reflectir-se en el punt ho fes segons la
+direcció de visió del punt. S'analitza si aquest raig interseca algun
+objecte de l'escena. En cas de resposta positiva, es determina el punt
+d'intersecció <b>PI</b> més proper al punt <b>Q</b>. El color de la
+llum incident s'aproxima com el color de <b>PI</b> i la seva aportació
+al color de <b>Q</b> com una proporció d'aquesta (per tenir en
+consideració una possible atenuació del medi)</li>
+<li><i> Determinació de la llum incident procedent de transmissió
+de llum</i>. Si l'objecte al que pertany el punt es pot considerar
+translúcid, es determina la direcció d'incidència d'una llum potencial
+que en propagar-se per l'objecte es transmet segons la direcció de
+visió del punt. S'analitza si aquest raig interseca algun objecte de
+l'escena. En cas de resposta positiva, es determina la intersecció
+<b>PI</b> més propera al punt <b>P</b>. El color de la llum incident
+s'aproxima com el color de <b>PI</b> i la seva aportació al punt
+<b>Q</b> com una proporció d'aquesta (per tenir en consideració una
+possible atenuació de la llum dins l'objecte).</li>
+<li><i> Determinació del color de la llum en els punts
+<b>PI</b></i>. Observeu que en els dos passos anteriors cal calcular
+el color del punt <b>PI</b> que reflecteix/transmet la llum incident cap
+a <b>Q</b>. A tal efecte s'executarà el mateix procediment que per al
+càlcul del color del punt <b>P</b> que ens ocupa, però prenent com a
+direcció de visió del punt <b>PI</b> la de la recta que l'uneix
+<b>Q</b> (és a dir, la direcció en la que s'observarà el seu
+color). Dit en altres paraules, calcularem el color de <b>PI</b> que
+veuria un observador situat al punt <b>Q</b>.</li>
+</ol>
+
+<p> Podeu observar que el procés anterior permet una implementació
+segons un <a href="../m11/m3a20t20_RayAlgor.html">algorisme
+recursiu</a> que genera un arbre de raigs de reflexió/transmissió de
+llum per a cada punt en que es desitja.
+
+<!--El següent passador de diapositives, mostra exemples d'imatges
+obtingudes amb aquesta tècnica. -->
+
+
+<br><br>
+<DIV CLASS="nav">
+[Anterior]
+<a href="m3a20t10_RayTracFisica.html">[Següent]</a>
+<a href="m3a15_Objectius.html">[Apartat anterior]</a>
+</div>
+</body>
+</html>

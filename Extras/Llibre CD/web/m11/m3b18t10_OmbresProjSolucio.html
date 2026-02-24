@@ -1,0 +1,29 @@
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+
+<BODY>
+<br>
+
+<div class=tit2>Solució exercici 11.1.3</div>
+
+<p> Observeu que quan no hi ha backface culling, OpenGL pinta tant les
+cares que estan orientades cap a l'observador com les que es troben
+mirant cap enrera. Això és cert tant pel que fa a l'objecte, com a la
+seva ombra. Per tant, aquesta ombra, encara que és plana, té polígons
+orientats cap amunt (els que provenen de cares de l'objecte que
+estaven orientades cap al focus de llum) i també polígons orientats cap
+avall (els que provenen de cares de l'objecte que estaven orientades
+d'esquena al focus de llum). La conseqüència és que en aquest cas,
+l'ombra es veu tant si es mira des del seu "davant" com si es mira des
+del seu "darrera". Evidentment, si activem el backface culling quan
+fem la projecció de les cares de l'objecte, l'ombra no té les cares
+del darrera i per tant no es veu quan la mirem des del darrera.
+
+
+<p align=right><a href='javascript:this.close();'>tancar</a>
+</body>
+</html>

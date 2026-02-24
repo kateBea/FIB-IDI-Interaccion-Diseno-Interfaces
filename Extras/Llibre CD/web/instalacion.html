@@ -1,0 +1,604 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html lang="CA">
+
+<HEAD><TITLE>Instal·lació</TITLE>
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;
+
+charset=iso-8859-1">
+
+<LINK REL="stylesheet" type="text/css" HREF="upc.css" >
+
+</HEAD>
+
+<BODY>
+
+<A NAME="inici"></a>
+
+<DIV CLASS="nav">
+
+      <a href="subindex.html">[Introducció]</a>
+
+    </div>
+
+<H1>Instal·lació</h1>
+
+<br><br><center>
+
+      <table bgcolor=#ffffdd cellpadding=20>
+
+	<tbody>
+
+	  <tr>
+
+	    <td>    <ol>
+
+      <li>Instruccions d'instal·lació</li>
+
+    <ul>
+
+      <li><a href="#introinst">Introducció</a></li>
+
+      <li><a href="#req">Requeriments d'instal·lació</a></li>
+
+      <li><a href="#wininst">Instruccions específiques per a Windows</a></li>
+
+      <li><a href="#unixinst">Instruccions específiques per a Linux</a></li>
+
+    </ul>
+
+      <li><a href="#libus">Com fer servir aquest llibre</a></li>
+
+<!--    <li><a href="#dirs">Software auxiliar</a></li>  -->
+
+    <li><a href="#demos">Programes complementaris de demostració</a></li>
+
+    </ol></td></tr></tbody>
+
+</table>
+
+    </center>
+
+<ftp:../
+
+<br>
+
+<br>  <a name="introinst"></a>&nbsp;<br><h2><u>Introducció</u></h2>
+
+<p>
+
+A continuació incluim instruccions detallades d'instal·lació del software necessari per 
+
+a la correcta visualització del llibre per les plataformes Windows i Linux. En aquest 
+
+mateix CD trobareu una còpia de tot aquest software al directori <a href="../software/">software</a>.
+
+<p>
+
+En primer lloc caldrà que instal·leu un navegador i una versió del plugin de java 
+
+compatibles. Un cop instal·lats, haureu de configurar la llibreria JOGL per al 
+
+seu correcte funcionament.
+
+
+
+<p>
+
+Finalment, obriu al navegador el fitxer <a href="javascript:top.location.replace('index.html');"><b>web/index.html</b></a>
+
+i podreu començar la lectura.  (opcionalment podeu fer servir <b><a
+
+href="javascript:top.location.replace('preload.html')"
+
+>web/Preload.html</a></b>, que comença per carregar les llibreries
+
+dinàmiques corresponents (En cas contrari es carregaran quan es
+
+necessitin, produïnt-se un retard apreciable en engegar el primer
+
+applet).
+
+
+
+
+
+<br>  <a name="req"></a>&nbsp;<br><h2><u>Requeriments d'instal·lació</u></h2>
+
+
+
+<UL>
+
+
+
+<BR><h2><u>Navegador</u></h2>
+
+
+
+<p>
+
+Per a la correcta visualització del llibre es requereix la versio 6 o superior del Netscape o la versió 2 o superior de Firefox
+
+o la versio 7 o superiors de l'Internet Explorer. De totes maneres es recomana actualitzar-se 
+
+a la última versió disponible.
+
+
+
+<p>
+
+Per a poder imprimir les pàgines del llibre que contenen applets es
+
+requereix com a minim la versió 6.1 de Netscape o bé Internet Explorer
+
+versió 5.5 o superior.  En linux no es poden imprimir els applets (la
+
+última versió de Netscape al finalitzar l'edició del llibre era la
+
+7.2).
+
+
+
+<br>  &nbsp;<br><h2><u>Plugin de Java</u></h2>
+
+<p>
+
+Per a la visualització correcta dels applets es pot fer servir qualsevol versio del plugin a partir de la 1.6.
+
+
+
+<!--
+<br>  &nbsp;<br><h2><u>Configuració recomanada</u></h2>
+
+<br>
+
+
+
+<table border="1" align="center" width="500" height="200">
+
+	<TR align="center">
+
+		<TD>
+
+		</TD>
+
+		<TD>
+
+			Windows
+
+		</TD>
+
+		<TD>
+
+			Linux
+
+		</TD>
+
+	</TR>
+
+	<TR align="center">
+
+		<TD>
+
+			Navegador
+
+		</TD>
+
+		<TD>
+
+			Netscape 7.2 <BR> o <BR> Firefox 0.9.3 <br>o<br>Internet Explorer 6
+
+		</TD>
+
+		<TD>
+
+			Netscape 7.2 <br> o<BR> Firefox 0.9.3
+
+		</TD>
+
+	</TR>
+
+	<TR align="center">
+
+		<TD>
+
+			Plugin
+
+		</TD>
+
+		<TD colspan=2>
+
+			versió 1.3.1_03 <br>o<br> versió 1.4.2_05
+
+		</TD>
+
+	</TR>
+
+</TABLE>
+
+
+
+<BR>
+
+<DIV align="center"><font size="-1">Tot aquest software el podeu trobar en aquest mateix CD.</font></DIV>
+
+-->
+
+</UL>
+
+
+
+<BR><a name="wininst"></a><h2><u>Instal·lació per a Windows</u></h2>
+
+<p>Abans de procedir, és convenient haver llegit la <a href="#introinst">introducció</a>.
+
+<p><b><i>Nota: per la distribució en cdrom, tots els directoris
+
+mencionats es refereixen a l'arrel del CD, excepte si s'indica</b></i>
+
+
+
+<p>
+
+<ul>
+
+
+
+	<LI>Un cop instal·lat el plugin de java, copieu les llibreries de JOGL (*.dll) del 
+
+	directori <a href="../software/jogl/libs/windows/">CDROM:\software\jogl\libs\windows</a>
+
+	al directori bin d'instal·lació del plugin. Per exemple si heu instal·lat la versió 
+
+	1.6.1_02 aquest directori serà 'C:\Archivos de programa\JavaSoft\JRE\1.6.1_02\bin', 
+
+	a menys que li hagueu especificat un altre directori a l'instal·lar.
+
+	</LI>
+
+
+
+<BR><BR>
+
+
+
+	<LI>Copieu els arxius jar de JOGL del directori <a href="../software/jogl/jars/">CDROM:\software\jogl\jars</a>
+
+	al directori lib\ext d'instal·lació del plugin. Per exemple si heu instal·lat la versió 
+
+	1.6.1_02 aquest directori serà 'C:\Archivos de programa\JavaSoft\JRE\1.6.1_02\lib\ext', 
+
+	a menys que li hagueu especificat un altre directori a l'instal·lar.
+
+	</LI>
+
+
+
+<BR><BR>
+
+
+
+	<li> Caldrà que tingueu instal·lat QuickTime o un plug-in equivalent per
+
+	a poder veure les animacions en format <tt>.avi</tt></li>
+
+
+
+</ul>
+
+<p>
+
+Ja està!  Podeu engegar el vostre navegador i obrir el fitxer <a
+
+      href="javascript:top.location.replace('index.html');">web/index.html</a>
+
+      per a començar a llegir-lo (Tanmateix convé que sortiu del
+
+      navegador ara, i torneu a executar-lo per a assegurar-vos que
+
+      llegeix els nous fitxers que heu instal·lat).
+
+
+
+<br><a name="unixinst"></a>&nbsp; <br> <h2><u>Instal·lació per a Linux</u></h2>
+
+<p>Abans de procedir, és convenient haver llegit la <a href="#introinst">introducció</a>.
+
+<p><b><i>Nota: per la distribució en cdrom, tots els directoris
+
+mencionats es refereixen a l'arrel del CD, excepte si s'indica (/CDROM dessigna el punt de muntatge del CD al vostre computador)</b></i>
+
+
+
+<p>
+
+<ul>
+
+
+
+	<LI>Un cop instal·lat el plugin de java, copieu les llibreries
+
+	de JOGL (*.so) del directori <a
+
+	href="../software/jogl/libs/linux/">/CDROM/software/jogl/libs/linux</a>
+
+	al directori lib/i386 d'instal·lació del plugin. Per exemple
+
+	si heu instal·lat la versió 1.6.1_02 del jdk aquest directori
+
+	pot ser '/usr/local/jdk1.6.1_02/jre/lib/i386', depenent del
+
+	 directori que heu fet servir en instal·lar-lo.  </LI>
+
+
+
+<BR><BR>
+
+
+
+	<LI>Copieu els arxius jar de JOGL del directori <a
+
+	href="../software/jogl/jars/">/CDROM/software/jogl/jars</a>
+
+	al directori lib/ext d'instal·lació del plugin. Per exemple si
+
+	heu instal·lat la versió 1.6.1_02 del jdk aquest directori pot
+
+	ser per exemple '/usr/local/jdk1.6.1_02/jre/lib/ext', depenent
+
+	del directori que heu fet servir en instal·lar-lo.  </LI>
+
+
+
+<BR><BR>
+
+
+
+	<li> Caldrà que tingueu instal·lat QuickTime o un plug-in
+
+	equivalent per a poder veure les animacions en format
+
+	<tt>.avi</tt></li>
+
+<BR><BR>
+
+
+
+<!--
+	<li> Si teniu una placa gràfica Nvidia i feu servir els
+
+	drivers distribuits pel fabricant a <a
+
+	href="http://www.nvidia.com/object/linux.html">http://www.nvidia.com/object/linux.html</a>,
+
+	haureu d'instal·lar la llibrería Mesa (versió 5) al directori
+
+	d'instal·lació del navegador. La gestió dels contextes gràfics
+
+	de gl4java és incompatible amb la llibreria distribuida per
+
+	Nvidia. Si no feu aquest pas de la instal·lació correctament,
+
+	el vostre navegador avortarà de tant en tant en engegar un
+
+	applet o en abandonar una plana que hi contingui un applet que
+
+	usi gl4java. Si la vostra tarja és ATI no cal fer res
+
+	especial.</li>
+-->
+
+
+</UL>
+
+
+
+<p>
+
+Ja està!  Podeu engegar el vostre navegador i obrir el fitxer <a
+
+      href="javascript:top.location.replace('index.html');">web/index.html</a>
+
+      per a començar a llegir-lo (Tanmateix convé que sortiu del
+
+      navegador ara, i torneu a executar-lo per a assegurar-vos que
+
+      llegeix els nous fitxers que heu instal·lat).
+
+
+
+<br><a name="libus"></a>&nbsp;<br><h2><u>Com fer servir aquest
+
+      llibre</u></h2>
+
+
+
+<P>En totes les pàgines del llibre apareix una barra inferior que
+
+permet recòrrer els capítols del llibre, o els diferents apartats d'un
+
+capítol quan ja s'és dins.  Les dues fletxes a esquerra i dreta fan
+
+lliscar la barra de títols quan és massa gran per a presentar-la tot
+
+d'una a la finestra. A l'extrem esquerre, els botons que diuen
+
+"Capítols" i "Seccions" permeten conmutar la barra de navegació entre
+
+els capítols i les seccions del capítol actual (si en té). En cada
+
+moment apareixeran "il·luminats" els rètols corresponents al capítol i
+
+secció en que ens trobem.
+
+
+
+<P>  Dins del text, a més dels hyperlinks que relacionen altres
+
+parts del text, hi ha al principi i final de cada plana uns links
+
+especials que apareixen entre gafets en color verd, i que permeten
+
+navegar dins de l'apartat (o passar al següent quan hom arriba al
+
+final).  També hi ha links que apareixen en verd i amb lletres
+
+italiques, que desplegan una petita finestra amb l'explicació del
+
+significat d'un terme.  Els diferents programes que apareixen
+
+incrustats van acompanyats de les corresponents explicacions.
+
+
+
+<P> En alguns casos, per a explicar un terme, mostrar un video, o
+
+presentar algun exemple, es creen noves finestres. Aquestes tenen un
+
+hiperlink a l'extrem inferior dret retolat "tancar" que les destrueix.
+
+
+
+
+<!--
+
+<br><a name="dirs"></a>&nbsp;<br><h2><u>Software auxiliar</u></h2>
+
+
+
+
+
+<P>  En aquest llibre electrònic, hem inclos un directori <a
+
+href="../Software">Software</a> amb les distribucions dels paquets
+
+de soft usats en la implementació d'aquest llibre.  Aquestes
+
+s'ofereixen aquí a títol informatiu i per comoditat (convé tenir-les
+
+juntes amb el llibre).  No cal en canvi, en principi, usar-les ni
+
+compilarles si feu servir una de les plataformes soportades.
+
+
+
+    <p class="noind">Un altre directori instal·lat a l'arrel (<a
+
+href="../lib">lib</a>) conté subdirectoris amb les llibreries
+
+especials per tres plataformes:
+
+<ul>
+
+<li>
+
+	<b><a href="../lib/Linux2-glibc-Mesa3">lib/Linux2-glibc-Mesa3</a>:</b>    aquest  directori  conté  les llibreries
+
+   dinàmiques  de GL4Java per a   PC's amb Linux   versió 2, usant  la
+
+   llibreria  glibc  (a.k.a.  libc versió   6).  També s'inclouen  les
+
+   llibreries Mesa en la seva versió 3.1)
+
+</li>
+
+      <li> <b><a href="../lib/Win32">lib/Win32</a>:</b> Aquí estan
+
+incloses les llibreries dinàmiques de <i>GL4Java compilades per a
+
+Win32 (Windows-95-98-NT)</i>.  Hi ha tres fitxers <a
+
+href="../lib/Win32/glu.dll">glu.dll</a>, <a
+
+href="../lib/Win32/opengl.dll">opengl.dll</a> i <a
+
+href="../lib/Win32/Opengl32.dll">Opengl32.dll</a> (aquests dos
+
+darrers idèntics entre sí) que contenen la implementació d'opengl per
+
+Windows feta per Silicon Graphics. En algunes implementacions d'OpenGL
+
+de Microsoft hi ha un bug que fa que els applets no s'inicialitzin
+
+correctament quan són parcialment amagats al carregar la pàgina, o
+
+inclús que el navegador falli en fer servir un applet que l'usi. Si
+
+experimenteu aquest problema (les finestres gràfiques dels applets que
+
+estaven parcialment tapats en inicialitzar-se queden negres en una
+
+part de la finestra, o el navegador mor mentre interactueu amb un
+
+applet que usa 3d, mentre la resta sembla funcionar), cal que copieu
+
+aquests tres fitxers al directori \WINDOWS\SYSTEM, substituint als de
+
+Microsoft.  Sigueu conscients que això pot <b>ELIMINAR</b> certes
+
+optimitzacions per a explotar hardware accel·lerat per openGL que
+
+pugueu tenir.  És per tant <b>altament recomenable</b> que guardeu
+
+copia de les versions originals de les vostres llibreries per a poder
+
+revertir a elles quan executeu altres aplicacions que necessitin de
+
+l'acceleració d'OpenGL (si el vostre hardware la proporciona). En
+
+versions futures mirarem de millorar la instal·lació perquè permeti
+
+conviure la implementació d'openGL de Microsoft amb aquesta i el
+
+GL4Java.  Al directori <a href="../Software">Software</a> podreu
+
+trobar també un executable autoinstal·lador dit opengl2.exe que
+
+instal·larà també la documentació i exemples, si els voleu.
+
+</li>
+
+</ul><br>
+
+-->
+
+      <br><a name="demos"></a>&nbsp;<br><h2><u>Programes complementaris de demostració</u></h2>
+
+      <P>El directori <a
+
+href="shutterbug/Diapos.html">Shutterbug</a> conté la seqüència
+
+d'imatges de realisme creixent conegudes com "Shutterbug", i
+
+realitzades per Pixar fent servir RenderMan.
+
+
+
+    <p>El directori <a href="../GLtutors">GLtutors</a> conté programes que ajuden a 
+	comprendre l'efecte dels diferents paràmetres de les crides a OpenGL més corrents. 
+	Són deguts a Nate Robins, i es poden obtenir les versions més actuals o d'altres 
+	<a href="http://www.xmission.com/~nate/tutors.html">aquí</a>.
+
+<br><br>
+
+<br><br>
+
+<DIV CLASS="nav">
+
+      <a href="subindex.html">[Introducció]</a>
+
+    </div>
+
+
+
+
+
+</BODY>
+
+
+
+</HTML>
+
+
+

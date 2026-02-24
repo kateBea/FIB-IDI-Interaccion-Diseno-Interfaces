@@ -1,0 +1,282 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html lang="CA">
+
+<head>
+
+<title></title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+
+<script type="text/javascript" src="../upc.js"></script>
+
+<SCRIPT>
+
+top.passara("visreal","textu");
+
+</SCRIPT>
+
+<BODY>
+
+<DIV CLASS="nav">
+
+<a href="m3e30t15_TextGenDirEx2.html">[Anterior]</a>
+
+<a href="m3e30t20_TextGenAuto.html">[Següent]</a>
+
+</div>
+
+<br><br>
+
+
+
+<div class=tit1>Textures.
+
+<span class=tit2>Aplicació de textures planes.</span>
+
+<span class=tit3>Parametrització directa: Parametrització Directa d'un poliedre en dues fases</span>
+
+</div>
+
+
+
+<p> Tal i com haureu pogut comprovar en l'exemple de <a
+
+href="m3e30t15_TextGenDirEx2.html">parametrització directa per un
+
+cub</a>, si s'ha de texturar un poliedre (o superfície) amb una única
+
+textura resulta complicat i farragós haver de definir una funció de
+
+parametrització diferent per a cada cara. Penseu en poliedres
+
+complexes amb un nombre elevat de cares.
+
+
+
+<p> Les tècniques de texturació en dues fases intenten definir una
+
+única funció de parametrització que pugui ser utilitzada per el
+
+conjunt de cares i que comporti una texturació amb el màxim de
+
+continuitat possible.
+
+
+
+<p> Com s'ha definit, la idea fonamental consisteix en representar les
+
+coordenades dels vèrtexs del poliedre (<i>O_mapping</i>) i de la
+
+textura (<i>S_mapping</i>) sobre un mateix espai tri-dimensional
+
+(superfície intermitja) en què es realitza la correspondència.
+
+
+
+<p> Possibles superfícies intermitjes poden ser: un pla, un cub, un
+
+cilindre o una esfera.
+
+
+
+<p> La definició de la funció de <i>S_mapping </i> es pot veure com la
+
+inversa de la parametrització directa d'un polígon, d'un cub, d'un
+
+cilindre o d'una esfera.
+
+
+
+<p> Segons la definició de la funció d'<i>O_mapping </i> es poden
+
+aconseguir diferents efectes, però sempre es troba un punt de la
+
+superfície intermitja com a intersecció entre una recta que passa pel
+
+vèrtex i la superfície intermitja.
+
+
+
+<ul>
+
+<li> Recta que passa pel vèrtex i té la direcció del raig reflectit de
+
+la direcció de visió del vèrtex.</li>
+
+<li> Recta que passa pel vèrtex i té la direcció de la normal en el
+
+vèrtex.</li>
+
+<li> Recta que passa pel vèrtex i té com a vector director la unió d'un punt
+
+considerat com a centre de l'objecte i el vèrtex.</li>
+
+<li> Recta que passa pel vèrtex i té com a vector director la normal a un
+
+punt de la superfície intermitja.</li>
+
+</ul>
+
+
+
+<!--<center><img src="imatges/TextGenDirectOMap.png"></center>-->
+
+
+
+<p> Segons les funcions de <i>S_mapping</i> i de <i>O_mapping</i>
+
+escollides s'obtenen diferents "efectes especials" amb la texturació.
+
+
+
+<!--diferents efectes sintetitzats en la figura
+
+adjunta. Algunes de les combinacions són inviables, per no ser
+
+possible definir la inversa de les corresponents funcions.
+
+<center><img src="imatges/TextGenDirectOSMap.png"></center>-->
+
+
+
+<p> Per exemple, imaginem que definim com a superfície intermitja una
+
+esfera i com a funció de O_mapping la utilització del raig reflectit.
+
+S'obtè l'efecte anomenat <i>Environment mapping</i> que aproxima les
+
+reflexions especulars d'un entorn sobre un objecte.
+
+
+
+<center>
+
+<img src="imatges/esphere.png"><img src="imatges/esphereMap.png">
+
+</center>
+
+
+
+<p> Definim com entorn d'un objecte reflector, els objectes de
+
+l'escena que es troben suficientment lluny d'ell (penseu en un objecte
+
+relativament petit, com el de la figura esquerra, en el mig d'una
+
+habitació). Situem l'objecte en el mig d'una esfera. Realitzem una
+
+fotografia amb una càmera especial de tipus "ull de peix" situada al
+
+mig de l'esfera que permet obtenir una imatge d'un entorn de quasi 360
+
+graus al voltant del punt. Si mapem aquesta imatge (veure figura
+
+anterior dreta) sobre l'esfera, per a cada punt d'aquesta tindrem una
+
+correcta aproximació de la llum que incideix provinent d'altres
+
+objectes. Ara, situem un objecte en mig de l'esfera i utilitzem per a
+
+definir l'O_mapping el raig reflectit en cada vèrtex. Recordeu que en
+
+el punt d'intersecció amb l'esfera trobarem un color que aproxima la
+
+llum incident d'altres objectes; per tant hem trobat un sistema que
+
+aproxima les reflexions d'objectes de l'escena en objectes
+
+reflectors. Noteu que si modifiquem la posició de l'observador es
+
+modificarà el color aplicat a cada vèrtex tal i com es produeix en les
+
+reflexions especulars.
+
+
+
+<p> L'aproximació radica en dos aspectes. D'una banda en l'obtenció de
+
+la fotografia de l'entorn. És impossible una imatge de 360 graus al
+
+voltant d'un punt; altrament aquesta tindrà una resolució concreta,
+
+per tant a diferents direccions de reflexió se'ls assignarà un mateix
+
+color. D'altra banda, en l'escena poden haver-hi objectes intermitjos
+
+entre el reflector i l'entorn que no es tenen en consideració.
+
+
+
+<p> Altre exemple d'utilització de textures és simular l'efecte de
+
+tenir una imatge que es projecta des d'un projector de diapositives
+
+sobre un objecte. Per això caldrà definir com a superfície intermitja
+
+un pla perpendicular a la direcció de projecció del projector on
+
+s'ubica la imatge a projectar. Com funció d'O_mapping es defineix la
+
+recta que uneix cada vèrtex amb el centre de projecció. L'S_mapping
+
+aplicarà la imatge sobre un polígon situat sobre la superfície
+
+intermitja. No oblideu que la funció de parametrització que
+
+s'utilitzarà en tots els casos s'obtindrà com a composició de la
+
+inversa de la funció d'S_mapping amb l'O_mapping; i que la inversa de
+
+l'S_mapping la podeu entendre com la parametrització en una fase de la
+
+superfície intermitja.
+
+
+
+<p> A continuació trobareu un applet que permet veure el simulador de
+
+diapositives explicat. Amb el control Projecció activat és possible
+
+modificar interactivament en la pantalla gràfica la posició del
+
+projector. Amb el control Rotació activat és possible modificar
+
+interactivament la visió de l'objecte i de la diapositiva projectada
+
+sobre ell. Es pot modificar l'objecte en el que projectem i la textura
+
+(imatge) que s'hi projecta.
+
+
+
+<BR>
+
+<div align=center>
+
+<applet code="Interficie.class" archive="Projeccio.jar,../comuns.jar" height=470 width=760>
+
+</applet>
+
+</div>
+
+
+
+
+
+<br><br>
+
+<DIV CLASS="nav">
+
+<a href="m3e30t15_TextGenDirEx2.html">[Anterior]</a>
+
+<a href="m3e30t20_TextGenAuto.html">[Següent]</a>
+
+</div>
+
+</body>
+
+</html>
+

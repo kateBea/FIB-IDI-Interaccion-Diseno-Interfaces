@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title>8.2.1 Algorismes d'espai objecte</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" TYPE="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</head>
+<BODY >
+<SCRIPT>
+top.passara("visib","calg");
+</SCRIPT>
+<DIV CLASS="nav">
+<a href="m8-2.html">[Anterior]</a>
+<a href="m8-algIma.html">[Següent]</a>
+</div>
+<br><br>
+
+<div CLASS="tit1">Classificació dels algorismes de determinació de visibilitat.
+<span CLASS="tit2">Algorismes d'espai objecte</span>
+</div>
+
+<P>
+Parteixen de la geometria de l'escena (usualment cares planes) i,
+d'acord amb la posició de l'observador, calculen la geometria visible
+sobre el model de l'aplicació (espai aplicació o
+objecte). Posteriorment visualitzen aquesta geometria utilitzant el
+<A HREF="../m6/main63.html">pipeline de visualització 3D</A>. S'anomenen
+algorismes d'espai objecte perquè determinen la visibilitat comparant
+la posició relativa dels objectes de l'escena respecte a
+l'observador. En la figura mostrem el diagrama funcional d'un
+algorisme genèric i il·lustrem el seu funcionament amb un exemple
+concret. Es tracta d'una <i>figura sensible</i>, és a dir, cal prémer
+el cursor en els blocs per veure el seu efecte. S'analitza l'escena
+original, la geometria determinada visible i el resultat del seu
+processat dins el PV3D.
+
+<CENTER>
+<TABLE><tr><TD>
+<img src="imatges/esquema8-3.jpg" alt="Pipeline de Visualització" height="180" width="600" usemap="#espobj">
+<MAP NAME="espobj">
+<area onmouseover="window.status='Geometria escena';return true" onmouseout="window.status='';return true" shape="RECT" coords="1,67,93,193" href="javascript:oWin('imatges/fig-8-3-1.jpg','','340','260','','','','yes')" alt="">
+<area onmouseover="window.status='Part visible';return true" onmouseout="window.status='';return true" shape="RECT" coords="258,61,372,193" href="javascript:oWin('imatges/fig-8-3-2.jpg','','340','260','','','','yes')" alt="">
+<area onmouseover="window.status='Imatge final';return true" onmouseout="window.status='';return true" shape="RECT" coords="535,58,605,172" href="javascript:oWin('imatges/fig-8-3-3.jpg','','340','260','','','','yes')" alt="">
+</MAP>
+</TD></TR></TABLE>
+</CENTER>
+
+<P>
+Exemples d'algorismes d'aquesta família són l'algorisme de Robert i el
+d'Appel. Tots ells són molt antics (dels 60,70) i s'utilitzaven quan
+els dispositius de sortida eren bàsicament vectorials i
+només es podien pintar segments rectes (filferros).
+
+<P>
+Per a determinar la complexitat d'aquesta família d'algorismes cal
+considerar que donada la posició de l'observador Obs i una cara
+concreta C<sub>i</sub>, és necessari analitzar quines cares
+C<sub>j</sub> li són obstacles parcials o totals (C<sub>i</sub>
+parcialment o total no visible). Per tant, si per cada cara cal
+analitzar (comparar) la posició relativa de la resta de cares respecte
+d'ella i l'observador, la complexitat d'aquesta família d'algorismes
+es O(N*N) on N es el nombre de cares de l'escena.
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m8-2.html">[Anterior]</a>
+<a href="m8-algIma.html">[Següent]</a>
+</div>
+</body>
+</html>

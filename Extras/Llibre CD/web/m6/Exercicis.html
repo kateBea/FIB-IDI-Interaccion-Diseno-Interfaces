@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M7.1 Procés de visualització 2D.Exercicis.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("vis3D","ex");
+</SCRIPT>
+<A NAME="inici"></A>
+<DIV CLASS="nav">
+[Anterior]
+[Següent]
+<A HREF="res.html">[Apartat anterior]</a>
+</div>
+<br><br>
+
+<div class=tit1>Exercicis d'autoavaluació</div>
+
+<P>
+	A continuació teniu un recull d'exercicis
+	d'autoavaluació. Després de la majoria dels enunciats teniu un
+	'link' a la solució, i en cas que sigui necessari, a una
+	resposta numèrica.
+
+<p class=exercici>
+<span class=exernum>Exercici 1:</span> Procés de resolució de
+l'exercici: Tens una petita finestra de referència aqui sota a
+l'esquerra amb una projecció de l'escena que servirà de referència. La
+imatge que es veu a aquesta vista s'obté aleatòriament d'entre un
+catàleg de vistes. Cada cop que es prem el botó "Modif. Càmera", apareix
+una nova vista.
+
+<br><br>
+L'exercici consisteix en anar modificant els
+diferents paràmetres de la càmera fins obtenir a la vista dins la
+finestra gràfica de l'<i>applet</i>, la mateixa imatge que apareix a
+la finestra de referència.
+
+<center>
+<table>
+<tr valign=top>
+<td><APPLET CODE ="comuns.MiniVentana.class" archive="AppletG2.jar,../comuns.jar" WIDTH=230 HEIGHT=240 ALIGN="left" hspace=10>
+<PARAM NAME=fichero VALUE="/DAT/2cuboG.dat">
+</APPLET>
+</td>
+<td>  <APPLET CODE ="AppletG2.class" archive="AppletG2.jar,../comuns.jar" WIDTH=640 HEIGHT=480> ALIGN="right"
+  <PARAM NAME=NApplet VALUE="10">
+  <PARAM NAME=Vrpx    VALUE="5.0">
+  <PARAM NAME=Vrpy    VALUE="5.0">
+  <PARAM NAME=Vrpz    VALUE="5.0">
+  <PARAM NAME=Angx    VALUE="30.0">
+  <PARAM NAME=Angy    VALUE="45.0">
+  <PARAM NAME=Angz    VALUE="0.0">
+  <PARAM NAME=D       VALUE="20.0">
+  <PARAM NAME=Winy    VALUE="5.0">
+  <PARAM NAME=Zfar    VALUE="25.0">
+  <PARAM NAME=Znear   VALUE="1.0">
+  <PARAM NAME=fich    VALUE="">
+  <PARAM NAME=AngExtx VALUE ="30.0">
+  <PARAM NAME=AngExty VALUE="10.0">
+  <PARAM NAME=fichero VALUE="/DAT/2cuboG.dat">
+  <PARAM NAME=Camara VALUE="1">
+  <PARAM NAME=Alfa VALUE="15.0">
+  </APPLET>
+</td></tr>
+</table></center>
+
+<p class=exercici><span class=exernum>Exercici 2:</span>
+   Un punt del Model Transformat es troba sobre l'eix z en el sistema de
+   coordenades de l'observador i sobre el pla de retallat anterior
+   (coordenades (0,0,-zNear) ). Quines coordenades normalitzades tindrà
+   en el Model d'Observador després d'aplicar-li la matriu de perspectiva
+   d'OpenGL?
+
+<br><br>
+<span class=sollnk><A HREF="javascript:MuestraFin('Solu62.html','400','200','yes')" title="">[Solució]</A></span>
+<br>
+
+<p class=exercici><span class=exernum>Exercici 3:</span>
+Un punt del Model Transformat es troba sobre l'eix z en el sistema de
+   coordenades de l'observador i sobre el pla de retallat posterior
+   (coordenades (0,0,-zFar) ). Quines coordenades normalitzades tindrà
+   en el Model d'Observador després d'aplicar-li la matriu de perspectiva
+   d'OpenGL?
+
+<br><br>
+<span class=sollnk><A HREF="javascript:MuestraFin('Solu63.html','400','200','yes')" title="">[Solució]</A></span>
+<br>
+
+<p class=exercici><span class=exernum>Exercici 4:</span>
+Un punt del Model Transformat es troba sobre l'eix z en el sistema de
+   coordenades de l'observador i sobre el pla de retallat anterior
+   (coordenades (0,0,-zNear) ). Quines coordenades normalitzades tindrà
+   en el Model d'Observador després d'aplicar-li la matriu axonomètrica
+   d'OpenGL?
+
+<br><br>
+<span class=sollnk><A HREF="javascript:MuestraFin('Solu64.html','400','200','yes')" title="">[Solució]</A></span>
+<br>
+
+<p class=exercici><span class=exernum>Exercici 5:</span>
+Un punt del Model Transformat es troba sobre l'eix z en el sistema de
+   coordenades de l'observador i sobre el pla de retallat posterior
+   (coordenades (0,0,-zFar) ). Quines coordenades normalitzades tindrà
+   en el Model d'Observador després d'aplicar-li la matriu axonomètrica
+   d'OpenGL?
+
+<br><br>
+<span class=sollnk><A HREF="javascript:MuestraFin('Solu65.html','400','200','yes')" title="">[Solució]</A></span>
+<br>
+
+<p class=exercici><span class=exernum>Exercici 6:</span>
+Un punt del Model Transformat es troba sobre el pla de retallat anterior
+   i a una distància igual a la meitat de la dimensió del frustrum en
+   direcció y desde l'eix z en el sistema de coordenades de l'observador.
+   (coordenades (0, .5*zNear/f, -zNear) ). Quines coordenades
+   normalitzades tindrà en el Model d'Observador després d'aplicar-li
+   la matriu de perspectiva d'OpenGL?
+
+<br><br>
+<span class=sollnk><A HREF="javascript:MuestraFin('Solu66.html','400','200','yes')" title="">[Solució]</A></span>
+<br>
+
+<p class=exercici><span class=exernum>Exercici 7:</span>
+Un punt del Model Transformat es troba sobre el pla de retallat anterior
+   i a una distància igual al 75%  de la dimensió del frustrum en
+   direcció x desde l'eix z en el sistema de coordenades de l'observador.
+   Quines coordenades
+   normalitzades tindrà en el Model d'Observador després d'aplicar-li
+   la matriu de perspectiva d'OpenGL?
+
+<br><br>
+<span class=sollnk><A HREF="javascript:MuestraFin('Solu67.html','400','200','yes')" title="">[Solució]</A></span>
+
+
+<br><br>
+<DIV CLASS="nav">
+[Anterior]
+[Següent]
+<A HREF="res.html">[Apartat anterior]</a>
+</div>
+</BODY>
+</HTML>

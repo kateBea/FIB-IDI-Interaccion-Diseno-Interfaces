@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("anim","morph");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m4c50_MorphingExemples.html">[Anterior]</a>
+[Següent]
+<a href="m4d10_AnimacioResum.html">[Següent apartat]</a>
+</div>
+<br><br>
+
+<div class=tit1>Morphing.
+<span class=tit2>Altres mètodes</span>
+</div>
+
+<p> A part dels mètodes que hem vist, existeixen molts altres mètodes
+de morphing, més sofisticats i que permeten una major automatització
+del procés. Entre aquests algorismes podem citar l'article "As Rigid
+as Possible Shape Interpolation", ACM Siggraph 2000, de Marc Alexa,
+Daniel Cohen-Or i David Levin. En aquest article es proposa un esquema
+de morphing, vàlid tant per objectes 2D com per 3D, que treballa en
+l'espai objecte i que transforma l'interior dels objectes com la seva
+frontera. El fet de controlar la deformació de l'espai interior als
+objectes fa que es pugui garantir que el volum (local) es manté el més
+constant possible durant la transformació. L'algorisme suposa que es
+coneix una correspondència entre els vèrtexs de les cares de la
+frontera de l'objecte, i genera una divisió de l'espai interior en
+tetraedres (en 2D, triangles) que seran interpolats durant la
+transformació de morphing.
+
+<p> Si ens centrem en el morphing d'objectes 3D, tenim alguns
+algorismes que treballen en espai objecte i que permeten modificar la
+geometria dels objectes:
+
+<ul>
+<li> Les deformacions de forma lliure (FFD) proposades per Sederberg
+permeten deformar i modificar la forma dels objectes en base a la
+deformació de l'espai que els conté.  En aquest cas, l'espai es
+deforma amb una xarxa de control de Bézier (o B-Spline) que l'usuari
+pot anar modificant: cada cop que movem un dels punts de control de la
+xarxa, l'espai es deforma com si fós elàstic i arrastra tots els
+vèrtexs i cares dels objectes que engloba. Podeu trobar una descripció
+detallada del mètode a l'article original, "Free-Form Deformation of
+Solid Geometric Models", ACM Siggraph'1986, Vol 20, pp 151-160.</li>
+
+<li> D'altra banda, Jarek Rossignac va proposar un algorisme per a la
+interpolació de poliedres usant sumes de Minkowsky. L'algorisme, que
+funciona bé en objectes convexes, calcula l'objecte interpolació
+linial C com A*(1-t) + B*t , on A i B són els poliedres inicial i
+final, respectivament i t és un paràmetre que pot variar entre 0 i
+1. L'algorisme afegeix els nous vèrtexs (i noves cares nules) que
+calen tant al sòlid A com al B, i després interpola linealment per
+trobar els vèrtexs de C per qualsevol valor intermig del paràmetre
+t. L'objecte C té sempre la mateixa topologia (cares i relació de
+veinitat entre elles) independentment del valor de t.  L'article el
+podeu trobar als Proceedings del congrés Eurographics'1991.  Aquest
+algorisme d'interpolació entre poliedres es pot extendre a la
+interpolació bilinial entre quatre poliedres o bé a obtenir poliedres
+de Bézier, si utilitzem el càlcul de De Casteljau per a corbes de
+Bézier, que es basa en l'aplicació reiterada de l'algorisme
+d'interpolació lineal.</li>
+</ul>
+
+<p> Un altre grup d'algorismes són els que modifiquen la forma dels
+objectes en base al seu esquelet. L'article "Pose Space Deformation: A
+Unified Approach to Shape Interpolation and Skeleton-Driven
+Deformation", ACM Siggraph 2000, de J. P. Lewis , Matt Cordner i
+Nickson Fong, observa que un bon nombre de deformacions es poden
+especificar a partir de transformacions en un espai de <i>poses</i>
+(posicions), definit a partir d'algun sistema de paràmetres o d'un
+esquelet. Les transformacions de l'esquelet generen automàticament les
+deformacions desitjades als punts de la frontera dels objectes. Aquest
+algorisme és útil en aplicacions que requereixen simulació de
+deformació facial o del cos humà en temps real.
+
+<p> Finalment, podem parlar de morphing entre seqüències animades. En
+aquest cas, s'ha d'anar fent el morphing entre parelles d'imatges
+homòlogues de la seqüència animada inicial i de la final. En aquest
+cas (Alan Watt, "The Computer Image", Addison Wesley 1999, pàg 471) té
+molt d'interés el poder controlar diferentes parts de la imatge de
+manera que puguin variar a diferents velocitats entre la imatge
+inicial i la final.  
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m4c50_MorphingExemples.html">[Anterior]</a>
+[Següent]
+<a href="m4d10_AnimacioResum.html">[Següent apartat]</a>
+</div>
+</body>
+</html>

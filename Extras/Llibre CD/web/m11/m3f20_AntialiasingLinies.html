@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","antial");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m3f10_Antialiasing.html">[Anterior]</a>
+<a href="m3f30_AntialiasingPoligons.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Antialiasing.
+<span class=tit2>Supressió de l'efecte d'escala en el dibuix de línies</span>
+</div>
+
+<p> Quan es vol activar la supressió de l'efecte d'escala en el dibuix
+de rectes en OpenGL només cal activar el mode de suavitzat i demanar
+que es faci promig de color (blending) usant els recursos de
+transparències d'OpenGL. Una de les rutines a cridar és la <b>glHint
+(GLenum objectiu, GLenum hint)</b>, que ens permet especificar el grau
+de qualitat que volem en el resultat final. El paràmetre
+<b>objectiu</b>, de tipus GLenum, pot tenir els valors
+GL_POINT_SMOOTH_HINT, GL_LINE_SMOOTH_HINT o bé GL_POLYGON_SMOOTH_HINT
+segons si volem indicar la qualitat amb que volem que es dibuixin els
+punts, les línies o els polígons. L'altre paràmetre, <b>hint</b>, el
+podem especificar com GL_FASTEST, GL_NICEST o bé GL_DONT_CARE segons
+si volem que OpenGL ens dibuixi ràpid però amb poca qualitat, lent i
+amb la màxima qualitat (i supressió de l'efecte d'escala) o si no ho
+volem especificar.
+
+<p> Un tros de programa per dibuixar rectes amb supressió de l'efecte
+d'escala hauria de contenir les següents crides:
+
+<pre class=algoritme>
+   <b>glClearColor</b>(0., 0., 0.8, 0.);
+
+   <b>glEnable</b>(GL_LINE_SMOOTH);
+   <b>glEnable</b>(GL_BLEND);
+   <b>glBlendFunc</b>(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+   <b>glHint</b>(GL_LINE_SMOOTH_HINT, GL_NICEST);
+   <b>glLineWidth</b> (1.5);
+   <b>glColor3f</b> (.8, .8, 0., 0.);
+   <b>glBegin</b> (GL_LINES);
+      ......
+      ......
+   <b>glEnd</b>();
+</pre>
+
+<p> La crida a <b>glEnable</b> amb paràmetre GL_LINE_SMOOTH és la que
+activa el mode d'antialiasing d'OpenGL. La crida a <b>glEnable</b>
+amb paràmetre GL_BLEND activa la barreja de colors durant el procés de
+dibuixat de l'escena sobre el frame buffer. D'altra banda, la crida a
+<b>glBlendFunc</b> indica a OpenGL que la barreja de colors es farà
+amb els factors de ponderació <i>a</i> i <i>(1-a)</i> on <i>a</i> és
+el factor alfa de la línia que estem dibuixant. El que farà OpenGL és
+calcular, a cada pixel cobert per la recta, un valor de alfa que és
+proporcional a l'àrea de pixel ocupada per la recta. Després, la
+barreja de colors al pixel (blending) es farà segons el valor alfa
+dels dos colors: el color que tenia el pixel fins ara i el color de la
+recta que l'està cobrint parcialment.
+
+<p> A les següents imatges veieu el resultat que ens dona aquest
+algorisme. A l'esquerra tenim el dibuix d'un avió sense supressió de
+l'efecte d'escala, i a la dreta podeu veure l'efecte després d'aplicar
+l'algorisme d'antialiasing presentat. En cada un dels dos casos, a
+sota teniu una visió amplificada (zoom) per a que veieu més bé com
+funciona l'algorisme:
+
+<p>
+<div align=center><img src="imatges/AvioSenseaa.png" width=400 height=350 >
+&nbsp;&nbsp;
+<img src="imatges/AvioAmbaa.png" width=400 height=350 ></div>
+
+<p>
+<div align=center><img src="imatges/AvioZoomSenseaa.jpg" width=200 height=300 >
+&nbsp;&nbsp;
+<img src="imatges/AvioZoomAmbaa.jpg" width=200 height=300 ></div>
+
+<p> Si el que volem és aplicar aquest algorisme de supressió de
+l'efecte d'escala durant el dibuix d'una escena 3D, ens caldrà fer un
+<b>glEnable</b> del test de profunditat (depth test), per tal que
+colors resultants corresponguin als dels objectes més propers. Si
+s'han de pintar línies sobre un fons d'objectes opacs, cal pintar
+primer aquests objectes.  
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m3f10_Antialiasing.html">[Anterior]</a>
+<a href="m3f30_AntialiasingPoligons.html">[Següent]</a>
+</div>
+</body>
+</html>

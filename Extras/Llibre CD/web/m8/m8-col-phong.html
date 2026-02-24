@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title>8 </title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" TYPE="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</head>
+<BODY >
+<SCRIPT>
+top.passara("visib","izbf");
+</SCRIPT>
+<DIV CLASS="nav">
+<A HREF="m8-col-exeGouraud.html">[Anterior]</a>
+[Següent]
+<A HREF="m8-9.html">[Següent apartat]</a>
+</div>
+<br><br>
+
+<div CLASS="tit1">Models d'il·luminació i Z-buffer.
+<span CLASS="tit2">Colorat de Phong</span>
+</div>
+
+<P>
+Aquest mètode interpola el vector normal en un punt (píxel) interior a
+un polígon en funció de les normals dels seus vèrtexs i calcula
+l'equació d'il·luminació en aquest punt amb la seva normal
+interpolada. La interpolació de normals es realitza en temps de
+rasterització de la manera que expressa la figura:
+
+<CENTER>
+<TABLE><TR><TD>
+<img src="imatges/phong-sh.jpg" alt="Tècnica d'interpolació per Phong shading">
+</TD></TR></TABLE>
+</CENTER>
+
+<P>
+L'avantatge d'aquest mètode és que elimina els inconvenients de la
+interpolació de colors respecte a les reflexions especulars que
+s'obtenia amb Gouraud a l'interpolar normals i no il·luminació
+directament. Els principals inconvenients són un cost computacional
+més elevat donat que igualment cal calcular el model d'il·luminació en
+cada punt i, per tant, efectuar el còmput d'angles entre vectors. Per
+aquest motiu usualment no es troba implementat en llibreries gràfiques
+3D i s'utilitza únicament per visualitzar objectes aproximats per
+cares planes amb tècniques de visualització com ray-casting.
+
+
+<br><br>
+<DIV CLASS="nav">
+<A HREF="m8-col-exeGouraud.html">[Anterior]</a>
+[Següent]
+<A HREF="m8-9.html">[Següent apartat]</a>
+</div>
+</body>
+</html>

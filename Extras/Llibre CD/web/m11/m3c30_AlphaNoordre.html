@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","transp");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m3c20_Alpha.html">[Anterior]</a>
+<a href="m3c40_Experalpha.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Transparències.
+<span class=tit2>Barrejes alternatives</span>
+</div>
+
+<P>Evidentment la fase d'ordenació pot ser complexa. Sovint no cal un
+ordre perfecte per a obtenir imatges raonables. El mateix exemple
+anterior us mostra que l'ordre erroni és manifestament dolent si el
+comparem amb el resultat correcte, però pres per sí sol podria ser
+acceptable. Una altra estratègia és modificar la funció de barreja
+perquè no depengui de l'ordre. Per exemple hom fa servir a vegades:
+
+<div class=formula>NouColorPíxel :=
+&#945;<sub>fragment</sub>x Color<sub>fragment</sub>+
+Color<sub>FrameBuffer</sub></div>
+
+<P class="exercici"><span class=exernum>Exercici 2.2:</span>
+Demostreu que efectivament el color no depèn ara de
+l'ordre en què es pinten els objectes transparents (que es pinten,
+això sí, després de tots els opacs)
+
+<br><br>
+<span class=sollnk><A href="javascript:MuestraFin('m3c30s10_Sol3-2-2.html','400','200','yes')">Solució</A></span>
+
+<P>Tanmateix aquest mètode dóna problemes evidents de saturació. Cada
+primitiva semitransparent que afegim sols suma quelcom a les
+components de color ja emmagatzemades al frame buffer. Quan els valors
+atenyen el màxim, les següents primitives que es pintin no
+contribuiran al color en absolut! Per exemple si alguna part de
+l'escena és blanca (com la paret posterior en les figures de la plana
+anterior), els objectes transparents no es veuran davant seu.
+
+<P class="exercici"><span class=exernum>Exercici 2.3:</span>
+Podeu trobar altres combinacions de factors de blending
+que tinguin sentit per a simular transparències?
+
+<br><br>
+<span class=sollnk><A href="javascript:MuestraFin('m3c30s20_Sol3-2-3.html','700','500','yes')">Solució</A></span>
+</p>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m3c20_Alpha.html">[Anterior]</a>
+<a href="m3c40_Experalpha.html">[Següent]</a>
+</div>
+</body>
+</html>

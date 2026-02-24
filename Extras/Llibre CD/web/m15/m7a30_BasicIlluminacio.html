@@ -1,0 +1,513 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("opengl","cridbas");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m7a20_BasicInstruccPrincipals.html">[Anterior]</a>
+[Següent]
+<a href="m7b10_QueEsGL4Java.html">[Següent apartat]</a>
+</div>
+<br><br>
+
+<div class=tit1> Crides bàsiques d'OpenGL.
+<span class=tit2>Il·luminació</span>
+</div>
+
+<P>
+En el model d'il·luminació d'OpenGL, la llum en una escena prové de
+diferents fonts de llum que poden ser activades o desactivades
+individualment. Algunes fonts de llum provenen d'una direcció o
+posició determinada mentre que d'altres són distribuïdes uniformement
+en l'escena.
+
+<P>
+OpenGL aproxima la llum o la il·luminació com si la llum estigués
+dividida en components de vermell, verd i blau. Per tant el color de
+les fonts de llum es caracteritza per la quantitat de vermell, verd i
+blau que emeten, i el material de les superfícies es caracteritza pel
+percentatge de les components de vermell, verd i blau que són
+reflectides en varies direccions.
+
+<P>
+Les components del color signifiquen coses diferents quan
+s'especifiquen per a llums o per a materials. Per a una llum, els
+valors corresponen al percentatge d'intensitat per a cada color. Per a
+materials, els valors corresponen a les proporcions reflectides dels
+respectius colors. És a dir, si R=1, G=0.5 i B=0 per a un material,
+aquest material reflecteix tot el vermell, la meitat del verd i res de
+blau.
+
+<P>
+Per a utilitzar il·luminació en OpenGL es requereix seguir els
+següents punts:
+<UL>
+<LI>Definir els fonts de llum (un o més) -- <A HREF="#defllum">glLigth*</A></LI>
+<LI>Activar els corresponents fonts de llum -- <A HREF="#actllum">glEnable</A></LI>
+<LI>Definir el model d'il·luminació -- <A HREF="#defillu">glLightModel*</A></LI>
+<LI>Activar el model d'il·luminació -- <A HREF="#actillu">glEnable</A></LI>
+<LI>Definir les propietats del material pels objectes de l'escena -- <A HREF="#defmat">glMaterial*</A></LI>
+<LI>Establir els vectors normals per als vèrtexs de l'escena -- <A HREF="#actnorm">glNormal*</A></LI>
+</UL>
+
+<P>
+<div class=tit3><b>Fonts de llum</b></div><A NAME=defllum></A>
+
+<P>
+Es poden incloure fins a vuit fonts de llum diferents en una escena
+OpenGL i de diferents colors. La comanda per a especificar totes les
+propietats d'una font de llum és:
+
+<PRE class=algoritme>
+          void <B>glLight{if}[v]</B> (GLenum light, GLenum property,
+                               TYPE param)
+</PRE>
+
+<br>
+on <I>light</I> és la font de llum a especificar: GL_LIGHT0,
+GL_LIGHT1, ... , o GL_LIGHT7; <I>property</I> és el nom de la
+propietat a la que es vol donar valor: GL_AMBIENT, GL_DIFFUSE,
+GL_SPECULAR, GL_POSITION, GL_SPOT_DIRECTION, GL_SPOT_EXPONENT,
+GL_SPOT_CUTOFF, GL_CONSTANT_ATTENUATION, GL_LINEAR_ATTENUATION o
+GL_QUADRATIC_ATTENUATION; i <I>param</I> especifica el(s) valor(s) per
+a la propietat.
+
+<br><br>
+Propietats de la llum:
+
+<br><br>
+Valors RGB:
+<UL>
+<DL COMPACT><DT><B>GL_AMBIENT</B>
+<DD> defineix el color RGBA de la llum ambient que una font de llum
+particular afegeix a l'escena: llum sense direcció que desapareix quan
+s'activa una altra font de llum.<BR>
+Exemple:
+<PRE class=algoritme>
+          GLfloat light_ambient[] = {0.0, 0.0, 0.0, 1.0};
+          <B>glLightfv</B> (GL_LIGHT0, GL_AMBIENT, light_ambient);
+</PRE>
+<DT><B>GL_DIFFUSE</B>
+<DD> defineix el color RGBA de la llum difosa que una determinada font
+de llum afegeix a l'escena: llum que prové d'una direcció però rebota
+en la superfície cap a totes direccions.<BR>
+Exemple:
+<PRE class=algoritme>
+          GLfloat light_difuse[] = {1.0, 1.0, 1.0, 1.0};
+          <B>glLightfv</B> (GL_LIGHT0, GL_DIFFUSE, light_difuse);
+</PRE>
+<DT><B>GL_SPECULAR</B>
+<DD> defineix el color RGBA d'una llum especular que una determinada
+font de llum afegeix a l'escena: llum que prové d'una direcció
+particular i tendeix a rebotar en la superfície en una determinada
+direcció.<BR>
+Exemple:
+<PRE class=algoritme>
+          GLfloat light_specular[] = {1.0, 1.0, 1.0, 1.0};
+          <B>glLightfv</B> (GL_LIGHT0, GL_SPECULAR, light_specular);
+</PRE>
+</DL>
+</UL>
+
+<br>
+Posició/direcció del llum:
+<UL>
+<DL COMPACT><DT><B>GL_POSITION</B>
+<DD> decideix entre els dos tipus de llum: direccional (a l'infinit
+-el sol-) i posicional (local -una làmpada-).<BR>
+El paràmetre s'especifica per un vector de quatre components
+(x,y,z,w). Si w és zero el llum és direccional, i (x,y,z) descriuen la
+direcció; si w no és zero el llum és posicional i (x,y,z,w) marquen la
+posició en <A class=glossari Href="javascript:glossari('CoordHomog.html')">coordenades homogènies</A>.<BR>
+Exemple:
+<PRE class=algoritme>
+          GLfloat light_position[] = {0.0, 0.0, 1.0, 0.0};
+          <B>glLightfv</B> (GL_LIGHT0, GL_POSITION, light_position);
+</PRE>
+</DL>
+</UL>
+
+<P>
+En OpenGL una font de llum també està subjecte a les transformacions
+corresponents marcades per les matrius de transformació de la mateixa
+manera que una primitiva. És a dir, es pot manipular la posició o
+direcció d'una font de llum canviant el contingut de la matriu
+MODELVIEW (la matriu PROJECTION no té efecte sobre la posició o
+direcció de les fonts de llum). Això vol dir que segons el punt del
+codi on activem la posició de la font de llum podem aconseguir efectes
+diferents:
+<UL>
+<LI><I>Llum que es queda fixe.</I> Cal donar valor a la posició de la
+font de llum DESPRÉS de qualsevol transformació utilitzada (i cada cop
+que es canvïi la matriu MODELVIEW).</LI>
+<LI><I>Llum que es mou al voltant d'un objecte estacionari.</I> Hi ha
+dues maneres: la primera és anar variant el valor de la propietat
+GL_POSITION; la segona és posar la mateixa posició a la llum després de
+fer la transformació del model. És a dir, primer definir la matriu de
+visualització pels objectes, fer un "PushMatrix", definir la
+transformació del model, definir la posició de la llum ("glLight") i
+finalment fer un "PopMatrix" abans d'enviar la geometria.</LI>
+<LI><I>Llum que es mou al llarg del punt de vista.</I> Cal posar els
+valors 0.0, 0.0, 1.0 1.0 a la posició de la font de llum ABANS de la
+transformació de visualització només un cop. Cada cop que s'apliqui
+una transformació de visualització s'aplicarà de la mateixa manera a
+la font de llum.</LI>
+</UL>
+
+<P>
+<I><B>Spotlights.</B></I> Hi ha dos tipus de llums posicionals:
+omnidireccional (per defecte) i <I>spotlight</I>. En un
+<I>spotlight</I> el que abarca la llum des del focus es restringeix a
+un con. Per defecte aquesta característica no està activada. Les
+següents propietats defineixen un <I>spotlight</I>:
+<UL>
+<DL COMPACT><DT><B>GL_SPOT_DIRECTION</B>
+<DD> Determina la direcció de l'eix del con de llum.<BR>
+Exemple:
+<PRE class=algoritme>
+          GLfloat direction[] = {0.0, 0.0, -1.0};
+          <B>glLightfv</B> (GL_LIGHT0, GL_SPOT_DIRECTION, direction);
+</PRE>
+<DT><B>GL_SPOT_CUTOFF</B>
+<DD> Defineix l'angle entre els eixos del con i un raig al llarg de
+l'aresta del con. El seu valor està restringit al rang [0.0, 90.0] a
+menys que tingui el valor especial de 180.0, que produeix una
+distribució de llum uniforme (aquest és el valor per defecte).<BR>
+Exemple:
+<PRE class=algoritme>
+          <B>glLightfv</B> (GL_LIGHT0, GL_SPOT_CUTOF, 45.0);
+</PRE>
+<DT><B>GL_SPOT_EXPONENT</B>
+<DD> Defineix la distribució de la intensitat de la llum dins del con,
+per a controlar la seva concentració. Contra més gran és el valor més
+enfocada és la llum.<BR>
+Exemple:
+<PRE class=algoritme>
+          <B>glLightfv</B> (GL_LIGHT0, GL_SPOT_EXPONENT, 0.0);
+</PRE>
+</DL>
+</UL>
+
+<P>
+<B>Atenuació.</B> La intensitat de llum decreix a mesura que la
+distància a la font de llum creix. Per a llums direccionals no té
+sentit, però es pot voler atenuació per a llums posicionals. OpenGL
+atenua una font de llum multiplicant la contribució d'aquesta llum pel
+factor d'atenuació següent:
+
+<CENTER><table><td>
+<I>factor = 1 / (k<sub>c</sub>+dk<sub>1</sub>+d<sup>2</sup>k<sub>q</sub>)</I>
+</td></table></CENTER>
+
+<br>
+on <I>d</I> és la distància entre la posició de la llum i el vèrtex, i
+<I>k<sub>c</sub>, k<sub>1</sub></I> i <I>k<sub>q</sub></I> són els
+paràmetres d'atenuació respectivament GL_CONSTANT_ATTENUATION,
+GL_LINEAR_ATTENUATION i GL_QUADRATIC_ATTENUATION. Per defecte
+<I>k<sub>c</sub></I> és 1.0 i <I>k<sub>1</sub></I> i
+<I>k<sub>q</sub></I> són zero.
+
+<br><br>
+Activar les fonts de llum:<A NAME=actllum></A>
+
+<P>
+Cada font de llum pot ser activada o desactivada individualment. Per a
+activar-la cal usar la crida a "glEnable" que ja haviem vist. El
+paràmetre en aquest cas haurà de ser la font de llum corresponent que
+volguem activar:
+<PRE class=algoritme>
+          <B>glEnable</B> (GL_LIGHT0);
+</PRE>
+
+<P>
+<div class=tit3><b>Model d'il·luminació</b></div><A NAME=defillu></A>
+
+<br>
+Definir el model:
+
+<P>
+El model d'il·luminació es defineix mitjançant la crida a
+"glLightModel*". El seu prototipus és:
+<PRE class=algoritme>
+          void <B>glLightModelf</B> (GLenum pname, GLfloat param);
+          void <B>glLightModeli</B> (GLenum pname, GLint param);
+          void <B>glLightModelfv</B> (GLenum pname, const GLfloat *params);
+          void <B>glLightModeliv</B> (GLenum pname, const GLint *params);
+</PRE>
+
+<P>
+<I>pname</I> especifica un paràmetre del model d'il·luminació. Els
+possibles valors són: GL_LIGHT_MODEL_AMBIENT,
+GL_LIGHT_MODEL_LOCAL_VIEWER, GL_LIGHT_MODEL_TWO_SIDE i
+GL_LIGHT_MODEL_COLOR_CONTROL; <I>param</I> especifica el valor que se
+li vol donar; i <I>params</I> especifica un punter al vector de valors
+que es volen donar.
+
+<P>
+Veiem diferents casos en que l'ús d'aquesta crida pot ser d'utilitat:
+<UL>
+<LI><I>Intensitat de la llum ambient global.</I> Cada font de llum pot
+contribuir a la llum ambient d'una escena, però també pot haver llum
+ambient que no provingui de cap font de llum particular. Per a donar
+valor a la intensitat RGBA d'aquesta llum ambient global usarem:
+<PRE class=algoritme>
+          GLfloat lmodel_ambient[] = {0.2, 0.2, 0.2, 1.0};
+          <B>glLightModelfv</B> (GL_LIGHT_MODEL_AMBIENT, lmodel_ambient);
+</PRE>
+</LI>
+
+<LI><I>Punt de visió local o infinit.</I> La posició del punt de visió
+afecta als càlculs de les intensitats de reflexió produïdes per la
+llum especular. Quan el punt de visió és a l'infinit, la direcció
+entre ell i qualsevol vèrtex de l'escena es manté constant; mentre que
+quan el punt de visió és local la direcció ha de ser calculada per
+cada vèrtex. Per defecte es considera un punt de visió a
+l'infinit. Veiem còm es canviaria a un punt de visió local:
+<PRE class=algoritme>
+          <B>glLightModeli</B> (GL_LIGHT_MODEL_LOCAL_VIEWER, GL_TRUE);
+</PRE>
+Aquesta crida posa el punt de visió al (0,0,0) en coordenades de
+l'observador. Per a tornar-ho a canviar a punt de visió a l'infinit
+només cal cridar-la amb valor GL_FALSE com a argument.</LI>
+<LI><I>Il·luminació a dos cares.</I> Els càlculs d'il·luminació es
+realitzen per tots els polígons tant si estan de cara a l'observador
+com si no. Com que normalment la il·luminació la pensem només per als
+polígons que tenim de cara, típicament la resta queden mal
+il·luminats.<BR>
+Però si hi ha objectes que han de ser retallats de manera que es faci
+visible la seva part interior, és possible que es vulgui que aquestes
+cares interiors estiguin també afectades de la mateixa manera per la
+il·luminació que hem definit. Quan activem la il·luminació a dos cares
+fent:
+<PRE class=algoritme>
+          <B>glLightModeli</B> (GL_LIGHT_MODEL_LOCAL_VIEWER, GL_TRUE);
+</PRE>
+OpenGL inverteix les normals d'aquests polígons que eren d'esquena a
+l'observador fent que ara estiguin de cara. Així el vector normal té
+una component de direcció cap a l'observador i el polígon s'il·lumina
+correctament.</LI>
+<LI><I>Separació del color especular.</I> Per als càlculs
+d'il·luminació, típicament les contribucions ambient, difusa,
+especular i emissiva es calculen i s'afegeixen conjuntament. Però si
+s'executa la crida:
+<PRE class=algoritme>
+          <B>glLightModeli</B> (GL_LIGHT_MODEL_COLOR_CONTROL,
+                         GL_SEPARATE_SPECULAR_COLOR);
+</PRE>
+OpenGL separa el càlcul del color especular de l'aplicació. Després
+d'aquesta crida, la il·luminació produeix dos colors per vèrtex: un
+color primari que conté totes les contribucions no especulars, i un
+color secundari que és la suma de totes les contribucions
+especulars. Durant el mapejat de textures, només el color primari es
+combina amb el color de la textura. Després de l'operació de textura,
+s'afegeix el color secundari a la combinació resultant del color
+primari i el color de textura. Els objectes que es texturen usant un
+color especular separat, normalment tenen reflexes (<i>highlights</i>)
+més visibles. Per a restaurar la situació per defecte cal fer la crida:
+<PRE class=algoritme>
+          <B>glLightModeli</B> (GL_LIGHT_MODEL_COLOR_CONTROL,
+                         GL_SINGLE_COLOR);
+</PRE>
+Si no s'està usant mapejat de textures, no hi ha cap raó per a separar
+el color especular de la resta de components.
+</LI>
+</UL>
+
+<br>
+Activar la il·luminació:<A NAME=actillu></A>
+
+<P>
+En OpenGL la il·luminació ha de ser explícitament activada (o
+desactivada). Si la il·luminació no està activada el color actual es
+mapeja en el vèrtex directament sense fer cap càlcul que tingui a
+veure amb <A HREF="#actnorm">normals</A>, <A HREF="#defllum">fonts de llum</A>, <A HREF="#defillu">model d'il·luminació</A> o <A HREF="#defmat">propietats
+del material</A>. Per a activar la il·luminació farem:
+<PRE class=algoritme>
+          <B>glEnable</B> (GL_LIGHTING);
+</PRE>
+
+<P>
+I per a desactivar-la cridarem amb el mateix paràmetre a "glDisable".
+
+<BR>
+<P>
+<div class=tit3><b>Colorat (<I>shading</I>) de línies i polígons</b></div>
+
+<P>
+<img align=left src="imatges/colors.jpg" width=217 height=190 hspace=20 vspace=10>
+Una línia o un polígon es pot pintar amb un únic color (<I>flat
+shading</I>) o amb molts colors diferents (<I>smooth shading</I> també
+nomenat <I>Gouraud shading</I>). Per defecte, OpenGL pinta amb colors
+diferents i per tant es poden aconseguir efectes com el del triangle
+de la figura, que simplement té assignat un color diferent (vermell,
+verd i blau) a cada vèrtex del polígon. OpenGL ens permet escollir
+entre aquestes dues modalitats utilitzant la rutina
+</P>
+<PRE class=algoritme>
+          void <B>glShadeModel</B> (GLenum mode);
+</PRE>
+
+<br>
+on <I>mode</I> pot prendre els valors de GL_SMOOTH (és el que pren per
+defecte) o GL_FLAT.
+
+<BR>
+<P>
+<div class=tit3><B>Establir el vector normal</B></div><A NAME=actnorm></A>
+
+<P>
+Les normals d'un objecte determinen la seva orientació relativa a les
+fonts de llum. Per a cada vèrtex OpenGL utilitza la normal assignada a
+aquest vèrtex per a determinar la quantitat de llum que rep el vèrtex
+en particular de cada font de llum.
+
+<P>
+Per a assignar la normal a un vèrtex s'usa la crida a la rutina
+<PRE class=algoritme>
+          void <B>glNormal3{bdfis}</B> (TYPE coords);
+</PRE>
+
+<P>
+Per exemple:
+<PRE class=algoritme>
+          <B>glNormal3f</B> (1.0, 0.0, 0.0);
+</PRE>
+
+<P>
+<div class=tit3><B>Propietats del material</B></div><A NAME=defmat></A>
+
+<br>
+Definir les propietats:
+
+<P>
+Igual que pasa amb les llums, els materials tenen diferents colors
+ambient, difosos i especulars que determinen les reflectàncies
+ambient, difoses i especulars del material. Una reflectància ambient
+del material es combina amb la component ambient de cada font de llum
+que li arriba, la reflectància difosa amb les components difoses, i
+similarment per a la reflectància especular.
+
+<P>
+Les propietats dels materials dels objectes són: el color ambient,
+difós i especular, la brillantor i el color de qualsevol llum
+emesa. El mecanisme per a donar valors a aquestes propietats passa per
+usar la rutina
+<PRE class=algoritme>
+          void <B>glMaterial{if}[v]</B> (GLenum face, GLenum pname,
+                                  TYPE param)
+</PRE>
+
+<P>
+Aquesta rutina especifica una propietat del material actual per a ser
+usada en els càlculs d'il·luminació. El paràmetre <I>face</I> pot
+tenir valors GL_FRONT, GL_BACK o GL_FRONT_AND_BACK per a indicar a
+quina cara de l'objecte ha de ser aplicat el material.
+
+<P>
+La propietat del material a la que se li dona valor és <I>pname</I> i
+el valor desitjat es dona en <I>param</I>, que pot ser un punter a un
+grup de valors (per a la versió de vector) o el valor.
+<UL>
+<DL COMPACT><DT><B>GL_AMBIENT:</B>
+<DD> Color ambient del material. La reflectància ambient afecta a tot
+el color de l'objecte. No és afectada per la posició del punt de
+visió. Valor per defecte: (0.2, 0.2, 0.2, 1.0).
+<PRE></PRE>
+<DT><B>GL_DIFFUSE:</B>
+<DD> Color difús del material. La reflectància difosa juga el rol més
+important a l'hora de determinar el color que es percep de
+l'objecte (més intens quan la llum incideix perpendicularment a la
+superfície). No li afecta el punt de visió. Valor per defecte: (0.8,
+0.8, 0.8, 1.0).
+<PRE></PRE>
+<DT><B>GL_AMBIENT_AND_DIFFUSE:</B>
+<DD> Els objectes reals acostumen a tenir el mateix color de la
+reflectància ambient i difosa. Per això OpenGL ofereix la possibilitat
+de donar el mateix valor a totes dues a la vegada:
+<PRE class=algoritme>
+          GLfloat mat_anb_diff[] = {0.1, 0.5, 0.8, 1.0};
+          <B>glMaterialfv</B> (GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE,
+                        mat_anb_diff);
+</PRE>
+En aquest exemple el color RGBA (0.1,0.5,0.8,1.0) representa la
+reflectància ambient i difosa actual dels polígons de davant i el de
+darrera.
+<PRE></PRE>
+<DT><B>GL_SPECULAR:</B>
+<DD> Color especular del material. La reflexió especular d'un objecte
+produeix línies de reflexió (<I>highlights</I>). La reflexió especular
+sí que depèn de la posició de l'observador -és més brillant al llarg
+de l'angle directe de reflexió. Valor per defecte: (0.0, 0.0, 0.0,
+1.0).
+<PRE></PRE>
+<DT><B>GL_SHININESS:</B>
+<DD> Exponent especular. Aquesta propietat especifica la mida i la
+brillantor de la línia de reflexió. Se li pot assignar un nombre dins
+del rang [0.0,128.0] -a valor més alt, més petita i brillant la
+reflexió. Valor per defecte: 0.0.
+<PRE></PRE>
+<DT><B>GL_EMISSION:</B>
+<DD> Color d'emissió del material. Aquesta propietat s'usa sobre tot
+per a simular làmpades i altres fonts de llum en una escena. Valor per
+defecte: (0.0, 0.0, 0.0, 1.0).
+</DL>
+</UL>
+
+<br>
+Canviar propietats del material:
+
+<P>
+Normalment es tenen diferents objectes en una escena i es vol que cada
+objecte sigui d'un material diferent, i per tant tingui diferents
+propietats.
+
+<P>
+Es pot cridar repetidament a la rutina "glMaterial*" per a posar les
+propietats a cada objecte, però això té un cost elevat i és bo
+intentar minimitzar els canvis de material-propietat. Una tècnica per
+a minimitzar el cost de canviar propietats de materials és usar la
+rutina
+<PRE class=algoritme>
+          void <B>glColorMaterial</B> (GLenum face, GLenum mode)
+</PRE>
+
+<P>
+Aquesta rutina provoca que la o les propietats especificades per
+<I>mod</I> de la o les cares especificades per <I>face</I> prenguin el
+valor del color actual sempre. Un canvi al color actual provoca un
+canvi al d'aquests materials. El paràmetre <I>fac</I> pot ser
+GL_FRONT, GL_BACK o GL_FRONT_AND_BACK (per defecte). El paràmetre
+<I>mode</I> pot ser GL_AMBIENT, GL_DIFFUSE, GL_AMBIENT_AND_DIFFUSE,
+GL_SPECULAR o GL_EMISSION. En aquest últim cas el valor per defecte és
+GL_AMBIENT_AND_DIFFUSE.
+
+<P>
+Després de cridar a "glColorMaterial" cal cridar a
+<PRE class=algoritme>
+          <B>glEnable</B> (GL_COLOR_MATERIAL);
+</PRE>
+
+<br>
+i aleshores es pot canviar el color actual amb "glColor*".
+
+<P>
+En l'apartat de <a href="../m10/m2h50_MaterialsiIlum.html">Materials i
+il·luminació</a> que s'explica a la part de tècniques bàsiques
+d'OpenGL al capítol 10 ("El pipeline de visualització d'OpenGL"), hi
+ha una taula amb els valors de les components d'un cert conjunt de
+materials.  
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m7a20_BasicInstruccPrincipals.html">[Anterior]</a>
+[Següent]
+<a href="m7b10_QueEsGL4Java.html">[Següent apartat]</a>
+</div>
+</body>
+</html>

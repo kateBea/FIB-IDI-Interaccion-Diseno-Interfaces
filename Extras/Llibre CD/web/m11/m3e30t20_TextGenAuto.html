@@ -1,0 +1,301 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html lang="CA">
+
+<head>
+
+<title></title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+
+<script type="text/javascript" src="../upc.js"></script>
+
+<SCRIPT>
+
+top.passara("visreal","textu");
+
+</SCRIPT>
+
+<BODY>
+
+<DIV CLASS="nav">
+
+<a href="m3e30t16_TextGenDirEx3.html">[Anterior]</a>
+
+<a href="m3e30t21_TextGenAutoCont.html">[Següent]</a>
+
+</div>
+
+<br><br>
+
+
+
+<div class=tit1>Textures.
+
+<span class=tit2>Aplicació de textures planes.</span>
+
+<span class=tit3>Parametrització Automàtica</span>
+
+</div>
+
+
+
+<p> OpenGL ofereix diferents opcions per a generar automàticament les
+
+coordenades de textura d'objectes polièdrics mitjançant la comanda <a
+
+href= "../m15/m7c60_Textures.html#glTexGen">glTexGen (coord, pname,
+
+param)</a>. Es pot utilitzar per a obtenir alguns efectes concrets com
+
+la visualització de contorns sobre una superfície i la simulació de la
+
+reflexió d'un entorn sobre un objecte reflector.
+
+
+
+<P> Anem a analitzar les diferents opcions d'aquesta comanda:
+
+
+
+<ul>
+
+<li> El paràmetre <i>coord </i> indica quina és la coordenada de
+
+l'espai de textures que volem generar automàticament. Cal
+
+especificar la funció per a cada coordenada de textura de manera
+
+indepedent (en el cas de textures planes per la coordenada <i>s</i> i
+
+per la <i>t</i>).</li>
+
+
+
+<li> El paràmetre <i>pname</i> té dues utilitats. Quan té el valor
+
+GL_TEXTURE_GEN_MODE, el tercer paràmetre <i>param</i> indica la funció
+
+que s'utilitzarà per generar les coordenades de textures:
+
+GL_OBJECT_LINEAR, GL_EYE_LINEAR o GL_SPHERE_MAP. Quan té el valor
+
+GL_OBJECT_PLANE o GL_EYE_PLANE, el tercer paràmetre <i>param</i>
+
+indica els coeficients de l'equació d'un pla en coordenades de
+
+l'aplicació o de l'observador.</li>
+
+</ul>
+
+
+
+<p> Cadascuna de les funcions té diferents utilitats. Anem a descriure
+
+algunes:
+
+
+
+<ul>
+
+<li> En mode GL_OBJECT_LINEAR, determina una parametrització
+
+directa en què les coordenades de textura s'obtenen del valor de
+
+substituir les coordenades dels vèrtexs dels polígons en l'equació del
+
+pla especificat. Pot utilitzar-se per a aplicar una textura plana que
+
+simuli les betes d'una fusta sobre una taula. Encara que modifiquem la
+
+càmera les coordenades que s'obtenen són les mateixes i per tant la
+
+textura es manté solidària amb el polígon. Una altre aplicació és mapar
+
+una textura 1D sobre un objecte per a pintar contorns sobre ell. En
+
+funció de la distància dels vèrtexs al pla (imaginem y=0), es
+
+determina la coordenada de textura i per tant el color a aplicar al
+
+punt. Veieu <a href= "m3e30t21_TextGenAutoCont.html">un exemple concret</a>.</li>
+
+
+
+<li> En mode GL_EYE_LINEAR, determina una parametrització directa
+
+en què per a obtenir les coordenades de textura d'un vèrtex, primer es
+
+transformen les seves coordenades a coordenades de l'observador i
+
+després es calcula la seva distància al pla especificat. En modificar
+
+la càmera es modificaran les coordenades dels vèrtexs en el sistema de
+
+l'observador i, per tant, les coordenades de textura que se li
+
+assignen.</li>
+
+
+
+<li>En mode GL_SPHERE_MAP, determina les coordenades de textura
+
+utilitzant la direcció del raig reflectit de la direcció de visió en un
+
+vèrtex. El seu propòsit és realitzar una correcta i eficient
+
+aproximació de la tècnica <a href=
+
+"m3e30t16_TextGenDirEx3.html">d'<i>environment mapping</i> </a> a
+
+efectes de simular refexions de l'entorn en objectes reflectors.
+
+
+
+<br>Imaginem que l'objecte és reflector i està situat en un entorn que
+
+es llunyà a l'objecte. Si calculem per a cada vèrtex el raig reflectit;
+
+la intersecció d'aquest raig amb l'entorn determina univocament i de
+
+manera precisa el color del vèrtex; però és una tècnica
+
+costosa. Imaginem que per a cada direcció de reflexió possible tenim
+
+pre-calculat el color que li correspon; per exemple situem una càmera
+
+al mig de l'objecte que es capaç de fer una <a href=
+
+"m3e40_TextSintesi.html">foto esfèrica o "d'ull de peix"</a><!--
+
+aquí link a síntesi de textures --> a tot el seu entorn i la guardem
+
+en una textura plana (òbviament és una aproximació). Imaginem que
+
+aquesta fotografia la utilitzem com una textura que mapem en una
+
+esfera que envolta l'objecte i que a cada vèrtex li fem correspondre
+
+un punt de l'esfera segons la direcció del raig reflectit en ell (noteu
+
+que utilitzem simplement la direcció i no calculem cap
+
+intersecció). Trobarem un punt sobre l'esfera (un color) que
+
+aproximarà el color reflectit. Per què diem aproximarà? Adoneu-vos que
+
+vèrtexs amb la mateixa direcció de raig reflectit tindràn un mateix color
+
+independentment de les seves coordenades. Per tant, és més correcte la
+
+tècnica quan més petit és l'objecte (punts més propers) respecte
+
+l'entorn. També té una importància especial com s'obté la textura.
+
+
+
+<br> Analitzeu una mica en detall l'algorisme de <a href=
+
+"m3e30t25_TextGenAutoSh.html">generació de coordenades</a> amb
+
+GL_SPHERE_MAP i acabareu d'entendre la seva eficiència i limitacions. </li>
+
+</ul>
+
+
+
+<p class=exercici><span class=exernum>Exercici 4.7:</span> L'Applet
+
+següent pot ajudar a entendre els efectes dels diferents càlculs de
+
+coordenades de textura automàtiques. Seleccioneu en la pestanya de
+
+Mapping Directa seqüencialment les diferents opcions de mapatge
+
+automatic. Tot seguit us aconsellem algunes proves, en totes elles
+
+modifiqueu la càmera (orientació i ampliacions) un cop texturat per
+
+analitzar l'efecte. Si no us recordeu del funcionament de l'applet,
+
+aneu <a href= "m3e30t50_TextApplet.html">aquí</a>.
+
+
+
+<ul class=exerc>
+
+<li>Objecte=Polígon; Textura=Contorn; Mapping=Object Linear. Es
+
+modifiquen els contors en girar l'objecte?. Respecte a quin pla creieu
+
+que s'estan calculant les coordenades de textura?</li>
+
+
+
+<li>Objecte=Polígon; Textura=Contorn; Mapping=Eye Linear. Es
+
+modifiquen els contorns en girar l'objecte?. Respecte a quin pla
+
+creieu que s'estan calculant les coordenades de textura?</li>
+
+
+
+<li>Objecte=Esfera; Textura=Environment; Mapping=Sphere. Es
+
+modifica el que es mapa en un punt en modificar la càmera.</li>
+
+</ul>
+
+
+
+<br>
+
+<div align=center>
+
+		      <applet code="Interficie.class" archive="Textures.jar,../comuns.jar" height=346 width=500>
+		      </applet>
+
+</div>
+
+</p>
+
+
+
+<p class=exercici><span class=exernum>Exercici 4.8:</span> Proveu ara
+
+altres combinacions i comproveu-ne el resultat, veureu que no sempre
+
+s'obtenen resutats aprofitables (que tinguin aplicabilitat). Intenteu
+
+raonar la seva justificació. Per ejemple, proveu:
+
+<ul class=exerc>
+
+<li>Objecte=Polígon; Textura=Environment; Mapping=Spere
+
+<li>Objecte=Cub senser; Textura=Contorn; Mapping=Object/Eye Linear
+
+<li>Objecte=esfera; Textura=Contorn; Mapping=Object/Eye Linear
+
+</ul>
+
+
+
+
+
+<br><br>
+
+<DIV CLASS="nav">
+
+<a href="m3e30t16_TextGenDirEx3.html">[Anterior]</a>
+
+<a href="m3e30t21_TextGenAutoCont.html">[Següent]</a>
+
+</div>
+
+</body>
+
+</html>
+

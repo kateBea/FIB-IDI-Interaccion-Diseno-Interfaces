@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M9.1.Primitives d'entrada.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("entrada","prim");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+      <a href="main92.html">[Anterior]</a>
+      <a href="callbacks.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class="tit1">Primitives d'entrada gràfiques. 
+<span class="tit2">El bucle d'events</span>
+</div>
+
+<P> En aquest cas el programa principal de l'aplicació té una
+    estructura com aquesta:</p>
+
+<PRE class=algoritme>
+     ...main(...){
+        Declaracions;
+        Inicialitzacions;
+        <b>mentre</b> (<i>cert</i>) <b>fer</b>
+           ObtenirEvent(e);
+           <b>segons</b> (e.tipus) <b>fer</b>
+	      <b>cas</b> UN_TIPUS:
+	         TractamentUnTipus...
+              <b>fcas</b>
+	      <b>cas</b> ALTRE_TIPUS:
+                 TractamentAltreTipus...
+	      <b>fcas</b>
+	      <b>cas</b> FI:
+                 TractamentFinal...
+	         exit(...);
+	      <b>fcas</b>
+	      <b>altrament:</b> ErrorEventDesconegut(...);
+           <b>fsegons</b>
+        <b>fmentre</b>
+     <b>ffunció</b>
+</PRE>
+
+<P> Les inicialitzacions inclouen habitualment, a més de les
+    pròpies de l'aplicació, la indicació al sistema dels tipus
+    d'events que es vol rebre. Ja veieu en aquest esquelet que el
+    problema d'aquesta estructura és que aquest bucle creixerà i es
+    complicarà a mida que anem afegint funcionalitats a l'aplicació, i
+    a més totes les interaccions amb l'usuari apareixeran barrejades
+    en ell, no importa al nivell que es produeixin dins la lògica de
+    la nostra aplicació.</p>
+
+<P> Degut a la complexitat que presenta tractar els events
+    d'aquesta manera, hom va derivar eventualment a un altre esquema
+    que presentem a la següent secció. </p>
+
+
+<BR><BR>
+<DIV CLASS="nav">
+      <a href="main92.html">[Anterior]</a>
+      <a href="callbacks.html">[Següent]</a>
+</div>
+</BODY>
+</HTML>

@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M7</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY onload='top.passara("vis2D","intr");'>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+[Anterior]
+[Següent]
+<a href="object.html">[Següent apartat]</a>
+</div>
+<br><br>
+
+<div class=tit1>Introducció</div>
+
+<p>
+ Donat un objecte o una escena 2D, representada de manera
+explícita, ens plantegem el problema de visualitzar tota o part
+de la seva geometria en un dispositiu de sortida raster. Tractarem el processat
+que cal fer a cada element geomètric bidimensional per a obtenir-ne
+la seva representació mitjançant un conjunt discret de pixels.
+Aquest procés global s'anomena <i>Procés de Visualització
+2D</i> (PV2D) i, com que es realitza de manera seqüencial per a cada
+element a visualitzar, en nomenclatura anglosaxona s'anomena "<i>pipeline</i>"
+de visualització 2D.
+
+<P>
+Estudiarem els diferents blocs funcionals que integren el PV2D: transformacions
+geomètriques, retallat i rasterització; així com quines
+son les dades requerides per a la seva implementació. En aquest
+sentit introduïrem els conceptes de Finestra_2D, Vista i atributs. Aquests
+darrers determinen l'aspecte gràfic que tindrà la visualització
+de la geometria (tipus de línia, gruix, ...).
+
+<p>
+Per últim analitzarem la metodologia requerida per a visualitzar
+una escena 2D bé utilitzant la llibreria gràfica OpenGL, bé utilitzant
+simplement l'acció de pintar un pixel en pantalla.
+
+
+<br><br>
+<DIV CLASS="nav">
+[Anterior]
+[Següent]
+<a href="object.html">[Següent apartat]</a>
+</div>
+</BODY>
+</HTML>

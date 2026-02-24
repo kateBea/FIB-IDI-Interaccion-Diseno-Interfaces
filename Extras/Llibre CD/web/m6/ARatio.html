@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M7.1 Procés de visualització 2D.Sistemes de coordenades.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("vis3D","estr");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+<A HREF="ProjTipusCam.html">[Anterior]</a>
+<a href="MapaIntro.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class="tit1">Estructuració del procés de visualització 3D. 
+<span class="tit2">Relació d'aspecte</span>
+</div>
+
+<p>Com hem vist, la
+<A CLASS="glossari" HREF="javascript:glossari('TamFin.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">grandària de la finestra 2D</A>
+ve donada per les seves
+dues dimensions (ample, alt) en el pla de projecció i s'especifica de
+forma diferent segons quin sigui el
+<A CLASS="glossari" HREF="javascript:glossari('TipusC.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">tipus de càmera</A>. El que ens
+queda per veure és quina ha de ser la relació entre aquestes dues
+dimensions. Com que finalment la
+<A CLASS="glossari" HREF="javascript:glossari('Fin2D.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">finestra 2D</A>
+ es transformarà i visualitzarà dins la
+<A CLASS="glossari" HREF="javascript:glossari('Vista.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">vista</A>,
+el més habitual és que les dimensions de la
+vista
+ determinin la relació <b>aspecte = ample / alt</b>, que
+anomenarem
+<A CLASS="glossari" HREF="javascript:glossari('ARatio.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">relació d'aspecte</A>.
+Si es vol que la imatge a la vista
+no quedi deformada respecte a la projecció a la finestra 2D, la
+relació d'aspecte ha de coincidir amb la relació amplada / alçada de
+la vista. Si no és així, la imatge sortirà deformada.
+
+
+<!--
+           Exercici: a la seguent escena senzilla, proveu de modificar
+           el valor de la [relació d'aspecte] i veieu com va canviant la imatge
+           que obtenim a la [vista] a la [finestra gràfica]. Fixeu-vos
+           que la imatge a la vista (que inicialment té la [relació d'aspecte]
+           determinada per la vista i per tant no està deformada) es deforma
+           quan modifiquem aquest valor:
+
+                 Applet 2 que visualitza el cub i la piràmide
+                 Botó de modificació de l'aspect ratio.
+                 Visualització del frustrum i del sistema de
+                       coordenades de l'observador
+-->
+<p>
+<CENTER><table><tr><td>
+   <APPLET CODE ="AppletG2.class" archive="AppletG2.jar,../comuns.jar" WIDTH=640 HEIGHT=480>
+  <PARAM NAME=NApplet VALUE="9">
+  <PARAM NAME=Vrpx    VALUE="5.0">
+  <PARAM NAME=Vrpy    VALUE="5.0">
+  <PARAM NAME=Vrpz    VALUE="5.0">
+  <PARAM NAME=Angx    VALUE="30.0">
+  <PARAM NAME=Angy    VALUE="45.0">
+  <PARAM NAME=Angz    VALUE="0.0">
+  <PARAM NAME=D       VALUE="20.0">
+  <PARAM NAME=Winy    VALUE="5.0">
+  <PARAM NAME=Zfar    VALUE="25.0">
+  <PARAM NAME=Znear   VALUE="1.0">
+  <PARAM NAME=fich    VALUE="">
+  <PARAM NAME=AngExtx VALUE ="30.0">
+  <PARAM NAME=AngExty VALUE="10.0">
+  <PARAM NAME=fichero VALUE="/DAT/2cuboG.dat">
+  <PARAM NAME=Camara VALUE="1">
+  <PARAM NAME=Alfa VALUE="15.0">
+  </APPLET>
+</td></table></CENTER>
+
+
+<br><br>
+<DIV CLASS="nav">
+<A HREF="ProjTipusCam.html">[Anterior]</a>
+<a href="MapaIntro.html">[Següent]</a>
+</div>
+</body>
+</HTML>

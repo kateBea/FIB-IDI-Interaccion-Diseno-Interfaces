@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title>8.6.CLASSIFICACIÓ DELS MODELS D'IL·LUMINACIÓ</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" TYPE="text/css" HREF="../upc.css">
+</head>
+<BODY >
+<SCRIPT>
+top.passara("visib","cmil");
+</SCRIPT>
+<DIV CLASS="nav">
+[Anterior]
+<a href="m8-clasIlu-modLocals.html">[Següent]</a>
+<A HREF="m8-5.html">[Apartat anterior]</a>
+</div>
+<br><br>
+
+<div class=tit1>Classificació dels models d'il·luminació</div>
+
+<P>
+Els models d'il·luminació simulen l'efecte d'interacció de la llum amb
+els objectes de l'escena per a determinar el color de cada punt Q de
+la superfície d'un objecte que es desitgi calcular.</P>
+
+
+<P>
+Un model d'il·luminació exacta hauria de produir el diagrama
+espectral de la llum que arriba a l'observador procedent del punt Q. A
+tal efecte, hauria de considerar tots els factors que afecten a la
+seva obtenció: llum procedent de focus i altres objectes, atenuació de
+la llum en el medi de transmissió i per objectes,...
+
+<P>
+Ara bé, l'avaluació completa de tots aquests factors per a cada punt
+d'una superfície i per les diferents longituds d'ona que integren la
+llum es computacionalment costós.
+
+<P>
+Una primera simplificació consisteix en considerar no tot l'espectre
+de la llum sinó només les energies corresponents a les llums vermella,
+verda i blava que són les que s'utilitzen com a <A
+HREF="../m3/main32.html">model de color</A> en el computador. Així,
+<!-- $I_{\lambda}(QObs)$ --><IMG WIDTH="70" HEIGHT="28" ALIGN="MIDDLE"
+BORDER="0"
+ SRC="imatges/formula1.gif" ALT="Intensitat de llum"> indicarà les
+intensitats de llum vermella, verda i blava que arriba a Obs procedent
+de Q (<IMG WIDTH="99" HEIGHT="28" ALIGN="MIDDLE" BORDER="0"
+SRC="imatges/formula3.gif" ALT="$\lambda \in \{R,G,B\}$"><!--$\lambda \in \{R,G,B\}$ -->).
+Aquest valor es codifica normalitzat en l'interval [0,1].
+
+<P>
+Altres simplificacions s'obtenen en imposar
+hipòtesis restrictives als diferents factors que afecten al color de
+la llum, per exemple: medis no participatius, focus puntuals,...
+
+<P>
+Aquestes simplificacions permeten deduir els models d'il·luminació més
+àmpliament utilitzats en medis no participatius (la llum es transmet
+en el buit) que es poden classificar en tres grups: models locals,
+models de traçat de raig i models transaccionals o de Radiositat
+(veiem-los en els següents subapartats).
+
+<H2>Subapartats:</h2>
+
+<UL>
+<LI><A HREF='m8-clasIlu-modLocals.html'>Models locals </A></LI>
+<LI><A HREF='m8-clasIlu-modTracRaig.html'>Models de traçat de raig </A></LI>
+<LI><A HREF='m8-clasIlu-modRadios.html'>Models transaccionals o de radiositat </A></LI>
+</UL>
+
+
+<br><br>
+<DIV CLASS="nav">
+[Anterior]
+<a href="m8-clasIlu-modLocals.html">[Següent]</a>
+<A HREF="m8-5.html">[Apartat anterior]</a>
+</div>
+</body>
+</html>

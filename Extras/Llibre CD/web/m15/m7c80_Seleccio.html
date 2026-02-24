@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("opengl","extop");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m7c70_Interrogacio.html">[Anterior]</a>
+<a href="m7c90_DisplayLists.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Extensió de crides d'OpenGL.
+<span class=tit2> Selecció usant OpenGL</span>
+</div>
+
+<P>
+La manera com es fa una selecció en OpenGL ha estat explicada a
+l'apartat de <a href="../m10/m2h60_Seleccio.html">selecció</a> de les
+tècniques bàsiques d'OpenGL en el capítol 10. Per tant, en aquest apartat
+només ens centrarem en veure les crides que s'utilitzen individualment
+i quins són els paràmetres que es poden usar amb elles.
+
+<a name="glSelectBuffer"></a>
+<P>
+La crida <b>glSelectBufer</b> especifica la taula que es vol usar per
+al retorn de les dades seleccionades.
+
+<pre class=algoritme>
+          void <b>glSelectBuffer</b> (GLsizei size, GLuint *buffer)
+</pre>
+
+<P>
+El paràmetre <i>buffer</i> és un punter a una taula d'enters en la
+qual es posaran les dades, i <i>size</i> indica el màxim nombre de
+valors que es podran guardar en la taula. Aquesta crida ha de ser
+cridada abans d'entrar en el mode de selecció.
+
+<a name="glRenderMode"></a>
+<P>
+Per a entrar en el mode de selecció, s'usa la crida:
+
+<pre class=algoritme>
+          GLint <b>glRenderMode</b> (GLenum mode)
+</pre>
+
+<P>
+Aquesta crida controla si l'aplicació està en mode de visualització
+(<i>render</i>), selecció o realimentació (<i>feedback</i>). El
+paràmetre <i>mode</i> pot ser GL_RENDER (és el que hi ha per defecte),
+GL_SELECT o GL_FEEDBACK. L'aplicació romandrà en el mode escollit fins
+que es torni a cridar a <b>glRenderMode</b> amb un paràmetre diferent.
+
+<P>
+El valor de retorn de la crida és el nombre de seleccions que s'han
+fet, si s'estava en mode selecció, o el nombre de valors que hi ha en
+la taula de realimentació, si s'estava en mode <i>feedback</i>.
+
+<P>
+Si el que es vol és saber en quin mode es troba l'aplicació en un
+moment determinat, es pot averiguar cridant a <a
+href="m7c70_Interrogacio.html#glGetIntegerv"><b>glGetIntegerv</b></a>
+i passant-li com a paràmetre de consulta la constant GL_RENDER_MODE.
+
+<a name="glInitNames"></a>
+<P>
+Per a manegar la pila de noms associats a les primitives, primer cal
+assegurar-se que la pila de noms és buida. Per això la inicialitzem
+amb <b>glInitNames</b>.
+
+<pre class=algoritme>
+          void <b>glInitNames</b> (void)
+</pre>
+
+<P>
+Amb aquesta crida s'esborra la pila de noms i, per tant, aquesta queda
+buida.
+
+
+<a name="glPushName"></a>
+<pre class=algoritme>
+          void <b>glPushName</b> (GLuint name)
+</pre>
+
+<P>
+Aquesta crida permet afegir un nom al capdemunt de la pila de noms. Si
+s'usa quan la pila ja és plena produirà un error
+(GL_STACK_OVERFLOW). La profunditat de la pila de noms depèn de la
+implementació d'OpenGL, però com a mínim sempre hi podrà tenir 64
+noms. Si volem averiguar aquest màxim en la nostra implementació, ho
+podem fer usant la crida <a
+href="m7c70_Interrogacio.html#glGetIntegerv"><b>glGetIntegerv</b></a>
+i passant-li com a paràmetre de consulta la constant
+GL_NAME_STACK_DEPTH.
+
+<a name="glPopName"></a>
+<P>
+De la mateixa manera que podem afegir un nom a la pila de noms, també
+podem treure el del capdemunt mitjançant la crida:
+
+<pre class=algoritme>
+          void <b>glPopName</b> (void)
+</pre>
+
+<P>
+Si s'executa aquesta crida sense que hi hagi cap nom a la pila, es
+produirà l'error GL_STACK_UNDERFLOW.
+
+<a name="glLoadName"></a>
+<P>
+Per al tractament de la pila de noms també tenim una crida que
+substitueix el nom que hi ha al capdemunt de la pila sense guardar
+còpia del que tenia.
+
+<pre class=algoritme>
+          void <b>glLoadName</b> (GLuint name)
+</pre>
+
+<P>
+Aquesta crida donarà un error de GL_INVALID_OPERATION si la pila és
+buida en el moment de la crida. Per aquest motiu, un cop s'acaba
+d'inicialitzar la pila cal cridar primer com a mínim un cop a
+<b>glPushName</b> abans de poder fer crides a <b>glLoadName</b>.
+
+<P>
+Si no ens trobem en mode selecció (no hem fet abans una crida a <a
+href="#glRenderMode"><b>glRenderMode</b></a>(GL_SELECT)), aquestes tres
+últimes crides, <b>glPushName</b>, <b>glPopName</b> i
+<b>glLoadName</b> no tindran cap efecte.
+
+<P>
+Una altra crida que també és útil quan es vol fer selecció en OpenGL,
+és la que ofereix la llibreria d'utilitats (GLU) per a restringir la
+regió de selecció a només un tros del <i>frustrum</i>.
+
+<a name="glPickMatrix"></a>
+<pre class=algoritme>
+          void <b>glPickMatrix</b> (GLdouble x, GLdouble y, GLdouble width,
+                             GLdouble height, GLint viewport[4])
+</pre>
+
+<P>
+Aquesta crida crea una matriu de projecció que restringeix l'àrea de
+pintat a una regió del <i>viewport</i>, i multiplica aquesta matriu per la
+matriu actual de transformació. El centre d'aquesta regió es troba a
+la posició (<i>x,y</i>) en coordenades del dispositiu (típicament la
+posició del ratolí), i <i>width</i> i <i>height</i> donen l'amplada i
+alçada respectivament d'aquesta regió al voltant de (<i>x,y</i>). El
+paràmetre <i>viewpot[]</i> indica les dimensions del <i>viewport</i>
+actual. Aquestes dimensions es poden obtenir amb la crida <a
+href="m7c70_Interrogacio.html#glGetIntegerv"><b>glGetIntegerv</b></a>
+passant-li com a paràmetre de consulta la constant GL_VIEWPORT.
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m7c70_Interrogacio.html">[Anterior]</a>
+<a href="m7c90_DisplayLists.html">[Següent]</a>
+</div>
+</body>
+</html>

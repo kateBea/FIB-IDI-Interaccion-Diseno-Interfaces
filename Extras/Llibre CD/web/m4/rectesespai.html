@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M4.1.Rectes a l'espai</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;
+charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("geom","3D");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+      <A HREF="plansespai.html">[Anterior]</a>
+      <a href="interdist.html">[Següent]</a>
+     </div>
+<br><br>
+
+<div class="tit1">Elements geomètrics a l'espai.
+<span class="tit2">Rectes a l'espai</span>
+</div>
+
+
+<p>La representació paramètrica (vectorial) d'una recta (en totes dues
+formes, donat per dos punts o un punt i un vector director) també es
+traslladan directament a l'espai tridimensional. <a
+href="rectespla.html#recta_parametrica_1">Les fòrmules són idèntiques</a>, però
+comporten tres components independents en comptes de les dues que
+trobavem al pla.
+
+<p>Una altra representació, anàloga a la representació implícita al
+pla, s'obté expressant la recta com a intersecció de dos plans. Cada
+un d'aquests plans, segons hem comentat més amunt, admet una
+representació implícita com una equació linial. La recta doncs es
+representa com un sistema de dues equacions lineals amb tres
+incògnites:
+
+<!--
+\[
+\left\{\begin{array}{rl}
+	a_1 x+b_1 y+c_1 z+d_1&=0\\
+		a_2 x+b_2 y+c_2 z+d_2&=0
+		\end{array}\right.
+\]
+--><div CLASS=formula><IMG WIDTH="202" HEIGHT="43"
+ SRC="imatges/img37.gif"
+ ALT="\begin{displaymath}
+\left\{\begin{array}
+{rl}
+ a_1 x+b_1 y+c_1 z+d_1&=0\\  a_2 x+b_2 y+c_2 z+d_2&=0
+ \end{array}\right.\end{displaymath}"></div>
+
+
+<p>Podem obtenir una representació paramètrica de la mateixa recta
+trobant un punt <i>P</i> de la recta (qualsevol terna de reals que
+satisfagui el sistema) i calculant el vector director de la recta com
+producte vectorial dels dos vectors normals dels plans. Sota l'epígraf
+d'<a href="interdist.html#pla-pla">intersecció de dos plans</a> donem més detalls. Observeu que
+aquí, tant per a treballar amb una recta donada en aquesta forma
+implícita com per a transformar-la a una forma paramètrica, patirem
+inestabilitats numèriques sempre que les dues normals dels dos plans
+siguin aproximadament colineals (com passava a la intersecció de dues
+rectes quasi paral·leles al pla), és a dir quan els vectors
+<i>(a<sub>1</sub>,b<sub>1</sub>,c<sub>1</sub>)</i> i <i>(a<sub>2</sub>,b<sub>2</sub>,c<sub>2</sub>)</i>
+siguin quasi colineals. A diferència del que passava al pla, aquesta
+dificultat no és aquí intrínseca, sinò consequència d'una tria dolenta
+dels plans usats per a representar la recta. A l'espai doncs resulta
+habitualment més útil la representació paramètrica.
+
+
+<br><br>
+<DIV CLASS="nav">
+      <A HREF="plansespai.html">[Anterior]</a>
+      <a href="interdist.html">[Següent]</a>
+    </div>
+
+</BODY>
+
+</HTML>
+

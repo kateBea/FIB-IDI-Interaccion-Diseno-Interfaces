@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M6.1 Procés de visualització 3D.MapaSensible.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("vis3D","estr");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+<a href="MSTransmet4.html">[Anterior]</a>
+<a href="AlgFil4.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Subprocessos.
+<span class=tit2>Retallat lateral</span>
+</div>
+
+<P>
+El procés de retallat lateral té la funció d'eliminar, del model de
+l'observador, els elements geomètrics que no apareixeran a la
+visualització final perquè es troben fora de les parets laterals de la
+piràmide de visió. Com veurem, l'algorisme és senzill si aquest procés
+s'aplica després de la transformació de perspectiva ja que en aquest
+cas la piràmide de visió s'ha convertit en un prisma rectangular.
+
+<p>
+El retallat lateral es pot fer en diferents graus:
+<ul>
+<li><B>Retallat lateral total</B>: El retallat elimina les cares que són
+   totalment externes a la piràmide de visió, i retalla les cares que es
+   troben en part a dins i en part a fora de la piràmide. En aquest
+   darrer cas, deixa els trossos de cares que són interiors a la piràmide
+   de visió.
+</li>
+<li><B>Retallat lateral parcial</B>: El retallat elimina cares que són
+   totalment externes a la piràmide de visió. Pot eliminar totes aquestes
+   cares o només part d'elles.
+</li>
+<li>No es fa retallat lateral</li>
+</ul>
+
+<P>
+En els dos darrers casos, tenim informació geomètrica que no es
+retalla en aquest procés. Aquesta informació continuarà endavant en el
+procés de visualització, serà transformada de món a dispositiu, i
+finalment es retallarà en el subprocés de retallat del <A
+CLASS="glossari" HREF="javascript:glossari('ProcVisu2D.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">procés de visualització
+2D</A>. El resultat final és el mateix. En un cas el retallat es fa
+abans de la transformació món-dispositiu, i en l'altre cas es fa
+després. És clar que el temps de càlcul d'una i altre opció depèn de
+la quantitat d'informació geomètrica que hi ha dins/fora de la
+piràmide de visió, cosa que varia en funció de l'escena i de la
+posició de la càmera.
+
+<P>
+L'enllaç "Algorisme" us mostra un algorisme de retallat lateral parcial
+en el cas de visualització en filferros, en que només cal retallar les
+arestes. L'algorisme fa un recorregut per totes les
+arestes, i elimina les que queden totalment fora de la finestra
+normalitzada 2D.
+
+<P>
+A continuació teniu un algorisme de retallat lateral parcial en el cas
+general en que es vol retallar tota la informació geomètrica, incloent
+les cares (fixeu-vos que hi ha cares totalment externes a la piràmide
+de visió que no quedaran eliminades. Podeu dir quines són?):
+
+<PRE class=algoritme>
+<b>Per</b> cada cara c en el model de l'observador <b>fer</b>
+   xmin := MinimaXdelsVertexsDeLaCara (c)
+   xmax := MaximaXdelsVertexsDeLaCara (c)
+   ymin := MinimaYdelsVertexsDeLaCara (c)
+   ymax := MaximaYdelsVertexsDeLaCara (c)
+   <b>Si</b>
+      xmin > 1. <B>--></B> Esborra(c)
+      xmax <-1. <B>--></B> Esborra(c)
+      ymin > 1. <B>--></B> Esborra(c)
+      ymax <-1. <B>--></B> Esborra(c)
+   <b>fSi</b>
+<b>fPer</b>
+</PRE>
+
+<br><br>
+<DIV CLASS="nav">
+<a href="MSTransmet4.html">[Anterior]</a>
+<a href="AlgFil4.html">[Següent]</a>
+</div>
+</BODY>
+</HTML>

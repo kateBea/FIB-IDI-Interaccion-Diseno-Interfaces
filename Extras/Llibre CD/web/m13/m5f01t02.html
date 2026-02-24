@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("realvirt","tecacc");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m5f01t01.html">[Anterior]</a>
+<a href="m5f01t03.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Tècniques d'acceleració d'imatge.
+<span class=tit2>Visibility culling</span>
+</div>
+
+<p>Les tècniques de <i>visibility culling </i>tenen com a objectiu la
+identificació de les parts de l'escena que són visibles des d'un
+determinat punt de vista dinàmic.</p>
+
+<p>Normalment es distingeix entre tres tècniques bàsiques basades en diferents
+condicions suficients per la invisibilitat d'un objecte.</p>
+
+<p>Les tècniques de <b><i>view-frustum culling</i></b> eviten la visualització
+de les parts de l'escena que estan fora de la piràmide de visió associada a
+la càmera virtual.</p>
+
+<p>Les tècniques d'<b><i>occlusion culling</i></b> eviten que s'enviïn a
+pintar parts de l'escena que estan tapades per altres objectes més propers.</p>
+
+<p>Un cas particular d'aquesta darrera tècnica és el <b><i>backface culling</i>,
+</b>el qual elimina del pipeline de visualització les cares del objectes que
+miren cap enrera respecte l'observador. Aquesta tècnica només és aplicable
+si la superfície de l'objecte és tancada, amb la qual cosa es garanteix que
+no seran visibles les cares que miren cap enrera per estar tapades per altres
+cares del mateix objecte.</p>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m5f01t01.html">[Anterior]</a>
+<a href="m5f01t03.html">[Següent]</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("proj","avanc");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m2i30_StencilBuffer.html">[Anterior]</a>
+<a href="m2i80_Pixels.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Conceptes avançats.
+<span class=tit2><i>Accumulation Buffer</i></span>
+</div>
+
+<p>Un bon número d'efectes s'aconsegueixen repetint la presentació de
+l'escena vàries vegades des de punts de vista diferents, i combinant
+els resultats. D'entre aquestes podem mencionar <a
+href="../m11/m3f40_AntialiasingAccBuffer.html">l'antialiasing</a>, la
+simulació de la profunditat de camp que resulta d'usar una càmera per
+a fer una foto, o l'esborronament d'objectes en moviment.
+
+<p>Per tal d'implementar aquests efectes, OpenGL ofereix un buffer
+d'acumulació en que podem acumular els resultats de diverses
+presentacions de l'escena. Aquest buffer pot tenir més bits
+disponibles que el propi frame buffer, per tal de minvar els efectes
+d'arrodoniment o sobreeiximent que podrien ocòrrer durant
+l'acumulació.
+
+<p>El funcionament del buffer d'acumulació es controla fonamentalment
+mitjançant una sola crida: <tt>glAccum()</tt>. Aquesta crida té dos
+paràmetres, una <i>operació</i> i un <i>valor</i>. En cada operació
+s'obtenen els valors d'un píxel origen, es multiplica cada una de les
+seves quatre components (R, G, B, i Alfa) pel valor proporcionat pel
+segon paràmetre d'aquesta crida, i el resultat es fa servir en
+l'operació especificada. Les operacions poden ser:
+<dl>
+<dt><tt>GL_ACCUM</tt>
+    <dd>S'obté el píxel del buffer actualment designat com buffer de
+    lectura mitjançant <tt>glReadBuffer()</tt>, es multiplica pel valor
+    donat i es suma el resultat al que hi hagi al buffer d'acumulació.
+<dt><tt>GL_ADD i GL_MULT</tt>
+    <dd>Es suma o multiplica el que hi ha al buffer d'acumulació amb
+    el valor donat, i el resultat es torna a emmagatzemar al buffer
+    d'acumulació.
+<dt><tt>GL_LOAD</tt>
+    <dd>S'inicialitza el buffer d'acumulació amb el resultat de
+    multiplicar el contingut del buffer de lectura pel valor donat al
+    segon paràmetre. Els algoritmes que usen el buffer d'acumulació es
+    poden accelerar lleugerament usant aquesta operació la primera
+    vegada, estalviant-se així l'esborrrar el buffer abans de
+    començar.
+<dt><tt>GL_RETURN</tt>
+    <dd>Obté els valors del buffer d'acumulació, els multiplica pel
+    valor, i escriu el resultat en el buffer actualment designat com
+    a frame buffer d'escriptura (usualment el back buffer).
+</dl>
+
+<p>Naturalment els algoritmes que usen aquest sistema, en requerir
+vàries pasades, són més lents que d'altres que ho facin en sols
+una. Es tracta d'un compromís entre qualitat i rendiment que cal
+resoldre per cada aplicació.
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m2i30_StencilBuffer.html">[Anterior]</a>
+<a href="m2i80_Pixels.html">[Següent]</a>
+</div>
+</body>
+</html>

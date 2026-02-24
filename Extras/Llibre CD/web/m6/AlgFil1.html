@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M6.1 Procés de visualització 3D.MapaSensible.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("vis3D","estr");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+<a href="MatriuTG.html">[Anterior]</a>
+<a href="SCObs2.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Subprocessos. 
+<span class=tit2>Algorisme per a la visualització en filferros 1</span>
+</div>
+
+<p>
+<PRE class=algoritme>
+/* Calcula la matriu de transformació; */
+M := CalculaMatriu (O, C, u)
+/* Projecció dels vèrtexs */
+np := 0
+<B>Per</B> cada vèrtex v de l'objecte <B>fer</B>
+   P := ObtenirPuntVertex (v)
+   PProj := Projeccio (P,M)
+   np := np+1
+   PuntsProj[np].Punt := PProj
+   PuntsProj[np].Vertex := v
+<B>fper</B>
+</PRE>
+
+<div class=tit3><b>Observacions:</b></div>
+
+<ul>
+<li><B>Projeccio</B> és una funció que projecta un punt P en coordenades del
+model de l'aplicació, segons la matriu de projecció M:
+<pre class=algoritme>
+<B>funció</B> Projeccio (P:Punt3D, M:Matriu) <B>retorna Punt3D</B>
+</pre>
+La funció calcula i retorna el Punt3D auxiliar Pr: 
+<PRE class=algoritme>
+Pr.x := P.x*M[1,1] + P.y*M[1,2] + P.z*M[1,3] + M[1,4]
+Pr.y := P.x*M[2,1] + P.y*M[2,2] + P.z*M[2,3] + M[2,4]
+Pr.z := P.x*M[3,1] + P.y*M[3,2] + P.z*M[3,3] + M[3,4]
+</PRE>
+</li>
+</ul>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="MatriuTG.html">[Anterior]</a>
+<a href="SCObs2.html">[Següent]</a>
+</div>
+</body>
+</HTML>

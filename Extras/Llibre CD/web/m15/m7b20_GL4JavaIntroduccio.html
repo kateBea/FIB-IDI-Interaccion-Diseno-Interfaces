@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("opengl","gl4java");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m7b10_QueEsGL4Java.html">[Anterior]</a>
+<a href="m7b30_Exemple.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>GL4Java.
+<span class=tit2>Introducció al GL4Java</span>
+</div>
+
+<P>
+<B>GL4Java</B> defineix la classe "GLCanvas" que és la classe base per
+a implementar aplicacions que utilitzin OpenGL des de Java. Totes les
+crides a OpenGL dins d'aquesta classe tenen el mateix prototipus que
+l'API d'OpenGL per al llenguatge C, però han d'anar prefixades pel nom
+de la llibreria que les implementa. És a dir, les crides a rutines de
+la llibreria GL van prefixades per <B>gl.</B> (per exemple:
+<B>gl.glVertex3f</B>) i les de rutines de la llibreria GLU van
+prefixades per <B>glu.</B> (per exemple: <B>glu.gluLookAt</B>)
+
+<P>
+<div class=tit3><B>La classe "GLCanvas"</B></div>
+
+<pre>
+          java.lang.Object
+              |
+              +----- java.awt.Component
+                         |
+                         +----- java.awt.Canvas
+                                    |
+                                    +----- gl4java.awt.GLCanvas
+</pre>
+
+<BR>
+<pre class=algoritme>
+          <B>public class</B> GLCanvas <B>extends</B> Canvas
+          <B>implements</B> ComponentListener, WindowListener
+</pre>
+
+<br>
+Constructor:
+
+<pre class=algoritme>
+          public <B>GLCanvas</B> (int width, int height)
+              /* width - l'amplada en píxels */
+              /* height - l'alçada en píxels */
+</pre>
+
+<P>
+L'únic que cal fer és crear una subclasse de la classe GLCanvas i
+implementar els mètodes
+
+<pre class=algoritme>
+          public void <B>init</B> ()
+              /* mètode d'inicialització, es crida després que el
+                 GL-Context ha estat inicialitzat. És per a inicialitzar
+                 tant coses de Java com de GL */
+
+          public void <B>display</B> ()
+              /* mètode per a pintar, és cridat des de "paint" */
+</pre>
+
+<P>
+GL4Java també defineix funcions pròpies per a extendre
+OpenGL. Aquestes funcions d'extensió comencen totes per <B>glj</B>, i
+també van prefixades per <B>glj.</B> (com per a les altres
+llibreries). Entre elles es troben les següents:
+
+<pre class=algoritme>
+          protected void <B>glj.gljInit</B> ()
+              /* Inicialitza el GL-Context. És cridada automàticament pel
+                 primer "paint", per tant no cal que es cridi explícitament */
+
+          public boolean <B>glj.gljMakeCurrent</B> (boolean freeContextFirst)
+              /* Comprova si s'ha inicialitzat GL4Java i activa el
+                 GL-Context per a aquesta execució. Aquesta crida s'ha de
+                 fer en el primer mètode en que volguem usar crides a OpenGL
+                 (per exemple en el nostre <B>init()</B>, perque ens hem
+                 d'assegurar que el GL-Context estigui actiu. */
+
+          public native void <B>glj.gljSwap</B> ()
+              /* mètode de swap de buffers usat en el doble buffering */
+</pre>
+
+<P>
+<div class=tit3><B>Equivalències de tipus</B></div>
+
+<P>
+Com que OpenGL defineix els seus propis tipus, ens cal un estil de
+conversió d'aquests tipus als tipus de java. El primer criteri que es
+té en compte és la mesura en bytes. El segon, i també convenient, és
+trobar tipus equivalents en java, on la conversió que s'hagi de fer
+sigui mínima. Tots els tipus <i>unsigned</i> han de convertir-se en un
+tipus byte de mesura equivalent de java, així doncs en aquests casos
+caldrà un fer un cast. Com que un programador en java utilitza taules,
+es genera la funció GL4Java per a tots els tipus de taules de java,
+per a aconseguir compatibilitat amb el GLvoid *.
+
+<P>
+La taula següent mostra les correspondències entre els tipus d'OpenGL
+i els tipus de java:
+
+<P>
+<center>
+<table border="2" class=materials>
+<thead>
+<tr><th>Tipus OpenGL</th><th>Tipus Java</th><th>Tipus C</th><th>Tipus intern</th></tr>
+</thead>
+<tbody><tr><td>GLboolean</td><td>boolean</td><td>unsigned char</td><td>enter 8-bits</td></tr>
+<tbody><tr><td>GLbyte</td><td>byte</td><td>signed char</td><td>enter 8-bits</td></tr>
+<tbody><tr><td>GLubyte</td><td>byte</td><td>unsigned char</td><td>enter 8-bits sense signe</td></tr>
+<tbody><tr><td>GLshort</td><td>short</td><td>short</td><td>enter 16-bits</td></tr>
+<tbody><tr><td>GLushort</td><td>short</td><td>unsigned short</td><td>enter 16-bits sense signe</td></tr>
+<tbody><tr><td>GLint<br>GLsizei</td><td>int</td><td>int o long</td><td>enter 32-bits</td></tr>
+<tbody><tr><td>GLuint<br>GLenum<br>GLbitfield</td><td>int</td><td>unsigned int o<br>unsigned long</td><td>enter 32-bits sense signe</td></tr>
+<tbody><tr><td>GLfloat<br>GLclampf</td><td>float</td><td>float</td><td>coma flotant 32-bits</td></tr>
+<tbody><tr><td>GLdouble<br>GLclampd</td><td>double</td><td>double</td><td>coma flotant 64-bits</td></tr>
+<tbody><tr><td>GLvoid *</td><td>byte[]<br>short[]<br>int[]<br>float[]<br>double[]<br>boolean[]<br>long[]</td><td>void *</td><td>enter 32-bits</td></tr>
+</table></center>
+
+<P>
+Cal tenir en compte que pels <i>unsigned</i> caldrà la conversió
+explícita, i que per les taules caldrà decidir en cada cas amb quin
+dels tipus interessa treballar.
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m7b10_QueEsGL4Java.html">[Anterior]</a>
+<a href="m7b30_Exemple.html">[Següent]</a>
+</div>
+</body>
+</html>

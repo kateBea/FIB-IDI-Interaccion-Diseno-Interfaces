@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("realvirt","represc");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m5e01t01t06.html">[Anterior]</a>
+<a href="m5e01t03_simp.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Representació d'escenes.
+<span class=tit2>Estructuració de l'escena</span>
+</div>
+
+<p>El <b>graf d'escena </b>(<i>scene graph</i>) és el nom que
+rep l'estructura de dades que representa els elements que formen una escena.</p>
+<p>Normalment, les escenes no inclouen simplement una
+col·lecció lineal d'objectes sense cap estructura, sinó que sovint convé
+organitzar els objectes de forma que estiguin agrupades aquelles entitats que
+comparteixin atributs comuns.</p>
+
+<p>Una possible organització de l'escena és en forma de <b>jerarquia</b>.
+Per exemple, el cos d'un humà pot estar organitzat de forma que els dits
+formin part de la mà, la mà formi part del braç, el braç pertany al tronc, i
+el tronc sigui una part de tot el cos.</p>
+
+<p>La representació més senzilla d'aquesta jerarquia és en
+forma d'<b>arbre</b> (vegeu el capítol anterior). L'arbre està format per una sèrie de <b>nodes</b> i
+d'<b>arcs </b>que relacionen aquests nodes, de forma que tots els nodes tenen
+un únic pare (excepte l'arrel, que no té cap pare).</p>
+
+<p>Normalment es consideren quatre tipus de nodes: els <b>grups</b>
+són els únics nodes que poden tenir fills, i permeten agrupar els objectes i
+definir la jerarquia; els nodes <b>geomètrics</b> representen la forma dels
+objectes, text, i altres elements geomètrics; els nodes <b>property </b>permeten
+alterar alguns atributs de l'estat gràfic, com ara les llums, colors,
+materials, etc.; els nodes <b>transform </b>permeten aplicar transformacions
+geomètriques respecte un sistema de coordenades local.</p>
+
+<p>La visualització d'una jerarquia d'aquest tipus es duu a
+terme mitjançant un recorregut en <b>pre-ordre </b>de l'arbre. Cada cop que
+visitem un node grup, visitarem recursivament els seus fills; els nodes de
+propietats i de transformacions permeten alterar el context gràfic i afectaran
+a la visualització dels objectes que es visitaran a continuació; finalment,
+els nodes geomètrics són visualitzats tenint en compte els colors, materials,
+etc. definits pel context gràfic actual. Això implica que l'ordre dels fills
+d'un node és relevant.</p>
+
+<p>En vrml i en d'altres models d'escena, hi ha un tipus
+especial de node grup anomenat <b>separador</b>. Tots els canvis de color,
+material i altres propietats que es facin en els nodes que pengen d'un
+separador no afecten a la resta de nodes de la jerarquia. Això permet acotar l'àmbit
+d'una definició d'un atribut de l'estat gràfic.</p>
+
+<p>L'estructuració de l'escena en forma de jerarquia té
+molts avantatges: d'una banda, ens permet estalviar memòria al no haver d'especificar
+els atributs per cada objecte, sinó que només hem d'especificar els canvis
+en l'estat gràfic. Donat que també minimitzem el nombre de canvis d'estat,
+el recorregut i la visualització d'una escena jeràrquica és més eficient.</p>
+
+<p>D'altra banda, les jerarquies simplifiquen molt l'aplicació
+de transformacions geomètriques a estructures complexes. Per exemple, si
+disposem d'un model del cos humà amb estructura jeràrquica, amb els dits
+formant part de la mà, la mà formant part del braç, el braç pertanyent al
+tronc, i el tronc essent una part de tot el cos, i cadascuna d'aquestes parts
+està precedida per un node de transformació geomètrica, al canviar la
+transformació geomètrica del braç estarem aconseguint que es transformin
+adequadament tots els seus components.</p>
+
+<p>Finalment, les jerarquies permeten aplicar algorismes
+jeràrquics: càlculs com les col·lisions, el retallat lateral, etc. es poden
+fer de forma molt més eficient si l'escena està estructurada de forma
+jeràrquica, doncs a vegades podem donar una resposta ràpida només
+inspeccionant els primers nivells de la jerarquia. Per exemple, si les esferes
+contenidores de dos nodes no intersequen, ja podem concloure que els nodes no
+intersequen,
+sense haver de fer més comprovacions de col·lisions.</p>
+
+<p>Una generalització de la jerarquia en forma d'arbre són
+els <b>grafs dirigits acíclics </b>(DAG, <i>Directed Acyclic Graphs</i>). La
+principal millora és que és possible definir entitats (per exemple, la
+geometria d'un dit) que després poden ser <b>referenciades</b> en diferents
+parts de la jerarquia (per exemple, podem crear cinc instàncies del dit genèric,
+precedits pel seu node de transformació), amb la qual cosa es permet la
+reusabilitat dels nodes, s'evita la redundància de formes geomètriques i es
+facilita el manteniment del model.</p>
+
+<p>En el següent exemple d'escena vrml, s'aprecia com l'ordre dels nodes
+de propietat i de transformació és important, doncs determina quins nodes de
+geometria es veuran afectats:</p>
+
+<pre class=algoritme>
+  #vrml V1.0 ascii
+  Separator
+  {
+     Material { diffuseColor 0 0 1 # Blue sphere }
+     Sphere { radius 1 }
+     Translation { translation 2 0 0 }
+     Sphere { radius 1 }
+  }
+  Separator
+  {
+     Material { diffuseColor 1 0 0 # Red sphere }
+     Translation { translation -2 0 0 }
+     Sphere { radius 1 }
+  }
+</pre>
+
+<p>La visualització d'aquesta escena donaria com a resultat aquesta imatge:
+</p>
+
+<div ALIGN="CENTER"><img border="0" src="imatges/boles.jpg" width="300" height="127"></div>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m5e01t01t06.html">[Anterior]</a>
+<a href="m5e01t03_simp.html">[Següent]</a>
+</div>
+</body>
+</html>

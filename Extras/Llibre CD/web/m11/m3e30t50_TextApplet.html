@@ -1,0 +1,46 @@
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<BODY>
+<br>
+
+<div class=tit2>Explicació de l'applet de textures</div>
+
+<p> Aquest applet permet activar/desactivar quasi tots els paràmetres
+relatius al mapat de textures que permet OpenGL. Observeu que disposa
+de dues àreas gràfiques.
+
+<p>L'àrea de l'esquerra s'utilitza per assignar coordenades de textura
+als vèrtexs d'un polígon/objecte a texturar. Òbviament nomès té sentit
+quan la generació de coordenades de textura és en mode directe; però
+en qualsevol cas sempre mostra la textura i l'objecte a texturar.
+
+<p>L'àrea de la dreta mostra l'objecte texturat. Es pot modificar la
+posició de la càmera interactivament (botó esquerre del ratolí
+arrossegant vertical/horitzonalment) i fer ampliacions/reduccions (botó
+dret del ratolí arrossegant verticalment).
+
+<p>Les pestanyes superiors són autoexplicatives i permeten: escollir
+objecte a texturar, la textura a aplicar, el mètode de parametrització
+escollit, el tractament dels pixels amb coordenades de textura fora
+del rang [0,1] i el tipus de filtre.
+
+<p>Segons l'opció de parametritació escollida hi ha algun objecte que
+no està actiu (per manca d'implementació de l'opció); així només es
+poden assignar coordenades de manera directa explícita a polígons. En
+cas del cub i l'esfera es calculen proceduralment. Per introduir les
+coordenades de textures, modiqueu la posició dels vèrtexs en la
+finestra de l'esquerra (us situeu aprop d'un vèrtex, premeu el botó
+esquerre del ratolí i l'arrossegueu).
+
+<p>Els botons inferiors us indiquen l'estat de l'applet i us permeten
+tornar a la posició d'inici.
+
+
+<p align=right><a href='javascript:this.close();'>tancar</a>
+
+</body>
+</html>

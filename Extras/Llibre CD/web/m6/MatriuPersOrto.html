@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M6.1 Procés de visualització 3D.MapaSensible.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("vis3D","estr");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+<a href="MSExplicacio4.html">[Anterior]</a>
+<a href="AlgFil3.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Subprocessos.
+<span class=tit2>Matriu de transformació perspectiva/ortogonal</span>
+</div>
+
+<P>
+Aquestes matrius s'apliquen a tots els vèrtexs del model transformat,
+i els passa del
+<A CLASS="glossari" HREF="javascript:glossari('SCObs.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">sistema de coordenades de l'observador</A> a
+<A CLASS="glossari" HREF="javascript:glossari('CoordNorm.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">coordenades normalitzades</A>.
+
+<p>En el cas que el tipus de càmera sigui perspectiva,
+la matriu es calcula a partir dels
+<A CLASS="glossari" HREF="javascript:glossari('PlansRet.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">plans de retallat anterior i posterior</A> zProp, zLluny, i de l'<A CLASS="glossari" HREF="javascript:glossari('angleO.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">angle d'obertura de la càmera</A>
+<IMG WIDTH="13" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="imatges/img6.gif"
+ ALT="$\alpha$">:
+
+<pre class=algoritme>
+a := tangent (<IMG WIDTH="13" HEIGHT="13" ALIGN="BOTTOM" BORDER="0" SRC="imatges/img6.gif" ALT="$\alpha$"> / 2)<br>
+c := (zProp + zLluny)  /  (zProp - zLluny)<br>
+d := 2 * zProp * zLluny / (zProp - zLluny)<br>
+</pre>
+
+<CENTER>
+<table><tr><td>
+<IMG WIDTH="317" HEIGHT="81"
+ SRC="imatges/img5.gif"
+ ALT="\begin{displaymath}[MPers]
+= \left[\begin{array}
+{cccc}
+ 1/(aspecte*a) & 0 & 0 &...
+ ... 0 & 0 \\  0 & 0 & c & d \\  0 & 0 & -1 & 0
+ \end{array}\right]\end{displaymath}">
+</td>
+</table>
+</CENTER>
+
+<div class=tit3><b>Observació:</b></div>
+
+<ul>
+<li>Cal calcular la tangent de l'angle d'obertura de la càmera i cal
+   tenir en compte la variable de
+   <A CLASS="glossari" HREF="javascript:glossari('ARatio.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">relació d'aspecte</A>.
+ Això permet calcular automàticament la
+   <A CLASS="glossari" HREF="javascript:glossari('TamFin.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">grandària de la finestra 2D</A>:
+   Si pensem que posem el pla de projecció i per tant la finestra 2D a distància 1
+   del punt O en direcció a C, l'alçada de la finestra seria 2*a, i el
+   seu ample seria 2*a*aspecte.
+</li>
+</ul>
+
+<P>
+En el cas que el tipus de càmera sigui axonomètrica,
+la matriu es calcula a partir dels
+<A CLASS="glossari" HREF="javascript:glossari('PlansRet.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">plans de retallat anterior i posterior</A>
+ zProp, zLluny, i de la grandària de la finestra 2D
+ (ample, alt; habitualment tindrem que ample/alt = aspecte):
+
+<PRE class=algoritme>
+a := 2 / ample
+b := 2 / alt
+c := 2 / (zProp - z Lluny)
+d := (zProp + zLluny)  /  (zProp - zLluny)
+</PRE>
+
+<CENTER>
+<table><tr><td>
+<IMG WIDTH="180" HEIGHT="81"
+ SRC="imatges/img7.gif"
+ ALT="\begin{displaymath}[MAx]
+= \left[\begin{array}
+{cccc}
+ a & 0 & 0 & 0 \\  0 & b & 0 & 0 \\  0 & 0 & c & d \\  0 & 0 & 0 & 1
+ \end{array}\right]\end{displaymath}"></td></table></CENTER>
+
+
+<p class=exercici>
+<span class=exernum>Exercici a:</span>
+Proveu de multiplicar -manualment- la matriu MPers per diversos
+   vectors en el sistema de coordenades de l'observador. Proveu primer
+   amb punts que tinguin les coordenades x, y nules. Què passa si el punt
+   tenia una coordenada z igual a zProp? Què passa si la z del punt era
+   igual a zLluny? Què passa si la coordenada del punt era nula?
+
+<p class=exercici>
+<span class=exernum>Exercici b:</span>
+Proveu ara de multiplicar -manualment- la matriu MPers per
+   diversos vectors corresponents a punts amb x=1, y=0. Què passa si el punt
+   tenia una coordenada z igual a zProp? Què passa si la z del punt era
+   igual a zLluny? Què passa si la coordenada del punt era nula? Què
+   passa si la z del punt era (zProp + zLluny)/2? Què passa si la z del
+   punt era 10*zLluny? Que passa si era 0.1*zProp?
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="MSExplicacio4.html">[Anterior]</a>
+<a href="AlgFil3.html">[Següent]</a>
+</div></body>
+</HTML>

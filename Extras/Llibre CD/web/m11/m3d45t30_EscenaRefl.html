@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","reflex");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m3d45_StencilBufGL.html">[Torna a l'algorisme]</a>
+</div>
+<br><br>
+
+<div class=tit3><b>Implementació en OpenGL de les reflexions amb
+Stencil Buffer.</b> Explicació - part 3</div>
+
+<p>Com ja feiem a l'altre exemple vist en aquest apartat, ara empilem
+una nova transformació que precedeix les demés amb una reflexió pel
+pla del mirall. Com abans, fem servir una reflexió respecte del pla
+<tt>x=50</tt>.
+
+<pre class=algoritme>
+   <b>glPushMatrix</b>();
+   <b>glScalef</b>(-1.f, 1.f, 1.f);
+   <b>glTranslatef</b>(-200.f, 0.f, 0.f);
+</pre>
+
+<p>I també aquest cop cal actualitzar la posició de la llum (o les
+llums si es tenen més focus a l'escena), i indicar a OpenGL que
+inverteixi el seu criteri de filtrat de cares, degut a que la reflexió
+haurà invertit les normals.
+
+<pre class=algoritme>
+   <b>glLightfv</b>(GL_LIGHT0, GL_POSITION, lightpos);
+   <b>glCullFace</b>(GL_FRONT);
+   pintaEscena();
+</pre>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m3d45_StencilBufGL.html">[Torna a l'algorisme]</a>
+</div>
+</body>
+</html>

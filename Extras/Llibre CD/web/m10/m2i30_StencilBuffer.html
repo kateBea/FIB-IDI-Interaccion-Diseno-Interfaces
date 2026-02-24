@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("proj","avanc");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m2i20_AltresBuffers.html">[Anterior]</a>
+<a href="m2i40_Accum.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Conceptes avançats.
+<span class=tit2><i>Stencil Buffer</i></span>
+</div>
+
+<p>L'Stencil buffer permet restringir l'efecte d'altres crides a zones
+específiques del frame buffer. La paraula anglesa "stencil" designa
+una plantilla, i és la millor descripció de l'efecte d'aquesta eina:
+podem dibuixar una plantilla al stencil buffer de manera que
+successives crides a primitives de dibuix afectin només les zones
+"foradades" de la plantilla. Aquesta simple idea dóna lloc a
+innumerables aplicacions, algunes de les quals s'expliquen al següent
+capítol.
+
+<p>La instal·lació en què el nostre programa s'executi pot no disposar
+d'un stencil buffer, així que el primer que ens caldrà és averiguar si
+en tenim. Alguns algoritmes a més necessitaran un cert nombre de bits
+al stencil buffer per a poder funcionar. Podem usar en aquests casos
+la crida <tt>glGetIntegerv(GL_STENCIL_BITS, &amp;numBits)</tt> per a
+averiguar el número de bits disponibles.
+
+<p>El primer que necessitem saber, quan volguem fer servir un
+stencil buffer i en tinguem un disponible, és com podem assignar
+valors a cada píxel. En OpenGL això s'aconsegueix dibuixant de la
+manera habitual, però indicant que es vol actualitzar l'stencil buffer
+segons els resultats de les diferents primitives invocades, mitjançant
+una crida a <tt>glStencilOp(GLenum fail, GLenum zfail, GLenum
+zpass)</tt>.
+
+<p>Els tres paràmetres d'aquesta crida indiquen l'acció a prendre
+sobre la dada corresponent a un píxel a l'stencil buffer quan el píxel
+que es pinta no supera l'<i>stencil test</i>, quan el pasa pero no pasa el
+test de profunditat, i finalment quan passa tots dos tests. Cadascuna
+de les tres funcions pot ser una de les següents constants:
+<dl>
+<dt><tt>GL_KEEP</tt>
+    <dd>Deixar el mateix valor que hi havia
+<dt><tt>GL_ZERO</tt>
+    <dd>Posar a zero
+<dt><tt>GL_REPLACE</tt>
+    <dd>Substitueix el valor actual pel valor de referència
+<dt><tt>GL_INCR</tt>
+    <dd>Incrementar el valor actual en 1
+<dt><tt>GL_DECR</tt>
+    <dd>Decrementar el valor actual en 1
+</dl>
+
+<p>Quan es fan increments i decrements, els valors es forcen a
+romandre entre <i>0</i> i <i>2<sup>s</sup>-1</i>, on <i>s</i> és el
+nombre de bits disponibles per l'stencil buffer. Inicialment totes tres
+operacions estan definides com <tt>GL_KEEP</tt>, amb el què els valors
+a l'stencil buffer no varien independentment del que
+dibuixem. Alternativament podem assignar valors a l'stencil buffer usant
+<a href="m2i80_Pixels.html">operacions de píxels</a>.
+
+<p>Un cop hem colocat valors apropiats a l'stencil buffer, podem fer
+que aquest defineixi un filtre pels fragments que recorren el <i>pipeline</i>
+d'OpenGL mitjançant les següents crides:
+<pre class=algoritme>
+     glEnable(GL_STENCIL_TEST);
+     glStencilFunc(GL_EQUAL, refval, mask);
+</pre>
+
+<p>La crida a <tt>glEnable()</tt> és, com sempre, com un
+interruptor. Aquesta crida activa que s'apliqui el filtre d'stencil a
+tots els fragments; si ens interessa desconnectar aquest filtre durant
+una part del programa, podem fer servir <tt>glDisable()</tt>.
+
+<p>La segona crida, <tt>glStencilFunc()</tt>, defineix el filtre a
+usar. El primer paràmetre indica el tipus de comparació a fer entre el
+valor emmagatzemat a l'stencil i el de referència (segon
+paràmetre). Aquesta comparació pot ser:
+
+<dl>
+<dt><tt>GL_NEVER</tt>
+    <dd>La comparació sempre falla. Per tant cap fragment superarà el
+    filtre
+<dt><tt>GL_ALWAYS</tt>
+    <dd>La comparació mai falla. Tots els fragments passen
+<dt><tt>GL_LESS</tt>
+    <dd>El fragment passa si <tt>refval</tt> és més petit que el valor
+    emmagatzemat a l'stencil buffer
+<dt><tt>GL_LEQUAL</tt>
+    <dd>El fragment passa si <tt>refval</tt> és més petit o igual que
+    el valor emmagatzemat a l'stencil buffer
+<dt><tt>GL_GREATER</tt>
+    <dd>El fragment passa si <tt>refval</tt> és més gran que el valor
+    emmagatzemat a l'stencil buffer
+<dt><tt>GL_GEQUAL</tt>
+    <dd>El fragment passa si <tt>refval</tt> és més gran o igual que el valor
+    emmagatzemat a l'stencil buffer
+<dt><tt>GL_EQUAL</tt>
+    <dd>El fragment passa si <tt>refval</tt> és igual al valor
+    emmagatzemat a l'stencil buffer
+<dt><tt>GL_NOTEQUAL</tt>
+    <dd>El fragment passa si <tt>refval</tt> és diferent del valor
+    emmagatzemat a l'stencil buffer
+</dl>
+
+<p>El tercer paràmetre, <tt>mask</tt>, defineix una màscara de bits
+que determina quins bits del valor de referència i de l'stencil buffer
+són rellevants pel filtre. Inicialment tots els bits de la màscara
+estan inicialitzats a 1, però si indiquem altres valors, totes les
+comparacions anteriors es realitzen entre els resultats de fer un AND
+bit a bit entre la màscara i el valor de referència, i entre la
+màscara i el valor del buffer. Per exemple si <tt>mask==070</tt> i
+<tt>refval==015</tt>, i si la funció triada és <tt>GL_GEQUAL</tt>,
+aleshores un fragment passa si
+<pre class=algoritme>
+                    stencil & 070 <= 010
+</pre>
+<P>és a dir si ni el bit 4 ni el 5 de la posició corresponent de
+l'stencil buffer estan activats.
+
+<p>Aquesta màscara pot estar relacionada però és diferent de la que
+especifiquem amb la crida a <tt>glStencilMask()</tt>. Aquesta màscara
+simplement autoritza o prohibeix l'actualització d'un cert bit de
+l'stencil buffer. Si l'stencil buffer té <i>s</i> bits, aleshores els
+<i>s</i> bits menys significatius de l'argument determinaran la
+màscara. Els bits que estiguin a 1 podran ser actualitzats a l'stencil
+buffer, mentre que els que estiguin a zero seran sols de
+lectura. Aquestes crides es fan servir en algoritmes sofisticats que
+usen diferents bits de l'stencil buffer per diferents propòsits (per
+exemple els algoritmes que s'han proposat per a dibuixar objectes
+modelats amb arbres CSG aprofitant l'acceleració per hardware dels
+gràfics, sense necessitat d'avaluar explícitament la frontera (que és
+una operació molt costosa).
+
+<p>L'operació <tt>glClear(GL_STENCIL_BUFFER_BIT)</tt> inicialitza tot
+l'stencil buffer amb el valor declarat mitjançant
+<tt>glClearStencil()</tt>, però sols modifica els bits que en la
+màscara estigun a 1. Algunes instalacions d'OpenGL tanmateix contenen
+un bug pel que la màscara no es fa servir en aquest cas.
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m2i20_AltresBuffers.html">[Anterior]</a>
+<a href="m2i40_Accum.html">[Següent]</a>
+</div>
+</body>
+</html>

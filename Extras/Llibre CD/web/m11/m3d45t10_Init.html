@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","reflex");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m3d45_StencilBufGL.html">[Torna a l'algorisme]</a>
+</div>
+<br><br>
+
+<div class=tit3><b>Implementació en OpenGL de les reflexions amb
+Stencil Buffer.</b> Explicació - part 1</div>
+
+<P>Cal afegir el
+<tt>GL_STENCIL_BUFFER_BIT</tt> en la crida a <tt>glClear()</tt>, per a
+inicialitzar-lo de la forma adequada (a zeros).
+
+<pre class=algoritme>
+   /* Esborrem i pintem l'escena */
+   <b>glClear</b>(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+</pre>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m3d45_StencilBufGL.html">[Torna a l'algorisme]</a>
+</div>
+</body>
+</html>

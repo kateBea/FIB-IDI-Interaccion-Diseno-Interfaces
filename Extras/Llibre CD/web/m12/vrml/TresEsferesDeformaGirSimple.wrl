@@ -1,0 +1,122 @@
+#VRML V2.0 utf8
+
+
+DEF Entry Viewpoint {
+    position 0.0 1.6 10.0
+    description "Entry View"
+}
+
+NavigationInfo {
+    type [ "EXAMINE", "ANY" ]
+    headlight TRUE
+}
+
+Background {
+    skyColor [ 0.2 0.2 0.0 ]
+}
+
+
+# Esfera central
+
+Transform {
+	center 0.0 4.0 0.0
+	children [
+		DEF EsferaCentral Transform {
+			children Shape {
+				appearance Appearance {
+					material DEF ColorEsfera Material { }
+				}
+				geometry Sphere { }
+			}
+		}
+	]
+}
+
+#  Esferes dels costats
+
+DEF Esfera1 Transform {
+	center 0.0 4.0 0.0
+	children [
+		DEF Esfera Shape {
+			appearance Appearance {
+				material Material {
+					diffuseColor 0.2 0.5 1.0
+				}
+			}
+			geometry Sphere { }
+		}
+	]
+}
+
+DEF Esfera2 Transform {
+	center 0.0 4.0 0.0
+	children [
+		USE Esfera
+	]
+}
+
+
+#  Animació del conjunt
+
+
+DEF Clock TimeSensor {
+	cycleInterval 2.0
+	loop TRUE
+	startTime 1.0
+	stopTime 0.0
+}
+
+DEF Oscilador1 OrientationInterpolator {
+	key [ 0.0, 0.2, 0.5, 0.8, 1.0 ]
+	keyValue [
+                0.0 0.0 1.0 -0.8,
+		0.0 0.0 1.0 -0.5,
+		0.0 0.0 1.0 -0.2,
+		0.0 0.0 1.0 -0.5,
+                0.0 0.0 1.0 -0.8,
+	]
+}
+
+ROUTE Clock.fraction_changed TO Oscilador1.set_fraction
+ROUTE Oscilador1.value_changed TO Esfera1.set_rotation
+
+DEF Oscilador2 OrientationInterpolator {
+	key [ 0.0, 0.2, 0.5, 0.8, 1.0 ]
+	keyValue [
+                0.0 0.0 1.0  0.8,
+		0.0 0.0 1.0  0.5,
+		0.0 0.0 1.0  0.2,
+		0.0 0.0 1.0  0.5,
+                0.0 0.0 1.0  0.8,
+	]
+}
+
+ROUTE Clock.fraction_changed TO Oscilador2.set_fraction
+ROUTE Oscilador2.value_changed TO Esfera2.set_rotation
+
+DEF Deformador PositionInterpolator {
+	key [ 0.0, 0.2, 0.5, 0.8, 1.0 ]
+	keyValue [
+		1.0 1.0 1.0,
+		1.0 1.0 1.0,
+		0.5 1.4 1.4,
+		1.0 1.0 1.0,
+		1.0 1.0 1.0,
+
+	]
+}
+
+ROUTE Clock.fraction_changed TO Deformador.set_fraction
+ROUTE Deformador.value_changed TO EsferaCentral.set_scale
+
+DEF CanviColor ColorInterpolator {
+	key [ 0.0, 0.5, 1.0 ]
+	keyValue [
+		0.0 0.5 1.0,
+		1.0 0.0 0.0,
+		0.0 0.5 1.0,
+	]
+}
+
+ROUTE Clock.fraction_changed TO CanviColor.set_fraction
+ROUTE CanviColor.value_changed  TO ColorEsfera.set_diffuseColor

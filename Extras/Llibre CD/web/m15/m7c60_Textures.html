@@ -1,0 +1,649 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("opengl","extop");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m7c50_BlendingAntalias.html">[Anterior]</a>
+<a href="m7c70_Interrogacio.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Extensió de crides d'OpenGL.
+<span class=tit2> Textures</span>
+</div>
+
+<P>
+L'objectiu d'aquest apartat és veure quins són els prototipus i tots
+els possibles paràmetres de les crides d'OpenGL que s'han usat per a
+explicar aquest tema en <a href="../m11/m3e10_Textures.html">l'apartat de textures</a> del capítol 11.
+
+<P>
+<div class=tit3><B> Activar l'ús de textures</B></div>
+
+<P>
+Abans de poder pintar l'escena amb textures, cal activar aquesta
+funcionalitat en OpenGL. Per a activar-les cal usar la crida a
+<b>glEnable</b>, i el valor del paràmetre pot ser: GL_TEXTUDE_1D,
+GL_TEXTURE_2D o GL_TEXTURE_3D, depenent de si volem textures d'una,
+dues o tres dimensions respectivament. Per a desactivar aquesta
+funcionalitat usarem la crida <b>glDisable</b> amb el mateix valor del
+paràmetre que haviem usat per a activar-la. Si més d'un mode de
+textures està activat alhora, OpenGL usarà el de més dimensions (és
+aconsellable, però, evitar aquesta situació).
+
+<P>
+<div class=tit3><B> Especificar textures 2D</B></div>
+
+<a name="glTexImage2D"></a>
+<P>
+La crida <b>glTexImage2D</b> defineix una textura de dues dimensions.
+
+<pre class=algoritme>
+          void <b>glTexImage2D</b> (GLenum target, GLint level, GLint internalFormat,
+                             GLsizei width, GLsizei height, GLint border,
+                             GLenum format, GLenum type, const GLvoid *texels)
+</pre>
+
+<P>
+El paràmetre <i>target</i> pot tenir com a valors les constants
+GL_TEXTURE_2D o GL_PROXY_TEXTURE_2D. Si s'usa amb el segon d'aquests
+valors, es genera la imatge de textura en un lloc especial,
+<i>proxy</i>, que permet al programa averiguar de forma més acurada si
+OpenGL pot acomodar la textura al format intern que se li demana.
+
+<P>
+El paràmetre <i>level</i> s'usa per quan hi ha múltiples resolucions
+del mapa de textura. Si només hi ha una resolució, aquest paràmetre
+hauria de tenir valor 0.
+
+<P>
+Els valors del paràmetre <i>internalFormat</i> indica quins valors de
+les components R, G, B, i alfa, o de la luminància o de la intensitat
+es seleccionen per a ser usats en la descripció dels texels d'una
+imatge. El valor d'aquest paràmetre pot ser un enter entre 1 i 4 o una
+de les constants simbòliques següents:
+
+<pre class=algoritme>
+          GL_ALPHA, GL_ALPHA4, GL_ALPHA8, GL_ALPHA12, GL_ALPHA16,
+          GL_LUMINANCE, GL_LUMINANCE4, GL_LUMINANCE8,
+          GL_LUMINANCE12, GL_LUMINANCE16,
+          GL_LUMINANCE_ALPHA, GL_LUMINANCE4_ALPHA4, GL_LUMINANCE6_ALPHA2,
+          GL_LUMINANCE8_ALPHA8, GL_LUMINANCE12_ALPHA4,
+          GL_LUMINANCE12_ALPHA12, GL_LUMINANCE16_ALPHA16,
+          GL_INTENSITY, GL_INTENSITY4, GL_INTENSITY8,
+          GL_INTENSITY12, GL_INTENSITY16,
+          GL_RGB, GL_R3_G3_B2, GL_RGB4, GL_RGB5, GL_RGB8, GL_RGB10,
+          GL_RGB12, GL_RGB16, GL_RGBA, GL_RGBA2, GL_RGBA4, GL_RGB5_A1,
+          GL_RGBA8, GL_RGB10_A2, GL_RGBA12, GL_RGBA16.
+</pre>
+
+<P>
+Si el paràmetre <i>internalFormat</i> és una d'aquestes constants
+simbòliques, s'estan demanant les components específiques i potser la
+seva resolució (per exemple: GL_R3_G3_B2 vol dir que els texels tenen
+3 bits de vermell, 3 de verd, i 2 de blau), però OpenGL només està
+obligat a trobar una representació interna que s'aproximi a la
+demanada. Per definició, GL_LUMINANCE, GL_LUMINANCE_ALPHA, GL_RGB i
+GL_RGBA són menys restrictives, ja que no demanen una resolució
+concreta. Els valors numèrics, 1, 2, 3 i 4, són equivalents a les
+constants GL_LUMINANCE, GL_LUMINANCE_ALPHA, GL_RGB i GL_RGBA
+respectivament per compatibilitat amb la versió 1.0 d'OpenGL.
+
+<P>
+Els paràmetres <i>width</i> i <i>height</i> donen les dimensions de la
+imatge de textura, i <i>border</i> indica l'amplada de la vora de la
+textura, que pot valer 0 (si no hi ha vora) o 1. Tant <i>width</i> com
+<i>height</i> han de ser una potència de dos sense vora i sumant-li
+dos amb vora (2<sup>m</sup>+2b). La mesura màxima d'un mapa de
+memòria depèn de la implementació d'OpenGL, però com a mínim sempre
+pot ser 64x64 (o 66x66 amb vora).
+
+<P>
+Els paràmetres <i>format</i> i <i>type</i> diuen el format i el tipus
+de dades de la imatge de textura. El <i>format</i> pot ser:
+GL_COLOR_INDEX, GL_RGB, GL_RGBA, GL_RED, GL_GREEN, GL_BLUE, GL_ALPHA,
+GL_LUMINANCE o GL_LUMINANCE_ALPHA. El <i>type</i> pot tenir els
+valors: GL_BYTE, GL_UNSIGNED_BYTE, GL_SHORT, GL_UNSIGNED_SHORT,
+GL_INT, GL_UNSIGNED_INT, GL_FLOAT, GL_BITMAP, o qualsevol dels tipus
+de píxels empaquetats que es mostren a la següent taula.
+
+<P>
+<center>
+<table border="2" class=materials>
+<thead>
+<tr><th>Constant de tipus empaquetat</th><th>Format de píxel vàlid</th></tr>
+</thead>
+<tbody><tr><td>GL_UNSIGNED_BYTE_3_3_2</td><td align=center>GL_RGB</td></tr>
+<tbody><tr><td>GL_UNSIGNED_BYTE_2_3_3_REV</td><td align=center>GL_RGB</td></tr>
+<tbody><tr><td>GL_UNSIGNED_SHORT_5_6_5</td><td align=center>GL_RGB</td></tr>
+<tbody><tr><td>GL_UNSIGNED_SHORT_5_6_5_REV</td><td align=center>GL_RGB</td></tr>
+<tbody><tr><td>GL_UNSIGNED_SHORT_4_4_4_4</td><td align=center>GL_RGBA</td></tr>
+<tbody><tr><td>GL_UNSIGNED_SHORT_4_4_4_4_REV</td><td align=center>GL_RGBA</td></tr>
+<tbody><tr><td>GL_UNSIGNED_SHORT_5_5_5_1</td><td align=center>GL_RGBA</td></tr>
+<tbody><tr><td>GL_UNSIGNED_SHORT_1_5_5_5_REV</td><td align=center>GL_RGBA</td></tr>
+<tbody><tr><td>GL_UNSIGNED_INT_8_8_8_8</td><td align=center>GL_RGBA</td></tr>
+<tbody><tr><td>GL_UNSIGNED_INT_8_8_8_8_REV</td><td align=center>GL_RGBA</td></tr>
+<tbody><tr><td>GL_UNSIGNED_INT_10_10_10_2</td><td align=center>GL_RGBA</td></tr>
+<tbody><tr><td>GL_UNSIGNED_INT_2_10_10_10_REV</td><td align=center>GL_RGBA</td></tr>
+</table></center>
+
+<P>
+Finalment, el paràmetre <i>texels</i> conté les dades de la imatge de
+textura. Aquestes dades descriuen la imatge de textura i també les
+seves vores.
+
+<a name="gluScaleImage"></a>
+<P>
+Si les dimensions d'amplada i alçada de la imatge de textura no són
+una potència de 2, es pot usar la crida <b>gluScaleImage</b> oferta a
+la llibreria d'utilitats per a fer un escalat d'aquesta imatge de
+textura.
+
+<pre class=algoritme>
+          int <b>glScaleImage</b> (GLenum format, GLint widthin, GLint heightin,
+                            GLenum typein, const void *datain,
+                            GLint widthout, GLint heightout, GLenum typeout,
+                            void *dataout)
+</pre>
+
+<P>
+Aquesta crida escala una imatge usant el mode de emmagatzemament de
+píxels apropiat per extreure les dades de <i>datain</i>. Els
+paràmetres <i>format</i>, <i>typein</i> i <i>typeout</i> es poden
+referir a qualsevol dels formats o tipus de dades suportats per la
+crida <a
+href="m7c30_PuntLiniaPoligonPixel.html#glDrawPixels"><b>glDrawPixels</b></a>
+que està explicada a l'apartat de punts, línies, polígons i píxels
+d'aquest mateix capítol. L'escalat es fa utilitzant interpolació linial
+(des de <i>widthin</i> i <i>heightin</i> a <i>widthout</i> i
+<i>heightout</i>), i la imatge resultant s'escriu a <i>dataout</i>. Si
+tot va bé, retorna un un 0, i si falla retorna un codi d'error de GLU.
+
+<a name="glCopyTexImage2D"></a>
+<P>
+La següent crida a comentar en aquest apartat és la crida
+<b>glCopyTexImage2D</b>, que permet llegir un rectangle de píxels del
+<i>frame buffer</i> i usar-lo com texels per a una nova textura.
+
+<pre class=algoritme>
+          void <b>glCopyTexImage2D</b> (GLenum target, GLint level,
+                                 GLint internalFormat,
+                                 GLint x, GLint y, GLsizei width, GLsizei height,
+                                 GLint border)
+</pre>
+
+<P>
+Aquesta crida crea una textura bidimensional usant les dades del
+<i>frame buffer</i>. El paràmetre <i>target</i> ha de ser la constant
+GL_TEXTURE_2D. Els paràmetres <i>level</i>, <i>internalFormat</i> i
+<i>border</i> tenen els mateixos efectes que per la crida
+<b>glTexImage2D</b> just explicada.
+
+<P>
+El rectangle de píxels que s'agafa té com a cantonada inferior
+esquerra les coordenades (<i>x, y</i>), i els paràmetres
+<i>width</i> i <i>height</i> ens donen l'amplada i alçada
+respectivament del rectangle que es vol copiar.
+
+<a name="glTexSubImage"></a>
+<P>
+Normalment, crear una textura pot ser molt més car computacionalment
+que no pas modificar-ne una d'existent. La crida
+<b>glTexSubImage2D</b> ens permet definir una imatge de textura
+bidimensional que substitueix tota o part d'una subregió contigua de
+la imatge actual de textura.
+
+<pre class=algoritme>
+          void <b>glTexSubImage2D</b> (GLenum target, GLint level,
+                                GLint xoffset, GLint yoffset,
+                                GLsizei width, GLsizei height,
+                                GLenum format, GLenum type, const GLvoid *texels)
+</pre>
+
+<P>
+El paràmetre <i>target</i> ha de ser la constant GL_TEXTURE_2D. Els
+paràmetres <i>level</i>, <i>format</i> i <i>type</i> s'entenen de la
+mateixa manera que en la crida <b>glTexImage2D</b>. <i>width</i> i
+<i>height</i> són les dimensions de la subregió que ha de substituir
+tota o part de la textura actual (si aquests valors són 0 la crida no
+tindrà efecte). Els paràmetres <i>xoffset</i> i <i>yoffset</i>
+especifiquen els desplaçaments en les direccions x i y respecte la
+imatge de textura (la cantonada inferior esquerra és el punt (0,0)) on
+es col·locarà la subimatge. I el paràmetre <i>texels</i> contindrà les
+dades de textura per a la subimatge.
+
+<a name="glCopyTexSubImage2D"></a>
+<P>
+De la mateixa manera, també es pot crear una subimatge (per a
+substituir tota o part de la imatge de textura) a partir de les dades
+del <i>frame buffer</i>. La crida <b>glCopyTexSubImage</b> es pot
+considerar d'alguna manera com una barreja de les crides
+<b>glCopyTexImage2D</b> i <b>glTexSubImage2D</b>.
+
+<pre class=algoritme>
+          void <b>glCopyTexSubImage2D</b> (GLenum target, GLint level,
+                                    GLint xoffset, GLint yoffset, GLint x, GLint y,
+                                    GLsizei width, GLsizei height)
+</pre>
+
+<P>
+Aquesta crida usa dades del <i>frame buffer</i> per a substituir tot o
+part d'una imatge de textura existent. El paràmetre <i>target</i> ha
+de ser GL_TEXTURE_2D. <i>level</i> és igual que en les crides
+anteriors. <i>xoffset</i> i <i>yoffset</i> indiquen els desplaçaments
+en les direccions x i y respecte la imatge de textura (la cantonada
+inferior esquerra és el punt (0,0)) on es col·locarà la subimatge. La
+matriu de la subimatge de textura s'extreu del rectangle de píxels que
+té com a cantonada inferior esquerra la posició (<i>x,y</i>) i com a
+mesures d'amplada i alçada <i>width</i> i <i>height</i>
+respectivament.
+
+<P>
+<div class=tit3><B> Especificar textures 1D</B></div>
+
+<a name="glTexImage1D"></a>
+<P>
+Una textura unidimensional es comporta com una bidimensional amb
+alçada 1 (<i>height=1</i>) i sense vores adalt ni abaix. Totes les
+rutines per textures 2D tenen un homòleg en 1D.
+
+<pre class=algoritme>
+          void <b>glTexImage1D</b> (GLenum target, GLint level,
+                             GLint internalFormat,
+                             GLsizei width, GLint border, GLenum fotmat,
+                             GLenum type, const GLvoid *texels)
+</pre>
+
+<P>
+Aquesta crida defineix una textura unidimensional. Tots els paràmetres
+tenen el mateix significat que tenien per la crida <a
+href="#glTexImage2D"><b>glTexImage2D</b></a>, excepte que ara el
+paràmetre <i>texels</i> és una taula d'una dimensió. El primer
+paràmetre <i>target</i> podrà tenir els valors G_TEXTURE_1D o
+GL_PROXY_TEXTURE_1D.
+
+
+<a name="glTexSubImage1D"></a>
+<P>
+Per a substituir tots o part dels texels d'una imatge de textura
+unidimensional usarem la crida:
+
+<pre class=algoritme>
+          void <b>glTexSubImage1D</b> (GLenum target, GLint level,
+                                GLint xoffset, GLsizei width,
+                                GLenum format, GLenum type, const GLvoid *texels)
+</pre>
+
+<P>
+Aquesta crida defineix una textura unidimensional que substitueix tota
+o una part de la imatge de textura actual. El paràmetre <i>target</i>
+ha de ser GL_TEXTURE_1D. Els paràmetres <i>level</i>, <i>format</i> i
+<i>type</i> es defineixen igual que a la crida <a
+href="#glTexSubImage2D"><b>glTexSubImage2D</b></a>. <i>texels</i>
+conté les dades de textura per la subimatge, <i>width</i> és el nombre
+de texels a substituir i <i>xoffset</i> indica el desplaçament de
+texels que cal fer en la textura actual per a col·locar la subimatge.
+
+<a name="glCopyTexImage1D"></a>
+<P>
+Per a usar les dades del <i>frame buffer</i> per a generar la textura
+unidimensional, existeix la crida:
+
+<pre class=algoritme>
+          void <b>glCopyTexImage1D</b> (GLenum target, GLint level,
+                                 GLint internalFormat,
+                                 GLint x, GLint y, GLsizei width, GLint border)
+</pre>
+
+<P>
+El paràmetre <i>target</i> ha de ser la constant GL_TEXTURE_1D. Els
+paràmetres <i>level</i>, <i>internalFormat</i> i <i>border</i> tenen
+el mateix efecte que tenien en la crida <a
+href="#glCopyTexImage2D"><b>glCopyTexImage2D</b></a>. La taula de
+textura és creada a partir d'una fila de píxels amb la cantonada
+inferior esquerra en les coordenades especificades pels paràmetres
+(<i>x,y</i>), i <i>width</i> especifica el nombre de píxels de la
+línia que s'usaran.
+
+<a name="glCopyTexSubImage1D"></a>
+<P>
+Per a usar les dades del <i>frame buffer</i> per a generar una
+subimatge de la textura unidimensional, usarem la crida:
+
+<pre class=algoritme>
+          void <b>glCopyTexSubImage1D</b> (GLenum target, GLint level,
+                                    GLint xoffset, GLint x, GLint y,
+                                    GLsizei width)
+</pre>
+
+<P>
+El paràmetre <i>target</i> ha de ser la constant GL_TEXTURE_1D. El
+paràmetre <i>level</i> té el mateix efecte que hem vist
+abans. <i>xoffset</i> indica el desplaçament de texels que cal fer en
+la textura actual per a col·locar la subimatge. La subimatge de
+textura es crea a partir d'una fila de píxels amb la cantonada
+inferior esquerra en les coordenades especificades pels paràmetres
+(<i>x,y</i>), i <i>width</i> especifica el nombre de píxels de la
+línia que s'usaran.
+
+<P>
+<div class=tit3><B> Especificar textures 3D</B></div>
+
+<P>
+A la versió 1.2 d'OpenGL, les textures 3D (que abans eren una extensió
+oferta només en algunes implementacions) formen part del nucli
+d'OpenGL. La majoria de les crides de textures vàlides per 2D tenen el
+seu homòleg també en 3D.
+
+<a name="glTexImage3D"></a>
+<P>
+Per a la creació d'una imatge de textura tridimensional usarem la
+crida:
+
+<pre class=algoritme>
+          void <b>glTexImage3D</b> (GLenum target, GLint level, GLint internalFormat,
+                             GLsizei width, GLsizei height, GLsizei depth,
+                             GLint border, GLenum format, GLenum type,
+                             const GLvoid *texels)
+</pre>
+
+<P>
+Tots els paràmetres d'aquesta crida tenen el mateix significat que
+tenien en la crida <a href="#glTexImage2D"><b>glTexImage2D</b></a>,
+excepte que <i>texels</i> ara és una matriu de tres dimensions i que
+s'afegeix el paràmetre <i>depth</i> que correspon a la tercera
+dimensió de la textura que es defineix. El paràmetre <i>target</i> en
+aquest cas pot tenir els valors GL_TEXTURE_3D o GL_PROXY_TEXTURE_3D.
+
+<a name="glTexSubimage3D"></a>
+<pre class=algoritme>
+          void <b>glTexSubImage3D</b> (GLenum target, GLint level,
+                                GLint xoffset, GLint yoffset, GLint zoffset,
+                                GLsizei width, GLsizei height, GLsizei depth,
+                                GLenum format, GLenum type, const GLvoid *texels)
+</pre>
+
+<P>
+Aquesta crida defineix una matriu de textura tridimensional que
+substitueix tota o part de la imatge de textura actual. El paràmetre
+<i>target</i> ha de ser la constant GL_TEXTURE_3D. Els paràmetres
+<i>level</i>, <i>format</i> i <i>type</i> es defineixen igual que a la
+crida <a
+href="#glTexSubImage2D"><b>glTexSubImage2D</b></a>. <i>texels</i>
+conté les dades de textura per la subimatge, <i>width</i>,
+<i>height</i> i <i>depth</i> especifiquen les mesures de la subimatge
+en texels i <i>xoffset</i>, <i>yoffset</i> i <i>zoffset</i> indiquen
+els desplaçaments de texels que cal fer en la textura actual per a
+col·locar la subimatge.
+
+<a name="glCopyTexSubimage3D"></a>
+<P>
+Per a usar el <i>frame buffer</i> com a font per a una substitució de
+part d'una imatge de textura 3D usarem la crida:
+
+<pre class=algoritme>
+          void <b>glCopyTexSubImage3D</b> (GLenum target, GLint level,
+                                    GLint xoffset, GLint yoffset, GLint zoffset,
+                                    GLint x, GLint y,
+                                    GLsizei width, GLsizei height)
+</pre>
+
+<P>
+Aquesta crida usa dades del <i>frame buffer</i> per a substituir part
+d'una imatge de textura 3D existent. El paràmetre <i>target</i> ha de
+ser GL_TEXTURE_3D. <i>level</i> és igual que en les crides
+anteriors. <i>xoffset</i>, <i>yoffset</i> i <i>zoffset</i> indiquen
+els desplaçaments en les direccions x, y i z respecte la imatge de
+textura. Com que la subimatge és un rectangle de dues dimensions,
+només es substitueix una llesca de la textura 3D (aquella que
+correspon a la coordenada <i>zoffset</i>). La matriu de la subimatge
+de textura s'extreu del rectangle de píxels que té com a cantonada
+inferior esquerra la posició (<i>x,y</i>) i com a mesures d'amplada i
+alçada <i>width</i> i <i>height</i> respectivament.
+
+<P>
+<a name="glTexParameter"></a>
+<div class=tit3><B> Paràmetres de control sobre textures</B></div>
+
+<P>
+Una crida que ens permet donar valors a diferents paràmetres que
+controlen els tractaments de textures és la següent:
+
+<pre class=algoritme>
+          void <b>glTexParameter{if}</b> (GLenum target, GLenum pname, TYPE param)
+          void <b>glTexParameter{if}v</b> (GLenum target, GLenum pname, TYPE *param)
+</pre>
+
+<P>
+El paràmetre <i>target</i> pot ser GL_TEXTURE_1D, GL_TEXTURE_2D o
+GL_TEXTURE_3D, i indica si es vol operar amb una textura
+unidimensional, bidimensional o tridimensional. Els possibles valors
+per als paràmetres <i>pname</i> i <i>param</i> es mostren a la taula
+següent:
+
+<P>
+<center>
+<table border="2" class=materials>
+<thead>
+<tr><th>Paràmetre</th><th>Valors</th></tr>
+</thead>
+<tbody><tr><td>GL_TEXTURE_WRAP_S</td><td>GL_CLAMP, GL_CLAMP_TO_EDGE,<br>GL_REPEAT</td></tr>
+<tbody><tr><td>GL_TEXTURE_WRAP_T</td><td>GL_CLAMP, GL_CLAMP_TO_EDGE,<br>GL_REPEAT</td></tr>
+<tbody><tr><td>GL_TEXTURE_WRAP_R</td><td>GL_CLAMP, GL_CLAMP_TO_EDGE,<br>GL_REPEAT</td></tr>
+<tbody><tr><td>GL_TEXTURE_MAG_FILTER</td><td>GL_NEAREST, GL_LINEAR</td></tr>
+<tbody><tr><td>GL_TEXTURE_MIN_FILTER</td><td>GL_NEAREST, GL_LINEAR,<br>GL_NEAREST_MIPMAP_NEAREST,<br>GL_NEAREST_MIPMAP_LINEAR,<br>GL_LINEAR_MIPMAP_NEAREST,<br>GL_LINEAR_MIPMAP_LINEAR</td></tr>
+<tbody><tr><td>GL_TEXTURE_BORDER_COLOR</td><td>qualsevols 4 valors en [0.0,1.0]</td></tr>
+<tbody><tr><td>GL_TEXTURE_PRIORITY</td><td>[0.0,1.0] per l'actual objecte de textura</td></tr>
+<tbody><tr><td>GL_TEXTURE_MIN_LOD</td><td>qualsevol valor 'float'</td></tr>
+<tbody><tr><td>GL_TEXTURE_MAX_LOD</td><td>qualsevol valor 'float'</td></tr>
+<tbody><tr><td>GL_TEXTURE_BASE_LEVEL</td><td>qualsevol enter no negatiu</td></tr>
+<tbody><tr><td>GL_TEXTURE_MAX_LEVEL</td><td>qualsevol enter no negatiu</td></tr>
+</table></center>
+
+<P>
+Es pot usar la crida en la versió de vector per a passar un vector de
+valors pel paràmetre GL_TEXTURE_BORDER_COLOR, en qualsevol altre cas
+usarem la versió de valors individuals.
+
+<P>
+<a name="glGenTextures"></a>
+<div class=tit3><B> Nombrar un objecte de textura</B></div>
+
+<P>
+Qualsevol enter sense signe diferent de zero pot ser usat com a nom
+d'un objecte de textura. Si es vol evitar l'error de reusar noms que
+ja existeixen, la crida <b>glGenTextures</b> ens pot servir.
+
+<pre class=algoritme>
+          void <b>glGenTextures</b> (GLsizei n, GLuint *textureNames)
+</pre>
+
+<P>
+Aquesta crida ens retorna <i>n</i> noms no usats actualment per
+objectes de textures en la taula <i>textureNames</i>. Aquests noms no
+tenen perquè ser enters consecutius. Aquests noms es marquen com a
+usats, però no adquireixen estat ni dimensionalitat fins que es crea
+un objecte de textura per a ell.
+
+<P>
+<a name="glBindTextures"></a>
+<div class=tit3><B> Crear i usar objectes de textura</B></div>
+
+<P>
+Per a crear i usar objectes de textura usarem la crida
+<b>glBindTexture</b>. Quan s'usa aquesta crida amb un cert nom de
+textura, es crea un nou objecte de textura amb valors per defecte per
+la imatge de textura i les seves propietats.
+
+<pre class=algoritme>
+          void <b>glBindTextures</b> (GLenum target, GLuint textureName)
+</pre>
+
+<P>
+Aquesta crida té tres possibles accions. Quan el paràmetre
+<i>textureName</i> no és zero i s'usa per primer cop, es crea un nou
+objecte de textura al que se li assigna aquest nom. Quan aquest nom
+correspon a un objecte que ja havia estat creat abans, aquest objecte
+esdevé actiu. I si el valor de <i>textureName</i> és zero, OpenGL
+deixa d'usar objectes de textura i retorna a la textura per defecte
+(sense nom). El valor del paràmetre <i>target</i> ens indica la
+dimensionalitat de la textura en qualsevol dels casos (GL_TEXTURE_1D,
+GL_TEXTURE_2D o GL_TEXTURE_3D).
+
+<P>
+<a name="glDeleteTextures"></a>
+<div class=tit3><B> Esborrar objectes de textura</B></div>
+
+<P>
+Com que es pot assignar i desassignar objectes de textura per a
+l'actual (amb la crida anterior), les dades d'aquest objecte de
+textura continuen sent vàlides fins que li indiquem explícitament que
+s'eliminin.
+
+<pre class=algoritme>
+          void <b>glDeleteTextures</b> (GLsizei n, const GLuint *textureNames)
+</pre>
+
+<P>
+Amb aquesta crida s'eliminen <i>n</i> objectes de textura, amb els
+noms que es troben a la taula <i>textureNames</i>. Els noms que es
+lliberen amb aquesta crida poden ser reutilitzats a partir d'ara.
+
+<P>
+Si un objecte de textura que actualment està activat és esborrat amb
+aquesta crida, es torna a la textura per defecte. Si s'intenta
+esborrar noms de textura no existents o el nom zero, s'ignoren sense
+generar cap error.
+
+<P>
+<a name="glTexEnv"></a>
+<div class=tit3><B> Funcions de textura</B></div>
+
+<P>
+La funció que cal fer quan s'aplica una textura a un cert objecte es
+pot definir amb la crida:
+
+<pre class=algoritme>
+          void <b>glTexEnv{if}</b> (GLenum target, GLenum pname, TYPE param)
+          void <b>glTexEnv{if}v</b> (GLenum target, GLenum pname, TYPE *param)
+</pre>
+
+<P>
+Aquesta crida decideix la funció de textura actual. El paràmetre
+<i>target</i> ha de ser GL_TEXTURE_ENV. El paràmetre <i>pname</i> pot
+ser GL_TEXTURE_ENV_MODE o GL_TEXTURE_ENV_COLOR. Quan aquest segon
+paràmetre, <i>pname</i>, és GL_TEXTURE_ENV_MODE, el paràmetre
+<i>param</i> pot ser GL_DECAL, GL_REPLACE, GL_MODULATE o
+GL_BLEND. Aquests valors especifiquen com es combinen el valor de la
+textura amb el color del fragment que s'està processant. Quan
+<i>pname</i> és GL_TEXTURE_ENV_COLOR, <i>param</i> és una taula de 4
+valors 'float' que representen les components R, G, B i A. Aquests
+valors només s'usen si també s'ha especificat la funció de textura
+GL_BLEND.
+
+<P>
+El que determina com s'aplica la textura és la combinació entre la
+funció de textura i el format intern base de la textura. Les següents
+taules mostren com la funció de textura i el format intern base
+determinen la fórmula que s'usa per a cada component de la
+textura. Les lletres majúscules de les fórmules representen els valors
+dels sis formats interns: GL_ALPHA (A), GL_LUMINANCE (L),
+GL_LUMINANCE_ALPHA (L i A), GL_INTENSITY (I), GL_RGB (C), i GL_RGBA (C
+i A). Els subíndexs indiquen: el valor de textura (<i>t</i>), el valor
+del fragment font (<i>f</i>), i el valor assignat a
+GL_TEXTURE_ENV_COLOR (<i>c</i>).
+
+<P>
+<center>
+<table border="2" class=materials>
+<thead>
+<tr><th>Format intern base</th><th>Funció REPLACE</th><th>Funció MODULATE</th></tr>
+</thead>
+<tbody><tr><td>GL_ALPHA</td><td align=center>C=C<sub><i>f</i></sub><br>A=A<sub><i>t</i></sub></td><td align=center>C=C<sub><i>f</i></sub><br>A=A<sub><i>f</i>A<sub><i>t</i></sub></td></tr>
+<tbody><tr><td>GL_LUMINANCE</td><td align=center>C=L<sub><i>t</i></sub><br>A=A<sub><i>f</i></sub></td><td align=center>C=C<sub><i>f</i></sub>L<sub><i>t</i></sub><br>A=A<sub><i>f</i></sub></td></tr>
+<tbody><tr><td>GL_LUMINANCE_ALPHA</td><td align=center>C=L<sub><i>t</i></sub><br>A=A<sub><i>t</i></sub></td><td align=center>C=C<sub><i>f</i></sub>L<sub><i>t</i></sub><br>A=A<sub><i>f</i></sub>A<sub><i>t</i></sub></td></tr>
+<tbody><tr><td>GL_INTENSITY</td><td align=center>C=I<sub><i>t</i></sub><br>A=I<sub><i>t</i></sub></td><td align=center>C=C<sub><i>f</i></sub>I<sub><i>t</i></sub><br>A=A<sub><i>f</i></sub>I<sub><i>t</i></sub></td></tr>
+<tbody><tr><td>GL_RGB</td><td align=center>C=C<sub><i>t</i></sub><br>A=A<sub><i>f</i></sub></td><td align=center>C=C<sub><i>f</i></sub>C<sub><i>t</i></sub><br>A=A<sub><i>f</i></sub></td></tr>
+<tbody><tr><td>GL_RGBA</td><td align=center>C=C<sub><i>t</i></sub><br>A=A<sub><i>t</i></sub></td><td align=center>C=C<sub><i>f</i></sub>C<sub><i>t</i></sub><br>A=A<sub><i>f</i></sub>A<sub><i>t</i></sub></td></tr>
+</table></center>
+
+<P>
+<center>
+<table border="2" class=materials>
+<thead>
+<tr><th>Format intern base</th><th>Funció DECAL</th><th>Funció BLEND</th></tr>
+</thead>
+<tbody><tr><td>GL_ALPHA</td><td align=center>no definit</td><td align=center>C=C<sub><i>f</i></sub><br>A=A<sub><i>f</i>A<sub><i>t</i></sub></td></tr>
+<tbody><tr><td>GL_LUMINANCE</td><td align=center>no definit</td><td align=center>C=C<sub><i>f</i></sub>(1-L<sub><i>t</i></sub>)+C<sub><i>c</i></sub>L<sub><i>t</i></sub><br>A=A<sub><i>f</i></sub></td></tr>
+<tbody><tr><td>GL_LUMINANCE_ALPHA</td><td align=center>no definit</td><td align=center>C=C<sub><i>f</i></sub>(1-L<sub><i>t</i></sub>)+C<sub><i>c</i></sub>L<sub><i>t</i></sub><br>A=A<sub><i>f</i></sub>A<sub><i>t</i></sub></td></tr>
+<tbody><tr><td>GL_INTENSITY</td><td align=center>no definit</td><td align=center>C=C<sub><i>f</i></sub>(1-I<sub><i>t</i></sub>)+C<sub><i>c</i></sub>I<sub><i>t</i></sub><br>A=A<sub><i>f</i></sub>(1-I<sub><i>t</i></sub>)+A<sub><i>c</i></sub>I<sub><i>t</i></sub></td></tr>
+<tbody><tr><td>GL_RGB</td><td align=center>C=C<sub><i>t</i></sub><br>A=A<sub><i>f</i></sub></td><td align=center>C=C<sub><i>f</i></sub>(1-C<sub><i>t</i></sub>)+C<sub><i>c</i></sub>C<sub><i>t</i></sub><br>A=A<sub><i>f</i></sub></td></tr>
+<tbody><tr><td>GL_RGBA</td><td align=center>C=C<sub><i>f</i></sub>(1-A<sub><i>t</i></sub>)+C<sub><i>t</i></sub>A<sub><i>t</i></sub><br>A=A<sub><i>f</i></sub></td><td align=center>C=C<sub><i>f</i></sub>(1-C<sub><i>t</i></sub>)+C<sub><i>c</i></sub>C<sub><i>t</i></sub><br>A=A<sub><i>f</i></sub>A<sub><i>t</i></sub></td></tr>
+</table></center>
+
+<P>
+<a name="glTexCoord"></a>
+<div class=tit3><B> Assignar coordenades de textura</B></div>
+
+<P>
+A l'hora de pintar l'escena que té objectes en els que es volen
+textures, de la mateixa manera que cal indicar les coordenades del
+vèrtex a pintar, també cal donar les coordenades de textura
+corresponents a aquest vèrtex. Per a indicar això, usarem la crida:
+
+<pre class=algoritme>
+          void <b>glTexCoord{1234}{sifd}</b> (TYPE coords)
+          void <b>glTexCoord{1234}{sifd}v</b> (TYPE *coords)
+</pre>
+
+<P>
+Aquesta crida indica les coordenades de textura (<i>s,t,r,q</i>). Les
+següents crides a <b>glVertex*</b> tindran assignades aquestes
+coordenades de textura. Les opcions 1,2,3,4 de la crida corresponen a
+donar la primera component, les dues primeres, les tres primeres o les
+coordenades homogènies respectivament.
+
+<P>
+<a name="glTexGen"></a>
+<div class=tit3><B> Generació automàtica de coordenades de textura</B></div>
+
+<P>
+Mitjançant la crida:
+
+<pre class=algoritme>
+          void <b>glTexGen{ifd}</b> (GLenum coord, GLenum pname, TYPE param)
+          void <b>glTexGen{ifd}v</b> (GLenum coord, GLenum pname, TYPE *param)
+</pre>
+
+<P>
+s'especifiquen les funcions per a generar de forma automàtica
+coordenades de textura.
+
+<P>
+El primer paràmetre <i>coord</i> ha de ser GL_S, GL_T, GL_R o GL_Q per
+a indicar si la coordenada de textura <i>s, t, r </i> o <i>q</i> s'ha
+de generar. El paràmetre <i>pname</i> és GL_TEXTURE_GEN_MODE,
+GL_OBJECT_PLANE o GL_EYE_PLANE. Si aquest paràmetre és
+GL_TEXTURE_GEN_MODE <i>param</i> és un enter que pot ser
+GL_OBJECT_LINEAR, GL_EYE_LINEAR o GL_SPHERE_MAP. Aquestes constants
+simbòliques determinen quina funció s'usa per a generar la coordenada
+de textura. Amb qualsevol dels altres possibles valors de
+<i>pname</i>, <i>param</i> és un punter a una taula de valors (per la
+versió vector de la crida) que especifica els paràmetres per la funció
+de generació de textura.
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m7c50_BlendingAntalias.html">[Anterior]</a>
+<a href="m7c70_Interrogacio.html">[Següent]</a>
+</div>
+</body>
+</html>

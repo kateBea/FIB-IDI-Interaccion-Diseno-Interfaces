@@ -1,0 +1,257 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("anim","vrml");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m4b30_AnimacioVRML.html">[Anterior]</a>
+<a href="m4b30t20_TransformacionsEnVRML.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Animació amb vrml.
+<span class=tit2>Introducció al llenguatge vrml'97</span>
+</div>
+
+<p> vrml'97 és la versió 1997 del "Virtual Reality Modeling Language",
+vrml. És un llenguatge de descripció de models i escenes virtuals, que
+permet escriure fitxers textuals que modelitzen aquestes escenes. Un
+dels avantatges del llenguatge vrml és que existeixen un bon nombre
+d'extensions (plug-ins) dels navegadors WWW més coneguts, que fan que
+els fitxers vrml siguin directament llegibles i visualitzables, com
+qualsevol altra pàgina Web.
+
+<p> Podeu trobar informació sobre el llenguatge i sobre browsers,
+editors i constructors de models vrml (així com informació sobre
+llibres, cursos, llibreries ...)  a la url:
+
+<center><a
+href="http://www.web3d.org/x3d/vrml/">http://www.web3d.org/x3d/vrml</a>
+</center>
+
+<!--p class=noind> que està mantinguda per <A
+HREF="javascript:MuestraFin('m4b30s15_Nadeau.html','300','250','yes')">David
+Nadeau</A-->
+
+<p> Veiem l'estructura del llenguatge vrml. Un fitxer vrml conté
+informació sobre:
+
+<ul>
+<li> La capçalera, que és de la forma <b>#vrml V2.0 utf8</b>. Indica
+que es tracta d'un fitxer vrml i en aquest cas diu que el tipus de
+lletra (font) és el utf8 </li>
+
+<li> Comentaris. Són línies que comencen amb el caràcter <b>#</b>
+</li>
+
+<li> Nodes. Són els elements d'informació de l'escena </li>
+
+<li> Camps. Són els atributs dels nodes. És el que es pot modificar,
+per exemple a les animacions </li>
+
+<li> Valors. Els valors dels atributs que canviarem </li>
+</ul>
+
+<p> Vegem un exemple molt senzill de fitxer vrml:
+
+<pre class=algoritme>
+  #vrml V2.0 utf8
+     # Comentari: aquest fitxer codifica un cilindre
+     <b>Shape</b> {
+         appearance <b>Appearance</b> {
+             material <b>Material</b> { }
+         }
+         geometry <b>Cylinder</b> {
+             height 2.0
+             radius 1.5
+         }
+     }
+</pre>
+
+<p> Si feu "clic" al següent enllaç, carregareu una pàgina exactament
+amb aquest text, que com veieu defineix un cilindre d'alçada 2 i radi
+1.5. Fixeu-vos que podeu girar i examinar el cilindre des de diferents
+punts de vista. També podeu demanar al navegador que us mostri el font
+(text) de la pàgina i comprovareu que es tracta del fitxer vrml
+anterior. Un cop l'hagueu examinat, premeu "back" o "enrera" al vostre
+navegador per tornar a aquesta pàgina:
+
+<p><center><a href="vrml/cilindre.wrl">Cilindre</a></center>
+
+<p> En vrml tenim nodes de diferents tipus:
+
+<ul>
+<li> <b>Shape</b>: serveix per especificar la forma d'un objecte
+</li>
+
+<li> <b>Appearance</b>: serveix per especificar "l'aparença" que
+tindrà un objecte </li>
+
+<li> <b>Material</b>: serveix per especificar el tipus de material
+d'un objecte </li>
+
+<li> <b>Cylinder</b>: indica que l'objecte serà un cilindre </li>
+
+<li> <b>IndexedFaceSet</b>: serveix per especificar la geometria d'un
+objecte complicat, especificant la geometria de totes les seves cares
+</li>
+
+<li> ... </li>
+</ul>
+
+<p> Els nodes poden contenir altres nodes, i de fet l'estructura d'un
+model vrml és en forma d'arbre, que es representa de forma
+parentitzada. A l'exemple anterior del cilindre, el model conté un
+node de tipus <b>Shape</b>. Aquest <b>Shape</b> conté dos nodes, un de
+tipus <b>Appearance</b> i un de tipus <b>Cylinder</b>. I finalment, si
+us fixeu en els parèntesis, el node de tipus <b>Appearance</b> conté
+un node de tipus <b>Material</b>.
+
+<p> Els nodes de tipus <b>Shape</b> indiquen la forma d'un objecte, i
+sempre contenen un node <b>appearance</b> que especifica la aparença
+de l'objecte (material, color, etc) i un node <b>geometry</b> que
+especifica la seva geometria. Vegem a continuació els tipus més usuals
+de nodes <b>Shape</b> que nosaltres usarem:
+
+<p><b>Especificació d'un objecte amb forma de capsa</b>. Ara usem un
+node <b>geometry</b> de tipus <b>Box</b> per indicar que volem una
+capsa. El node <b>Box</b> especifica les tres dimensions de la
+capsa. Aquestes dimensions són els anomenats atributs del node (en
+aquest cas del node <b>Box</b>), que més endavant comentarem:
+
+<pre class=algoritme>
+  Shape {
+       appearance Appearance {
+                        material Material { }
+                             }
+       geometry Box { size 2.0 2.0 2.0 }
+  }
+</pre>
+
+<p><b>Especificació d'un objecte amb forma d'esfera</b>. Ara usem un
+node <b>geometry</b> de tipus <b>Sphere</b> per indicar que volem una
+esfera. El node <b>Sphere</b> especifica el radi de l'esfera. Aquest
+radi és l'únic atribut que té el node esfera:
+
+<pre class=algoritme>
+  Shape {
+       appearance Appearance {
+                        material Material { }
+                             }
+       geometry Sphere { radius 1.0 }
+  }
+</pre>
+
+<p><b>Especificació d'un objecte amb forma de cilindre</b>. Ara usem
+un node <b>geometry</b> de tipus <b>Cylinder</b> per indicar que volem
+un cilindre. Els atributs del node <b>Cylinder</b> especifiquen
+l'alçada, el radi, i si hem de visualitzar la base de sota, la base de
+sobre i el lateral. Observeu que els atributs poden apareixer a la
+mateixa línia de text o bé en línies separades:
+
+<pre class=algoritme>
+  Shape {
+       appearance Appearance {
+                        material Material { }
+                             }
+       geometry Cylinder { height 2.0 radius 1.0
+                           bottom TRUE top TRUE side TRUE }
+  }
+</pre>
+
+<p> Més formalment, els nodes tenen camps, que descriuen els seus
+atributs. Cada node té els seus camps específics (acabem de veure els
+camps corresponents als nodes capsa, esfera i cilindre). Els camps:
+
+<ul>
+<li> Tenen un nom: height, radius, bottom ... </li>
+<li> Tenen un tipus: enter, real, booleà ... </li>
+<li> Tenen un valor per defecte, que vrml utilitza sempre que no
+s'especifica el camp </li>
+<li> Es poden escriure en qualsevol ordre, dins d'unes claus que
+segueixen al nom del node</li>
+</ul>
+
+<p> Com a comentari, direm que els objectes creats amb el node de
+tipus <b>Shape</b> sempre queden col·locats al centre del món. vrml
+permet especificar diversos objectes, i en aquest cas, com que tots
+ells es creen al centre del món, queden superposats. Veiem-ho en un
+exemple, que utilitza alguns valors per defecte en els camps dels
+nodes:
+
+<pre class=algoritme>
+  #vrml V2.0 utf8
+     # Comentari: aquest fitxer codifica tres objectes superposats
+     <b>Shape</b> {
+         appearance <b>Appearance</b> {
+             material <b>Material</b> { }
+         }
+         geometry <b>Cylinder</b> { height 4.0 radius 0.3 bottom FALSE }
+     }
+
+     <b>Shape</b> {
+         appearance <b>Appearance</b> {
+             material <b>Material</b> { }
+         }
+         geometry <b>Sphere</b> { radius 1.5 }
+     }
+
+     <b>Shape</b> {
+         appearance <b>Appearance</b> {
+             material <b>Material</b> { diffuseColor  0.8 0.8 0.0 }
+         }
+         geometry <b>Box</b> { }
+     }
+</pre>
+
+<p> Observeu que el node <b>Material</b> de la capsa (Box) conté ara
+un camp que especifica el seu atribut de color difós, que en aquest
+cas és groc. En general, els atributs dels nodes de tipus
+<b>Material</b> són:
+
+<ul>
+<li> diffuseColor, per indicar el color difós de l'objecte (exemple:
+diffuseColor 0.8 0.8 0.8). </li>
+<li> emissiveColor, per indicar el color si l'objecte emet llum
+(exemple: emissiveColor 0.0 0.0 0.9 per simular una llum blava).</li>
+<li> transparency, per indicar el grau de transparència de l'objecte
+(exemple: transparency 0.5 ). </li>
+<li> specularColor, per indicar el color especular de l'objecte
+(exemple: specularColor 0.71 0.70 0.56 ). </li>
+<li> shininess, per indicar el paràmetre (exponent) d'especularitat de
+l'objecte (exemple: shininess 0.16 ). </li>
+<li> ... </li>
+</ul>
+
+<p> Si no diem res, per defecte els objectes són grisos, no emeten
+llum, no són transparents i tenen només color difós. Només cal que
+especifiquem els paràmetres que volem canviar.
+
+<p> Si feu cliqueu al següent enllaç, carregareu una pàgina exactament
+amb el model anterior. Fixeu-vos que podeu examinar el conjunt des de
+diferents punts de vista. Observeu, si mireu el cilindre per sota, que
+li falta la base!. Un cop l'hagueu examinat, premeu "back" o "enrera"
+al vostre navegador per tornar a aquesta pàgina:
+
+<p><center><a href="vrml/tresobjectes.wrl">Tres objectes</a>
+</center>
+
+<p class=exercici><span class=exernum>Exercici:</span> Proveu de
+salvar el fitxer vrml'97 d'aquest darrer exemple, editar-lo modificant
+les dimensions del cilindre, esfera i/o capsa, i tornar-lo a
+visualitzar.
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m4b30_AnimacioVRML.html">[Anterior]</a>
+<a href="m4b30t20_TransformacionsEnVRML.html">[Següent]</a>
+</div>
+</body>
+</html>

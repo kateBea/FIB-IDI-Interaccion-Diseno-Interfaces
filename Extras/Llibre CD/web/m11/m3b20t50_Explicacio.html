@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","ombres");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m3b20t10_OmbresOpenGL.html">[Torna a l'algorisme]</a>
+</div>
+<br><br>
+
+<div class=tit3><b>Generació de volums d'ombres.</b> Explicació - part 1</div>
+
+<pre class=algoritme>
+<b>void redraw_shadow</b>(void)
+{
+   .....
+   .....
+
+   <b>glColorMask</b>(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
+   <b>render</b>(); /* <a href="m3b20t40_RutinaRender.html"> visualitza l'escena </a> */
+</pre>
+
+<p> La crida a <b>render</b> visualitza tota l'escena. De totes
+maneres, observeu que primer posem a fals les quatre components de la
+màscara de color. El que això implica és que no volem guardar el color
+dels polígons dels objectes; l'únic que guardarem al frame buffer és
+la profunditat de tots els pixels de la seva projecció.
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m3b20t10_OmbresOpenGL.html">[Torna a l'algorisme]</a>
+</div>
+</body>
+</html>

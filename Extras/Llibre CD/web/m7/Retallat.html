@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M7.1 Procés de visualització 2D.Prim. gràfiques.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("vis2D","defs");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+<a href="ARatio.html">[Anterior]</a>
+[Següent]
+<a href="main74.html">[Següent apartat]</a>
+</div>
+<br><br>
+
+<div class="tit1">Definicions.
+<span class="tit2">Retallat</span>
+</div>
+
+<P>En els exemples anteriors hem pogut observar que els elements geomètrics
+exteriors a la Finestra_2D no es visualitzen en la finestra gràfica;
+això és degut a que es consideren que queden fora del camp de visió de la càmera.
+
+<p>En informàtica gràfica aquest procés s'anomena
+<i>retallat</i> i es realitza dins del PV2D; és a dir, el programador
+d'aplicacions gràfiques envia a pintar tota la geometria de l'escena
+i el PV2D d'acord amb la definició de Finestra_2D elimina la geometria
+exterior a ella.
+
+<p>Per tant, no es veurà mai geometria dibuixada fora de la Vista
+
+<p>Tanmateix en algunes aplicacions és convenient visualitzar tota l'escena
+(és a dir, no retallar), per això dins d'aquest capítol considerarem
+que es pot <i>activar/desactivar</i> el retallat amb l'acció:
+
+<center><h4>SetRetallat (booleà activat)</h4></center>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="ARatio.html">[Anterior]</a>
+[Següent]
+<a href="main74.html">[Següent apartat]</a>
+</div>
+</BODY>
+</HTML>

@@ -1,0 +1,245 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html lang="CA">
+
+<head>
+
+<title></title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+
+<script type="text/javascript" src="../upc.js"></script>
+
+<SCRIPT>
+
+top.passara("visreal","textu");
+
+</SCRIPT>
+
+<BODY>
+
+<DIV CLASS="nav">
+
+<a href="m3e30t03_TextCreacioAdvan.html">[Anterior]</a>
+
+<a href="m3e30t11_TextGenDirectOpenGL.html">[Següent]</a>
+
+</div>
+
+<br><br>
+
+
+
+<div class=tit1>Textures.
+
+<span class=tit2>Aplicació de textures planes.</span>
+
+<span class=tit3>Parametrització Directa</span>
+
+</div>
+
+
+
+<p>L'assignació de coordenades de textura als vèrtexs d'un polígon no
+
+és una tasca evident. Menys encara si considerem una malla de polígons
+
+i volem obtenir-ne un resultat semblant a embolicar l'objecte amb un
+
+paper.
+
+
+
+<p>Usualment, els sistemes de modelatge d'escenes disposen d'utilitats
+
+que permenten interactivament assignar una textura plana a un polígon
+
+(o superfície en general), analitzar visualment el resultat i
+
+emmagatzemar juntament amb les coordenades geomètriques dels vèrtexs
+
+les seves coordenades de textura. Aquests sistemes s'anomenen de
+
+parametrització directa explícita.
+
+
+
+<p> Les coordenades de textura calculades per vèrtex, s'han
+
+d'especificar en el moment que s'indiquen les coordenades geomètriques
+
+dels vèrtexs del polígon a texturar utilitzant la comanda
+
+<b>glTexCoord2</b>. Veieu a continuació <a
+
+href="m3e30t11_TextGenDirectOpenGL.html">un exemple concret</a>.
+
+
+
+<p class=exercici><span class=exernum>Exercici 4.2:</span> L'applet
+
+que trobareu tot seguit permet assignar interactivament coordenades de
+
+textura als vèrtexs d'un polígon. Escolliu l'objecte <i>Polígon</i> i
+
+una de les textures, per exemple <i>tauler o Gorila</i>. En la
+
+finestra gràfica de l'esquerra observareu la textura escollida i el
+
+polígon pintat a sobre. En l'instant inicial, al vèrtex inferior
+
+esquerre del polígon se li assigna la coordenada (0,0) i al superior
+
+dret (1,1). Proveu de modificar el posicionament dels vèrtexs del
+
+polígon mitjançant el cursor cap a l'interior del polígon. Aquesta
+
+modificació només afecta a les coordenades de textura del vèrtex, que
+
+s'assignaran d'acord al seu posicionament sobre la textura. La forma
+
+geomètrica del polígon no varia. En la finestra de la dreta podeu
+
+observar el resultat de la texturació. Fixeu-vos en la deformació que
+
+s'obtè de la textura si modiqueu molt els vèrtexs. Si requeriu ajut
+
+per a la interacció de l'applet consulteu <a
+
+href="javascript:MuestraFin('m3e30t50_TextApplet.html','700','550','yes')">aquí</a>
+
+
+
+<div align=center>
+
+	    <applet code="Interficie.class" archive="Textures.jar,../comuns.jar" height=346 width=500>
+	    </applet>
+
+</div>
+
+</p>
+
+
+
+<p> Si no es disposa d'un sistema d'ajut interactiu, l'assignació de
+
+textures no és una tasca sencilla. A continuació, introduirem un
+
+conjunt de tècniques que permeten definir funcions de parametrització
+
+directa, és a dir, que en funció de les coordenades dels vèrtexs
+
+calculen les seves coordenades de textura. S'acostumen a utilitzar en
+
+polígons simples, poliedres desenvolupables (desplegables) sobre un
+
+pla, poliedres qualsevols i en superfícies fàcilment parametritzables.
+
+
+
+<P> Els procediments existents es poden classificar en dos grups:
+
+
+
+<ol>
+
+<li><b>Parametrització en una fase</b> <!--Queda il·lustrada en la
+
+figura-->. Es defineix un sistema de coordenades local sobre el
+
+polígon que permet referenciar els seus vèrtexs amb dues
+
+coordenades. Per tant, es podrà determinar una funció <i>F1</i> tal
+
+que <i>F1(x,y,z)=(u,v)</i>. Sobre aquest sistema es determina una
+
+finestra bidimensional que englobi els vèrtexs del polígon. Aquesta
+
+finestra es transforma mitjançant una funció <i>F2</i> en una finestra
+
+definida sobre l'espai normalitzat de textures, de manera similar a la
+
+transformació finestra/vista del procés de visualització 2D. La
+
+composició de les funcions <i>F1</i> i <i>F2</i> permet a partir de
+
+les coordenades d'un vèrtex <i>(x,y,z)</i> obtenir les seves
+
+coordenades de textura <i>(s,t)</i>. Observeu que si en la definició
+
+de la funció <i>F2</i> no es conserva la relació d'aspecte de la
+
+textura poden existir deformancions. A continuació trobareu exemples
+
+de com definir funcions de parametrització <a
+
+href="m3e30t12_TextGenDirEx1.html">per un polígon</a> i <a
+
+href="m3e30t15_TextGenDirEx2.html">per un cub</a>
+
+</li>
+
+
+
+<!--<center><img src="imatges/TextGenDirect.png"></center>-->
+
+
+
+<li><b>Parametrització en dues fases</b> <!--Queda il·lustrada en la
+
+figura-->. Consisteix en definir, d'una banda, una funció <i>S</i> que
+
+apliqui la textura 2D sobre un objecte 3D fàcilment parametritzable
+
+(<i>S(s,t)=(x*,y*,z*)</i>). D'altra banda, es defineix una funció
+
+<i>O</i> que als vèrtexs del poliedre (punts d'una superfície en
+
+general) els assigni un punt sobre la mateixa superfície intermitja
+
+(<i>O(x,y,z)=(x*,y*,z*)</i>). La composició de la funció <i>O</i> amb
+
+la inversa de <i>S</i> dona una funció que permet obtenir les
+
+coordenades de textura d'un vèrtex qualsevol. S'anomena
+
+parametrització en dues fases perquè es pot interpretar com que tant
+
+l'espai de l'objecte com el de la textura es transformen
+
+(re-parametritzen) prèviament a realitzar la correspondència entre
+
+ells. En <a href="m3e30t16_TextGenDirEx3.html">l'exemple</a> veureu
+
+diferents possibilitats de definició d'ambdues funcions i el seu
+
+efecte.
+
+</li>
+
+
+
+<!--<center><img src="imatges/TextGenDirect2Fases.png"></center>-->
+
+</ol>
+
+
+
+
+
+<br><br>
+
+<DIV CLASS="nav">
+
+<a href="m3e30t03_TextCreacioAdvan.html">[Anterior]</a>
+
+<a href="m3e30t11_TextGenDirectOpenGL.html">[Següent]</a>
+
+</div>
+
+</body>
+
+</html>
+

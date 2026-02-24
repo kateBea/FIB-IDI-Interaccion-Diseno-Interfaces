@@ -1,0 +1,57 @@
+<html lang="CA">
+<HEAD><TITLE>M4.Exercicis.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+</HEAD>
+
+<BODY>
+<A NAME="inici"></a>
+<br>
+
+<div class=tit2>Solució exercici 4.2</div>
+
+    <P>A partir
+      d'<I>O</i> i <I>Q</i> sabem escriure l'equació paramètrica del
+      raig: <I>P(t)=O+t(Q-O)</i> on <i>t</i> és un paràmetre
+      lliure. Ara usant la <a href="interdist.html#punt-recta"
+      target="main">fòrmula de distància d'un punt a una recta</a>
+      podem saber la distància més curta entre un punt del raig i el
+      centre de l'esfera. Obtenim 
+    <div class=formula><i>t=(Q-O)·(C-O)/(Q-O)·(Q-O)</i></div>
+
+      <p>Tots aquests
+      punts els coneixem, per tant podem calcular
+      <i>t</i>. Substituint en l'espressió paramètrica del raig,
+      obtenim el punt <i>P(t)</i> que és el peu de la perpendicular al
+      raig des de <i>C</i>, i calculant el quadrat de la seva
+      distància a <I>C</i> tenim <div class=formula>
+      <i>D=||C-P(t)||<sup>2</sup>=||C-O-((Q-O)·(C-O)/(Q-O)·(Q-O))(Q-O)||<sup>2</sup>
+      </i></div>
+    <P>Només hi pot haver intersecció si aquesta <I>D</i> és
+      menor o igual al quadrat del radi <i>r<sup>2</sup></i>.</P>
+
+    <P>Per a determinar les interseccions, caldrà escriure la condició
+    que un punt de la forma <I>P(t)</i> sigui a una distància igual
+    a <i>r</i> de <i>C</i>:
+    <div class=formula>
+      <i>(O+t(Q-O)-C)·(O+t(Q-O)-C)=r<sup>2</sup></i>
+    </div>
+
+    <p>O sigui
+    <div class=formula>
+      <i>||(O-C)||<sup>2</sup>+2t(Q-O)·(O-C)+t<sup>2</sup>||Q-O||<sup>2</sup></i>
+    </div> 
+
+    <p class=noind>que és una equació de segon grau en <i>t</i>. Les solucions
+    donen els valors del paràmetre que corresponen als punts
+    d'intersecció. Si aquests valors són negatius els ignorem, car
+    volen dir que el punt es troba darrera l'observador.
+
+    <P>Relacioneu el discriminant d'aquesta equació quadràtica i
+    l'expressió que hem trobat al principi per a determinar si hi ha o
+    no intersecció.
+
+
+<p align=right><a href='javascript:this.close();'>tancar</a>
+</BODY>
+</HTML>

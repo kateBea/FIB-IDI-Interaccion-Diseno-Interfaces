@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","antial");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m3f40_AntialiasingAccBuffer.html">[Torna a l'algorisme]</a>
+</div>
+<br><br>
+
+<div class=tit3><b>Antialiasing basat en l'ús del buffer d'acumulació</b>:
+Comentaris a l'algorisme
+</div>
+
+<p>
+<pre class=algoritme>
+  <b>glClearAccum</b> (0., 0., 0., 0.);
+  <b>glClear</b> (GL_ACCUM_BUFFER_BIT);
+
+  <b>for</b> (jitter=0; jitter < N; jitter++) {
+
+     <b>glClear</b> (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+     <b>glMatrixMode</b> (GL_PROJECTION);
+     <b>glLoadIdentity</b> ();
+
+     dx := DesplaçamentX [jitter] * (2.*FrustX) / (AmpladaVista);
+     dy := DesplaçamentY [jitter] * (2.*FrustY) / (AlçadaVista);
+     <b>glFrustum</b> (-FrustX+dx, FrustX+dx, -FrustY+dy, FrustY+dy, Near, Far);
+
+     <b>glMatrixMode</b> (GL_MODELVIEW);
+     <b>DibuixaObjectes</b> ();
+     <b>glAccum</b> (GL_ACCUM, 1.0 / N );
+  }
+  <b>glAccum</b>(GL_RETURN, 1.0);
+  <b>glFlush</b>();
+</pre>
+
+<p>
+<ul>
+<li> La part clau d'aquest algorisme, després de les incialitzacions,
+és el bucle on es dibuixen N vegades tots els objectes de l'escena amb
+petits desplaçaments de magnitut inferior a un pixel.</li>
+
+<li> Per a produir el desplaçament, es fa un canvi a mode
+GL_PROJECTION, es modifica la matriu de perspectiva, i després es
+torna a mode GL_MODELVIEW.</li>
+
+<li> La crida a <b>glFrustum</b> crea la matriu per a la transformació
+de perspectiva i la multiplica per la matriu actual a la pila (que és
+la matriu identitat ja que tot just s'ha fet una càrrega de la matriu
+identitat). La rutina <b>glFrustum</b> té com a paràmetres les
+coordenades xmin, xmax, ymin, ymax de la intersecció de la piràmide de
+visió amb el pla de retallat anterior (en coordenades d'observador) i
+les distàncies (near, far) dels dos plans de retallat a
+l'observador. Com ja hem vist en capítols anteriors, aquests
+paràmetres són suficients per a calcular la matriu de perspectiva que
+transforma la piràmide de visió a coordenades normalitzades. En el cas
+concret de l'algorisme que aquí presentem, suposem que
+xmax=-xmin=FrustX i que ymax=-ymin=FrustY. Observeu que aquests
+paràmetres es poden calcular fàcilment ja que FrustY no és més que la
+distància al pla de retallat anterior (near) per la tangent de l'angle
+d'obertura de la càmera, i que la relació entre FrustX i FrustY és la
+relació d'aspecte. </li>
+
+<li> Els desplaçaments que cal efectuar a cada iteracció en les
+direccions x, y són inferiors a un pixel. Els valors recomanats per
+DesplaçamentX[i], DesplaçamentY[i] es troben <a
+href="m3f40t10_AntialiasingAccBufTaules.html">tabulats</a> per
+i=1..N. Aquests desplaçaments tabulats es multipliquen per
+(2.*FrustX)/AmpladaVista i per (2.*FrustY)/AlçadaVista per
+convertir-los de coordenades de dispositiu (pixels) a coordenades
+d'observador i poder-los sumar a les coordenades del frustum. Com que
+els valors "AmpladaVista" i "AlçadaVista" són les dimensions en pixels
+del viewport o vista a la pantalla, aquestes dues fraccions ens donen
+el canvi de coordenades que desitgem.</li>
+
+<li> El fet que cada vegada que es dibuixa l'escena es faci havent
+carregat una matriu de perspectiva lleugerament diferent, fa que les
+imatges que s'acumulen al buffer d'acumulació quan es fa la crida a
+<b>glAccum (GL_ACCUM, 1.0 / N )</b> estiguin desplaçades menys d'un
+pixel entre elles, i que es vagi calculant una imatge promig.</li>
+
+<li> La imatge acumulada s'envia al frame buffer un cop acabat el
+bucle, quan fem la crida <b>glAccum (GL_RETURN, 1.0)</b>. </li>
+</ul>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m3f40_AntialiasingAccBuffer.html">[Torna a l'algorisme]</a>
+</div>
+</body>
+</html>

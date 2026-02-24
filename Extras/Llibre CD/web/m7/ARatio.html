@@ -1,0 +1,116 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.6 [en] (Win98; I) [Netscape]">
+   <title>M7.1 Procés de visualització 2D.Prim. gràfiques.</title>
+<link REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</head>
+<body>
+<script>
+top.passara("vis2D","defs");
+</script>
+<a NAME="inici"></a>
+<div CLASS="nav">
+<a href="ZoomPan.html">[Anterior]</a>
+<a href="Retallat.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Definicions.
+<span class=tit2>Relació d'aspecte</span>
+</div>
+
+<p>S'anomena <a href="javascript:glossari('ARatio.html','*','400','150','no','no','no','yes')" CLASS="glossari" onMouseOver="window.status='Glossari';return true" onMouseOut="window.status='';return true">relació
+d'aspecte</a> a la relació existent entre l'amplada i l'alçada
+d'una <a href="javascript:glossari('FinGraf.html','*','400','300','no','no','no','yes')" CLASS="glossari" onMouseOver="window.status='Glossari';return true" onMouseOut="window.status='';return true">finestra</a>
+(amp/alç). En nomenclatura anglo-saxona s'anomena aspect-ratio.
+
+<p>Com hem observat en els exemples anteriors, quan la relació d'aspecte
+de la Finestra_2D no es correspon amb la de la Vista, es produeix una deformació
+visual de l'escena degut al diferent escalat que cal aplicar en cada coordenada
+per mapejar exactament el perímetre de la Finestra_2D ocupant tot
+el perímetre de la vista.
+
+<p>A continuació, tenim un exemple que permet entendre la relació
+d'aspecte. Proveu de modificar la grandària de la Finestra 2D i
+de la vista amb els paràmetres <i>Fixar Viewport</i> y
+<i>Conservar
+RA</i> desactivats. Observeu la deformació de l'escena visualitzada
+en la vista quan la relació amplada/alçada del window no
+es correspon a la del viewport. Activeu el paràmetre
+<i>Conservar RA</i>, observeu que en modificar les mides de la Finestra_2D (o de la
+Vista), automàticament es modifica la vista (o la Finestra_2D) de
+manera que sempre tenen la mateixa relació d'aspecte i per tant
+no hi ha deformació en la imatge visualitzada. La modificació
+automàtica de la finestra_2D s'ha implementat mantenint el seu
+centre, mentre que la de la Vista manté el seu origen. Si s'activa
+el paràmetre
+<i>Fixar Viewport</i>, la Vista no es modifica al variar
+el window. Si tenim activat el paràmetre <i>Conservar RA,</i> l'aplicació
+restringirà les modificacions de la Finestra_2D de manera que es
+mantingui la relació d'aspecte de la Vista; a tal efecte sempre
+es definirà un window d'una grandària superior o igual a
+les mides introduïdes interactivament.
+
+<center><table>
+<tr>
+<td><applet CODE ="Applet2D.class" archive="../comuns.jar" WIDTH=520 HEIGHT=370>
+<param NAME=AppId VALUE="3">
+</applet></td>
+</tr>
+</table></center>
+
+<br> 
+<center><table>
+<tr>
+<td><param NAME=AppId VALUE="1"></applet></td>
+</tr>
+</table></center>
+
+<div class=tit3><b>Implementació de la relació d'aspecte.</b></div>
+
+<p>Per evitar deformacions en la transformació aplicació-dispositiu (window-viewport) cal que la relació d'aspecte del window sigui la mateixa que la del viewport.
+
+<pre class=algoritme> 
+<b>funcio</b> verifica_relacio_aspecte (real  ampF, real llargF, enter  ampV,
+      enter  llargV) retorna booleà 
+   retorna (ampF/llargF = real(ampV)/real(llargV)) 
+<b>fifuncio</b> 
+</pre>
+
+<p>Si no es vol tenir deformacions cal igualar les relacions
+d'aspecte de les finestres, que es pot aconseguir modificant les seves mides
+(ampF, llargF, ampV o llargV). Usualment, per una qüestió relativa a la interfície amb l'usuari, es mantenen les mides de la Vista
+i es modifiquen les mides de la Finestra_2D de manera que s'obtingui una
+nova finestra que inclogui la inicial (així visualitzarem en la
+Vista tot el que l'usuari desitjava i potser una mica més).
+
+<pre class=algoritme> 
+<b>accio</b> relació_d'aspecte (ampF: real, alcF: real, ampV: enter, alç:enter)
+   <b>si</b> ampF/alçF > real(ampV)/real(alçV) <b>llavors</b> augmentar_alçF  
+   <b>altrament</b> augmentar_ampF 
+   <b>fisi</b> 
+<b>faccio</b> 
+</pre>
+
+<p>L'augment d'amplades i alçades també es pot realitzar
+seguint diferents criteris a efectes d'ajustar l'increment de grandària
+a una banda o altre de la finestra, Generalment es realitza de manera que
+la finestra creixi simètricament. Per exemple en cas d'allargar
+l'amplada de la finestra:
+
+<pre class=algoritme> 
+   nouamplF:= (ampV/alçV)*alçF 
+   orgF:= orgF-nouamplF/2.0 </pre>
+</pre>
+
+
+<br><br> 
+<div CLASS="nav">
+<a href="ZoomPan.html">[Anterior]</a>
+<a href="Retallat.html">[Següent]</a>
+</div>
+</body>
+</html>

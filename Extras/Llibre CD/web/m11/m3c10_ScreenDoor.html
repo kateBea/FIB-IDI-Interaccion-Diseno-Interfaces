@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","transp");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m3c01_introduccio.html">[Anterior]</a>
+<a href="m3c20_Alpha.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Transparències.
+<span class=tit2>Pseudo transparència</span>
+</div>
+
+<p>Segurament heu vist objectes que no són exactament transparents,
+però que ho semblen, al menys des de certa distància. Per exemple les
+teles metàliques que es fan servir per a evitar que mosques i mosquits
+entrin per finestres que es volen mantenir obertes. Aquests filats,
+fets d'una trama i una urdimbre de filferros entrellaçats, deixen
+passar l'aire i la llum a través dels espais entre filferros, tot i
+que el material de què estan fets és evidentment opac. Des de lluny es
+veuen com un vidre fosc, en ser els diferents filferros
+indistingibles. (A vegades el que passa és el contrari. Certes robes
+poden semblar molt tupides de lluny estant, però si les atansem als
+ulls podem veure-hi a través.)
+
+<p>Usant aquesta idea hom pot obtenir una aproximació a la presentació
+d'objectes transparents en escenes pintades amb OpenGL. La comanda
+<tt>glPolygonStipple()</tt> permet definir una màscara de 32x32 bits
+que filtra els pixels durant la rasterització dels polígons. Quan
+activem aquest mecanisme cridant a
+<tt>glEnable(GL_POLYGON_STIPPLE)</tt>, OpenGL filtra els fragments en
+mig del <em>pipeline</em>. Els 5 bits menys significatius de les
+coordenades <em>x</em> i <em>y</em> del fragment (en coordenades de
+dispositiu!) es fan servir per indexar la matriu de bits definida per
+<tt>glPolygonStipple()</tt>. Si el bit resultant és ú, el fragment
+continua el seu camí pel <em>pipeline</em>. Si és zero, el fragment es
+descarta.
+
+<center>
+<div><img src="imatges/CoTranspSD.png"></div>
+</center>
+
+<p>És important tenir present que les coordenades que es fan servir
+per aplicar aquesta màscara són coordenades de pantalla. Això implica
+que si pintem tota l'escena amb el filtrat activat, certs
+<em>píxels</em> mai es pintaran, i veurem l'escena sencera com si la
+estiguéssim mirant a través d'una tela metàlica com les que discutíem
+al començament d'aquesta secció. En canvi, si aquest filtrat ha estat
+activat sols mentre dibuixàvem cert objecte, aleshores aquest sols
+haurà aconseguit influir els colors emmagatzemats a <em>píxels</em>
+amb coordenades marcades amb un ú a la matriu de bits. La resta de
+píxels rebran el seu color d'altres objectes de l'escena, produint-se
+una barreja que des d'una certa distància veurem com si l'objecte fos
+parcialment transparent. La figura mostra un con blau semitransparent
+en un racó d'una habitació blanca. La matriu de bits ha estat
+inicialitzada aleatòriament. Com veieu l'efecte no és extraordinari,
+però sí dona una certa idea de transparència.
+
+<p>Si en l'escena tenim més d'un objecte transparent i aquests
+interactuen (és a dir que hi ha objectes transparents que es veuen a
+través d'altres objectes transparents), caldrà inicialitzar la màscara
+per cadascun amb valors adequats. Si féssim servir el mateix filtre
+per tots els objectes, cap d'ells es podria veure a través d'altres!
+
+<center>
+<div><img src="imatges/CoTranspSD2.png"></div>
+</center>
+
+<p>Aquesta tècnica és fàcil d'implementar. No requereix cap altre
+cura, com pot ser l'ordre en que es pinta, i en algunes plataformes
+pot resultar més eficient que d'altres. Com la transparència es basa
+en descartar una proporció dels fragments, els fenòmens
+d'<em>aliasing</em> són inevitables. Tanmateix, si s'usen patrons
+periòdics que tinguin un període molt curt, es poden aconseguir
+imatges força suaus. La figura mostra un altre cop el mateix con blau,
+amb el mateix índex de transparència (50%), però presentat amb un
+filtre periòdic de període 2, generat així:
+
+<pre class=algoritme>
+    <b>for</b> (y = 0; y < 32; y++) {
+	pat[y] = 0;
+	<b>for</b> (x = 0; x < 32; x++) {
+	  <b>if</b> (x%2 == y%2)
+		pat[y] |= (1 << x);
+	}
+    }
+</pre>
+
+<p>Pot apreciar-se que el resultat és força més acceptable. Tanmateix
+els patrons periòdics de període 2 poden representar molt pocs graus
+de transparència de manera adequada (de fet sols tres: 25%, 50% i
+75%). Adoptant patrons més grans anirem perdent suavitat (guanyant
+aliasing) progressivament i ràpida.
+
+<P>Pel disseny d'aquests patrons hom pot aprofitar l'extensa teoria
+desenvolupada entorn del problema del <em>dithering</em> (per exemple
+podeu consultar <A HREF="../Biblio.html#Foley">[Foley, vanDam,
+et.al.]</A>, capítol 13, i les referències que s'hi citen).
+<br clear=left>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m3c01_introduccio.html">[Anterior]</a>
+<a href="m3c20_Alpha.html">[Següent]</a>
+</div>
+</body>
+</html>

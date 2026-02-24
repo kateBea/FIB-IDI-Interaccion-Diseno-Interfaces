@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M2.3 El frame buffer. Paletes de colors.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;
+charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("hard","fb");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+      <A HREF="lut.html">[Anterior]</a>
+      [Següent]
+      <a href="main24.html">[Següent apartat]</a>
+     </div>
+<br><br>
+
+<div class="tit1">El Frame Buffer.
+<span class="tit2">Sistema de finestres. Accés als pixels</span>
+</div>
+
+<P> Avui dia és habitual treballar dins un entorn de finestres (MacOS,
+Windows*, X-windows). Aquestes són gestionades per <i>software</i>,
+possiblement amb l'ajut d'acceleracions proporcionades pel
+controlador. Així, cada vegada que una finestra passa davant d'una
+altra, les regions que es descobreixen passen a refrescar-se amb els
+valors dels <i>pixels</i> d'aquella finestra, i a vegades es salven
+els pixels de la finestra que passa a estar coberta a la memòria
+ordinària del computador. Així cal constantment copiar informació
+del/al <i>frame buffer</i> a/des de la memòria convencional. Quan el
+dispositiu usa una paleta de colors, a més, es freqüent que els
+sistemes de finestres  guardin còpies de les paletes de cada finestra,
+el que produeix canvis sobtats (i sovint dràstics) de colors quan es
+visiten diferents finestres. En aquests entorns és doncs preferible,
+sempre que sigui possible, que totes les finestres comparteixin la
+mateixa paleta.
+
+<P>En aquest llibre, l'operació primitiva d'assignar un color a un pixel
+la designarem<br>
+
+<center><u>setPixel(x: enter, y: enter, color: Color)</u></center>
+
+<p>on <i>x</i> i <i>y</i> designen les coordenades del pixel, i color el
+color que volem assignar al pixel, on el <i>pixel (0,0)</i> és el
+vèrtex superior esquerra de la pantalla.
+
+<p>També disposarem d'una primitiva simètrica d'aquesta per a
+consultar el color que conté un cert <i>pixel</i> al <i>frame buffer</i>:<br>
+
+<center>
+<u><B>funció</B> getPixel(x: enter, y: enter) <B>retorna Color</B>
+</u></center>
+
+
+<br><br>
+<DIV CLASS="nav">
+      <A HREF="lut.html">[Anterior]</a>
+      [Següent]
+      <a href="main24.html">[Següent apartat]</a>
+    </div>
+
+</BODY>
+
+</HTML>
+

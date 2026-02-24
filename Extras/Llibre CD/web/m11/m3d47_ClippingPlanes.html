@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","reflex");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m3d45_StencilBufGL.html">[Anterior]</a>
+<a href="m3d60_Textures.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Reflexions.
+<span class=tit2>Reflexions en miralls plans: ús dels <i>clipping
+planes.</i></span>
+</div>
+
+<P>Una alternativa a l'ús de l'<i>stencil buffer</i> per a retallar les
+porcions no desitjades dels objectes virtuals, és usar els plans
+addicionals de retallat suportats per OpenGL. Aquesta alternativa pot
+ser l'única disponible (per exemple si no disposem d'un buffer de
+retallat), però té algunes limitacions evidents. OpenGL sols exigeix a
+una implementació el donar suport a sis plans de retallat
+addicionals. Si necessitem un pla coincident amb el pla del mirall per
+a evitar que altres objectes virtuals "entrin" a l'habitació (com hem
+discutit abans), estarem limitats en general a miralls la vora dels
+quals tingui cinc o menys costats, i altrament a sis (clar que el més
+freqüent és que en tinguin quatre. Això descarta, però, per exemple,
+aplicar aquesta tècnica a miralls rodons). A més, com ja s'ha
+mencionat, aquest mètode pot resultar força més lent si els plans de
+retallat no estan accelerats per <i>hardware</i>, com és encara
+freqüent avui (inclús en el cas de plaques "accelerades per
+OpenGL"). Si decidim fer servir aquesta tècnica haurem de considerar
+seriosament el filtrar prèviament els objectes francament fora
+d'aquesta regió de retallat (per exemple si totes les cantonades d'una
+caixa englobant de l'objecte estan a l'hemiespai negatiu del pla).
+
+<p>Per a fer servir aquesta tècnica haurem de calcular les equacions
+dels plans determinats per la posició de la càmera i cadascuna de les
+arestes del mirall, i haurem de demanar a OpenGL que retalli l'escena
+per aquests plans (més el pla del mirall) abans de pintar els objectes
+virtuals. Un cop fet això podrem pintar el mirall i la resta de
+l'escena amb els plans addicionals de retallat desactivats.
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m3d45_StencilBufGL.html">[Anterior]</a>
+<a href="m3d60_Textures.html">[Següent]</a>
+</div>
+</body>
+</html>

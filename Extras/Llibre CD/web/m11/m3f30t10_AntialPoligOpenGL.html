@@ -1,0 +1,212 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html lang="CA">
+
+<head>
+
+<title></title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+
+<script type="text/javascript" src="../upc.js"></script>
+
+<SCRIPT>
+
+top.passara("visreal","antial");
+
+</SCRIPT>
+
+<BODY>
+
+<DIV CLASS="nav">
+
+<a href="m3f30_AntialiasingPoligons.html">[Anterior]</a>
+
+<!--a href="m3f40_AntialiasingAccBuffer.html">[Següent]</a-->
+
+<a href="m3f30t20_AntialPoligExercicis.html">[Següent]</a>
+
+</div>
+
+<br><br>
+
+
+
+<div class=tit1>Antialiasing.
+
+<span class=tit2>Supressió de l'efecte d'escala en polígons.</span>
+
+<span class=tit3>Programació en Open GL</span>
+
+</div>
+
+
+
+<p>A primera vista, l'algorisme per suprimir l'efecte d'escala quan es
+
+dibuixa una escena amb polígons omplerts no és massa diferent de
+
+l'algorisme d'antialiasing que hem vist per rectes. Igual que abans,
+
+usarem el valor d'alfa per a representar el grau de cobriment dels
+
+pixels. En concret, la crida <b>glEnable (GL_POLYGON_SMOOTH)</b>
+
+assigna als pixels del borde valors d'alfa fraccionals, en base a
+
+l'àrea que cobreixen en els pixels travessats pel borde. L'algorisme
+
+següent és el que correspon a l'applet que heu vist a la pàgina
+
+anterior i que també usarem a la pàgina d'exercicis d'aquest apartat:
+
+
+
+<pre class=algoritme>
+
+  <b>glEnable</b> (GL_POLYGON_SMOOTH);
+
+  <b>glHint</b> (GL_POLYGON_SMOOTH_HINT, GL_NICEST);
+
+  <b>glCullFace</b> (GL_BACK);
+
+  <b>glEnable</b> (GL_BLEND);
+
+
+
+  <b>glBlendFunc</b> (GL_SRC_ALPHA_SATURATE, GL_ONE);
+
+  <b>glDisable</b> (GL_DEPTH_TEST);
+
+
+
+  <b>Dibuixa</b> (Esfera);
+
+  <b>Dibuixa</b> (Piramide);
+
+  <b>Dibuixa</b> (Pantalla);
+
+  <b>Dibuixa</b> (Poligon_Fons);
+
+</pre>
+
+
+
+<p> Les quatre primeres crides no requereixen cap comentari
+
+especial. S'activa l'antialiasing de polígons amb el paràmetre
+
+GL_POLYGON_SMOOTH, es demana màxima qualitat, es demana retallat de
+
+les cares que miren enrera, i s'activa el promitjat de colors segons
+
+el valor de l'alfa del color.
+
+
+
+<p> La crida a <b>glBlendFunc (GL_SRC_ALPHA_SATURATE, GL_ONE)</b> és
+
+la clau de tot l'algorisme. Aquesta crida estableix que el color final
+
+serà la suma del color que hi havia al pixel del frame buffer i del
+
+color corresponent al nou polígon (que cobreix parcialment el pixel),
+
+havent escalat aquest darrer. El factor d'escala és el mínim entre el
+
+valor alfa del polígon (grau de cobriment del pixel per part del
+
+polígon) i (1 - alfa), on alfa correspon al valor que fins ara hi
+
+havia al pixel del frame buffer. Això implica que, per un pixel amb
+
+una alfa elevada, els altres pixels que arribin tindran poc efecte (el
+
+valor de (1 - alfa) és quasi zero).
+
+
+
+<p> Cal fer algunes observacions sobre l'algorisme de dibuix de
+
+l'escena i sobre la desactivació del DEPTH_TEST:
+
+<ul>
+
+<li> Dins la rutina <b>Dibuixa</b>, quan es fan les crides a OpenGL
+
+per dibuixar els polígons de les cares dels objectes, cal usar el mode
+
+GL_FILL ja que si usem GL_LINE farà antialiasing de les arestes i no
+
+del polígon respecte del fons. </li>
+
+
+
+<li> Per a que el resultat sigui correcte, fixeu-vos que cal pintar
+
+els polígons ordenats de més proper a l'observador a més llunyà. Sinó,
+
+els pixels molt tapats per un polígon, que han quedat amb una alfa
+
+elevada, no podrien tornar a ser modificats per polígons més propers a
+
+l'observador. </li>
+
+
+
+<li> És important desactivar el DEPTH_TEST per tal que el test de
+
+visibilitat es faci en base al valor d'alfa i no en base a la
+
+profunditat dels polígons. Observeu que, un cop dibuixat un polígon
+
+proper a l'observador (que són els que primer es dibuixen), els pixels
+
+parcialment coberts pel seu contorn queden amb valors d'alfa
+
+intermitjos i seran promitjats amb els colors dels polígons
+
+subsegüents, però els pixels totalment coberts pel polígon queden amb
+
+alfa=1 (el grau de cobriment és total) i el seu color ja no podrà ser
+
+afectat per cap dels polígons que arribin posteriorment </li>
+
+</ul>
+
+
+
+<p> Fixeu-vos que a l'algorisme anterior, hem dibuixat els objectes en
+
+ordre (esfera, piràmide, pantalla i finalment el fons) per tal que
+
+l'escena es vegi bé quan s'observa des de davant. De tota manera,
+
+aconseguir això en una escena general pot ser molt complicat, ja que
+
+una ordenació en profunditat dels objectes pot tenir complexitat
+
+quadràtica.  
+
+
+
+
+
+<br><br>
+
+<DIV CLASS="nav">
+
+<a href="m3f30_AntialiasingPoligons.html">[Anterior]</a>
+
+<!--a href="m3f40_AntialiasingAccBuffer.html">[Següent]</a-->
+
+<a href="m3f30t20_AntialPoligExercicis.html">[Següent]</a>
+
+</div>
+
+</body>
+
+</html>
+

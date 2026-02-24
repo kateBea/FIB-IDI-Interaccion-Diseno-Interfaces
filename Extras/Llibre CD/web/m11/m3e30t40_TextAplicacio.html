@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","textu");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m3e30t31_TextFiltratgeEx.html">[Anterior]</a>
+<a href="m3e40_TextSintesi.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Textures.
+<span class=tit2>Aplicació de textures planes.</span>
+<span class=tit3>Aplicació de la textura al pixel</span>
+</div>
+
+<p> En tots els apartats anteriors sempre hem fet la hipòtesi que el
+valor guardat en un texel (si cal convenientment filtrat) s'utilitza
+directament com a color de la superfície. Com hem anat repetint, per
+això s'anomena al mapat de textures <i>colot mapping</i> (mapat de
+color). Noteu que en aquest cas el color que s'hagi assignat al pixel
+degut a l'entorn d'il·luminació i a les propietats òptiques concretes
+de la superfície no té cap repercussió en el seu color final.
+
+<p> OpenGL permet modular el valor de la textura amb el color calculat
+pel pixel. Cal utilitzar la comanda <a href=
+"../m15/m7c60_Textures.html#glTexEnv">glTexEnv(...)</a> (que cal
+declarar dins l'objecte textura). La funció de ponderació es defineix
+mitjançant una variable d'estat que s'introdueix com a paràmetre. El
+seu efecte és funció del format intern en què s'ha emmagatzemat la
+textura. Com les opcions són múltiples el millor és que analitzeu les
+taules explicitades a través de l'enllaç.
+
+<p> Per defecte, quan OpenGl calcula el color d'un pixel calcula tota
+la contribució de color (difós i especular). Aquest fet comporta que
+al modular el color del pixel amb la textura, les zones especulars
+(<i>hightlight</i>) es veuen difumidades. Per a evitar-ho es poden
+mantenir el color difós i especular per separat al llarg del procés de
+visualització. D'aquesta manera el color especular s'afegeix després
+de l'aplicació de la textura que només afecta al color difós. Per
+activar aquest mode de funcionament cal utilitzar la comanda
+<b>glLightModel</b>(GL_LIGHT_MODEL_COLOR_CONTROL,
+GL_SEPARATE_SPECULAR_COLOR) (cal notar que aquesta possibilitat de la
+crida <b>glLightModel</b> només es troba a partir de la versió 1.2
+d'OpenGL).
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m3e30t31_TextFiltratgeEx.html">[Anterior]</a>
+<a href="m3e40_TextSintesi.html">[Següent]</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("anim","vrml");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m4b30t10_IntroduccioVRML.html">[Anterior]</a>
+<a href="m4b30t30_AnimacioEnVRML.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Animació amb vrml.
+<span class=tit2>Transformacions geomètriques i gestió de grups d'objectes en vrml</span>
+</div>
+
+<p> Com hem vist, si no diem res més, totes les primitives
+geomètriques que definim ens apareixen al centre de coordenades del
+món. Per a poder tenir més flexibilitat i poder definir objectes i
+grups a qualsevol posició, vrml'97 ens proporciona els nodes de tipus
+<b>Transform</b>. Un node d'aquest tipus ens defineix un grup
+d'objectes situat on nosaltres volguem, amb el seu propi sistema de
+coordenades. La sintaxi d'un node de tipus <b> Transform </b> és la
+següent:
+
+<pre class=algoritme>
+    Transform {
+        translation . . .
+        rotation    . . .
+        scale       . . .
+        children  [ . . . ]
+    }
+</pre>
+
+<p> Dins de <b>children</b> indicarem els nodes que formen part del
+grup. Poden ser formes geomètriques simples (capses, esferes,
+cilindres) de tipus <b>Shape</b> com les que ja hem vist, o bé altres
+nodes de tipus <b>Transform</b>. D'aquesta manera podrem crear una
+jerarquia d'objectes tant complexa com volguem.
+
+<p> Com també veieu, aquests nodes <b>Transform</b> poden tenir
+atributs de translació, rotació i escalat. Evidentment, aquestes
+transformacions geomètriques s'apliquen a tots els fills, per a
+transformar-los i situar-los a la posició que volguem dins de
+l'escena.  És important remarcar que les transformacions es fan en un
+ordre prefixat, independentment de l'ordre en que nosaltres
+especifiquem els atributs: els fills (children) primer s'escalen,
+després s'els aplica la rotació, i finalment s'els aplica la
+translació. Els valors per defecte, en cas que no especifiquem un o
+més atributs, són la translació i rotació nules i l'escalat
+unitari. Vegem un exemple d'atributs:
+
+<pre class=algoritme>
+     Transform {
+         translation 2.0 0.0 0.0
+         rotation 0.0 0.0 1.0  0.52
+         scale 0.5 1.0 0.5
+         children [ . . . ]
+     }
+</pre>
+
+<p> En aquest cas, estem demanant un escalat anisotròpic -reducció a
+la meitat en les direccions x, z sense variar l'escala en direcció y-
+seguit d'una rotació de 0.52 radians respecte l'eix z -a la rotació,
+els tres primers valors defineixen l'orientació de l'eix mentre que el
+quart és l'angle de gir- i seguit d'una translació de dues unitats
+segons l'eix x.
+
+<p> Vegem un exemple que conté un node de tipus <b>Transform</b> amb
+dos fills: un cilindre i una esfera que hem posicionat i escalat
+convenientment. Si feu "clic" al següent enllaç, veureu un exemple amb
+un arbre. Examineu el conjunt des de diferents punts de vista. Un cop
+l'hagueu examinat, premeu "back" o "enrera" al vostre navegador per
+tornar a aquesta pàgina. <A
+HREF="javascript:MuestraFin('m4b30s21_Arbre1.html','600','400','yes')">Aquí</A>
+podeu veure el corresponent model en vrml.
+
+<p><center><a href="vrml/Arbre1.wrl">Un arbre</a> </center>
+
+<p> Ara torneu a obrir la pàgina <A
+HREF="javascript:MuestraFin('m4b30s21_Arbre1.html','600','400','yes')">d'aquest
+model vrml'97</A>. Fixeu-vos que el model conté un node de tipus
+<b>Transform</b> amb dos fills (children) que també són de tipus
+<b>Transform</b>. Els dos fills ens modelen la copa de l'arbre (una
+esfera verda convenientment escalada i traslladada) i el tronc, que és
+un cilindre de color marró. Fixeu-vos que aquest model conté també, a
+la part inicial, tres nodes que indiquen l'estat inicial de la
+visualització del model. El node <b>Viewpoint</b> amb l'atribut
+"position" ens informa de la posició inicial de l'observador. Si diem
+res més, es suposa que l'observador es troba mirant en direcció a
+l'origen de coordenades. Proveu d'editar el fitxer i canviar les
+coordenades de la "position", i veureu que s'us modifica el punt de
+vista inicial. El node <b>NavigationInfo</b> indica que el que farem
+serà examinar l'escena, i finalment, el node <b>Background</b> amb
+skyColor [ 0.2 0.0 0.2 ] indica el color del fons, que aquí és un
+magenta fosc. Si voleu més detalls sobre possibles camps i atributs
+d'aquests nodes, podeu consultar la pàgina que ja hem indicat abans,
+<a
+href="http://www.web3d.org/x3d/vrml/">http://www.web3d.org/x3d/vrml</a>.
+
+<p> Vegem un segon exemple. Un cop l'hagueu examinat, premeu "back" o
+"enrera" al vostre navegador per tornar a aquesta pàgina. <A
+HREF="javascript:MuestraFin('m4b30s22_Arbre2.html','600','400','yes')">Aquí</A>
+podeu veure el corresponent model en vrml, que observareu que és
+pràcticament idèntic al del primer arbre. Només hem canviat els valors
+de l'escalat, i molt lleugerament el color:
+
+<p><center><a href="vrml/Arbre2.wrl">Un segon arbre</a> </center>
+
+<p> Encara podem modelar un altre arbre.  <A
+HREF="javascript:MuestraFin('m4b30s23_Arbre3.html','600','400','yes')">Aquí</A>
+podeu veure el corresponent model en vrml, que ara conté un node de
+tipus <b>Shape</b> que no haviem vist abans: el con. S'ha canviat
+també els valors de l'escalat i el color:
+
+<p><center><a href="vrml/Arbre3.wrl">I encara un tercer arbre ...</a></center>
+
+<p> Veiem ara com podem construir el model d'un petit jardí. Primer,
+amb un paralelepíded molt pla i dues esferes escalades verticalment,
+podem simular el terra i les plantes:
+
+<p><center><a href="vrml/Jardi1.wrl">Un primer jardí</a></center>
+
+<p> Si mireu el model vrml <A
+HREF="javascript:MuestraFin('m4b30s25_Jardi1.html','600','400','yes')">d'aquest
+jardí</A> veureu que consisteix, com deiem abans, en una capsa (Box) i
+dues esferes. El problema ve si volem afegir-hi arbres i més plantes,
+perquè haurem d'anar repetint les definicions de les diferents
+"shapes" i el fitxer ens pot quedar molt llarg ...
+
+<p> vrml ens dona un recurs d'instanciació: podem donar noms als nodes
+escrivint <b>DEF</b> i el nom quan definim el node, i després els
+podrem instanciar escrivint <b>USE</b> i el nom. L'estructura és
+simple, i podem fàcilment multiplicar els objectes de l'escena.
+Veiem-ho en aquest segon jardí:
+
+<p><center><a href="vrml/Jardi2.wrl">Un jardí amb més plantes</a> </center>
+
+<p> Fixeu-vos, si mireu el model vrml <A
+HREF="javascript:MuestraFin('m4b30s26_Jardi2.html','600','400','yes')">d'aquest
+segon jardí</A>, que la part inicial és molt semblant a l'anterior, i
+l'únic que canvia és que hem separat els objectes i hem donat nom
+(identificador) a cada una de les dues plantes. A la part final del
+model hem afegit uns quants nodes de tipus Transform que "usen" els
+models de les plantes, traslladant-les a diferents llocs del jardí.
+
+<p> El darrer recurs de vrml per fer transformacions i còpies que
+veurem, és el d'instanciació d'altres models vrml'97. Observeu que el
+següent model incorpora, a més de les plantes, els arbres que haviem
+definit al principi:
+
+<p><center><a href="vrml/Jardi3.wrl">... i ara el jardí té plantes i
+arbres</a> </center>
+
+<p> Si us fixeu en <A
+HREF="javascript:MuestraFin('m4b30s27_Jardi3.html','600','400','yes')">el
+model vrml</A> d'aquest darrer jardí, veureu que només hi hem afegit 6
+nodes Transform al final. Aquests nodes contenen un sol objecte (un
+sol "children") cadascú. Però enlloc d'instanciar un node definit
+abans en el mateix model amb un "USE", aquí usem el node <b>Inline</b>
+per indicar que hem d'incorporar tot el model vrml que es troba en un
+altre fitxer o en una altra adreça url. La sintaxi <b>Inline {url
+"..."}</b> indica quina és la url on es troba el model vrml que volem
+instanciar. La potència que ens dona aquest node <b>Inline</b> és molt
+elevada, ja que podem instanciar altres fitxers nostres o qualsevol
+model de la xarxa, indicant tan sols la seva adreça url <b>Inline
+{url "http://www ..."}</b>.
+
+<p class=exercici><span class=exernum>Exercici 1:</span> Com a primer
+exercici, podeu provar d'editar el model vrml d'aquest darrer jardí i
+afegir més arbres i plantes, i/o canviar-les de lloc...
+
+<p class=exercici><span class=exernum>Exercici 2:</span> Si feu "clic"
+al següent enllaç, veureu un exemple amb un conjunt d'esferes.
+Fixeu-vos que és molt fàcil obtenir aquest model a partir d'una <a
+href="vrml/Esferes.wrl">capa d'esferes</a>. Examineu el conjunt des de
+diferents punts de vista. Un cop l'hagueu examinat, premeu "back" o
+"enrera" al vostre navegador per tornar a aquesta pàgina. <A
+HREF="javascript:MuestraFin('m4b30s28_MoltesCapesEsferes.html','600','400','yes')">Aquí</A>
+podeu veure el corresponent model en vrml. Com a exercici, proveu de
+modificar els atributs dels nodes <b>Transform</b> per canviar el
+grau de gir de l'hèlix, i proveu també de modificar-ho per aconseguir
+que l'eix de l'hèlix no sigui recte.
+
+<p class=exercici><center><a
+href="vrml/MoltesCapesEsferes2.wrl">Escena amb esferes</a> </center>
+
+<p class=exercici> Proveu d'incloure una altra línia d'esferes que
+senyali l'eix central de l'hèlix.
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m4b30t10_IntroduccioVRML.html">[Anterior]</a>
+<a href="m4b30t30_AnimacioEnVRML.html">[Següent]</a>
+</div>
+</body>
+</html>

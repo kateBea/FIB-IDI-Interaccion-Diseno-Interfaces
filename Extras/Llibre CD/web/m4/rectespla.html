@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M4.1. Rectes al pla</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;
+charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("geom","2D");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+      <A HREF="prodescalar.html">[Anterior]</a>
+      <a href="conversio.html">[Següent]</a>
+     </div>
+<br><br>
+
+<div class="tit1">Elements geomètrics al pla.
+<span class="tit2">Rectes al pla</span>
+</div>
+
+<p>Hi ha diverses maneres d'especificar una recta al pla. Serà
+necessari que les recordem, i que sapiguem convertir d'una
+representació a una altra.  <a name="recta_parametrica_1"></a> <p>Una
+manera de representar una recta és mitjançant dos punts, i per tant
+mitjançant quatre reals. Si els dos punts són
+<i>P=(P<sub>x</sub>,&nbsp;P<sub>y</sub>)</i> i
+<i>Q=(Q<sub>x</sub>,&nbsp;Q<sub>y</sub>)</i>, aleshores per cada
+<!--$\lambda\in\R$--><IMG WIDTH="43" HEIGHT="30" ALIGN="MIDDLE"
+BORDER="0" SRC="imatges/img9.gif" ALT="$\lambda\in\mbox{\bbold R}$">, el punt
+de coordenades <!--$\left(\lambda P_x+(1-\lambda) Q_x, \lambda
+P_y+(1-\lambda) Q_y\right)$--> <IMG WIDTH="254" HEIGHT="28"
+ALIGN="MIDDLE" BORDER="0" SRC="imatges/img10.gif" ALT="$\left(\lambda
+P_x+(1-\lambda) Q_x, \lambda P_y+(1-\lambda) Q_y\right)$"> pertany a la recta. (Sovint
+necessitarem descriure una operació semblant sobre cada una de les
+components d'una tupla, com en aquesta darrera fórmula. Usarem doncs
+la notació abreujada <!--$\lambda P+(1-\lambda)Q$--><IMG WIDTH="105"
+HEIGHT="28" ALIGN="MIDDLE" BORDER="0"
+ SRC="imatges/img11.gif"
+ ALT="$\lambda P+(1-\lambda)Q$"> entenent per
+aquesta el mateix que a l'equació anterior.)
+
+<p>Si limitem <!--$\lambda$--><IMG WIDTH="12" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="imatges/img12.gif"
+ ALT="$\lambda$"> a prendre valors en <i>[0,1]</i> obtindrem sols els
+punts del segment que uneix a <i>P</i> i <i>Q</i>.
+A aquesta formulació li direm <b>equació paramètrica de la recta</b>, perquè
+ens dóna una forma d'obtenir diferents punts de la recta (o del
+segment) donant diferents valors a un paràmetre (<!--$\lambda$--><IMG WIDTH="12" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="imatges/img12.gif"
+ ALT="$\lambda$">). <a
+name="recta_parametrica_2"></a>Però no és
+l'única formulació paramètrica. Podem obtenir una altra si descrivim
+la recta a partir d'un punt de pas <i>P</i> i un vector direcció
+<!--$\vec v$--><IMG WIDTH="11" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="imatges/img4.gif"
+ ALT="$\vec v$">: els punts de la recta s'obtenen aleshores substituint diferents
+valors reals per <!--$\lambda$--><IMG WIDTH="12" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="imatges/img12.gif"
+ ALT="$\lambda$"> a <!--$P+\lambda\vec v$--><IMG WIDTH="52" HEIGHT="26" ALIGN="MIDDLE" BORDER="0"
+ SRC="imatges/img13.gif"
+ ALT="$P+\lambda\vec v$"> (on com hem dit abans
+repetim les mateixes operacions sobre les diferents components).
+
+<p>D'una altra banda, qualsevol <i>funció afí</i> definida al pla
+defineix al seu torn una recta (aquella dels punts que són zeros de la
+funció). Aquesta és l'<b>equació implícita de la recta</b>: <i>n<sub>x</sub>
+x+ n<sub>y</sub> y+ c=0</i>, on <i>(n<sub>x</sub>, n<sub>y</sub>)</i>
+és un vector perpendicular a la recta.
+
+<p>Recordem l'operació de producte escalar. Donats dos vectors
+<i>v</i> i <i>w</i>, el producte escalar <!--$(v \cdot w)$--><IMG
+WIDTH="46" HEIGHT="28" ALIGN="MIDDLE" BORDER="0" SRC="imatges/img14.gif"
+ALT="$(v \cdot w)$"> és
+<i>v<sub>x</sub>&nbsp;w<sub>x</sub>+&nbsp;v<sub>y</sub>&nbsp;w<sub>y</sub></i>.
+Per tant si <i>P</i> és un punt pel que passa la recta, i si denotem
+per <i>P</i> també el vector posició de <i>P</i> (és a dir
+<i>P-(0,0)</i>), aleshores tot punt <i>Q</i> de la recta satisfà
+(reescrivint la fórmula implícita que tot just hem introduït usant ara
+productes escalars) <!--$(\vec n \cdot P)-(\vec n \cdot Q)=0$--><IMG
+WIDTH="143" HEIGHT="28" ALIGN="MIDDLE" BORDER="0" SRC="imatges/img15.gif"
+ALT="$(\vec n \cdot P)-(\vec n \cdot Q)=0$">.
+
+<p>Finalment, si la recta no és paral·lela al segon eix de
+coordenades, aleshores <i>n<sub>y</sub><!--$\neq$--><IMG WIDTH="15"
+HEIGHT="26" ALIGN="MIDDLE" BORDER="0" SRC="imatges/img16.gif"
+ALT="$\neq$">&nbsp;0</i>, i podem aïllar <i>y</i> a l'equació
+implícita per a obtenir-ne una d'<b>explícita</b>:
+<i>y=m&nbsp;x+b</i>, on <!--$m=\frac{n_x}{n_y}$--><IMG WIDTH="56"
+HEIGHT="26" ALIGN="MIDDLE" BORDER="0" SRC="imatges/img17.gif"
+ALT="$m=\frac{n_x}{n_y}$"> denota la pendent de la recta (la tangent
+de l'angle que forma amb el primer eix de coordenades), i
+<i>b</i>&nbsp;denota l'ordenada en que la recta talla al segon eix de
+coordenades (dita també ordenada a l'origen).
+
+<p>Resumint, hem vist les següents formes d'expressar una recta:</P>
+<center>
+<table class=m4 width="80%" border>
+<tr><th>Dades</th><th>Tipus</th><th>Fórmula</th></tr>
+<!--           -->
+<tr><td>Per dos punts P i Q</td><td>Paramètrica</td><td><!--$\lambda P+(1-\lambda)Q$-->
+<IMG WIDTH="105" HEIGHT="28" ALIGN="MIDDLE" BORDER="0"
+ SRC="imatges/img11.gif"
+ ALT="$\lambda P+(1-\lambda)Q$"></td>
+	      </tr>
+<!--           -->
+<tr><td>Per un punt P i amb una direcció <!--$\vec v$--><IMG WIDTH="11" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="imatges/img4.gif"
+ ALT="$\vec v$"></td><td>Paramètrica</td><td>
+<!--$P+\lambda\vec v$--><IMG WIDTH="52" HEIGHT="26" ALIGN="MIDDLE" BORDER="0"
+ SRC="imatges/img13.gif"
+ ALT="$P+\lambda\vec v$"></td>
+	      </tr>
+<!--           -->
+<tr><td>Punt P i direcció normal <!--$\vec n$--><IMG WIDTH="12" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="imatges/img18.gif"
+ ALT="$\vec n$"></td>
+<td>Implícita</td><td>
+<!--$(\vec n\cdot P)=(\vec n\cdot Q)$--><IMG WIDTH="115" HEIGHT="28" ALIGN="MIDDLE" BORDER="0"
+ SRC="imatges/img19.gif"
+ ALT="$(\vec n\cdot P)=(\vec n\cdot Q)$"></td>
+	      </tr>
+<!--           -->
+<tr><td>Pendent <i>m</i> i ordenada a l'origen <i>b</i></td>
+<td>Explícita</td><td><i>y=mx+b</i></td>
+	      </tr>
+</table>
+</center>
+
+
+
+<br><br>
+<DIV CLASS="nav">
+       <A HREF="prodescalar.html">[Anterior]</a>
+      <a href="conversio.html">[Següent]</a>
+    </div>
+
+</BODY>
+
+</HTML>
+

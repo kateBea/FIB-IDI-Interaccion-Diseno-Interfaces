@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("realvirt","visester");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m5d01t03t01.html">[Anterior]</a>
+<a href="m5d01t03t03.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Visió estereoscòpica.
+<span class=tit2>Fonaments de la percepció estereoscòpica.</span>
+<span class=tit3>Model de l'ull humà (observador monocular)</span>
+</div>
+
+<p>En aquest apartat introduirem un model senzill de l'ull humà que ens
+permetrà calcular la posició que ocupa a la retina cada punt de
+l'escena. Per aquesta tasca farem servir un model de càmera similar al que vam
+fer servir al capítol 6. De moment, només ens interessa modelar només un ull
+(observador monocular); més endavant ampliarem aquest model per tal que
+pugui representar un observador binocular.
+
+<p>La posició i orientació d'un ull, tal i com es veu al capítol 6,
+queden determinades per
+aquests paràmetres:
+
+<ul>
+  <li><b>Posició de l'observador</b>, representada per un punt <b>O</b>. Per
+    ser més precisos, agafarem el punt central de la retina com a posició de
+    l'observador.&nbsp;</li>
+  <li><b>Centre de l'escena</b>, representat per qualsevol punt <b>C </b>en la
+    direcció de l'eix òptic.</li>
+  <li><b>Vector cap amunt</b>, representat per un vector <b>u</b>.<b>&nbsp;</b>El
+    vector cap amunt és un vector que assenyala la direcció vertical de globus
+    ocular.</li>
+</ul>
+
+<p>La següent figura il·lustra la interpretació d'aquests tres paràmetres:
+
+<div align="center"><img border="0" src="imatges/camarasimple1s.jpg" width="400" height="260"></div>
+
+<p>Els paràmetres <b>C</b>, <b>O</b> i <b>u</b> defineixen el <b> Sistema de Coordenades de
+l'Observador</b> (<b>SCO</b>):
+
+<ul>
+  <li>L'<b>origen</b> del sistema de coordenades està en la posició <b> O</b>
+</li>
+  <li>L'<b>eix</b> <b>Z </b>té la mateixa direcció que vector <b> OC </b>(l'eix
+    òptic) però en sentit contrari.&nbsp;</li>
+  <li>L'<b>eix</b> <b>Y</b> es calcula de forma que sigui perpendicular a l'eix
+    òptic i de forma que contingui la projecció del vector <b>u</b> al pla
+    perpendicular a l'eix òptic.</li>
+  <li>L'<b>eix</b> <b>X </b>es calcula com el producte vectorial de Y i Z&nbsp;</li>
+</ul>
+
+<p>La següent figura mostra la direcció dels eixos del Sistema de Coordenades de
+l'Observador:
+
+<div align="center">
+<img border="0" src="imatges/camarasimple2s.jpg" width="350" height="228"></div>
+
+<p>Amb els paràmetres anteriors no n'hi ha prou per calcular la
+posició de la projecció d'un punt qualsevol de l'escena a la retina,
+doncs no hem dit res sobre la <b>forma de la retina</b>, ni tampoc
+sobre el <b>camp de visió </b>humà, que és l'equivalent a l'<b>angle
+d'obertura</b> del model de càmera que vam veure al capítol 6.
+
+<p>De fet, la retina té forma corbada, el camp visual de l'ull humà és
+aproximadament de 180 graus, tant en direcció horitzontal com en
+vertical i, a més a més, la imatge que es forma a la retina està
+invertida degut a l'efecte del cristal·lí, que actua com una lent
+biconvexa (convexa per tots dos costats). De cara a l'estudi de
+l'estereoscopia, podem ignorar aquests detalls i considerar que l'ull
+es comporta com una càmera fotogràfica. Per tant, considerarem que la
+projecció que s'obté a la retina és equivalent a la projecció que
+s'obtindria en la pel·lícula d'una càmera situada amb l'objectiu en la
+mateixa posició i orientació de l'ull.
+
+<p>La figura següent mostra el camp visual aproximat de cada ull:
+
+<div align="center"><img border="0" src="imatges/campvisuals.jpg" width="300" height="215"></div>
+
+<p>Fixeu-vos
+que la visió estereoscòpica només es pot manifestar amb els objectes que es
+troben a la intersecció entre els dos camps visuals, i que per tant són
+visibles des dels dos ulls.
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m5d01t03t01.html">[Anterior]</a>
+<a href="m5d01t03t03.html">[Següent]</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","ombres");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m3b20t10_OmbresOpenGL.html">[Torna a l'algorisme]</a>
+</div>
+<br><br>
+
+<div class=tit3><b>Generació de volums d'ombres.</b> Explicació - part 5</div>
+
+<pre class=algoritme>
+<b>void redraw_shadow</b>(void)
+{
+   .....
+   .....
+   <b>glStencilFunc</b>(GL_EQUAL, 0, 1);
+   <b>glEnable</b>(GL_LIGHT0);
+   <b>render</b>(); /* <a href="m3b20t40_RutinaRender.html"> visualitza l'escena </a> */
+</pre>
+
+<p> Aquí es torna a pintar tota l'escena, després d'haver activat la
+llum (amb la crida a <b>glEnable</b>(GL_LIGHT0)) i amb la funció
+d´stencil buffer de manera que els pixels que passen i es pinten són
+els dels polígons que no es troben a l'ombra: es pinten els pixels
+tals que el valor corresponent al darrer bit a l'stencil buffer (estem
+demanant una màscara de 1) és igual a 0 (el reference value és 0). En
+altres paraules, els pixels que pintem són els de fora del volum
+d'ombra. Aquest últim repintat fa que els polígons a l'ombra que ja
+haviem pintat abans, puguin quedar tapats per polígons més propers a
+l'observador que pintem ara.
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m3b20t10_OmbresOpenGL.html">[Torna a l'algorisme]</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+#VRML V2.0 utf8
+
+# Produced by 3D Studio MAX VRML97 exporter, Version 3, Revision 1,31
+# Date: Wed Jun 06 17:52:27 2001
+
+DEF Sphere01 Transform {
+  translation -2.947 0 -1.842
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.8784 0.7765 0.3412
+        }
+      }
+      geometry Sphere { radius 18.87 }
+    }
+  ]
+}
+DEF Sphere02 Transform {
+  translation 90.6 0 115.3
+  rotation 0 -1 0 -2.985
+  children [
+  DEF Sphere02-TIMER TimeSensor { loop TRUE cycleInterval 3.333 },
+  DEF Sphere02-POS-INTERP PositionInterpolator {
+    key [0, 0.03, 0.06, 0.09, 0.12, 0.15, 0.18, 0.21, 0.24, 0.27, 0.3, 
+        0.33, 0.36, 0.39, 0.42, 0.45, 0.48, 0.51, 0.54, 0.57, 0.6, 
+        0.63, 0.66, 0.69, 0.72, 0.75, 0.78, 0.81, 0.84, 0.87, 0.9, 
+        0.93, ]
+    keyValue [90.6 0 115.3, 77.48 0 124.7, 63.43 0 132.6, 48.62 0 138.9, 
+      33.22 0 143.6, 17.4 0 146.6, 1.35 0 147.9, -14.75 0 147.5, 
+      -30.71 0 145.3, -46.35 0 141.5, -61.48 0 136, -75.94 0 128.8, 
+      -89.55 0 120.2, -102.2 0 110.1, -113.6 0 98.79, -123.8 0 86.26, 
+      -132.5 0 72.7, -139.8 0 58.26, -145.5 0 43.12, -149.5 0 27.43, 
+      -151.7 0 11.4, -152.3 0 -4.8, -151.1 0 -20.97, -148.1 0 -36.92, 
+      -143.4 0 -52.46, -137.1 0 -67.4, -129.1 0 -81.57, 
+      -119.7 0 -94.8, -108.9 0 -106.9, -96.91 0 -117.8, 
+      -83.77 0 -127.3, -69.68 0 -135.4, ] },
+  DEF Sphere02-ROT-INTERP OrientationInterpolator {
+    key [0, 0.03, 0.06, 0.09, 0.12, 0.15, 0.18, 0.21, 0.24, 0.27, 0.3, 
+        0.33, 0.36, 0.39, 0.42, 0.45, 0.48, 0.51, 0.54, 0.57, 0.6, 
+        0.63, 0.66, 0.69, 0.72, 0.75, 0.78, 0.81, 0.84, 0.87, 0.9, 
+        0.93, ]
+    keyValue [0 -1 0 -2.985, 0 -1 0 -2.877, 0 -1 0 -2.769, 0 -1 0 -2.661, 
+      0 -1 0 -2.554, 0 -1 0 -2.446, 0 -1 0 -2.338, 0 -1 0 -2.23, 
+      0 -1 0 -2.123, 0 -1 0 -2.015, 0 -1 0 -1.907, 0 -1 0 -1.799, 
+      0 -1 0 -1.692, 0 -1 0 -1.584, 0 -1 0 -1.476, 0 -1 0 -1.368, 
+      0 -1 0 -1.26, 0 -1 0 -1.152, 0 -1 0 -1.044, 0 -1 0 -0.9355, 
+      0 -1 0 -0.8272, 0 -1 0 -0.7188, 0 -1 0 -0.6104, 0 -1 0 -0.5019, 
+      0 -1 0 -0.3933, 0 -1 0 -0.2848, 0 -1 0 -0.1762, 0 -1 0 -0.06762, 
+      0 1 0 -0.04096, 0 1 0 -0.1495, 0 1 0 -0.258, 0 1 0 -0.3665, 
+      ] },
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.8902 0.5961 0.5961
+        }
+      }
+      geometry Sphere { radius 15.66 }
+    }
+  ]
+ROUTE Sphere02-TIMER.fraction_changed TO Sphere02-POS-INTERP.set_fraction
+ROUTE Sphere02-POS-INTERP.value_changed TO Sphere02.set_translation
+ROUTE Sphere02-TIMER.fraction_changed TO Sphere02-ROT-INTERP.set_fraction
+ROUTE Sphere02-ROT-INTERP.value_changed TO Sphere02.set_rotation
+}

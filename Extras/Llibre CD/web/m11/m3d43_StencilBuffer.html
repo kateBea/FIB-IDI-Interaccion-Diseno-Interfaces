@@ -1,0 +1,267 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html lang="CA">
+
+<head>
+
+<title></title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+
+<script type="text/javascript" src="../upc.js"></script>
+
+<SCRIPT>
+
+top.passara("visreal","reflex");
+
+</SCRIPT>
+
+<BODY>
+
+<DIV CLASS="nav">
+
+<a href="m3d42_ObjVirtualsGL.html">[Anterior]</a>
+
+<a href="m3d45_StencilBufGL.html">[Següent]</a>
+
+</div>
+
+<br><br>
+
+
+
+<div class=tit1>Reflexions. 
+
+<span class=tit2>Reflexions en miralls plans: ús d'un <i>stencil
+
+buffer</i></span>
+
+</div>
+
+
+
+<P>Una de les maneres d'evitar que els objectes virtuals es vegin fora
+
+del mirall és usant un <a
+
+href="../m10/m2i30_StencilBuffer.html"><i>stencil plane</i></a>, si la
+
+llibreria usada el proporciona. La idea és senzilla. Simplement ens
+
+cal inicialitzar el pla de <i>clipping</i> de manera que sols siguin
+
+no nuls els <i>pixels</i> de la pantalla que corresponen al mirall, i
+
+activar el filtrat mitjançant aquest pla de <i>clipping</i> quan es
+
+pinten els objectes virtuals. D'aquesta manera els objectes vituals
+
+sols es veuen en la porció d'ells que apareix al mirall i enlloc
+
+més. Ara és possible passejar-nos per tot el voltant del mirall sense
+
+veure els objectes virtuals afegits a l'escena per a pintar les
+
+reflexions.
+
+
+
+<P>El següent <i>applet</i>, semblant al de l'apartat anterior,
+
+mostra aquesta tècnica en funcionament.
+
+
+
+<center>
+
+<div>
+
+<applet code="Interficie.class" archive="mirallStencil.jar,../comuns.jar" height=500 width=500>
+</applet>
+
+</div>
+
+</center>
+
+
+
+<P>En plataformes en què l'<i>stencil buffer</i> sigui lent,
+
+l'anterior estratègia pot adaptar-se lleugerament per a obtenir un
+
+millor rendiment. En comptes de retallar el pintat dels objectes
+
+virtuals mitjançant el buffer de retallat, hom pinta en primer lloc
+
+els objectes virtuals, sense restriccions. A continuació inicialitzem
+
+i activem el buffer de retallat, i pintem el polígon que descriu el
+
+mirall, omplint d'uns a l'<i>stencil buffer</i> els pixels coberts pel
+
+mirall. Triant com a filtre del buffer de retallat que seleccioni els
+
+<i>pixels</i> que <b>no</b> valen 1, una crida per esborrar el
+
+<i>frame buffer</i> netejarà tota la porció de l'escena fora del
+
+mirall. Ara ja podem desactivar l'<i>stencil buffer</i> i pintar la
+
+resta de l'escena. D'aquesta manera sols fem servir el buffer de
+
+retallat per pintar un polígon (el mirall) i per filtrar una crida
+
+(per a esborrar el <i>frame buffer</i> a color de fons), cosa que
+
+almenys quan l'<i>stencil buffer</i> estigui implementat en
+
+<i>software</i> resultarà força més eficient.
+
+
+
+<P>Fins aquí hem discutit el cas en què l'escena conté un únic
+
+mirall. El mateix s'aplica també si n'hi ha més d'un, suposant que no
+
+hi hagi <b>interreflexions</b>, és a dir que en cap dels miralls
+
+aparegui la imatge reflectida d'un altre. Si es dóna aquest cas, haurem
+
+de fer-ne un tractament especial, que discutim a continuació.
+
+
+
+<div class=tit3><b>Múltiples miralls</b></div>
+
+
+
+<p>Pot passar que en l'escena hi hagi més d'un mirall. Si per alguna
+
+posició de la càmera pot passar que la imatge d'un dels miralls es
+
+vegi reflectida en un altre, el que hem dit fins aquí donarà resultats
+
+erronis.
+
+
+
+<P>En aquests casos cal decidir el nombre d'interreflexions que volem
+
+calcular correctament. En general (però no sempre) en les successives
+
+reflexions l'àrea de la imatge ocupada pels miralls es redueix molt
+
+ràpidament. Per tant s'obté una presentació molt acceptable
+
+considerant molt poques interreflexions. Sovint és suficient fer-ne dues.
+
+(Evidentment aquesta restricció d'un nombre determinat de reflexions
+
+existeix, d'una o altra forma, en tots els algorismes. En el traçat de
+
+raigs, per exemple, és habitual fixar una fondària màxima de l'arbre
+
+de reflexions/refraccions que es construeix.)
+
+
+
+<P>Tanmateix, els mètodes discutits fins ara per a accelerar la
+
+presentació de reflexions no serveixen sense modificacions. Però pot
+
+ser senzill adaptar-los. Per exemple, si els dos miralls que hi
+
+interactuen estan en parets perpendiculars, podem construir tres
+
+conjunts d'objectes virtuals (tres escenes virtuals), corresponent dos
+
+d'ells a la primera reflexió per cadascun dels dos miralls, i el
+
+tercer a la reflexió secundària de tots dos (que coincideix per una i
+
+altra banda). Vegeu en aquesta figura les tres reflexions d'una escena
+
+senzilla (que correspon al programa <tt>mirror.c</tt> del curs avançat
+
+d'OpenGL del Siggraph'99).
+
+<br>
+
+
+
+<center><img src="imatges/DosMiralls.png"></center>
+
+<br>
+
+
+
+<p>Les dues còpies de l'escena que apareixen a esquerra i dreta són
+
+primeres reflexions. La que apareix més amunt representa les segones
+
+reflexions (per qualsevol dels dos camins). En aquest programa s'ha
+
+pintat cada reflexió amb un factor d'atenuació de la intensitat de la
+
+llum de 0.6. Per aquesta raó es veu l'escena superior (que sent una
+
+reflexió secundària està afectada per aquest factor dos cops, i per
+
+tant atenuada a 0.36 de la intensitat normal de l'escena) més fosca.
+
+
+
+<p>Si el punt de vista usat impedeix veure les escenes virtuals
+
+(perquè hi ha obstacles com parets que s'hi interposen), això ja
+
+permetrà representar l'escena. Si es disposa d'<i>stencil buffer</i>,
+
+es pot adaptar, tanmateix, la tècnica dels objectes virtuals sense
+
+massa dificultat a contextes força generals, ja que serà aquest
+
+mecanisme el que impedirà que es vegin porcions indesitjades de les
+
+escenes virtuals. Pintant els miralls tant reals com virtuals i
+
+incrementant el valor a l'<i>stencil buffer</i> per cadascun, podrem
+
+triar els pixels que corresponen a l'enèssima reflexió perquè tindran
+
+precisament el valor <i>n</i> assignat.
+
+
+
+<p>En aquest cas, és clar, no s'aplica, en general, l'acceleració
+
+mencionada a l'apartat anterior, on es feia servir l'<i>stencil
+
+buffer</i> per a esborrar el que havia fora del mirall, en comtpes de
+
+filtrar el que hi queia dins.  La programació d'aquesta técnica pot
+
+doncs enlentir força l'aplicació, depenent de la plataforma en què
+
+s'executa i de la complexitat de l'escena.
+
+
+
+
+
+<br><br>
+
+<DIV CLASS="nav">
+
+<a href="m3d42_ObjVirtualsGL.html">[Anterior]</a>
+
+<a href="m3d45_StencilBufGL.html">[Següent]</a>
+
+</div>
+
+</body>
+
+</html>
+

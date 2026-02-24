@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("realvirt","visester");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m5d01t04t05.html">[Anterior]</a>
+<a href="m5d01t06_cal.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Visió estereoscòpica.
+<span class=tit2>Procés de generació d'imatges estereoscòpiques</span>
+</div>
+
+<p>En aquest apartat estudiarem el procés complet de generació
+d'imatges estereoscòpiques per computador, des del punt de partida on
+només tenim un model geomètric 3D, fins a l'objectiu final que és
+projectar a les retines del participant una imatge amb disparitat
+retinal.</p>
+
+<p>En el procés de generació d'imatges estereoscòpiques distingirem
+bàsicament quatre etapes, il·lustrades en aquesta figura:</p>
+
+<div align="center"><img border="0" src="imatges/proces_gen.jpg" width="500" height="424"></div>
+
+<p>Aquestes quatre etapes són:</p>
+
+<ul>
+  <li><b><i>Càlcul de la imatge. </i></b>El càlcul de la imatge inclou bàsicament el procés de visualització 3D
+    que vam estudiar al capítol 6, amb la diferència de que hem de generar dues
+    imatges, una per cada ull. El càlcul de la imatge es basa en el model 3D i
+    en els paràmetres de la càmera binocular, a partir dels quals es genera en
+    el frame buffer (memòria de vídeo) una representació digital de la imatge.</li>
+  <li><i><b>Codificació de la imatge</b>.&nbsp;</i> Per codificació de la
+    imatge entenem, per una banda, el format intern en que s'emmagatzemen les
+    imatges en el frame buffer, i per altra banda, la seva codificació en un senyal de
+    vídeo.</li>
+  <li><b><i>Visualització de la imatge</b></i>. La visualització
+    de la imatge consisteix en crear una imatge física (visible) en un
+    dispositiu de visualització a partir de la senyal de vídeo. Els
+    dispositius de visualització com els monitors i els projectors es basen en
+    una pantalla on es genera físicament la imatge (tret dels dispositius
+    làser que projecten directament a la retina).</li>
+  <li><i><b>Separació/Direccionament. </b></i>S'anomena així el mecanisme que permet fer arribar a cada retina la imatge que li correspon.
+    Per exemple, si les imatges s'han generat amb la tècnica de separació de
+    colors (vermell per l'ull esquerre i blau per l'ull dret), la separació és
+    duta a terme per unes ulleres especials.</li>
+</ul>
+
+<p>En els següents apartats s'expliquen una mica més en detall aquestes
+etapes.&nbsp;</p>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m5d01t04t05.html">[Anterior]</a>
+<a href="m5d01t06_cal.html">[Següent]</a>
+</div>
+</body>
+</html>
+
+
+
+

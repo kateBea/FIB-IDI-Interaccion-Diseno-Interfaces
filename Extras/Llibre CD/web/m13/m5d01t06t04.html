@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("realvirt","visester");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m5d01t06t03.html">[Anterior]</a>
+<a href="m5d01t06t05.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Visió estereoscòpica.
+<span class=tit2>Càlcul del parell estereoscòpic.</span>
+<span class=tit3>Pantalla mòbil amb head-tracking</span>
+</div>
+
+<p>Com hem dit abans, aquesta és la configuració dels cascos
+  estereoscòpics. Es caracteritza perquè <b>les pantalles segueixen
+  els moviments del cap de l'usuari</b>, de forma que sempre estan
+  situades davant dels seus ulls, i perquè el sistema coneix en tot
+  moment l'<b>orientació del cap</b> de l'usuari. Les dades de posició
+  del cap no són gaire útils quan es treballa amb cascos
+  estereoscòpics. La raó és que els cascos, al ser completament
+  immersius, limiten molt els moviments dels usuaris, per la qual cosa
+  els usuaris romanen a la mateixa posició durant la inspecció del
+  model virtual.
+
+<p>El fet que les pantalles siguin mòbils farà que
+          sigui més adient considerar un altre sistema de referència en
+          l'espai real que sigui estàtic, que anomenarem <b>vehicle virtual</b>.&nbsp;</p>
+
+<p class=noind><b>Càlcul de la càmera</b></p>
+
+<p>Per <span style="mso-ansi-language: CA" lang="CA">calcular els paràmetres de la càmera virtual
+necessitem: </span></p>
+
+<ul>
+  <li>
+    <p class="topo1" style="margin-left:0cm;text-indent:0cm;mso-list:none;tab-stops:
+35.4pt"><span style="mso-ansi-language: CA" lang="CA"><b>Posició i orientació
+    del vehicle virtual. </b>Aquestes dades, expressades respecte el
+    sistema de coordenades de l'aplicació, ens permetrà situar </span>l'observador
+    en el model 3D, i són actualitzades per
+l'aplicació en funció de la part del model que es vol inspeccionar. Aquestes dades ens
+    permeten transformar coordenades del món real a coordenades del món
+    virtual.</li>
+  <li>
+    <p class="topo1" style="margin-left:0cm;text-indent:0cm;mso-list:none;tab-stops:
+35.4pt"><span style="mso-ansi-language: CA" lang="CA"><b>Orientació del cap de l'observador real</b>.&nbsp;Aquestes dades són proporcionades pel sistema
+    de posicionament. L'orientació del cap ens permet conèixer de forma
+    trivial l'orientació de les dues pantalles del casc.&nbsp;</span></li>
+  <li>
+    <p class="topo1" style="margin-left:0cm;text-indent:0cm;mso-list:none;tab-stops:
+35.4pt"><b>Distància dels plans de retallat. </b>El pla de retallat anterior es
+    situa a pocs centímetres de l'observador virtual. El pla de retallat
+    posterior es situa lluny de l'observador, per exemple a la distància de
+    l'objecte més llunyà a l'observador.</li>
+  <li>
+    <p class="topo1" style="margin-left:0cm;text-indent:0cm;mso-list:none;tab-stops:
+35.4pt"><b>Geometria de la piràmide de visió</b>. Donat que en aquesta
+    configuració, la posició de l'ull es fixa respecte les pantalles, la geometria de
+    la piràmide de visió també ho és, i depèn de les característiques
+    òptiques del casc. Normalment aquestes dades seran proporcionades pel
+    fabricant del casc.</li>
+</ul>
+
+<p>Un cop disposem d'aquestes dades, els càlculs dels paràmetres de la càmera
+          corresponent a un dels dos ulls, per exemple l'esquerre, es detallen a continuació:</p>
+
+<pre class=algoritme>
+  eye := &lt;posició de l'ull esquerre&gt; /*calculada a partir de la orientació del cap*/
+  center := &lt;qualsevol punt en la direcció del raig que neix a eye i és perpendicular a la pantalla virtual&gt;
+  up := &lt;vector cap amunt del cap de l'observador real, proporcionat pel posicionador&gt;
+  near := &lt;distancia del pla de retallat anterior&gt;
+  far := &lt;distancia del pla de retallat posterior&gt;
+  left := &lt;extrem esquerre de la piràmide de visió&gt;
+  right := &lt;extrem dret de la piràmide de visió&gt;
+  bottom := &lt;extrem esquerre de la piràmide de visió&gt;
+  top := &lt;extrem superior de la piràmide de visió&gt;
+</pre>
+
+<p>De forma simètrica, podem calcular la càmera corresponent a l'ull dret.</p>
+
+<div align="center"><img border="0" src="imatges/proj_separada2s.jpg" width="350" height="291"></div>
+
+<p>La diferència fonamental respecte a la configuració amb pantalla fixa, és
+que ara la càmera virtual s'orienta segons l'orientació del cap, de forma que
+tant el punt <b>center </b>com el vector <b>up</b> són sensibles als girs del
+cap de l'usuari (en la configuració amb pantalla fixa només depenien de la
+          posició del cap, no de l'orientació).</p>
+
+<p class=noind><b>Utilització</b></p>
+
+<p>Aquí teniu un exemple d'utilització de les dades anteriors per definir
+les transformacions de visualització i de perspectiva amb OpenGL:
+
+<pre class=algoritme>
+   <b>glMatrixMode</b>(GL_MODELVIEW);
+   <b>glLoadIdentity</b>();
+   <b>gluLookAt</b>(eye.x, eye.y, eye.z, center.x, center.y, center.z, up.x, up.y, up.z);
+   <b>glMatrixMode</b>(GL_PROJECTION);
+   <b>glLoadIdentity</b>();
+   <b>glFrustum</b>(left, right, bottom, top, near, far);
+</pre>
+
+<p class=noind><b>Comentaris addicionals</b></p>
+
+<p>El fet que els cascos estereoscòpics siguin tan sensibles a l'orientació
+del cap és un greu inconvenient. Una rotació de només 45 graus provoca que la
+imatge que hem de generar sigui completament diferent (recordeu que el punt <b>center
+</b>es calcula de forma que el vector <b>eye-center </b>sigui perpendicular a la
+pantalla, i que aquesta gira lligada al cap de l'usuari). Si afegim el fet que
+els posicionadors solen tenir errors de precisió, i que a més a més poden tenir un
+temps de latència no menyspreable, el problema és encara més greu.&nbsp;</p>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m5d01t06t03.html">[Anterior]</a>
+<a href="m5d01t06t05.html">[Següent]</a>
+</div>
+</body>
+</html>

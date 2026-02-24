@@ -1,0 +1,820 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+	<head>
+		<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+		<meta NAME="GENERATOR" CONTENT="Àlvar Vinacua">
+		<title>explorador</title>
+		<SCRIPT language="JavaScript1.2">
+			var CapAct, SecAct;
+			var nouCap, novaSec;
+
+			var BarrraCapitols;
+			var BarraCaps;
+			var BarraSecs;
+
+			var heightBarra = 30;
+
+			var BarraScroll1, BarraScroll2;
+
+			var margeTop = 0;
+			var margeEsq = 0;
+
+			var margeDret = 0;
+			var despl = 0;
+
+			var scrolling;
+			var waiting;
+
+
+			function getElement (nom)
+			{
+				var elem;
+
+				if (document.getElementById)
+				{
+					// Codi Netscape 6.2
+
+					elem = document.getElementById(nom);
+				}
+				else if (document.all)
+				{
+					// Codi Internet Explorer
+
+					elem = document.all[nom];
+				}
+				else if (document.layers)
+				{
+					elem = document.layers[nom];
+				}
+
+				return elem;
+			}
+
+
+			function amaga (elem)
+			{
+				if (elem.style)
+				{
+					// Codi Internet Explorer
+
+					elem.style.visibility = "hidden";
+				}
+				else
+				{
+					elem.visibility = "hidden";
+				}
+			}
+
+
+			function visible (elem)
+			{
+				if (elem.style)
+				{
+					// Codi Internet Explorer
+
+					elem.style.visibility = "visible";
+				}
+				else
+				{
+					elem.visibility = "visible";
+				}
+			}
+
+
+			function clip (elem, top, right, up, left)
+			{
+				if (elem.style)
+				{
+					// Codi Internet Explorer
+
+					elem.style.clip = "rect(" + top +"px " + right + "px " + up + "px " + left + "px)";
+
+					// cal de totes maneres actualitzar el marge dret per culpa del netscape
+					elem.style.right = right;
+				}
+				else
+				{
+					elem.clip = "rect(" + top +"px " + right + "px " + up + "px " + left + "px)";
+				}
+			}
+
+
+			function resize()
+			{
+				if (window.innerWidth)
+				{
+					margeDret = (innerWidth - 176);
+				}
+				else
+				{
+					margeDret = (document.body.clientWidth - 176);
+				}
+
+				despl = margeDret - 130 / 2;
+
+				clip (barra, 0, margeDret, 30, 0);
+			}
+
+
+			function init()
+			{
+				scrolling = false;
+
+				if (window.innerWidth)
+				{
+					margeDret = (innerWidth - 176);
+				}
+				else
+				{
+					margeDret = (document.body.clientWidth - 176);
+				}
+
+				despl = margeDret - 130 / 2;
+
+				barra = getElement ("Barra");
+
+				clip (barra, 0, margeDret, 30, 0);
+
+				BarraCaps = getElement ("Barra_caps");
+
+				CapAct = "";
+				SecAct = "";
+
+				BarraCapitols = true;
+
+				apagar ("caps");
+
+				visible (BarraCaps);
+			}
+
+
+			function wait ()
+			{
+				waiting = true;
+
+				if (scrolling)
+				{
+					setTimeout ("wait ()", 25);
+				}
+				else
+				{
+					passara (nouCap, novaSec);
+					waiting = false;
+				}
+			}
+
+
+			function passara (Cap, Sec)
+			{
+				if (scrolling)
+				{
+					nouCap = Cap;
+					novaSec = Sec;
+
+					if (!waiting)
+					{
+						wait ();
+					}
+				}
+				else
+				{
+					if (Cap == "")
+					{
+						if (CapAct!="")
+						{
+							apagar (CapAct);
+							apagar (CapAct+SecAct);
+						}
+
+						CapAct = "";
+						SecAct = "";
+
+						apagar ("caps");
+						apagar ("secs");
+					}
+					else if (Cap == "intro")
+					{
+						if (CapAct!="")
+						{
+							apagar (CapAct);
+							apagar (CapAct+SecAct);
+						}
+
+						CapAct = "intro";
+						SecAct = "";
+
+						iluminar (CapAct);
+
+						apagar ("caps");
+						apagar ("secs");
+					}
+					else
+					{
+						if ((Cap == CapAct) && (!BarraCapitols))
+						{
+							// no cal tocar cap barra, nomes iluminar una altra seccio
+							apagar (CapAct+SecAct);
+
+							SecAct = Sec;
+
+							iluminar (CapAct+SecAct);
+						}
+						else
+						{
+							// actualitzar el capitol i seccio actuals
+							if (CapAct!="")
+							{
+								apagar (CapAct);
+								apagar (CapAct+SecAct);
+							}
+
+							CapAct = Cap;
+							SecAct = Sec;
+
+							iluminar (CapAct);
+							iluminar (CapAct+SecAct);
+
+							if (!BarraCapitols)
+							{
+								// amagar la barra actual de seccions
+
+								BarraScroll1 = BarraSecs;
+							}
+							else // (BarraCapitols)
+							{
+								// amagar la barra de capitols
+								BarraScroll1 = BarraCaps;
+
+								BarraCapitols = false;
+
+								iluminar ("caps");
+								apagar ("secs");
+							}
+
+							BarraSecs = getElement ("Barra_" + CapAct);
+
+							setTop (BarraSecs, margeTop + heightBarra);
+							setLeft (BarraSecs, margeEsq);
+							visible (BarraSecs);
+
+							BarraScroll2 = BarraSecs;
+
+							scrollUp ();
+						}
+					}
+				}
+			}
+
+
+			function iluminar (nom)
+			{
+				img = getElement (nom);
+
+				img.src = img.src.replace(/\.jpg/,"_h.jpg");
+			}
+
+
+			function apagar (nom)
+			{
+				img = getElement (nom);
+
+				img.src = img.src.replace(/_h\.jpg/,".jpg");
+			}
+
+
+			function getWidth (elem)
+			{
+				if (elem.style)
+				{
+					return parseInt (elem.style.width);
+				}
+				else
+				{
+					return parseInt (elem.width);
+				}
+			}
+
+
+			function getLeft (elem)
+			{
+				if (elem.style)
+				{
+					return parseInt (elem.style.left);
+				}
+				else
+				{
+					return parseInt (elem.left);
+				}
+			}
+
+
+			function getTop (elem)
+			{
+				if (elem.style)
+				{
+					return parseInt (elem.style.top);
+				}
+				else
+				{
+					return parseInt (elem.top);
+				}
+			}
+
+
+			function setLeft (elem, left)
+			{
+				if (elem.style)
+				{
+					elem.style.left = left;
+				}
+				else
+				{
+					elem.left = left;
+				}
+			}
+
+
+			function setTop (elem, top)
+			{
+				if (elem.style)
+				{
+					elem.style.top = top;
+				}
+				else
+				{
+					elem.top = top;
+				}
+			}
+
+
+			function moveDreta ()
+			{
+				var BarraAct;
+
+				if (BarraCapitols)
+				{
+					BarraAct = BarraCaps;
+				}
+				else
+				{
+					BarraAct = BarraSecs;
+				}
+
+				var w = getWidth (BarraAct);
+				var l = getLeft (BarraAct);
+
+				if (w > margeDret)
+				{
+					if ((l-despl)+w < margeDret)
+					{
+						setLeft(BarraAct, margeDret - w);
+
+						document.dreta.src = document.dreta.src.replace(/_h\.jpg/,".jpg");
+					}
+					else
+					{
+						setLeft (BarraAct, l - despl);
+					}
+				}
+			}
+
+
+			function moveEsq ()
+			{
+				var BarraAct;
+
+				if (BarraCapitols)
+				{
+					BarraAct = BarraCaps;
+				}
+				else
+				{
+					BarraAct = BarraSecs;
+				}
+
+				var w = getWidth (BarraAct);
+				var l = getLeft (BarraAct);
+
+				if ((l+despl) > margeEsq)
+				{
+					setLeft (BarraAct, margeEsq);
+
+					document.esq.src = document.esq.src.replace(/_h\.jpg/,".jpg");
+				}
+				else
+				{
+					setLeft (BarraAct, l + despl);
+				}
+			}
+
+
+			function overDreta ()
+			{
+				var BarraAct;
+
+				if (BarraCapitols)
+				{
+					BarraAct = BarraCaps;
+				}
+				else
+				{
+					BarraAct = BarraSecs;
+				}
+
+				var w = getWidth (BarraAct);
+				var l = getLeft (BarraAct);
+
+				if (l + w > margeDret)
+				{
+					document.dreta.src = document.dreta.src.replace(/\.jpg/,"_h.jpg");
+				}
+			}
+
+
+			function outDreta ()
+			{
+				document.dreta.src = document.dreta.src.replace(/_h\.jpg/,".jpg");
+			}
+
+
+			function overEsq ()
+			{
+				var BarraAct;
+
+				if (BarraCapitols)
+				{
+					BarraAct = BarraCaps;
+				}
+				else
+				{
+					BarraAct = BarraSecs;
+				}
+
+				var w = getWidth (BarraAct);
+				var l = getLeft (BarraAct);
+
+				if (l < margeEsq)
+				{
+					document.esq.src = document.esq.src.replace(/\.jpg/,"_h.jpg");
+				}
+			}
+
+
+			function outEsq ()
+			{
+				document.esq.src = document.esq.src.replace(/_h\.jpg/,".jpg");
+			}
+
+
+			function scrollDown ()
+			{
+				scrolling = true;
+
+				if (getTop (BarraScroll1) < margeTop)
+				{
+					setTop (BarraScroll1, getTop (BarraScroll1) + 1);
+					setTop (BarraScroll2, getTop (BarraScroll2) + 1);
+
+					setTimeout("scrollDown ()", 25);
+				}
+				else
+				{
+					amaga (BarraScroll2);
+					scrolling = false;
+				}
+			}
+
+
+			function scrollUp ()
+			{
+				scrolling = true;
+
+				if (getTop (BarraScroll2) > margeTop)
+				{
+					setTop (BarraScroll1, getTop (BarraScroll1) - 1);
+					setTop (BarraScroll2, getTop (BarraScroll2) - 1);
+
+					setTimeout("scrollUp ()", 25);
+				}
+				else
+				{
+					amaga (BarraCaps);
+					scrolling = false;
+				}
+			}
+
+
+			function passarACapitols()
+			{
+				// Conmuta a Barra de Capítols
+				if (!BarraCapitols)
+				{
+					setTop (BarraCaps, margeTop - heightBarra);
+
+					visible (BarraCaps);
+
+					BarraScroll1 = BarraCaps;
+					BarraScroll2 = BarraSecs;
+					scrollDown ();
+
+					BarraCapitols = true;
+
+					apagar ("caps");
+
+					if (SecAct != "")
+					{
+						iluminar ("secs");
+					}
+				}
+			}
+
+
+			function passarASeccions()
+			{
+				// Conmuta a Barra de Seccions
+
+				if (BarraCapitols && (SecAct!=""))
+				{
+					setTop (BarraSecs, margeTop + heightBarra);
+
+					visible (BarraSecs);
+
+					BarraScroll1 = BarraCaps;
+					BarraScroll2 = BarraSecs;
+					scrollUp ();
+
+					BarraCapitols = false;
+
+					iluminar ("caps");
+					apagar ("secs");
+				}
+			}
+		</SCRIPT>
+	</head>
+	<body BGCOLOR="#336699" onload="init()" onresize="resize()" link="#336699" vlink="#336699" alink="#336699">
+		<table border="0" width = "100%" height= "50px">
+			<tr>
+				<td align="left" valign="bottom" width=50>
+					<table border="0" cellpadding="0" cellspacing=0>
+						<tr>
+							<td valign="top" align="center">
+								<a NAME="caplink" href="javascript:passarACapitols()">
+									<img id="caps" NAME="caps" src="imatges/caps.jpg" alt="Anar a barra de capítols" vspace="0">
+								</a>
+							</td>
+						</TR>
+	  					<tr>
+	  						<td valign="bottom" align="center">
+	  							<a href="javascript:passarASeccions()">
+	  								<img id="secs" NAME="secs" src="imatges/secs.jpg" alt="Anar a barra de seccions del capítol" vspace="0">
+	  							</a>
+	  						</td>
+	  					</TR>
+					</TABLE>
+				</td>
+				<td width="50" align="left" onMouseOver="overEsq()" onMouseOut="outEsq()">
+     				<a href="javascript:moveEsq()">
+     					<img id="esq" NAME="esq" src="imatges/esquerra.jpg" border="0">
+					</a>
+				</td>
+				<td width="90%">
+        			<div class="Barra" id="Barra" style="position: absolute;top: 13px;left: 130px;right: 50%;clip: rect(0px auto 13px 0px);" NAME="Barra" bgcolor="green">
+						<div class="Barra_caps" id="Barra_caps" NAME="Barra_caps" style="position: absolute;top: 0px;left: 0px;width: 2340px;visibility: visible;">
+							<table border=0 cellspacing=0 cellpadding=0>
+								<tr>
+									<td><a TARGET="principal" href="../intro.html"><img name="intro" id="intro" src="imatges/intro.jpg"></a></td>
+									<td><a TARGET="principal" href="../m1/intro.html" onClick="passaASects=true;"><img name="aplic" id="aplic" src="imatges/m1/introduccioAp.jpg"></a></td>
+									<td><a TARGET="principal" href="../m2/intro.html" onClick="passaASects=true;"><img name="hard" id="hard" src="imatges/m2/dispositius.jpg"></a></td>
+									<td><a TARGET="principal" href="../m3/intro.html" onClick="passaASects=true;"><img name="color" id="color" src="imatges/m3/color.jpg"></a></td>
+									<td><a TARGET="principal" href="../m4/intro.html" onClick="passaASects=true;"><img name="geom" id="geom" src="imatges/m4/geometria2D3D.jpg"></a></td>
+									<td><a TARGET="principal" href="../m5/intro.html" onClick="passaASects=true;"><img name="model" id="model" src="imatges/m5/reprObj.jpg"></a></td>
+									<td><a TARGET="principal" href="../m6/intro.html" onClick="passaASects=true;"><img name="vis3D" id="vis3D" src="imatges/m6/vis3D.jpg"></a></td>
+									<td><a TARGET="principal" href="../m7/intro.html" onClick="passaASects=true;"><img name="vis2D" id="vis2D" src="imatges/m7/vis2D.jpg"></a></td>
+									<td><a TARGET="principal" href="../m8/m8-intro.html" onClick="passaASects=true;"><img name="visib" id="visib" src="imatges/m8/epa.jpg"></a></td>
+									<td><a TARGET="principal" href="../m9/intro.html" onClick="passaASects=true;"><img name="entrada" id="entrada" src="imatges/m9/entrada.jpg"></a></td>
+									<td><a TARGET="principal" href="../m10/m2a10_Intro.html" onClick="passaASects=true;"><img name="proj" id="proj" src="imatges/m10/pipeOpenGL.jpg"></a></td>
+									<td><a TARGET="principal" href="../m11/m3a10_Intro.html" onClick="passaASects=true;"><img name="visreal" id="visreal" src="imatges/m11/visuReal.jpg"></a></td>
+									<td><a TARGET="principal" href="../m12/m4a10_AnimacioIntro.html" onClick="passaASects=true;"><img name="anim" id="anim" src="imatges/m12/animacio.jpg"></a></td>
+									<td><a TARGET="principal" href="../m13/m5a00_intro.html" onClick="passaASects=true;"><img name="realvirt" id="realvirt" src="imatges/m13/realitatVirtual.jpg"></a></td>
+									<!--<td><a TARGET="principal" href="../m14/m6a10_ProjecteIntro.html" onClick="passaASects=true;"><img name="proj2" id="proj2" src="imatges/m14/projecte.jpg"></a></td>-->
+									<td><a TARGET="principal" href="../m15/m7a01_Introduccio.html" onClick="passaASects=true;"><img name="opengl" id="opengl" src="imatges/m15/openGL.jpg"></a></td>
+								</tr>
+							</table>
+						</DIV>
+						<DIV class="Barra_aplic" id="Barra_aplic" NAME="Barra_aplic" style="position: absolute;top: 0px;left: 0px;width: 930px;visibility: hidden;">
+							<table border=0 cellspacing=0 cellpadding=0>
+						    	<tr>
+						      		<td><a TARGET="principal" href="../m1/intro.html"><img name="aplicintr" id="aplicintr" src="imatges/m1/introduccio.jpg"></a></td>
+						      		<td><a TARGET="principal" href="../m1/object.html"><img name="aplicobj" id="aplicobj" src="imatges/m1/objectius.jpg"></a></td>
+								  	<td><a TARGET="principal" href="../m1/grafics.html"><img name="aplicgc" id="aplicgc" src="imatges/m1/grafics.jpg"></a></td>
+								    <td><a TARGET="principal" href="../m1/main12.html"><img name="aplicaplic" id="aplicaplic" src="imatges/m1/aplicacions.jpg"></a></td>
+								    <td><a TARGET="principal" href="../m1/moduls.html"><img name="aplicmods" id="aplicmods" src="imatges/m1/moduls.jpg"></a></td>
+								    <td><a TARGET="principal" href="../m1/resum.html"><img name="aplicresu" id="aplicresu" src="imatges/m1/resum.jpg"></a></td>
+								</tr>
+							</table>
+						</DIV>
+						<DIV class="Barra_hard" id="Barra_hard" NAME="Barra_hard" style="position: absolute;top: 0px;left: 0px;width: 1030px;visibility: hidden;">
+							<table border=0 cellspacing=0 cellpadding=0>
+								<tr>
+									<td><a TARGET="principal" href="../m2/intro.html"><img name="hardintr" id="hardintr" src="imatges/m2/introduccio.jpg"></a></td>
+									<td><a TARGET="principal" href="../m2/object.html"><img name="hardobj" id="hardobj" src="imatges/m2/objectius.jpg"></a></td>
+									<td><a TARGET="principal" href="../m2/main21.html"><img name="hardpanbn" id="hardpanbn" src="imatges/m2/EscombratBN.jpg"></a></td>
+									<td><a TARGET="principal" href="../m2/main22.html"><img name="hardpancol" id="hardpancol" src="imatges/m2/PantColor.jpg"></a></td>
+									<td><a TARGET="principal" href="../m2/main23.html"><img name="hardfb" id="hardfb" src="imatges/m2/FrameBuf.jpg"></a></td>
+									<td><a TARGET="principal" href="../m2/main24.html"><img name="hardimpr" id="hardimpr" src="imatges/m2/Impressores.jpg"></a></td>
+									<td><a TARGET="principal" href="../m2/resum.html"><img name="hardresu" id="hardresu" src="imatges/m2/resum.jpg"></a></td>
+								</tr>
+							</table>
+						</DIV>
+						<DIV class="Barra_color" id="Barra_color" NAME="Barra_color" style="position: absolute;top: 0px;left: 0px;width: 1330px;visibility: hidden;">
+							<table border=0 cellspacing=0 cellpadding=0>
+								<tr>
+									<td><a TARGET="principal" href="../m3/intro.html"><img name="colorintr" id="colorintr" src="imatges/m3/introduccio.jpg"></a></td>
+									<td><a TARGET="principal" href="../m3/object.html"><img name="colorobj" id="colorobj" src="imatges/m3/objectius.jpg"></a></td>
+									<td><a TARGET="principal" href="../m3/main31.html"><img name="colorllum" id="colorllum" src="imatges/m3/llumicolor.jpg"></a></td>
+									<td><a TARGET="principal" href="../m3/main32.html"><img name="colorrgb" id="colorrgb" src="imatges/m3/modelRGB.jpg"></a></td>
+									<td><a TARGET="principal" href="../m3/main33.html"><img name="colorhsb" id="colorhsb" src="imatges/m3/modelHSB.jpg"></a></td>
+									<td><a TARGET="principal" href="../m3/main34.html"><img name="colorcmyk" id="colorcmyk" src="imatges/m3/modelsCMYK.jpg"></a></td>
+									<td><a TARGET="principal" href="../m3/main35.html"><img name="colorcie" id="colorcie" src="imatges/m3/modelCIE.jpg"></a></td>
+									<td><a TARGET="principal" href="../m3/resum.html"><img name="colorres" id="colorres" src="imatges/m3/resum.jpg"></a></td>
+									<td><a TARGET="principal" href="../m3/Exercicis.html"><img name="colorex" id="colorex" src="imatges/m3/exercicisAuto.jpg"></a></td>
+								</tr>
+							</table>
+						</DIV>
+						<DIV class="Barra_geom" id="Barra_geom" NAME="Barra_geom" style="position: absolute;top: 0px;left: 0px;width: 1540px;visibility: hidden;">
+							<table border=0 cellspacing=0 cellpadding=0>
+								<tr>
+									<td><a TARGET="principal" href="../m4/intro.html"><img name="geomintr" id="geomintr" src="imatges/m4/introduccio.jpg"></a></td>
+									<td><a TARGET="principal" href="../m4/object.html"><img name="geomobj" id="geomobj" src="imatges/m4/objectius.jpg"></a></td>
+									<td><a TARGET="principal" href="../m4/main41.html"><img name="geom2D" id="geom2D" src="imatges/m4/ElemsPla.jpg"></a></td>
+									<td><a TARGET="principal" href="../m4/main42.html"><img name="geom3D" id="geom3D" src="imatges/m4/ElemsEspai.jpg"></a></td>
+									<td><a TARGET="principal" href="../m4/main43.html"><img name="geomtrns" id="geomtrns" src="imatges/m4/Transf2D3D.jpg"></a></td>
+									<td><a TARGET="principal" href="../m4/main44.html"><img name="geomalgs" id="geomalgs" src="imatges/m4/NormClasi.jpg"></a></td>
+									<td><a TARGET="principal" href="../m4/resum.html"><img name="geomresu" id="geomresu" src="imatges/m4/resum.jpg"></a></td>
+									<td><a TARGET="principal" href="../m4/Exercicis.html"><img name="geomex" id="geomex" src="imatges/m4/exercicisAuto.jpg"></a></td>
+								</tr>
+							</table>
+						</DIV>
+						<DIV class="Barra_model" id="Barra_model" NAME="Barra_model" style="position: absolute;top: 0px;left: 0px;width: 2048px;visibility: hidden;">
+							<table border=0 cellspacing=0 cellpadding=0>
+								<tr>
+									<td><a TARGET="principal" href="../m5/intro.html"><img name="modelintr" id="modelintr" src="imatges/m5/introduccio.jpg"></a></td>
+									<td><a TARGET="principal" href="../m5/object.html"><img name="modelobj" id="modelobj" src="imatges/m5/objectius.jpg"></a></td>
+									<td><a TARGET="principal" href="../m5/main51.html"><img name="modelsist" id="modelsist" src="imatges/m5/SisModel.jpg"></a></td>
+									<td><a TARGET="principal" href="../m5/main52.html"><img name="modelgeom" id="modelgeom" src="imatges/m5/modelsGeom.jpg"></a></td>
+									<td><a TARGET="principal" href="../m5/main53.html"><img name="modelrep" id="modelrep" src="imatges/m5/Rep2D3D.jpg"></a></td>
+									<td><a TARGET="principal" href="../m5/main54.html"><img name="modelsoli" id="modelsoli" src="imatges/m5/RepSolids.jpg"></a></td>
+									<td><a TARGET="principal" href="../m5/main55.html"><img name="modelbrep" id="modelbrep" src="imatges/m5/RepBREP.jpg"></a></td>
+									<td><a TARGET="principal" href="../m5/main56.html"><img name="modelnous" id="modelnous" src="imatges/m5/NousModels.jpg"></a></td>
+									<td><a TARGET="principal" href="../m5/resum.html"><img name="modelres" id="modelres" src="imatges/m5/resum.jpg"></a></td>
+									<td><a TARGET="principal" href="../m5/Exercicis.html"><img name="modelex" id="modelex" src="imatges/m5/exercicisAuto.jpg"></a></td>
+								</tr>
+							</table>
+  						</DIV>
+						<DIV class="Barra_vis3D" id="Barra_vis3D" NAME="Barra_vis3D" style="position: absolute;top: 0px;left: 0px;width: 1452px;visibility: hidden;">
+							<table border=0 cellspacing=0 cellpadding=0>
+								<tr>
+									<td><a TARGET="principal" href="../m6/intro.html"><img name="vis3Dintr" id="vis3Dintr" src="imatges/m6/introduccio.jpg"></a></td>
+									<td><a TARGET="principal" href="../m6/object.html"><img name="vis3Dobj" id="vis3Dobj" src="imatges/m6/objectius.jpg"></a></td>
+									<td><a TARGET="principal" href="../m6/main61.html"><img name="vis3Dproc" id="vis3Dproc" src="imatges/m6/procesVis3D.jpg"></a></td>
+									<td><a TARGET="principal" href="../m6/main62.html"><img name="vis3Dcam" id="vis3Dcam" src="imatges/m6/modelCam.jpg"></a></td>
+									<td><a TARGET="principal" href="../m6/main63.html"><img name="vis3Destr" id="vis3Destr" src="imatges/m6/estrprocVis3D.jpg"></a></td>
+									<td><a TARGET="principal" href="../m6/main64.html"><img name="vis3Dlib" id="vis3Dlib" src="imatges/m6/llibGrafAlg.jpg"></a></td>
+									<td><a TARGET="principal" href="../m6/res.html"><img name="vis3Dres" id="vis3Dres" src="imatges/m6/resum.jpg"></a></td>
+									<td><a TARGET="principal" href="../m6/Exercicis.html"><img name="vis3Dex" id="vis3Dex" src="imatges/m6/exercicisAuto.jpg"></a></td>
+								</tr>
+							</table>
+						</DIV>
+						<DIV class="Barra_vis2D" id="Barra_vis2D" NAME="Barra_vis2D" style="position: absolute;top: 0px;left: 0px;width: 905px;visibility: hidden;">
+							<table border=0 cellspacing=0 cellpadding=0>
+								<tr>
+									<td><a TARGET="principal" href="../m7/intro.html"><img name="vis2Dintr" id="vis2Dintr" src="imatges/m7/introduccio.jpg"></a></td>
+									<td><a TARGET="principal" href="../m7/object.html"><img name="vis2Dobj" id="vis2Dobj" src="imatges/m7/objectius.jpg"></a></td>
+									<td><a TARGET="principal" href="../m7/main71.html"><img name="vis2Ddefs" id="vis2Ddefs" src="imatges/m7/definicions.jpg"></a></td>
+									<td><a TARGET="principal" href="../m7/main74.html"><img name="vis2Dimpl" id="vis2Dimpl" src="imatges/m7/implementacio.jpg"></a></td>
+									<td><a TARGET="principal" href="../m7/main75.html"><img name="vis2Dvis" id="vis2Dvis" src="imatges/m7/visEscena2D.jpg"></a></td>
+									<td><a TARGET="principal" href="../m7/res.html"><img name="vis2Dres" id="vis2Dres" src="imatges/m7/resum.jpg"></a></td>
+									<td><a TARGET="principal" href="../m7/Exercicis.html"><img name="vis2Dex" id="vis2Dex" src="imatges/m7/exercicisAuto.jpg"></a></td>
+								</tr>
+							</table>
+						</DIV>
+						<DIV class="Barra_visib" id="Barra_visib" NAME="Barra_visib" style="position: absolute;top: 0px;left: 0px;width: 3065px;visibility: hidden;">
+							<table border=0 cellspacing=0 cellpadding=0>
+								<tr>
+									<td><a TARGET="principal" href="../m8/m8-intro.html"><img name="visibintr" id="visibintr" src="imatges/m8/introduccio.jpg"></a></td>
+									<td><a TARGET="principal" href="../m8/m8-objectius.html"><img name="visibobj" id="visibobj" src="imatges/m8/objectius.jpg"></a></td>
+									<td><a TARGET="principal" href="../m8/m8-1.html"><img name="visibdete" id="visibdete" src="imatges/m8/determVisibi.jpg"></a></td>
+									<td><a TARGET="principal" href="../m8/m8-2.html"><img name="visibcalg" id="visibcalg" src="imatges/m8/classAlgVis.jpg"></a></td>
+									<td><a TARGET="principal" href="../m8/m8-3.html"><img name="visibfiltr" id="visibfiltr" src="imatges/m8/filtratCares.jpg"></a></td>
+									<td><a TARGET="principal" href="../m8/m8-4.html"><img name="visibzbuf" id="visibzbuf" src="imatges/m8/algZBuff.jpg"></a></td>
+									<td><a TARGET="principal" href="../m8/m8-5.html"><img name="visibcolp" id="visibcolp" src="imatges/m8/colorPunt.jpg"></a></td>
+									<td><a TARGET="principal" href="../m8/m8-6.html"><img name="visibcmil" id="visibcmil" src="imatges/m8/classModelsIlu.jpg"></a></td>
+									<td><a TARGET="principal" href="../m8/m8-7.html"><img name="visibiemp" id="visibiemp" src="imatges/m8/modelsIluEmp.jpg"></a></td>
+									<td><a TARGET="principal" href="../m8/m8-8.html"><img name="visibizbf" id="visibizbf" src="imatges/m8/modelsIluZBuff.jpg"></a></td>
+									<td><a TARGET="principal" href="../m8/m8-9.html"><img name="visibsuav" id="visibsuav" src="imatges/m8/suavAres.jpg"></a></td>
+									<td><a TARGET="principal" href="../m8/m8-10.html"><img name="visiblibs" id="visiblibs" src="imatges/m8/llibGraf.jpg"></a></td>
+									<td><a TARGET="principal" href="../m8/m8-11.html"><img name="visibtav" id="visibtav" src="imatges/m8/tecAvReal.jpg"></a></td>
+									<td><a TARGET="principal" href="../m8/m8-resum.html"><img name="visibres" id="visibres" src="imatges/m8/resum.jpg"></a></td>
+									<td><a TARGET="principal" href="../m8/m8-avaluacio.html"><img name="visibex" id="visibex" src="imatges/m8/exercicisAuto.jpg"></a></td>
+								</tr>
+							</table>
+						</DIV>
+						<DIV class="Barra_entrada" id="Barra_entrada" NAME="Barra_entrada" style="position: absolute;top: 0px;left: 0px;width: 990px;visibility: hidden;">
+							<table border=0 cellspacing=0 cellpadding=0>
+								<tr>
+									<td><a TARGET="principal" href="../m9/intro.html"><img name="entradaintr" id="entradaintr" src="imatges/m9/introduccio.jpg"></a></td>
+									<td><a TARGET="principal" href="../m9/object.html"><img name="entradaobj" id="entradaobj" src="imatges/m9/objectius.jpg"></a></td>
+									<td><a TARGET="principal" href="../m9/main91.html"><img name="entradadisp" id="entradadisp" src="imatges/m9/DispEntr.jpg"></a></td>
+									<td><a TARGET="principal" href="../m9/main92.html"><img name="entradaprim" id="entradaprim" src="imatges/m9/PrimsEntr.jpg"></a></td>
+									<td><a TARGET="principal" href="../m9/main93.html"><img name="entradasele" id="entradasele" src="imatges/m9/SelecInfo.jpg"></a></td>
+									<td><a TARGET="principal" href="../m9/resum.html"><img name="entradares" id="entradares" src="imatges/m9/resum.jpg"></a></td>
+								</tr>
+							</table>
+						</DIV>
+						<DIV class="Barra_proj" id="Barra_proj" NAME="Barra_proj" style="position: absolute;top: 0px;left: 0px;width: 250px;visibility: hidden;">
+							<table border=0 cellspacing=0 cellpadding=0>
+								<tr>
+									<td><a TARGET="principal" href="../m10/m2a10_Intro.html"><img name="projintr" id="projintr" src="imatges/m10/introduccio.jpg"></a></td>
+									<td><a TARGET="principal" href="../m10/m2a10_Objectius.html"><img name="projobj" id="projobj" src="imatges/m10/objectius.jpg"></a></td>
+									<td><a TARGET="principal" href="../m10/m2h10_TecniquesBasiques.html"><img name="projdiagfunc" id="projdiagfunc" src="imatges/m10/DiagFunc.jpg"></a></td>
+									<td><a TARGET="principal" href="../m10/m2h15_Geometria.html"><img name="projbasic" id="projbasic" src="imatges/m10/ConcBasics.jpg"></a></td>
+									<td><a TARGET="principal" href="../m10/m2i10_DisplayLists.html"><img name="projavanc" id="projavanc" src="imatges/m10/ConcAvanc.jpg"></a></td>
+									<td><a TARGET="principal" href="../m10/m2j10_resum.html"><img name="projres" id="projres" src="imatges/m10/resum.jpg"></a></td>
+								</tr>
+							</table>
+						</DIV>
+						<DIV class="Barra_visreal" id="Barra_visreal" NAME="Barra_visreal" style="position: absolute;top: 0px;left: 0px;width: 952px;visibility: hidden;">
+							<table border=0 cellspacing=0 cellpadding=0>
+								<tr>
+									<td><a TARGET="principal" href="../m11/m3a10_Intro.html"><img name="visrealintr" id="visrealintr" src="imatges/m11/introduccio.jpg"></a></td>
+									<td><a TARGET="principal" href="../m11/m3a15_Objectius.html"><img name="visrealobj" id="visrealobj" src="imatges/m11/objectius.jpg"></a></td>
+									<td><a TARGET="principal" href="../m11/m3a20_RayTracIntro.html"><img name="visrealtrasat" id="visrealtrasat" src="imatges/m11/trasatRaigs.jpg"></a></td>
+									<td><a TARGET="principal" href="../m11/m3b01_Ombres.html"><img name="visrealombres" id="visrealombres" src="imatges/m11/ombres.jpg"></a></td>
+									<td><a TARGET="principal" href="../m11/m3c01_introduccio.html"><img name="visrealtransp" id="visrealtransp" src="imatges/m11/transparencies.jpg"></a></td>
+									<td><a TARGET="principal" href="../m11/m3d10_intro.html"><img name="visrealreflex" id="visrealreflex" src="imatges/m11/reflexions.jpg"></a></td>
+									<td><a TARGET="principal" href="../m11/m3e10_Textures.html"><img name="visrealtextu" id="visrealtextu" src="imatges/m11/textures.jpg"></a></td>
+									<td><a TARGET="principal" href="../m11/m3f10_Antialiasing.html"><img name="visrealantial" id="visrealantial" src="imatges/m11/antialiasing.jpg"></a></td>
+									<td><a TARGET="principal" href="../m11/m3g10_Resum.html"><img name="visrealresum" id="visrealresum" src="imatges/m11/resum.jpg"></a></td>
+								</tr>
+							</table>
+						</DIV>
+						<DIV class="Barra_anim" id="Barra_anim" NAME="Barra_anim" style="position: absolute;top: 0px;left: 0px;width: 250px;visibility: hidden;">
+							<table border=0 cellspacing=0 cellpadding=0>
+								<tr>
+									<td><a TARGET="principal" href="../m12/m4a10_AnimacioIntro.html"><img name="animintr" id="animintr" src="imatges/m12/introduccio.jpg"></a></td>
+									<td><a TARGET="principal" href="../m12/m4a20_AnimacioObjectius.html"><img name="animobj" id="animobj" src="imatges/m12/objectius.jpg"></a></td>
+									<td><a TARGET="principal" href="../m12/m4b10_AnimacioClassif.html"><img name="animconcclass" id="animconcclass" src="imatges/m12/concclass.jpg"></a></td>
+									<td><a TARGET="principal" href="../m12/m4b30_AnimacioVRML.html"><img name="animvrml" id="animvrml" src="imatges/m12/vrml.jpg"></a></td>
+									<td><a TARGET="principal" href="../m12/m4c10_MorphingIntro.html"><img name="animmorph" id="animmorph" src="imatges/m12/morphing.jpg"></a></td>
+									<td><a TARGET="principal" href="../m12/m4d10_AnimacioResum.html"><img name="animresum" id="animresum" src="imatges/m12/resum.jpg"></a></td>
+								</tr>
+							</table>
+						</DIV>
+						<DIV class="Barra_realvirt" id="Barra_realvirt" NAME="Barra_realvirt" style="position: absolute;top: 0px;left: 0px;width: 1465px;visibility: hidden;">
+							<table border=0 cellspacing=0 cellpadding=0>
+								<tr>
+									<td><a TARGET="principal" href="../m13/m5a00_intro.html"><img name="realvirtintr" id="realvirtintr" src="imatges/m13/introduccio.jpg"></a></td>
+									<td><a TARGET="principal" href="../m13/m5a00_objectius.html"><img name="realvirtobj" id="realvirtobj" src="imatges/m13/objectius.jpg"></a></td>
+									<td><a TARGET="principal" href="../m13/m5a01_def.html"><img name="realvirtdefconc" id="realvirtdefconc" src="imatges/m13/defconc.jpg"></a></td>
+									<td><a TARGET="principal" href="../m13/m5b01_Arquit.html"><img name="realvirtarquit" id="realvirtarquit" src="imatges/m13/arquitectura.jpg"></a></td>
+									<td><a TARGET="principal" href="../m13/m5c01_Periferics.html"><img name="realvirtperif" id="realvirtperif" src="imatges/m13/periferics.jpg"></a></td>
+									<td><a TARGET="principal" href="../m13/m5d01_Estereo.html"><img name="realvirtvisester" id="realvirtvisester" src="imatges/m13/visEster.jpg"></a></td>
+									<td><a TARGET="principal" href="../m13/m5e01_Escena.html"><img name="realvirtrepresc" id="realvirtrepresc" src="imatges/m13/represc.jpg"></a></td>
+									<td><a TARGET="principal" href="../m13/m5f01_acel.html"><img name="realvirttecacc" id="realvirttecacc" src="imatges/m13/tecacc.jpg"></a></td>
+									<td><a TARGET="principal" href="../m13/m5g01_coli.html"><img name="realvirtdetcol" id="realvirtdetcol" src="imatges/m13/detcol.jpg"></a></td>
+									<td><a TARGET="principal" href="../m13/m5h00_resum.html"><img name="realvirtresum" id="realvirtresum" src="imatges/m13/resum.jpg"></a></td>
+								</tr>
+							</table>
+						</DIV>
+						<!--<DIV class="Barra_proj2" id="Barra_proj2" NAME="Barra_proj2" style="position: absolute;top: 0px;left: 0px;width: 250px;visibility: hidden;">
+							<table border=0 cellspacing=0 cellpadding=0>
+								<tr>
+									<td><a TARGET="principal" href="../m14/m6a10_ProjecteIntro.html"><img name="proj2intr" id="proj2intr" src="imatges/m14/introduccio.jpg"></a></td>
+									<td><a TARGET="principal" href="../m14/m6a20_ProjecteObjectius.html"><img name="proj2obj" id="proj2obj" src="imatges/m14/objectius.jpg"></a></td>
+									<td><a TARGET="principal" href="../m14/m6a30_ProjecteEnunciats.html"><img name="proj2enun" id="proj2enun" src="imatges/m14/enunciats.jpg"></a></td>
+									<td><a TARGET="principal" href="../m14/m6a40_ProjecteResum.html"><img name="proj2resum" id="proj2resum" src="imatges/m14/resum.jpg"></a></td
+								</tr>
+							</table>
+						</DIV>-->
+						<DIV class="Barra_opengl" id="Barra_opengl" NAME="Barra_opengl" style="position: absolute;top: 0px;left: 0px;width: 250px;visibility: hidden;">
+							<table border=0 cellspacing=0 cellpadding=0>
+								<tr>
+									<td><a TARGET="principal" href="../m15/m7a01_Introduccio.html"><img name="openglintr" id="openglintr" src="imatges/m15/introduccio.jpg"></a></td>
+									<td><a TARGET="principal" href="../m15/m7a10_BasicIntroduccio.html"><img name="openglcridbas" id="openglcridbas" src="imatges/m15/cridbas.jpg"></a></td>
+									<td><a TARGET="principal" href="../m15/m7b10_QueEsGL4Java.html"><img name="openglgl4java" id="openglgl4java" src="imatges/m15/gl4java.jpg"></a></td>
+									<td><a TARGET="principal" href="../m15/m7c01_ExtensIntroduccio.html"><img name="openglextop" id="openglextop" src="imatges/m15/extOpenGL.jpg"></a></td>
+									<td><a TARGET="principal" href="../manpages/index.html"><img name="openglmanpag" id="openglmanpag" src="imatges/m15/manpages.jpg"></a></td>
+								</tr>
+							</table>
+						</DIV>
+        			</div>
+				</td>
+				<td width="50" align="right" onMouseOver="overDreta()" onMouseOut="outDreta()">
+     				<a href="javascript:moveDreta()">
+						<img id="dreta" NAME="dreta" src="imatges/dreta.jpg" border="0">
+					</a>
+				</td>
+     		</tr>
+     	</table>
+  	</body>
+</html>

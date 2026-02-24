@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("anim","morph");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+[Anterior]
+<a href="m4c20_Warping.html">[Següent]</a>
+<a href="m4b30_AnimacioVRML">[Apartat anterior]</a>
+</div>
+<br><br>
+
+<div class=tit1>Metamorfosi d'imatges (Morphing).
+<span class=tit2>Introducció</span>
+</div>
+
+<p> Les tècniques de metamorfosi d'imatges (Morphing) permeten fer una
+transició suau d'un objecte a un altre. Habitualment, i en els casos
+més senzills que veurem aquí, no es treballa fent una metamorfosi real
+dels objectes (en espai objecte) sinó que es fa una metamorfosi entre
+dues imatges digitals, la inicial i la final, que contenen cada una
+d'elles la representació d'un dels dos objectes (treball en espai
+imatge). Les tècniques de metamorfosi són un clar complement a les
+técniques d'animació que acabem de veure als apartats anteriors, i
+s'utilitzen en molts casos en cine i TV. Com a exemple podem posar la
+transformació entre cares de diferents personatges, o la transformació
+en que un objecte (o un animal) es transforma en un altre. Podeu
+trobar la descripció de molts exemples d'utilització del morphing en
+la producció de pel·lícules concretes, al llibre "Digital Image Warping"
+de G. Wolberg (IEEE Computer Society Press 1990) o en la recopilació
+feta pel mateix autor a la revista "The Visual Computer": "Image
+Morphing Survey", G. Wolberg, The Visual Computer, Vol 14 nums 8/9,
+1998.
+
+<p> Cal distingir entre les tècniques de metamorfosi entre imatges
+(morphing) i les de deformació d'imatges (warping). En el primer cas
+estem parlant de la transformació d'un primer objecte a un altre
+diferent, mentre que en segon cas es tracta de la transformació del
+mateix objecte, que passa d'una posició a una altra posició o
+"actitud" diferent.
+
+<p> En tot cas, podem parlar de tres tipus de tècniques diferents:
+
+<ul>
+<li> Les tècniques de deformació d'imatges (warping): en aquest cas
+l'únic que s'obté són deformacions de la imatge inicial. Amb aquestes
+deformacions, que sempre s'apliquen en el pla 2D de la imatge, es
+poden simular deformacions generals, perspectives i moviments
+3D. Aquestes tècniques són molt usades en efectes especials en cine i
+TV (un exemple podria ser la simulació del moviment del pas de les
+pàgines d'un llibre).</li>
+
+<li> Les tècniques d'interpolació entre imatges (cross-disolving): en
+aquest cas tenim dues imatges diferents. L'algorisme d'interpolació
+permet passar suaument de l'una a l'altra per simple interpolació del
+color entre els pixels homòlegs a cada una de les dues imatges.</li>
+
+<li> Les tècniques de metamorfosi entre imatges (morphing): en aquest
+cas es vol generar una seqüència suau que passi d'una imatge que conté
+un objecte a una altra imatge que conté un segon objecte. Un exemple
+seria la metamorfosi entre les cares de dues persones diferents. Com
+veurem, els algorismes de metamorfosi són més complexes i usen a la
+vegada els dos algorismes anteriors, de deformació i interpolació
+entre imatges.</li>
+</ul>
+
+<p> Als propers apartats veurem les tècniques bàsiques que s'apliquen
+per cada una d'aquestes operacions en la metamorfosi d'imatges 2D,
+analitzant les seves prestacions i limitacions. Finalment, descriurem
+breument algunes altres tècniques que no podem incloure en aquest
+apartat per raons de brevetat, així com alguns algorismes que
+treballen en espai objecte i que permeten efectuar metamorfosi
+directament dels objectes 2D i 3D.  
+
+
+<br><br>
+<DIV CLASS="nav">
+[Anterior]
+<a href="m4c20_Warping.html">[Següent]</a>
+<a href="m4b30_AnimacioVRML">[Apartat anterior]</a>
+</div>
+</body>
+</html>

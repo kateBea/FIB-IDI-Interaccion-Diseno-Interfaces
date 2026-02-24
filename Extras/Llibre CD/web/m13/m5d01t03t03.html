@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("realvirt","visester");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m5d01t03t02.html">[Anterior]</a>
+<a href="m5d01t03t04.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Visió estereoscòpica.
+<span class=tit2>Fonaments de la percepció estereoscòpica.</span>
+<span class=tit3>Model de càmera binocular</span>
+</div>
+
+<p>En aquest apartat definirem un model adient per representar un
+observador binocular. Començarem introduint un model força redundant,
+per detallar després el model que farem servir.</p>
+
+<p>Una primera aproximació per representar un observador binocular
+seria fer servir dues càmeres independents, una per l'ull esquerre
+(diguem-li <b>eye</b><sub><b>l</b></sub>) i una altra per l'ull dret
+(diguem-li <b>eye</b><sub><b>r</b></sub>). Per tant, una possibilitat
+és descriure l'observador binocular amb aquests sis paràmetres:</p>
+
+<ul>
+  <li>Posició ull esquerre <b>O<sub>l</sub></b></li>
+  <li>Posició ull dret <b>O<sub>r</sub></b></li>
+  <li>Centre escena ull esquerra <b>C<sub>l</sub></b></li>
+  <li>Centre escena ull dret <b>C<sub>r</sub></b></li>
+  <li>Vector cap amunt <b>u<sub>l</sub></b></li>
+  <li>Vector cap amunt <b>u<sub>r</sub></b></li>
+</ul>
+
+<p>Tenint en compte que cada càmera virtual representa un ull d'un
+observador humà, podem constatar fàcilment que aquests sis paràmetres
+no són independents entre sí, ja que estan afectats per les
+restriccions pròpies de l'anatomia i el funcionament del sistema
+visual humà.</p>
+
+<p>Una d'aquestes restriccions afecta a la distància entre els dos
+ulls. La distància entre <b>O<sub>l</sub></b> i
+<b>O<sub>r&nbsp;</sub></b> és fixa i s'anomena <b>distància
+interocular</b> (en anglès, interocular distance) i la denotarem per
+<b>iod</b>. En una persona adulta, la distància interocular és
+aproximadament 6 cm.</p>
+
+<p>Una altra restricció afecta a la orientació dels ulls. Si
+considerem els ulls de forma individual, cada ull pot girar de dreta a
+esquerra (és a dir, al voltant de l'eix Y) i de dalt a baix (és a dir,
+al voltant de l'eix X), però no és possible girar-lo al voltant de
+l'eix Z (necessitaríem músculs oculars dels que no disposem). Com a
+conseqüència d'això, l'eix Y és el mateix per ambdós ulls, amb la qual
+cosa podem agafar el mateix valor pels vectors cap amunt de cada ull,
+o dit d'una altra forma, <b>u<sub>l</sub></b>&nbsp; =
+<b>u<sub>r</sub></b>.  De fet, l'única forma d'alterar l'eix Y del SCO
+és tombant el cap com si volguéssim tocar l'espatlla amb l'orella:</p>
+
+<div align="center"><img border="0" src="imatges/cararotadas.jpg" width="250" height="283"></div>
+
+<p>Una altra restricció que també afecta a la orientació dels ulls és
+conseqüència de la sincronització dels seus moviments. Alguns animals,
+com el camaleó, poden controlar els moviments de cada ull de manera
+autònoma, però a l'ésser humà els moviments dels ulls segueixen
+determinades restriccions. Els eixos òptics poden estar
+<b>paral·lels</b> (quan mirem un objecte molt llunyà, o quan relaxem
+la vista i mirem &quot;a l'infinit&quot;) o poden <b>convergir</b> en
+un punt <b>I</b> (quan mirem un objecte proper), però mai no poden
+<b>divergir</b> (almenys, no de forma voluntària). Aquest fet també
+representa una restricció sobre la distància entre <b>C<sub>l
+</sub></b>i <b>C<sub>r </sub></b>.
+
+<p>Finalment, per fer el model més senzill, considerarem que
+l'observador està mirant sempre cap endavant (és a dir, que no mira de
+reüll). Aquesta restricció addicional no limita gaire la validesa del
+nostre model i permet definir el model de càmera binocular que es
+descriu a continuació.</p>
+
+<p>El model de càmera binocular que farem servir per representar un
+observador amb dos ulls consta d'aquests elements, a partir dels quals
+és possible calcular els paràmetres corresponents a l'ull dret i a
+l'ull esquerre, respectivament. Fixeu-vos que com a origen del nou
+sistema de coordenades estem agafant un punt mig entre els dos
+ulls:</p>
+
+<ul>
+  <li><b>Posició de l'observador O. </b> Definirem la posició de l'observador
+    d'una càmera binocular com el punt situat al centre del segment que uneix el centre dels dos ulls.
+    Dit d'una altra manera, agafarem el punt O al punt mig del segment <b> O<sub>l</sub>O<sub>r</sub></b>,
+    i que per tant està a distància <b> iod/2</b> de cada ull.&nbsp;</li>
+  <li><b>Centre de l'escena C. </b>Definirem el centre de l'escena d'una càmera
+    binocular com el <b>punt de convergència</b> dels dos eixos òptics.
+    Fixeu-vos que si volem representar un observador amb els eixos òptics
+    aproximadament paral·lels, hem d'agafar un punt de convergència molt lluny
+    de la posició de l'observador.
+  </li>
+  <li><b>Vector cap amunt u.&nbsp;</b> Direcció vertical del cap de l'observador.</li>
+  <li><b>Distància interocular iod. </b> És la distància entre els dos ulls.
+    Encara que normalment es tracta d'una constant que val aproximadament 6 cm en
+    un individu adult, a vegades convé considerar-lo com un paràmetre més,
+    sobretot quan no interessa tant obtenir una perspectiva estèreo
+    &quot;matemàticament correcta&quot; sinó una perspectiva &quot;eficaç&quot;. Per exemple,
+    si volem visualitzar un model del sistema solar, on les dimensions són de
+    l'ordre de milions de km, no té cap sentit considerar un
+    observador amb dos ulls separats només per 6 cm!</li>
+</ul>
+
+<p>Aquesta figura il·lustra la interpretació dels paràmetres que acabem de
+discutir:</p>
+
+<div align="center"><img border="0" src="imatges/camarabinocular.jpg" width="400" height="290"></div>
+
+<p>Fixeu-vos que a partir dels paràmetres de la càmera binocular, el càlcul
+dels paràmetres corresponents a cada ull són trivials:</p>
+
+<ul>
+  <li> <b>O<sub>l </sub></b>=&nbsp; <b>O</b> - (<b>iod</b>/2)*(<b>OC</b> ^ <b>u</b>)/||<b>OC</b>
+    ^ <b>u</b> ||&nbsp;</li>
+  <li> <b>O<sub>r </sub></b>=&nbsp; <b>O</b> + (<b>iod</b>/2)*(<b>OC</b> ^ <b>u</b>)/||<b>OC</b>
+    ^ <b>u</b> ||</li>
+  <li> <b>C<sub>l </sub></b>= <b>C</b></li>
+  <li> <b>C<sub>r </sub></b>= <b>C</b></li>
+  <li> <b>u<sub>l </sub></b>=<b>u</b></li>
+  <li> <b>u<sub>r </sub></b>=<b>u</b></li>
+</ul>
+
+<p>Un paràmetre d'utilitat és la <b>distància focal </b>(<i>focal length</i>),
+que anomenarem <b>f</b>&nbsp; i que definirem com la distància entre
+l'observador i els punts on es creuen els eixos òptics, és a dir, la
+distància de O a C.</p>
+
+<p>Un altre paràmetre d'utilitat és l'<b>angle de convergència</b>  denotat
+per <b>a</b>. L'angle de convergència es defineix com l'angle entre el vector
+OC&nbsp; i qualsevol
+    dels eixos òptics. Quan els ulls estan mirant en direccions paral·leles,
+    l'angle <b>a</b> és zero. A mesura que els ulls convergeixen en un punt
+    més proper, l'angle <b>a</b> augmenta. El valor límit d'aquest angle
+    depèn de cada persona, però per enllà dels 45-50 graus hem de fer un esforç visual
+    considerable (no només perquè els músculs oculars han de girar l'ull fins
+    al límit, sinó també perquè el cristal·lí s'ha de deformar molt més
+    per enfocar un objecte molt proper). L'angle de convergència no l'hem
+inclòs dintre dels paràmetres de la càmera binocular perquè es pot calcular
+fàcilment a partir de la distancia focal i de <b>iod</b>:&nbsp;&nbsp;&nbsp;</p>
+
+<ul>
+  <li><b>a</b>=arctan( (<b>iod * f </b>/ 2) )</li>
+</ul>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m5d01t03t02.html">[Anterior]</a>
+<a href="m5d01t03t04.html">[Següent]</a>
+</div>
+</body>
+</html>

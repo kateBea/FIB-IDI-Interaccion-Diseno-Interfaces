@@ -1,0 +1,17 @@
+8
+imatges/pere1.jpg
+Imatge original amb tot el codi
+imatges/pere2.jpg
+Sense el primer render() de la linia b
+imatges/pere3.jpg
+Sense el glCullFace(GL_BACK)
+imatges/pere4.jpg
+Sense el glCullFace(GL_FRONT)
+imatges/pere5.jpg
+Sense cap dels dos glCullFace()
+imatges/pere6.jpg
+Sense el render() de la línia l
+imatges/pere7.jpg
+Sense inhabilitar el z-buffer
+imatges/pere8.jpg
+Crida a glStencilFunc (linia m) modificada

@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M6.1 Procés de visualització 3D.MapaSensible.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("vis3D","estr");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+<a href="MSExplicacio5.html">[Anterior]</a>
+<a href="MSTransmet5.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Subprocessos.
+<span class=tit2>Algorisme per a la visualització en filferros 4</span>
+</div>
+
+<P>
+L'algorisme de retallat lateral fa un recorregut per totes les
+arestes, i elimina les que queden totalment fora de la finestra
+normalitzada 2D. Un algorisme senzill, que només elimina les arestes
+que apareixen totalment damunt, sota, a la dreta o a l'esquerra de la
+finestra normalitzada seria,
+
+<PRE class=algoritme>
+<b>Per</b> cada aresta a de la taula Arestes <b>fer</b>
+   k1 := a.P1
+   k2 := a.P2
+   <b>Si</b>
+      PuntsProj[k1].Punt.x > 1. <B>i</B> PuntsProj[k2].Punt.x > 1. <B>--></B> Esborra(a)
+      PuntsProj[k1].Punt.x <-1. <B>i</B> PuntsProj[k2].Punt.x <-1. <B>--></B> Esborra(a)
+      PuntsProj[k1].Punt.y > 1. <B>i</B> PuntsProj[k2].Punt.y > 1. <B>--></B> Esborra(a)
+      PuntsProj[k1].Punt.x <-1. <B>i</B> PuntsProj[k2].Punt.y <-1. <B>--></B> Esborra(a)
+   <b>fSi</b>
+<b>fPer</b>
+</PRE>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="MSExplicacio5.html">[Anterior]</a>
+<a href="MSTransmet5.html">[Següent]</a>
+</div>
+</BODY>
+</HTML>

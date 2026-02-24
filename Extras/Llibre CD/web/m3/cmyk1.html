@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M3.3.El model cmyk.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("color","cmyk");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+      <A HREF="main34.html">[Anterior]</a>
+      <A HREF="exerciciCMYK.html" target="principal">[Següent]</a>
+</div>
+<br><br>
+
+<div class="tit1">El model CMY(K).
+<span class="tit2">Definició</span>
+</div>
+
+<P>
+Quan el dispositiu en que presentarem una imatge funciona depositant
+tinta en un substrat, en comptes de generant llum, sorgeix una
+diferència fonamental, perquè les tintes operen absorbint la llum que
+no sigui del seu color. Per exemple una tinta vermella és tal que tota
+la llum blava o verda que hi incideix és absorbida. Una tinta groga
+absorbeix tota la llum blava que hi incideix, etc.
+
+<P>
+Cal en aquest cas formular un model substractiu de color, en
+contraposició al RGB, que s'anomena aditiu perquè especifica un color
+dient les components de llum que cal sumar per a obtenir un cert
+color. Per això les impressores usen el sistema CMY (o el CMYK que
+veurem més avall), un acrònim format amb les inicials de les paraules
+angleses per cian, magenta i groc (els complementaris del vermell,
+verd i blau en aquest ordre). Ara per exemple una tinta cian
+absorbeix la llum vermella. Com més tinta hi posem, menys llum
+vermella tindrem, fins que quan <I>C=1</I> no tindrem cap component
+vermella (<I>R=0</I>). Si volem obtenir un color verd, per exemple,
+necessitarem absorbir tota la llum vermella i blava, pel que posarem
+el màxim de cian i de groc. Aquest model es correspon amb el que
+primer aprenem en els colegis, quan barrejem colors pe fabricar-ne de
+nous.
+
+<P>
+En el model CMY el negre és doncs la suma de quantitats màximes de
+tintes cian, magenta i groga. Algunes impressores admeten però una
+quarta tinta (negra) per aquest cas, i així parlem del model CMYK (on
+la K denota la component negra).
+
+<P>
+El model CMYK s'origina en raons tecnològiques. Les tintes usades per
+les impressores mullen el paper, i hi ha una quantitat màxima de tinta
+que aquest pot absorbir en un punt. Sovint això implica que no podem
+generar satisfactòriament el negre (usant <I>C=1, M=1, Y=1</I>) perquè
+l'excés de tinta produeix esborronaments o arruga el paper. Aleshores
+es recorre a la tinta negra, de tal manera que podem passar la
+"component negra" per ser impresa sols amb aquesta tinta. És a dir que
+per exemple un color donat en CMY per <I>(0.3,0.2,0.6)</I> pot
+expressar-se en CMYK per exemple com <I>(0.1,0.0,0.4,0.2)</I> o com
+<I>(0.2,0.1,0.5,0.1)</I>. La tria entre les infinites representacions
+CMYK es realitza intentant optimitzar la presentació en un dispositiu
+segons la seva tecnologia, intentant minimitzar la quantitat de tinta
+i maximitzar la qualitat d'impressió.
+
+<P>
+També hi ha un motiu econòmic per a usar tinta negra, tota vegada que
+sol ser més econòmica que la de color, i a més cal menys quantitat
+total de tinta.
+
+<br><br>
+<DIV CLASS="nav">
+      <A HREF="main34.html">[Anterior]</a>
+      <A HREF="exerciciCMYK.html" target="principal">[Següent]</a>
+</div>
+</BODY>
+</HTML>
+

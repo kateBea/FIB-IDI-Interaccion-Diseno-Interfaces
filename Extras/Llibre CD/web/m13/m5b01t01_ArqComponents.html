@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("realvirt","arquit");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m5b01_Arquit.html">[Anterior]</a>
+<a href="m5b01t02_ArqFuncionament.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Arquitectura.
+<span class=tit2>Components d'un sistema de realitat virtual</span>
+</div>
+
+<p>En un sistema de realitat virtual es poden distingir elements
+<b>hardware </b>i elements <b>software</b>.</p>
+
+<p>Els components hardware més importants són el <b>computador</b>,
+els <b>perifèrics d'entrada</b>, i els <b>perifèrics de sortida</b>.</p>
+
+<p>Els components software més importants són el <b>model
+geomètric 3D</b> i els programes de <b>simulació sensorial </b>(simulació
+visual, auditiva, tàctil...), <b>simulació física</b> (moviment de la càmera
+virtual, detecció de col·lisions, càlcul de deformacions...), i <b>recollida
+de dades</b>.</p>
+
+<p>La següent figura il·lustra els components d'un sistema
+típic de realitat virtual:</p>
+
+<div ALIGN="center"><img border="0" src="imatges/arquitecturas.jpg" width="550" height="383"></div>
+
+<p>A continuació descriurem breument cadascun d'aquests
+components:</p>
+
+<div class=tit3><b>Perifèrics d'entrada (sensors)</b>
+</div>
+
+<p>Els perifèrics d'entrada s'encarreguen de <i>capturar
+les accions del participant i enviar aquesta informació al computador</i>. Els
+perifèrics d'entrada més freqüents en realitat virtual són els <b>posicionadors</b>
+(que permeten al sistema conèixer en temps real la posició i orientació del
+cap, de la mà, o de tot el cos de l'usuari), els <b>guants </b>(que permeten
+detectar el moviment dels dits de la mà) i els <b>micròfons </b>(que
+enregistren la veu del participant).</p>
+
+<div class=tit3><b>Perifèrics de sortida (efectors)</b></div>
+
+<p>Els perifèrics de sortida s'encarreguen de <i>traduir els
+senyals d'àudio, vídeo, etc. generats pel computador en estímuls pels
+òrgans dels sentits</i> (so, imatges, etc.). Els efectors es classifiquen
+segons el sentit al que estan adreçats: hi ha efectors <b>visuals </b>(cascos
+estereoscòpics, pantalles de projecció...), d'<b>àudio</b> (sistemes de so,
+altaveus), de <b>força i tacte</b> (dispositius tàctils), i del sentit de l'<b>equilibri</b> (plataformes mòbils).</p>
+
+<div class=tit3><b>Computador</b>
+</div>
+
+<p>El computador s'encarrega de dur a terme la simulació de
+forma interactiva, basant-se en el model geomètric 3D i en el programari de
+recollida de dades, simulació física i simulació sensorial. Degut a que el procés més crític en realitat
+virtual és la simulació visual (síntesi d'imatges a partir de models 3D),
+els computadors que es fan servir per realitat virtual són estacions de treball
+amb prestacions gràfiques avançades, on la major part de les etapes del
+procés de visualització estan implementades per hardware.</p>
+
+<div class=tit3><b>Model geomètric 3D</b></div>
+
+<p>Donat que un sistema de realitat virtual ha de permetre
+explorar l'escena de forma interactiva i veure el món virtual des de qualsevol
+punt de vista, és necessari disposar d'una representació geomètrica 3D d'aquest
+món, que permeti fer els càlculs d'imatges, generació de so espacial,
+càlcul de col·lisions, etc. als mòduls que descriurem més endavant.</p>
+
+<div class=tit3><b>Software de tractament de dades d'entrada</b></div>
+
+<p>Els mòduls de recollida i tractament de dades s'encarreguen de
+llegir i processar la informació que proporcionen els sensors. Això inclou els
+controladors dels dispositius físics, així com els mòduls pel
+primer tractament de les dades subministrades. Per exemple, les dades de
+posició i orientació del cap de l'usuari normalment s'han de transformar
+per expressar-les en un sistema de coordenades de l'aplicació,
+i s'han de filtrar per evitar salts sobtats com a conseqüència de lectures
+errònies dels valors de posició. Els sistemes que permeten la comunicació amb
+l'ordinador mitjançant ordres orals requereixen un sistema de reconeixement
+de veu. Altres
+sistemes fan servir un esquema de comunicació basat en gestos de la mà (una
+mena de llenguatge de sord-muts però més senzill) i requereixen el
+reconeixement de gestos a partir d'una seqüència de moviments.</p>
+
+<div class=tit3><b>Software de simulació física</b></div>
+
+<p>Els mòduls de simulació física s'encarreguen de dur a
+terme les modificacions pertinents en la representació digital de l'escena, a
+partir de les accions de l'usuari i de l'evolució interna del sistema. Per
+exemple, si el mòdul de recollida de dades indica que l'usuari ha fet el gest
+corresponent per obrir una porta, el sistema ha d'aplicar la transformació
+geomètrica corresponent a l'objecte del model 3D que representa aquesta
+porta. Aquests mòduls varien molt depenent de l'aplicació concreta. La
+funció més bàsica consisteix a calcular en temps real els paràmetres de la
+càmera virtual d'acord amb els moviments de l'usuari, encara que també pot
+encarregar-se del càlcul de col·lisions, deformacions, comportament i altres
+actualitzacions que afectin a l'evolució en el temps de l'entorn virtual
+representat.</p>
+
+<div class=tit3><b>Software de simulació sensorial</b></div>
+
+<p>Aquests mòduls s'encarreguen de calcular la representació digital
+de les imatges, sons, etc. que el hardware s'encarregarà de traduir a
+senyals i finalment a estímuls pels sentits. Entre els mòduls de
+simulació sensorial, el més important és el de <b>simulació
+visual</b>, que es basa en algorismes de visualització en temps real
+del model geomètric. Els algorismes de visualització que es fan servir
+en realitat virtual són semblants als que s'han descrit als capítols
+anteriors però, donat que el rendiment és crític, s'utilitzen
+tècniques d'acceleració d'imatge per tal de reduir al mínim possible
+el temps de generació de cada fotograma. Respecte a la <b>simulació
+auditiva</b>, cal dir que la generació de so realista requereix tenir
+en compte les propietats acústiques dels objectes i que els algorismes
+són tan complicats com els algorismes de visualització. Respecte a la
+<b>simulació tàctil</b>, cal distingir entre els dispositius que
+proporcionen sensació de tacte (sovint limitada a la mà), sensació de
+contacte (també limitada a la mà) i realimentació de força (impedeixen
+o ofereixen resistència a fer moviments amb la mà quan aquesta topa
+virtualment amb un objecte virtual). En qualsevol dels casos, és
+imprescindible que el sistema sigui capaç de detectar en temps real
+les col·lisions que es puguin produir entre la mà de l'usuari i els
+objectes de l'escena, ja que és aquest esdeveniment qui activa els
+dispositius hardware adients.</p>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m5b01_Arquit.html">[Anterior]</a>
+<a href="m5b01t02_ArqFuncionament.html">[Següent]</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("opengl","extop");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m7c60_Textures.html">[Anterior]</a>
+<a href="m7c80_Seleccio.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1> Extensió de crides d'OpenGL.
+<span class=tit2>Interrogació bàsica de l'estat</span>
+</div>
+
+<P>
+Com que OpenGL és una màquina d'estats, en moltes ocasions ens pot
+interessar saber en quin estat es troba per a una determinada
+qüestió. En els diferents apartats que hem vist en aquest capítol, en
+ocasions hem comentat que tal o qual cosa es pot averiguar usant la
+crida d'interrogació corresponent i passant-li un cert
+paràmetre. Aquest és el cas de crides com <b>glGetIntegerv</b> o
+<b>glIsEnable</b>. En aquest punt anem a veure algunes d'aquestes
+crides que OpenGL ofereix per a poder interrogar el seu estat.
+
+<a name="glGetBooleanv"></a>
+<a name="glGetIntegerv"></a>
+<a name="glGetFloatv"></a>
+<a name="glGetDoublev"></a>
+<a name="glGetPointerv"></a>
+<pre class=algoritme>
+          void <b>glGetBooleanv</b> (GLenum pname, GLboolean *params)
+          void <b>glGetIntegerv</b> (GLenum pname, GLint *params)
+          void <b>glGetFloatv</b> (GLenum pname, GLfloat *params)
+          void <b>glGetDoublev</b> (GLenum pname, GLdouble *params)
+          void <b>glGetPointerv</b> (GLenum pname, GLvoid *params)
+</pre>
+
+<P>
+Aquestes crides ens permeten averiguar quins són els valors que tenen
+algunes variables d'estat d'OpenGL que tenen tipus boleà, enter, real
+en simple precisió, real en doble precisió o punter. El primer
+paràmetre, <i>pname</i>, indica la constant simbòlica d'OpenGL de la
+qual volem saber el seu valor, i el segon paràmetre, <i>param</i>, és
+un punter a una taula del tipus indicat on es col·locarà el/s valor/s
+resultant/s de la consulta. Lògicament no podem enumerar aquí totes les
+possibles variables d'estat que es poden consultar amb aquestes
+crides, però podeu consultar qualsevol manual de referència d'OpenGL o
+el llibre <a href="../Biblio.html#OpenGLGuide">[OpenGL Programming
+Guide]</a>.
+
+<a name="glIsEnabled"></a>
+<P>
+Una altre crida que és interessant per a fer consultes és la crida
+<b>glIsEnabled</b>:
+
+<pre class=algoritme>
+          GLboolean <b>glIsEnabled</b> (GLenum capability)
+</pre>
+
+<P>
+Aquesta crida ens permet averiguar si una certa funcionalitat d'OpenGL
+està activada en un cert moment o no. El paràmetre de la crida,
+<i>capability</i>, indica quina és la funcionalitat que volem saber si
+ha estat activada, i per tant haurà de contenir una de les constants
+que OpenGL defineix com a funcionalitats activables (GL_DEPTH_TEST,
+GL_LIGHTING, GL_BLEND, etc...).
+
+<P>
+El que ens retorna aquesta crida és un booleà que serà cert, GL_TRUE,
+si aquesta funcionalitat està activada i fals, GL_FALSE, en altre cas.
+
+<a name="glGetString"></a>
+<pre class=algoritme>
+          GLubyte* <b>glGetString</b> (GLenum name)
+</pre>
+
+<P>
+Si el que volem és obtenir informació sobre la versió d'OpenGL que es
+contempla en la nostra implementació, podem usar aquesta crida. El que
+li podem passar com a paràmetre a <i>name</i> és: GL_VENDOR,
+GL_RENDERER, GL_VERSION o GL_EXTENSIONS. El retorn és una taula de
+bytes (string) que ens indica la informació que li hem demanat.
+
+<P>
+GL_VENDOR ens diu el nom de l'empresa responsable de la implementació
+OpenGL. GL_RENDERER ens dona un identificador del rasteritzador, que
+normalment és la plataforma hardware. GL_VERSION ens retorna un string
+que identifica el número de versió de la implementació
+d'OpenGL. GL_EXTENSIONS ens retorna una llista d'extensions que són
+les suportades per la implementació d'OpenGL que estem usant.
+
+<a name="glGetError"></a>
+<P>
+Quan es produeix un error en OpenGL, aquest guarda el codi d'aquest
+error en un flag que pot ser consultat quan interessa.
+
+<pre class=algoritme>
+          GLenum <b>glGetError</b> (void)
+</pre>
+
+<P>
+Aquesta crida retorna el valor del codi d'error que es troba al flag
+en el moment de la crida. Si no hi havia error retorna
+GL_NO_ERROR. Els codis d'error bàsics definits en OpenGL són:
+GL_INVALID_ENUM "argument GLenum fora de rang", GL_INVALID_VALUE
+"argument numèric fora de rang", GL_INVALID_OPERATION "operació
+il·legal en l'estat actual", GL_STACK_OVERFLOW "la comanda causaria
+desbordament de la pila", GL_STACK_UNDERFLOW "la comanda produiria
+<i>underflow</i> de la pila", GL_OUT_OF_MEMORY "no hi ha suficient
+memòria lliure per a executar la comanda".
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m7c60_Textures.html">[Anterior]</a>
+<a href="m7c80_Seleccio.html">[Següent]</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","ombres");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m3b20t30_OmbresVolFinal.html">[Anterior]</a>
+[Següent]
+<a href="m3c01_introduccio.html">[Següent apartat]</a>
+</div>
+<br><br>
+
+<div class=tit1>Ombres.
+<span class=tit2>Altres mètodes de generació d'ombres</span>
+</div>
+
+<p> En aquest apartat veurem alguns altres mètodes de generació
+d'ombres, que no detallem tant com els que hem descrit als apartats
+anteriors. En concret, comentarem l'algorisme d'aplicació d'ombres i
+dos algorismes que treballen en espai objecte i que per tant permeten
+obtenir la geometría exacta de les ombres poligonals.
+
+<p>Aplicació d'ombres (<i>shadow mapping</i>). En aquest cas,
+l'algorisme usa les capacitats d'eliminació de parts ocultes d'OpenGL
+(concretament l'algorisme de Z-Buffer) per generar les ombres en dos
+passos:
+
+<ul>
+<li>En primer lloc, l'algorisme suposa que situem el punt de vista al
+focus de llum. Es genera una visualització estàndard amb OpenGL, i la
+imatge obtinguda es guarda (amb la informació de profunditat) a una
+memòria auxiliar anomenada Shadow buffer. </li> <li>Ara, es fa una
+segona visualització amb un Z-buffer estàndard des del punt de vista,
+però amb alguns canvis a l'algorisme: Es tenen dos sistemes de
+coordenades So, Sf (observador i focus).  Per a cada punt visible, es
+transformen les seves coordenades (x,y,z) en el sistema de
+l'observador (So) a les (xf,yf,zf) respecte al sistema de coordenades
+del focus de llum Sf. Ara, es calcula la profunditat zb del shadow
+buffer pel punt (xf,yf). Si zb és més gran que zf, això ens indica que
+el punt es troba a la zona d'ombra, i el pintarem amb el color i
+lluminositat corresponents a l'ombra. En cas contrari, el punt es
+pinta amb el seu color propi. </li>
+<li>Aquest mètode té alguns problemes, que el fan difícil
+d'implementar: Ens trobem amb problemes d'aliasing deguts al mostreig
+de punts: apart de l'error de discretització degut al tamany dels
+propis pixels del shadow buffer, tenim els errors deguts a la
+projecció dels pixels de la imatge final sobre el shadow buffer,
+projecció que pot ser bastant més gran que un dels pixels del shadow
+buffer. Una solució, proposada per Reeves (Reeves,W., Salesin,D. and
+Cook,R., "Rendering antialiased shadows with depth maps", ACM Computer
+Graphics, Siggraph'1987, pp 283-291) és calcular la projecció de les 4
+cantonades del pixel i calcular la intensitat mitjana a partir de les
+intensitats d'aquestes quatre projeccions. </li>
+</ul>
+
+<p> També s'han proposat algorismes que treballen en dos passos, amb
+precisió d'espai objecte (Object-precision two-pass shadow algorithm:
+Atherton,P.R., Weiler,K., and Greenberg,D., "Polygon shadow
+generation", Siggraph 1978, pp 275-281).
+
+<p> Aquest algorisme treballa en espai objecte i fa els passos
+següents:
+
+<ul>
+<li> Transforma tots els objectes al sistema de coordenades que
+obtenim posant l'observador al focus de llum.</li>
+<li> Fa una eliminació de parts amagades en espai objecte. Al final
+obté una llista de sub-polígons visibles, cada un d'ells amb un
+apuntador o referència al polígon inicial.</li>
+<li> Inclou els polígons visibles com "surface detail polygons" dels
+polígons inicials. En general, per tot polígon inicial tindrem zones
+il·luminades - les zones que contenen subpolígons visibles - i zones
+fosques -les restants-.</li>
+<li> Fa una segona eliminació de parts ocultes des del punt de
+vista.</li>
+</ul>
+
+<p> D'altra banda, Chin i Feiner (l'any 1989) van proposar un
+algorisme amb precisió d'espai objecte que genera uns volums d'ombra
+(shadow volumes) usant un arbre BSP (Chin,N. and Feiner,S., "Near
+real-time shadow generation using BSP trees", Siggraph 1989 pp
+99-106). Chin i Feiner generen un arbre BSP de les zones
+clares/fosques, processant tots els polígons de l'escena i incorporant
+a l'arbre BSP la seva contribució al volum d'ombra.
+
+<p> Finalment, alguns autors han proposat algorismes per a la
+generació de penombres aprofitant les possibilitats que ens dona el
+buffer d'acumulació en OpenGL. L'article de M. Herf i Paul Heckbert
+(Fast Soft Shadows, ACM Siggraph'1996, pàg 145) és particularment
+interessant, per l'ús intensiu que fa d'aquestes possibilitats.  Els
+autors proposen discretitzar la font de llum (que en aquest cas és no
+puntual) en un conjunt de punts, i calcular, per a cada un d'aquests
+punts, l'ombra que es genera sobre cada polígon de l'escena. En un
+bucle per tots els punts mostrejats a la font de llum, aquestes ombres
+es van calculant i acumulant en el buffer d'acumulació. Un cop s'ha
+acabat tot el preprocés, els polígons que han quedat afectats per
+l'ombra o per la penombra es consideren polígons a texturar, amb una
+textura que no és més que la imatge que s'ha generat al buffer
+d'acumulació. Tot i que el preprocés és lent i de complexitat
+quadràtica, la visualització final des de diferents punts de vista és
+inmediata ja que simplement cal usar les prestacions de dibuix de
+polígons texturats d'OpenGL.
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m3b20t30_OmbresVolFinal.html">[Anterior]</a>
+[Següent]
+<a href="m3c01_introduccio.html">[Següent apartat]</a>
+</div>
+</body>
+</html>

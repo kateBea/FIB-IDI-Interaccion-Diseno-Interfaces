@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","reflex");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m3d47_ClippingPlanes.html">[Anterior]</a>
+[Següent]
+<a href="m3e10_Textures.html">[Següent apartat]</a>
+</div>
+<br><br>
+
+<div class=tit1>Reflexions.
+<span class=tit2>Mapatge de texures</span>
+</div>
+
+<p> El fonament d'aquesta tècnica consisteix en pintar sobre els
+miralls (objectes reflectors que existeixin en l'escena) una imatge
+similar a les reflexions que observaria l'observador en ells.
+
+<p> L'algorisme concret es pot veure sintetitzat en la figura següent,
+en una escena formada per un únic mirall.
+
+<center>
+<div><img src="imatges/ReflexTextur.png"></div>
+</center>
+
+<p> Hom pot observar que:
+
+<ul>
+<li> Es calcula una escena virtual constituïda pels objectes
+originals, reflectits respecte al pla que conté el mirall. No es
+consideren els objectes que estiguin en aquest pla.</li>
+<li> Es visualitza l'escena virtual des de l'observador i es guarda la
+imatge generada. </li>
+<li> Es visualitza l'escena real des de l'observador, mapant sobre
+el mirall (modelat mitjançant un polígon) una textura constituïda per
+la imatge generada en el punt anterior. S'assignen coordenades de
+textura de forma que els vèrtexs del mirall es mapin sobre ells
+mateixos.</li>
+</ul>
+
+<P>Com als mètodes anteriors, per cada mirall de l'escena, és
+necessari crear una escena virtual, per capturar cada imatge. A més
+hem de determinar les coordenades de textura dels vèrtexs del mirall
+en aquella imatge, pel que pot ser d'ajuda la funció <a
+href="../manpages/glu/project.html"><tt>gluProject()</tt></a> que
+calcula coordenades de dispositiu d'un punt. Observeu que les
+coordenades de textura que volem estan normalitzades a <i>[0,1]</i>,
+pel que cal passar a <tt>gluProject()</tt> aquests límits en comptes
+del viewport que realment estiguem fent servir.
+
+<P>Si es modifica la posició de l'observador, cal recalcular tot el
+procediment. No obstant, quan el moviment és petit, es pot aproximar
+la imatge reflectida per a una posició propera a partir de la mateixa
+imatge, però recalculant les coordenades de textura. Òbviament, el
+resultat no és correcte però si la grandària del mirall no és excessiva
+o si el moviment de l'observador és petit, pot resultar prou creïble.
+
+<p>La imatge que s'ultiliza com textura pot ser de més baixa resolució
+que la pantalla.  Aquesta qualitat inferior de la reflexió es pot
+compensar parcialment més tard amb el filtrat de textura que OpenGL fa
+en aplicar la textura. A més, tenint en compte que el mirall ocupa
+sols una part de l'escena, pot generar-se una textura més petita (hi
+ha prou amb que inclogui aquell tros), tenint cura de com es calculen
+les coordenades de textura (que han d'anar de zero a ú en el tros
+triat).
+
+<P>Comparant amb altres tècniques introduïdes de càlcul de reflexions
+com l'ús de l'stencil buffer, nomès resulta computacionalment més
+eficient si l'stencil buffer està implementat per software, o si ens
+estalviem recalcular les textures per a petits canvis de la posició de
+l'observador, conformant-nos amb una reflexió aproximada. Cal tenir en
+compte també que algunes plataformes poden tenir limitacions al nombre
+de textures que es poden aplicar a un polígon. Si sols s'accepta una,
+aquest mètode resultarà incompatible amb un mirall texturat.
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m3d47_ClippingPlanes.html">[Anterior]</a>
+[Següent]
+<a href="m3e10_Textures.html">[Següent apartat]</a>
+</div>
+</body>
+</html>

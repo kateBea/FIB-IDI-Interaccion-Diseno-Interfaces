@@ -1,0 +1,70 @@
+<HTML>
+<HEAD>
+<TITLE>Glossari</TITLE>
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<SCRIPT SRC="../upc.js">
+</SCRIPT>
+</HEAD>
+
+<BODY>
+<BR>
+<B><P>
+
+Esquelet d'un applet que tracta events de ratolí
+</B></P>
+
+<pre class=algoritme>
+...
+public class exemple extends Applet implements MouseListener{
+
+    public void init() {
+       ...
+       addMouseListener(this);  // Demanem rebre els events de ratolí.
+                                // Cal que l'objecte que passem
+                                // implementi MouseListener
+    }
+
+    ...
+
+    //
+    //  Ara implementem els mètodes requerits per la interfície
+    //  MouseListener. Hem d'implementar-los tots, deixant opcionalment
+    //  buit el cos d'aquells que en realitat no ens interessin.
+    //
+    public void mouseClicked (MouseEvent evt) { // Mètode cridat cada cop
+                                                // que es prem i deixa anar
+                                                // el botó del ratolí
+    }
+
+    public void mouseEntered (MouseEvent evt) { // Mètode cridat cada cop
+                                                // que el punter entra en la
+                                                // la regió de l'applet
+    }
+
+    public void mouseExited (MouseEvent evt) { // Mètode cridat cada cop
+                                               // que el punter surt de
+                                               // la regió de l'applet
+    }
+
+    public void mousePressed (MouseEvent evt) { // Mètode cridat cada cop
+                                                // que es prem el botó del ratolí
+        posX=evt.getX();       // si ens interessa, per exemple,
+        posY=evt.getY();       // salvar la darrera posició en que
+                               // l'usuari ha pres el botó del ratolí
+    }
+
+    public void mouseReleased (MouseEvent evt) { // Mètode cridat cada cop
+                                                 // que es deixa anar el
+                                                 // botó del ratolí
+    }
+} // Fi de la classe exemple
+</pre>
+
+
+<TABLE width="100%" border="0">
+<TR><TD align="right"><A HREF="javascript:window.close()" onMouseOver="window.status='Tancar'"
+ onMouseOut="window.status='';return true">
+tancar</A></TD>
+</TR></TABLE>
+</BODY>
+</HTML>

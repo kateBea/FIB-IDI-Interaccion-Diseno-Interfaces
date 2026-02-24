@@ -1,0 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","ombres");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m3b16_OmbresProj2OpenGL.html">[Torna a l'algorisme]</a>
+</div>
+<br><br>
+
+<div class=tit3><b>Generació d'ombres usant OpenGL i Stencil Buffer.</b> Explicació - part 1</div>
+
+<p>
+<pre class=algoritme>
+    <b>glStencilFunc</b>(GL_ALWAYS, 1, 1);
+    <b>glStencilOp</b>(GL_KEEP, GL_KEEP, GL_REPLACE);
+    <b>Dibuixa</b>(Paret);
+</pre>
+
+<p> Aquest tros de codi comença dibuixant la paret de l'habitació a
+l'stencil buffer. El tercer paràmetre de <b>glStencilOp</b>,
+GL_REPLACE, fa que es modifiqui el valor de l'Stencil buffer a tots
+els pixels en que es projecta la paret que estem dibuixant a la
+pantalla.
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m3b16_OmbresProj2OpenGL.html">[Torna a l'algorisme]</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,309 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html lang="CA">
+
+<head>
+
+<title></title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+
+<script type="text/javascript" src="../upc.js"></script>
+
+<SCRIPT>
+
+top.passara("anim","morph");
+
+</SCRIPT>
+
+<BODY>
+
+<DIV CLASS="nav">
+
+<a href="m4c10_MorphingIntro.html">[Anterior]</a>
+
+<a href="m4c30_CrossDisolving.html">[Següent]</a>
+
+</div>
+
+<br><br>
+
+
+
+<div class=tit1>Morphing.
+
+<span class=tit2>Deformació d'imatges (Warping)</span>
+
+</div>
+
+
+
+<p> Les tècniques de deformació d'imatges (warping), produeixen
+
+deformacions de la imatge inicial. Amb aquestes deformacions, que
+
+sempre s'apliquen en el pla 2D de la imatge, es poden simular
+
+deformacions generals, perspectives i moviments 3D. Aquestes tècniques
+
+són molt usades en efectes especials en cine i TV (imatges que sembla
+
+que se'n vagin volant i/o girant sobre sí mateixes, simulació del
+
+moviment del pas de les pàgines d'un llibre, etc).
+
+
+
+<p> Observeu el següent applet. Fixeu-vos en les dues finestres de la
+
+part superior. Les dues finestres inicialment es veuen amb la mateixa
+
+imatge digital. Fixeu-vos que teniu uns botons que us permeten
+
+superposar una malla a cada una de les imatges. Proveu el seu
+
+efecte. Anomenarem M1 a la malla que es pot superposar a la primera
+
+imatge, i M2 a la que podem superposar a la segona imatge. Observeu
+
+que la malla M1 sempre apareix com una malla fina, mentre que a M2
+
+podem fer apareixer o bé una malla fina, o bé una malla més separada
+
+que anomenarem malla de control M2'. Ara visualitzeu la malla de
+
+control de la segona imatge, i moveu algun dels seus punts amb el
+
+cursor. Observeu l'efecte que es produeix:
+
+
+
+<div align=center>
+
+   <applet code="Interficie.class" archive="Morphing3.jar,../comuns.jar" height=570 width=750>
+   </applet> 
+
+</div>
+
+
+
+<p> El que esteu fent és aplicar una deformació a la primera
+
+imatge. Un cop hagueu modificat la malla de control M2' i deformat la
+
+imatge, visualitzeu les dues malles M1 i M2 superposades a les dues
+
+imatges. Observeu que la modificació de la malla de control ha
+
+deformat la malla fina M2, però que es cumpleix una determinada llei
+
+de "conservació" de la imatge: a cada petit quadrilàter de la malla
+
+M2, el que apareix és el tros d'imatge que hi havia al rectangle
+
+homòleg de la malla M1.
+
+
+
+<p> De fet, la manera més senzilla de generar efectes de warping com
+
+aquest és usant textures amb OpenGL. Així és com ho fa l'applet que
+
+acabeu de veure: la primera de les imatges és sempre la imatge digital
+
+de partida, però la segona imatge es genera pintant un total de 16 x
+
+16 petits polígons (tants com els que es formen a la malla fina, M2)
+
+texturats. Les coordenades de textura dels seus vèrtexs són constants,
+
+i corresponen sempre a les coordenades dels vèrtexs de la malla M1
+
+dins la primera imatge. Evidentment, quan la malla M2 no està
+
+deformada, la segona imatge es veu exactament igual que la
+
+primera. Quan deformem la malla M2, estem canviant les coordenades
+
+dels vèrtexs dels seus polígons, però no les coordenades de textura
+
+que sempre tenen els valors incials. La conseqüència és que sempre
+
+veiem tota la imatge, però aquesta se'ns deforma. I és clar que a cada
+
+petit quadrilàter de la malla M2, el que apareix és el tros d'imatge
+
+que hi havia al rectangle homòleg de la malla M1. El mecanisme que
+
+seguim aquí per deformar la malla M2 és una interpolació linial: quan
+
+modifiqueu un dels vèrtexs de la malla de control, es modifica la
+
+forma d'un màxim de quatre quadrilàters d'aquesta malla de control i,
+
+de forma automàtica, es modifiquen (per interpolació linial) les
+
+coordenades dels vèrtexs de la malla M2 que són interiors a aquests
+
+quadrilàters de control que s'han deformat.
+
+
+
+<p class=exercici><span class=exernum>Exercici:</span> Proveu
+
+d'aplicar diferents deformacions a la imatge que teniu a l'applet:
+
+
+
+<ul class=exerc>
+
+<li> Proveu de modificar els punts interiors de M2' sense modificar
+
+els de la perifèria. Fixeu-vos com es modifica la part interna de la
+
+imatge.</li>
+
+
+
+<li> Proveu ara de modificar tots els punts, per a que la imatge
+
+deformada sembli que giri a l'espai. Aneu provant i observant l'efecte
+
+que es produeix.</li>
+
+
+
+<li> Proveu ara de modificar tots els punts, per a que la imatge
+
+deformada sembli que es doblegui a l'espai. Aneu provant i observant
+
+l'efecte que es produeix.</li>
+
+
+
+<li> Proveu altres deformacions i observeu l'efecte. </li>
+
+</ul>
+
+</p>
+
+
+
+<p> L'algorisme de warping més ampliament utilitzat és l'algorisme que
+
+va desenvolupar Douglas Smythe, de ILM. L'algorisme ha estat usat en
+
+la producció de diverses películes (Indiana Jones, The Last Crusade,
+
+The Abyss, etc). L'algorisme, de fet, és una extensió del que heu vist
+
+a l'applet, perquè usa interpolació amb splines enlloc d'interpolació
+
+linial. Se l'anomena "Two Spline Mesh Warping". L'algorisme treballa
+
+en dues fases, fent primer una deformació de la imatge (warp) en
+
+sentit horitzontal, seguida d'una altra deformació en sentit
+
+vertical. Suposem com abans que la malla inicial és M1 i la malla que
+
+hem deformat és M2. Direm també M2' a la malla de control corresponent
+
+a M2, i anàlogament, M1' serà la malla -que no es deforma-
+
+corresponent a M1 i amb la mateixa separació que M2'. Llavors,
+
+
+
+<ul>
+
+<li> Per cada fila de pixels, es calcula la deformació en
+
+horitzontal. Suposem que x1 .. xn són les abscisses de les
+
+interseccions de M1' amb la fila actual de pixels. El primer que cal
+
+fer és calcular les abscisses w1 .. wn de les interseccions de M2' amb
+
+aquesta fila actual de pixels. Aquestes abscisses es calculen per
+
+interpolació amb Splines en sentit vertical, a partir dels punts de
+
+cada una de les línies "verticals" de la malla M2'. Ara, per calcular
+
+la deformació que cal aplicar a un determinat pixel d'abscissa xp
+
+només cal interpolar (també usant Splines cúbics) els punts (x1,w1)
+
+.. (xn,wn) i trobar el valor de wp corresponent a l'abscissa inicial
+
+xp.
+
+</li>
+
+
+
+<li> Ara, per a cada columna de pixels, es calcula la deformació en
+
+horitzontal. Suposem que y1 .. yn són les ordenades de les
+
+interseccions de M1' amb la columna actual de pixels. El primer que
+
+cal fer és calcular les ordenades w1 .. wn de les interseccions de M2'
+
+amb aquesta columna actual de pixels. Aquests valors w1 .. wn es
+
+calculen per interpolació amb Splines en sentit horitzontal, a partir
+
+dels punts de cada una de les línies "horitzontals" de la malla
+
+M2'. Ara, per calcular la deformació que cal aplicar a un determinat
+
+pixel d'ordenada yp només cal interpolar (també usant Splines cúbics)
+
+els punts (y1,w1) .. (yn,wn) i trobar el valor de wp corresponent a
+
+l'ordenada inicial yp. </li>
+
+</ul>
+
+
+
+<p> Fixeu-vos que el que estem fent és, en el primer pas, calcular la
+
+nova abscissa de cada pixel de la imatge inicial; en el segon pas,
+
+mantenim la seva abscissa i calculem la seva ordenada final. Podem
+
+entendre que després del primer pas tenim una imatge intermitja en que
+
+hem aplicat una deformació en sentit horitzontal; el segon pas torna a
+
+deformar-la, ara en sentit vertical, per tal d'arribar a la deformació
+
+final desitjada. El resultat és millor que amb l'algorisme de l'applet
+
+que hem vist, perquè la interpolació per Splines és sempre més suau
+
+que la simple interpolació linial.  
+
+
+
+
+
+<br><br>
+
+<DIV CLASS="nav">
+
+<a href="m4c10_MorphingIntro.html">[Anterior]</a>
+
+<a href="m4c30_CrossDisolving.html">[Següent]</a>
+
+</div>
+
+</body>
+
+</html>
+

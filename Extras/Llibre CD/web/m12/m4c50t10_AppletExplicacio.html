@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("anim","morph");
+</SCRIPT>
+<BODY>
+<br>
+
+<div class=tit2>Morphing: Explicació de l'applet</div>
+
+<p> L'applet d'aquest apartat permet treballar amb dues imatges
+digitals i fer una metamorfosi entre dues imatges digitals. Quan es
+carrega, l'applet llegeix i mostra dues imatges. Aquestes imatges es
+llegeixen dels fitxers Foto1.jpg i Foto2.jpg, i poden ser substituïts
+per altres fitxers que volgueu provar, sempre que els doneu aquests
+noms.
+
+<p> L'applet ens mostra 5 finestres, dues corresponents a la primera
+imatge, dues corresponents a la segona imatge, i una finestra final
+que mostra el resultat de la metamorfosi.
+
+<p> La primera finestra corresponent a cada una de les imatges es pot
+trobar en qualsevol dels dos estats següents, que podeu modificar amb
+els botons de l'applet:
+
+<ul>
+<li> Visualització de la imatge inicial</li>
+<li> Visualització de la imatge inicial, amb la superposició d'un 
+enreixat de 17 x 17 </li>
+</ul>
+
+<p> La segona finestra corresponent a cada una de les dues imatges es
+pot trobar en qualsevol dels estats següents, que podeu modificar amb
+els botons corresponents de l'applet:
+
+<ul>
+<li> Visualització d'un enreixat de control, de 5 x 5 punts, junt amb
+la imatge que queda deformada pels desplaçaments dels punts d'aquest
+enreixat. En aquest cas, podeu arrastrar qualsevol dels punts de
+control amb el cursor per a produir una deformació local de la
+imatge. Repetint aquest procés, us podeu anar acostant a la deformació
+(warp) de la imatge que us interessi</li>
+
+<li> Visualització de la imatge deformada, sense cap enreixat </li>
+
+<li> Visualització de la imatge deformada, amb la superposició de
+l'enreixat, també deformat, de 17 x 17 </li>
+</ul>
+
+<p> Si el que desitgeu és simplement fer una deformació (warping) de
+la imatge, podeu anar movent lliurament els punts de l'enreixat de
+control. Si en canvi, el que voleu és deformar una de les imatges per
+tal que el contorn -i tal vegada l'interior- d'un dels objectes tingui
+la mateixa forma que el contorn de l'objecte que tenim a la segona
+imatge, el millor és seguir el següent procediment:
+
+<ul>
+<li> Visualitzem l'enreixat de control, de 5 x 5 punts, junt amb la
+imatge que va quedant deformada pels desplaçaments dels punts d'aquest
+enreixat. Podeu arrastrar qualsevol dels punts de control amb el
+cursor per a produir una deformació local de la imatge. Repetint
+aquest procés, us podeu anar acostant a la deformació (warp) de la
+segona imatge</li>
+
+<li> Podeu anar veient com va quedant la deformació si visualitzeu la
+imatge deformada sense cap enreixat. També podeu veure la deformació
+de l'enreixat de 17 x 17 </li>
+
+<li> Per a comprovar si heu aconseguit la deformació que porta els
+contorns i detalls rellevants de la primera imatge a la posició que
+han de tenir dins de la segona imatge, el més adequat és visualitzar
+la imatge deformada amb superposició de l'enreixat no deformat de 17 x
+17. D'aquesta manera podeu comparar el que queda, després de la
+deformació, als punts homòlegs de les dues imatges.</li>
+</ul>
+
+<p> La darrera finestra, finalment, mostra la interpolació entre les
+dues imatges deformades. Podeu desplaçar-vos al llarg de la
+metamorfosi variant el valor del paràmetre <b> t </b> d'interpolació
+linial, amb la corresponent barra de desplaçament.
+
+
+<p align=right><a href="javascript:window.close()">tornar </a>
+</body>
+</html>

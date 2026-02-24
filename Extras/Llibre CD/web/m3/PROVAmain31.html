@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M3.1.La llum i el color.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+<style type="text/css">
+.nota{
+  visibility:collapse;
+  background-color: #f8f800;
+  foreground: black;
+  overflow:visible;
+  z-index:0;
+  position:absolute;
+  width: 300px;
+  padding: 8px;
+}
+</style>
+</HEAD>
+<BODY>
+<SCRIPT>
+top.passara("color","llum");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+      [Anterior]
+      [Següent]
+      <a href="object.html">[Apartat anterior]</a>
+      <a href="main32.html">[Següent apartat]</a>
+    </div>
+<br><br>
+
+
+<div class=tit1>La llum i el color</div>
+
+<P>
+En aquest apartat veurem que un color és caracteritzat per una <A
+HREF="#llumicolor1">distribució espectral,</A> i discutirem com
+els nostres ulls el <a href="#llumicolor2">perceben.</a>
+
+<A NAME="llumicolor1"></a>
+<div class=tit2>La llum i el color</div>
+
+<p>Segons el problema, els físics pensen en la llum com la propagació
+d'energia electromagnètica en forma d'onas o com a feixos de
+partícules (fotons). Des del punt de vista dels gràfics per
+computador, el model d'ones serà suficient per a explicar el
+comportament de la llum, la seva naturalesa i la nostra percepció dels
+diferents tipus de llums.
+
+<P>
+Els nostres ulls són capaços de percebre ones lluminoses entre els 380
+<A CLASS="glossari" HREF="javascript:glossari('nm.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">nanòmetres (nm)</A> de
+longitud d'ona (el violeta) i els 760 nanòmetres de longitud d'ona
+(el vermell). Recordem que la longitud d'ona és la distància
+recorreguda per l'ona en el temps que triga en fer un cicle
+complet. Per tant <!--$\lambda={c\over f}$-->
+<IMG WIDTH="44" HEIGHT="26" ALIGN="MIDDLE" BORDER="0"
+ SRC="imatges/img1.gif"
+ ALT="$\lambda={c\over f}$"> on <!--$\lambda$--><IMG WIDTH="12" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="imatges/img12.gif"
+ ALT="$\lambda$">
+ és la longitud
+d'ona, <I>c</I> la velocitat de la llum (aproximadament
+3x10<SUP>8</SUP>m/s),i <I>f</I> la freqüència (en cicles/s.).
+
+<P>
+Normalment la llum que veiem no és però d'una única freqüència pura,
+sinó que és una barreja o superposició de multitud d'ones de
+diferents freqüències. La naturalesa exacta d'una certa llum (el
+color de la llum) es pot capturar doncs en un <A
+CLASS="glossari" HREF="javascript:glossari('diagEspec.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">diagrama espectral</A> que
+indica les freqüències que hi intervenen i l'amplitud de cadascuna:<br>
+<center><TABLE><tr><TD>
+<img src="imatges/Espectr.gif" alt="">
+</TD></TABLE></center>
+
+<P>
+Observeu que des d'aquest punt de vista, la naturalesa de la llum és
+de dimensió infinita. El diagrama espectral indica la intensitat amb
+que hi participa cada freqüència, i aquestes formen un continu. Això
+fóra força difícil de tractar direcament en els nostres programes,
+quan volguem modelar diferents tipus de llums. Afortunadament, els
+nostres ulls no són capaços de distingir aquesta enorme varietat de
+llums possibles, i el nostre propòsit és en última instància modelar
+els colors que som capaços de veure. Però caldrà primer fer una petita
+disgresió i parlar de com els nostres ulls veuen el color.
+
+
+<A NAME="llumicolor2"></a>
+<A NAME="l_ull"></A>
+<div class=tit2>L'ull i la nostra visió del color</div>
+
+<P>
+Els nostres ulls són com petites càmeres fotogràfiques, amb la córnea
+i els cristalins (a la part anterior) fent d'objectiu, i la retina
+fent les vegades de pel·lícula.
+
+<P>
+A la retina, existeixen diferents receptors especialitzats que
+transformen la llum incident en impulsos nerviosos que el nostre
+sistema nerviós i cervell eventualment decodifiquen en les imatges que
+veiem. Aquests receptors a la retina són de dos tipus ben
+diferenciats: bastons i cons (que deuen els seus noms a la seva forma
+diferent). Els primers són sensibles a la intensitat de la llum, sense
+importar la longitud d'ona. Esencialment formen una imatge blanc i
+negre (amb grissos, s'enten) del que veiem.
+
+<P>
+Els segons, els cons, afegeixen la component de color. Normalment hi
+ha sols entre sis i set milions a cada ull, gairebé tots ubicats prop
+del centre de la retina (on es formarà la imatge d'allò al que mirem
+directament). Els bastons en canvi són molt més nombrosos (hi ha de 75
+a 150 milions a cada ull), però cobreixen una àrea molt més extensa.
+
+<div Id="nota1" class=nota>Algunes investigacions
+recents semblen indicar que les dones disposen de cons amb una quarta
+<A CLASS="glossari"
+HREF="javascript:glossari('sensespec.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true"> sensibiltat espectral</A>
+diferent, corresponent aproximadament al color groc.</div>
+
+<P>
+Els cons, al seu torn, estan dividits en tres classes diferents, que
+es distingeixen per la seva <A Name="sensespec"> </A><A
+CLASS="glossari"
+HREF="javascript:glossari('sensespec.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true"> sensibilitat
+espectral. </A> Aquestes tres distribucions espectrals classifiquen
+els cons en cons sensibles al vermell, d'altres sensibles al verd i
+d'altres al blau. <A name="nota1"></a><A Href="#Nota1"
+onMouseOver="getElementById('nota1').style.visibility='visible';
+return true">[NOTA]</A> Observeu
+doncs que els ulls mesuren propietats molt simples de l'<A
+CLASS="glossari"
+HREF="javascript:glossari('distespec.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">espectre</A> de la llum
+incident: llums espectralment diferents des del punt de vista de la
+seva <a CLASS="glossari"
+HREF="javascript:glossari('distespec.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true"> distribució espectral</A>
+són percebudes com iguals.
+
+<BR><br>
+<DIV CLASS="nav">
+      [Anterior]
+      [Següent]
+      <a href="object.html">[Apartat anterior]</a>
+      <a href="main32.html">[Següent apartat]</a>
+    </div>
+</BODY>
+</HTML>

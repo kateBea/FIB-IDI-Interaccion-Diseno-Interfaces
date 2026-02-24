@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("opengl","extop");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m7c80_Seleccio.html">[Anterior]</a>
+[Següent]
+<a href="../manpages/index.html">[Següent apartat]</a>
+</div>
+<br><br>
+
+<div class=tit1>Extensió de crides d'OpenGL.
+<span class=tit2> <i>Display Lists</i></span>
+</div>
+
+<a name="glGenLists"></a>
+<P>
+Les <i>display lists</i> s'identifiquen per un índex enter. Si en
+crear una display list usem un índex que corresponia a una altra
+display list, estarem eliminant la primera (sobreescrivint-la). Per a
+evitar esborrats accidentals d'aquest estil, la crida
+<b>glGenLists</b> ens servirà per a generar índexs no usats.
+
+<pre class=algoritme>
+          GLuint <b>glGenLists</b> (GLsizei range)
+</pre>
+
+<P>
+Aquesta crida alocata <i>range</i> índexs de display lists contigus i
+que no estaven alocatats per d'altres display lists. L'enter que es
+retorna és el primer índex dels que formen el bloc d'índexs
+lliures. Tots els índexs retornats es marquen com usats. Si no hi ha
+prou índexs disponibles o <i>range</i> és zero, la crida retorna un
+zero.
+
+<a name="glNewList"></a>
+<P>
+Per a indicar el principi i el final en la creació d'una display list,
+usarem les crides <b>glNewList</b> i <b>glEndList</b> respectivament.
+
+<pre class=algoritme>
+          void <b>glNewList</b> (GLuint list, GLenum mode)
+          void <b>glEndList</b> (void)
+</pre>
+
+<P>
+<b>glNewList</b> especifica el començament d'una display list. Totes
+les crides a OpenGL que es facin a partir d'aquesta crida i abans de
+la crida a <b>glEndList</b> es guarden a la display list, excepte
+algunes com les de consulta de variables d'estat i algunes altres (més
+avall es nombrem totes aquestes crides que no es guarden en les
+display lists). El paràmetre <i>list</i> és l'índex que identifica la
+display list. Els possibles valors de <i>mode</i> són GL_COMPILE i
+GL_COMPILE_AND_EXECUTE. El primer indica que no es vol que s'executin
+les comandes de la display list en el moment en que s'està creant, i
+el segon indica que es vol una execució immediata mentre es crea la
+display list.
+
+<P>
+Quan es crea una display list, es guarda en el context actual
+d'OpenGL, per tant, quan aquest context es destrueix també es
+destruirà la display list.
+
+<P>
+Les crides que no es guarden en una display list s'executen de forma
+immediata encara que estiguin en mig d'un bloc de creació d'una
+display list. L'única que donarà error en cas que es faci servir dins
+d'un d'aquests blocs és la pròpia <b>glNewList</b>. Moltes d'aquestes
+crides no les hem vist en aquest llibre, si esteu interessats en saber
+què fan podeu mirar les <i>manpages</i> corresponents. Aquestes crides
+són les següents:
+
+<pre class=algoritme>
+          <b>glColorPointer</b>
+          <b>glDeleteLists</b>
+          <b>glDisableClientState</b>
+          <b>glEdgeFlagPointer</b>
+          <b>glEnableClientState</b>
+          <b>glFeedbackBuffer</b>
+          <b>glFinish</b>
+          <b>glFlush</b>
+          <b>glGenLists</b>
+          <b>glGet*</b>
+          <b>glIndexPointer</b>
+          <b>glInterleavedArrays</b>
+          <b>glIsEnabled</b>
+          <b>glIsList</b>
+          <b>glNormalPointer</b>
+          <b>glPixelStore</b>
+          <b>glReadPixels</b>
+          <b>glRenderMode</b>
+          <b>glSelectBuffer</b>
+          <b>glTexCoordPointer</b>
+          <b>glVertexPointer</b>
+</pre>
+
+<a name="glCallList"></a>
+<P>
+Un cop tenim creada una display list, se la pot executar usant la
+crida:
+
+<pre class=algoritme>
+          void <b>glCallList</b> (GLuint list)
+</pre>
+
+<P>
+Aquesta crida executa la display list especificada pel paràmetre
+<i>list</i>. Les comandes de la display list s'executen en el mateix
+ordre en que es van guardar en la creació de la display list. Si
+<i>list</i> no ha estat definida no passa res.
+
+<a name="glDeleteLists"></a>
+<P>
+De la mateixa manera que podem crear display lists, també podem
+esborrar-les.
+
+<pre class=algoritme>
+          void <b>glDeleteLists</b> (GLuint list, GLsizei range)
+</pre>
+
+<P>
+Amb aquesta crida esborrem <i>range</i> display lists, començant en
+l'índex <i>list</i>. Si s'intenta esborrar una display list que no
+havia estat creada, s'ignora.
+
+<a name="glIsList"></a>
+<pre class=algoritme>
+          GLboolean <b>glIsList</b> (GLuint list)
+</pre>
+
+<P>
+Finalment amb aquesta crida podem saber si un determinat índex
+correspon a una display list o no. El retorn serà GL_TRUE si
+<i>list</i> s'està usant com a display list i GL_FALSE si no.
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m7c80_Seleccio.html">[Anterior]</a>
+[Següent]
+<a href="../manpages/index.html">[Següent apartat]</a>
+</div>
+</body>
+</html>

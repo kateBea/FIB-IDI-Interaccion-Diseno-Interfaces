@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("realvirt","represc");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m5e01t01_info.html">[Anterior]</a>
+<a href="m5e01t01t02.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Representació d'escenes.
+<span class=tit2>Tipus d'informació en una escena.</span>
+<span class=tit3>Informació geomètrica</span>
+</div>
+
+<p>La informació geomètrica consisteix bàsicament en una
+descripció de la forma dels objectes.</p>
+
+<p>L'esquema de representació de la geometria dels objectes
+més utilitzat en realitat virtual és el <b>model de fronteres</b> (<i>boundary
+representation</i>, BRep), en el qual els objectes sòlids es representen
+mitjançant la seva frontera, la qual es aproximada mitjançant cares planes.</p>
+
+<p>En un model de fronteres podem trobar cares de diferent
+complexitat. En ordre de menor a major complexitat, podem trobar <b>triangles</b>,
+<b>polígons convexos</b>, <b>polígons còncaus </b>i <b>cares amb forats
+interiors</b>.</p>
+
+<div align="center"><img border="0" src="imatges/primitives.jpg" width="490" height="126"></div>
+
+<p>Els <b>triangles </b>constitueixen la primitiva de visualització més simple
+(tret dels punts i les línies) i la seva visualització és molt ràpida. Per
+aquest motiu, la gran majoria d'escenes de realitat virtual inclouen objectes
+representats per <b>malles de triangles </b>(<i>triangle meshes</i>).</p>
+
+<p>Darrera dels triangles en quant a temps de visualització, es troben els <b>polígons
+convexos</b>. La majoria de plaques gràfiques incorporen algorismes de
+rasterització implementats per hardware que requereixen fer una triangulació
+prèvia dels polígons no triangulars. Si el polígon és convex, aquesta
+triangulació és molt senzilla, perquè en un polígon convex tots els punts
+del segment definit per dos punts interiors qualsevol són també interiors al
+polígon.</p>
+
+<p>La visualització dels <b>polígons còncaus</b> és més problemàtica,
+doncs també requereixen ser triangulats en temps de rasterització, però en
+aquest cas la triangulació no és tan senzilla. Per aquesta raó, en la majoria
+d'APIs 3D com OpenGL o Direct3D, és més adequat triangular tots els
+polígons còncaus en una etapa de preprocés prèvia a la visualització, doncs
+és molt més eficient enviar a visualitzar la malla de triangles resultant que
+el polígon còncau corresponent. D'aquesta forma el pipeline gràfic no
+haurà de descomposar el polígon cada cop que s'envia a pintar.</p>
+
+<p>El mateix passa amb les cares amb forats interiors, que han de triangular-se
+abans de ser incorporades a l'escena.</p>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m5e01t01_info.html">[Anterior]</a>
+<a href="m5e01t01t02.html">[Següent]</a>
+</div>
+</body>
+</html>

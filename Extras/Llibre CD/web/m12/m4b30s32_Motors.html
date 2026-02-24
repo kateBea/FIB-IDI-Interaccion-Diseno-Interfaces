@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<BODY>
+<br>
+
+<div class=tit2> Animacions amb vrml'97: Els motors que generen events </div>
+
+<p> Com hem vist, en tota animació tenim un rellotge que genera events
+de temps, un motor que rep aquests events i calcula i envia events de
+modificació d'algun dels atributs d'un model (posició, escala,
+rotació, color, etc), i finalment els nodes geomètrics que reben els
+events dels motors i es van automodificant.
+
+<p> Per especificar un motor d'animació hem de donar una llista
+d'instants de temps (que anomenarem instants de temps <b>clau</b> o
+key times) i el valor del corresponent atribut (posició, escala,
+color, etc) a cada un d'aquests instants. Aquesta informació és el
+que, en animació clàssica, s'anomena <b>key frames</b>: l'estat que
+volem que tingui l'animació en certs instants de temps que l'animador
+defineix a priori. En altres paraules, aquesta informació és el que
+conforma el guió de l'animació.
+
+<p> Vegem-ne un exemple:
+
+<pre class=algoritme>
+DEF Motor1 PositionInterpolator {
+              key [ 0.0, 0.25, 0.5, 0.75, 1.0 ]
+              keyValue [ 0.0 0.0 0.0,
+                         1.0 0.0 0.0,
+                         1.0 0.0 1.0,
+                         1.0 1.0 1.0,
+                         0.0 0.0 0.0,
+                       ]
+           }
+</pre>
+
+<p> El que hem fet és definir un interpolador de posicions (li hem
+donat a més el nom "Motor1" ) amb 5 "key frames". Els instants de
+temps clau són els 0., 0.25, 0.5, 0.75 i 1.0, mentre que l'atribut
+<b>keyValue</b> indica la posició que especifiquem (en el guió de
+l'animació) a cada un d'aquests instants de temps. Si usem events de
+temps fraccionari, que és el més usual, la llista de temps clau ha de
+començar pel temps inicial que sabem que és 0.0, i ha d'acabar pel temps
+final que sabem que ha de ser 1.0; entremig podem posar més o menys
+valors de temps clau, segons ens interessi a la nostra
+aplicació. Seguint amb aquest exemple que hem vist, quan a "Motor1" li
+arribi per exemple un event de temps fraccionari de 0.25, es generarà
+un event de posició amb les coordenades (1.0 0.0 0.0); quan li arribi
+un event de temps de per exemple 0.37, calcularà les coordenades per
+interpolació entre els dos temps clau més propers i generarà un event
+de posició amb aquestes coordenades interpolades. Tots els motors
+d'animació funcionen amb aquest mecanisme d'interpolació entre els
+atributs espeficicats pels instants de temps clau. Observeu finalment
+que és bo que l'atribut (en aquest cas posició) corresponent al temps
+t=1.0 coincideixi amb el que s'ha indicat per t=0.0, per tal
+d'evitar salts a l'animació.
+
+<p> Els motors o interpoladors que tenim en vrml'97 són:
+
+<ul>
+<li> L'interpolador de posicions, <b>PositionInterpolator</b>: Descriu
+una trajectòria de posicions. Típicament, el que farem serà assignar
+els seus events de sortida, amb una sentència <b>ROUTE</b>, a
+l'entrada <b>set_translation</b> d'un node </li>
+
+<li> L'interpolador de rotacions, <b>OrientationInterpolator</b>:
+Descriu un moviment de rotació. Típicament, el que farem serà assignar
+els seus events de sortida, amb una sentència <b>ROUTE</b>, a
+l'entrada <b>set_rotation</b> d'un node </li>
+
+<li> L'interpolador de color, <b>ColorInterpolator</b>: Descriu un
+procés de canvi de color. Típicament, el que farem serà assignar els
+seus events de sortida, amb una sentència <b>ROUTE</b>, a l'entrada
+<b>set_diffuseColor</b> o bé a la entrada <b>set_emissiveColor</b>
+d'un node </li>
+
+<li> L'interpolador de transparències, <b>ScalarInterpolator</b>:
+Descriu un procés de canvi de la transparència. Típicament, el que
+farem serà assignar els seus events de sortida, amb una sentència
+<b>ROUTE</b>, a l'entrada <b>set_transparency</b> d'un node </li>
+
+<li> Finalment, si volem tenir un interpolador del factor d'escala,
+usarem altra cop un <b>PositionInterpolator</b> que en aquest cas ens
+descriurà un procés de canvi del factor d'escala. Típicament, el que
+farem serà assignar els seus events de sortida, amb una sentència
+<b>ROUTE</b>, a l'entrada <b>set_scale</b> d'un node </li>
+</ul>
+
+<p> Tots els interpoladors són pràcticament idèntics. Només canvia
+l'atribut <b>keyValue</b>, que especifica el corresponent atribut
+clau:
+
+<pre class=algoritme>
+   PositionInterpolator {
+              key [ 0.0, . . . ]
+              keyValue [ 0.0 0.0 0.0,        -> Valors de posicions (x,y,z) o factors d'escala
+                         . . .
+                       ]
+           }
+
+   OrientationInterpolator {
+              key [ 0.0, . . . ]
+              keyValue [ 0.0 1.0 0.0 0.0,    -> Valors de rotacions (nx,ny,nz,angle)
+                         . . .
+                       ]
+          }
+
+   ColorInterpolator {
+              key [ 0.0, . . . ]
+              keyValue [ 1.0 1.0 0.0,        -> Valors de color (r,g,b)
+                         . . .
+                       ]
+          }
+
+   ScalarInterpolator {
+              key [ 0.0, . . . ]
+              keyValue [ 0.4,                -> Valors de transparència (o altres atributs)
+                         . . .
+                       ]
+          }
+</pre>
+
+
+<p align=right><a href="javascript:window.close()">tornar </a>
+</body>
+</html>

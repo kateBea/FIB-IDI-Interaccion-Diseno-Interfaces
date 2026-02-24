@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","textu");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m3e30t21_TextGenAutoCont.html">[Anterior]</a>
+<a href="m3e30t30_TextFiltratge.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Textures.
+<span class=tit2>Aplicació de textures planes.</span>
+<span class=tit3>Parametrització automàtica: Generació automàtica de coordenades de textura amb la funció GL_SPHERE_MAP</span>
+</div>
+
+<p> Primer presentem un exemple d'utilització de les comandes
+relatives d'OpenGL.
+
+<PRE class=algoritme>
+   /* Imaginem creat un objecte textura 2D amb una fotografia "ull
+      de peix" d'un entorn i l'activem */
+
+   <b>glBindTexture</b> (GL_TEXTURE_1D, texname);
+
+   /* Indiquem generació automàtica de coordenades de textures,
+      en mode GL_SPHERE_MAP per les dues coordenades s i t */
+
+   <b>glTexGen</b> (GL_S, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP)
+   <b>glTexGen</b> (GL_T, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP)
+
+   /* habilitem la generació automàtica de textures */
+
+   <b>glEnable</b> (GL_TEXTURE_GEN_S);
+   <b>glEnable</b> (GL_TEXTURE_GEN_T);
+   <b>glEnable</b>(GL_TEXTURE_1D);
+
+   /* pintem l'objecte sense incloure cap especificació de coordenades
+      de textura */
+   <b>PintaObjecte</b>;
+</PRE>
+
+<p> A continuació veurem l'algorisme que implementa OpenGL pel càlcul
+de les coordenades de textura. Tots els vectors estan expressats en el
+sistema de coordenades de l'observador.
+
+<ol>
+   <li> Càlcul del vector <b>u</b> que uneix l'observador amb el vèrtex.</li>
+   <li> Càlcul de <b>n</b>, vector normal al vèrtex</li>
+   <li> Càlcul del vector reflexió <b>r</b></li>
+   <li> Càlcul d'un valor intermig <b>m</b>= 2
+arrel(r<sub>x</sub><sup>2</sup>+r<sub>y</sub><sup>2</sup>+(r<sub>z</sub>+1)<sup>2</sup>)</li>
+   <li> s=(r<sub>x</sub>/m) + 1/2</li>
+   <li> t=(r<sub>y</sub>/m) + 1/2</li>
+</ol>
+
+<p> OpenGL realitza tots els càlculs en coordenades de l'observador a
+efectes de simplificar els càlculs. Recordeu que l'observador es troba
+en l'origen d'aquest sistema i que mira en sentit dels valors negatius
+de z. Per a cada vèrtex es calcula la direcció del raig reflectit que
+s'utilitza per a obtenir un punt de la textura.
+
+<!-- <center><img src="imatges/TextSphere1.png"></center>-->
+
+<p>La textura es presuposa que està calculada com la radiància (llum
+reflectida) per una esfera que envolta l'objecte i és observada per una
+càmera axonomètrica ubicada en la direcció de visió. Veieu l'apartat
+de <a href= "m3e40_TextSintesi.html">síntesi de textures</a> per
+ampliar la informació.
+
+<p>Si realitzeu un parell d'exemples amb diferents valors de
+r<sub>x</sub>, r<sub>y</sub> i r<sub>z</sub> podreu comprovar que
+sempre trobem coordenades interiors a un cercle (imatge de l'entorn)
+definit dins la textura.
+
+<p>Fixeu-vos en algunes de les limitacions del sistema:
+
+<ul>
+<li>Per una banda, per a obtenir les coordenades de textura
+s'utilitzen les direccions dels raigs reflectits. Per tant a punts amb
+mateix raig reflectit però amb direrent ubicació els hi correspon el
+mateix color. Noteu que és com si l'objecte s'hagués substituït per un
+punt. Només es vàlid si el reflector està prou llunyà dels objectes
+reflectits.</li>
+
+<li>L'algorisme de sphere_mapping assumeix un mètode concret de
+generació de la textura que és depenent de la direcció de visió. Per
+tant, la reflexió observada només serà vàlida per una direcció
+concreta i aproximada per a la resta. Per a posicions extremes de visió
+el resultat potser molt inadequat, s'haurien de calcular vàries
+imatges de textura i activar la més adient segons la direcció de
+visió.</li>
+</ul>
+
+<p> Actualment s'està treballant en implementar altres funcions de
+generació automàtica de textures, eficients en l'entorn d'OpenGL i que
+aproximin millor les reflexions de l'entorn.
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m3e30t21_TextGenAutoCont.html">[Anterior]</a>
+<a href="m3e30t30_TextFiltratge.html">[Següent]</a>
+</div>
+</body>
+</html>

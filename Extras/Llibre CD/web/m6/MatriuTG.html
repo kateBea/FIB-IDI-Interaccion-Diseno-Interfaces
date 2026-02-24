@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M6.1 Procés de visualització 3D.MapaSensible.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("vis3D","estr");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+<a href="MSExplicacio2.html">[Anterior]</a>
+<a href="AlgFil1.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Subprocessos. 
+<span class=tit2>Matriu de transformació TG</span>
+</div>
+
+<P>
+Aquesta matriu s'aplica a tots els vèrtexs del model geomètric de
+l'escena i els transforma, passant-los del
+<A CLASS="glossari" HREF="javascript:glossari('SCAp.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">sistema de coordenades de l'aplicació</A> al
+<A CLASS="glossari" HREF="javascript:glossari('SCObs.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">sistema de coordenades de l'observador</A>
+
+La matriu es calcula a partir de la
+<A CLASS="glossari" HREF="javascript:glossari('PosObs.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">posició de l'observador</A> O, de
+la posició del
+<A CLASS="glossari" HREF="javascript:glossari('CentreEsc.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">centre de l'escena</A> C i del
+<A CLASS="glossari" HREF="javascript:glossari('VAmunt.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">vector cap amunt</A> <b>u</b>.
+
+<p>Primer es calculen alguns vectors auxiliars:
+
+<PRE class=algoritme>
+   F.x := C.x - O.x
+   F.y := C.y - O.y
+   F.z := C.z - O.z
+
+   F.x := F.x /Mòdul (F)
+   F.y := F.y /Mòdul (F)
+   F.z := F.z /Mòdul (F)
+
+   u.x := u.x /Mòdul (u)
+   u.y := u.y /Mòdul (u)
+   u.z := u.z /Mòdul (u)
+
+   s := ProducteVectorial (F, u)
+
+   s.x := s.x /Mòdul (s)
+   s.y := s.y /Mòdul (s)
+   s.z := s.z /Mòdul (s)
+
+   w := ProducteVectorial (s, F)
+</PRE>
+
+<P>
+Fixeu-vos que el vector <B>F</B> normalitzat és un vector en la direcció de
+O a C, i per tant té la direcció contrària a l'eix z del
+sistema de coordenades de l'observador. El vector <B>s</B> normalitzat és evidentment
+perpendicular a <B>F</B> i <B>u</B>, per tant té la direcció de
+l'eix x en el sistema de coordenades de l'observador. Finalment,
+el càlcul de <B>w</B> com a producte vectorial de <B>s</B> per
+<B>F</B> garanteix que <B>w</B> té la
+direcció de l'eix y en el sistema de coordenades de l'observador.
+
+<p>Ara, finalment, la matriu M d'una transformació geomètrica de
+translació per tal que els punts situats a O passin a tenir
+coordenades nul·les, seguida d'una matriu de gir a les direccions dels
+nous eixos de coordenades:
+
+<center>
+<table><tr><td>
+<IMG WIDTH="392" HEIGHT="81"
+ SRC="imatges/img2.gif"
+ ALT="\begin{displaymath}[M]
+= \left[\begin{array}
+{cccc}
+ s.x & s.y & s.z & 0\\  w.x ...
+ ... -O.y\\  0 & 0 & 1 & -O.z\\  0 & 0 & 0 & 1
+ \end{array}\right]\end{displaymath}">
+</td></table>
+</center>
+<br>
+
+<div class=tit3><b>Observacions:</b></div>
+
+<ul>
+ <li>Un cop calculada la matriu M, aquesta matriu s'aplica a tots els
+   vèrtexs del model geomètric de l'escena per a transformar-los,
+   passant-los del sistema de coordenades de l'aplicació al sistema de
+   coordenades de l'observador. Els vèrtexs es consideren vectors
+   columna en <A CLASS="glossari"
+   HREF="javascript:glossari('CoordHomog.html','*','400','300','no','no','no','yes')"
+   onMouseOver="window.status='Glossari';return true"
+   onMouseOut="window.status='';return true">coordenades
+   homogènies</A>. El producte de M pel vèrtex V seria:
+
+<br>
+<CENTER><table><tr><td>
+<IMG WIDTH="256" HEIGHT="81"
+ SRC="imatges/img3.gif"
+ ALT="\begin{displaymath}
+VectorTransformat := [M] \left[\begin{array}
+{c}
+ V.x\\  V.y \\  V.z\\  1
+ \end{array}\right]\end{displaymath}">
+</td></table></center>
+</li>
+
+ <li>L'únic que cal per a poder calcular bé la matriu M és que C no
+   coincideixi amb O, que el vector <B>u</B> no sigui nul -evidentment-
+   i que <B>u</B> tingui una direcció diferent de <B>F</B> per a que
+   el vector cap amunt aporti informació significativa i per a que el
+   vector <B>s</B> no sigui nul.
+</li>
+
+ <li>(Observació per a lectors avançats): En OpenGL es segueix aquest
+   procés pero no es normalitza el vector
+   <B>s</B>. Si ho penseu bé i ho relacioneu amb la matriu que
+   s'utilitza al bloc de transformació ortogonal/perspectiva i amb la
+   normalització final de coordenades, veureu que es pot eliminar la
+   normalització de <B>s</B>.
+</li></ul>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="MSExplicacio2.html">[Anterior]</a>
+<a href="AlgFil1.html">[Següent]</a>
+</div>
+</BODY>
+</HTML>

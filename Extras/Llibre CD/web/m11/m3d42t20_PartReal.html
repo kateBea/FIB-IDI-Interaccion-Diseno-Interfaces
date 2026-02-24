@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","reflex");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m3d42_ObjVirtualsGL.html">[Torna a l'algorisme]</a>
+</div>
+<br><br>
+
+<div class=tit3><b>Reflexions amb objectes virtuals.</b> Explicació - part 2</div>
+
+<P>Quan arribem aquí tots els objectes virtuals han estat
+dibuixats. Abans de pintar la resta de l'escena, hem de tornar l'estat
+d'OpenGL a la normalitat. Per això, el codi:
+
+<pre class=algoritme>
+    <b>glPopMatrix</b>();
+    <b>glLightfv</b>(GL_LIGHT0, GL_POSITION, lightpos);
+    <b>glCullFace</b>(GL_BACK);
+</pre>
+
+<P class=noind>té l'efecte d'esborrar la matriu que haviem inserit al
+capdavant de les transformacions de modelat, i reposicionar la llum en
+les coordenades normals de l'escena. (Com abans, això s'ha de repetir
+per cada llum si n'hi ha més). Finalment la crida a
+<tt>glCullFace()</tt> restaura el criteri de filtrat de cares a la
+normalitat, ja que ja no tenim la reflexió concatenada amb les
+transformacions geomètriques, i el criteri per defecte d'OpenGL, basat
+en el sentit de gir, torna a ser correcte.
+
+<p>A continuació cal pintar el mirall, que té un tractament especial i
+per això no l'hem inclòs a <tt>pintaEscena()</tt>. Com ja vàrem
+comprovar a <a href="m3d40_ObjectesVirtuals.html#appletReflexions1">un
+applet</a> anterior, el realisme de la reflexió en el mirall augmenta
+si el mirall no és perfecte, val a dir que absorveix part de la llum
+incident. Per a simular això, el pintem com a polígon semitransparent,
+usant la tècnica ja descrita d'<i>alpha blending</i>:
+
+<pre class=algoritme>
+    <b>glColor4d</b>(1., 1., 1., 0.15);
+    <b>glEnable</b>(GL_BLEND);
+    <b>glBlendFunc</b>(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+    pintaPoligonMirall();
+    <b>glDisable</b>(GL_BLEND);
+</pre>
+
+<P>Finalment estem ja en condicions de pintar l'escena real, pel que
+tornem a enviar la geometria de l'escena al <i>pipeline</i> de
+visualització.
+
+<pre class=algoritme>
+    pintaEscena();
+</pre>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m3d42_ObjVirtualsGL.html">[Torna a l'algorisme]</a>
+</div>
+</body>
+</html>

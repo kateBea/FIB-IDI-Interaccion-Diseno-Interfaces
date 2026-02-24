@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","textu");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m3e40_TextSintesi.html">[Anterior]</a>
+[Següent]
+<a href="m3f10_Antialiasing.html">[Següent apartat]</a>
+</div>
+<br><br>
+
+<div class=tit1>Textures.
+<span class=tit2>Efectes visuals obtinguts amb utilització de textures</span>
+</div>
+
+<p> Al llarg d'aquest apartat hem observat exemples de com les
+textures es poden utilitzar per a incrementar el realisme de les
+escenes. Anem a fer una síntesi d'algunes de les aplicacions
+estudiades i avançarem altres aplicacions fora de l'abast d'aquest
+llibre. Actualment l'aplicació de textures està implementada en
+diferents plaques gràfiques i s'utilitza abastament en jocs
+d'ordinador en què es requereix simular realisme amb baix cost
+computacional.
+
+<ul>
+<li> Aplicació d'una textura de colors per a simular l'aspecte del
+material. Simplement caldrà indicar que la textura substitueix el color
+de l'objecte i les coordenades de textura es poden generar de manera
+explítita o amb generació automàtica amb GL_OBJECT_LINEAR, per
+exemple.</li>
+     <!-- en un futur imatge del palau de Carlos V-->
+
+<li> Generació de contorns sobre una superfície.
+
+<br><br>
+<div align=center><img src="imatges/ContornObject.png"></div>
+<br>
+</li>
+
+<li> Simulació de la il·luminació. S'utilitza sobretot en jocs d'ordinador <!--  (encara que l'exemple mostri una peça mecanitzada). -->
+
+<br><br>
+<div align=center><img height=200 src="imatges/isa2.png">&nbsp;&nbsp;<img height=200 src="imatges/isa3.png"></div>
+<br>
+<!--  <img src="imatges/isa2.png"><img src="imatges/isa3.png"> -->
+<!-- <img src="imatges/isa4.png"> -->
+</li>
+
+<li> Reflexions d'un entorn sobre un objecte altament reflectant.
+
+<br><br>
+<div align=center><img src="imatges/esphereMap.png"></div>
+<br>
+</li>
+
+<li> Projecció de diapositives sobre un objecte, utilitzant generació
+automàtica de textures amb GL_OBJECT_LINEAR.
+
+<br><br>
+<div align=center><img src="imatges/isa13.png" width=240 height=240></div>
+<br>
+</li>
+
+<li> Reflexions en miralls i ombres pre-calculades.</li>
+
+<li><i>Bump-Mapping</i>. Simulació de rugositats d'una
+superfície. La idea principal és utilitzar la textura per a
+distorsionar el valor de normal en cada vèrtex. La seva implementació
+amb OpenGL queda fora de l'abast d'aquest llibre. Podeu trobar més
+informació en la <a href="../Biblio.html">bibliografia</a>.
+
+<br><br>
+<div align=center><img src="imatges/isa1.png"></div>
+<br>
+</li>
+
+<li><i>Displacement-Mapping</i>. Simulació de protuberàncies en una
+superfície. La idea principal és utilitzar la textura per a
+distorsionar la ubicació dels vèrtex. La seva implementació amb OpenGL
+queda fora de l'abast d'aquest llibre. Podeu trobar més informació en la
+bibliografia.
+
+<br><br>
+<div align=center><img src="imatges/isa9.png"></div>
+<br>
+</li>
+</ul>
+
+<p class=exercici><span class=exernum>Exercici 4.12:</span> Textures
+per a Simular Arbres (tècnica de <i>billboard</i>).  Com a substitució
+d'objectes complexos difícils de modelar, com arbres, en entorns de
+simulació s'utilitza un "truc" que utilitza textures. Imagineu que
+tenim la imatge d'un arbre des d'una determinada posició. Els pixels
+(texels) en els que no es projecta cap fulla els inicialitzem com
+transparents. Quan es vol simular un arbre en l'escena, simplement es
+pinta un rectangle en el que es mapa aquesta imatge substituint el
+color del rectangle. Fixeu-vos que en els punts de transparència es
+veurà l'escena que hi ha darrera de l'arbre (cal tenir el
+<i>blending</i> activat). Per a que a l'arbre no es noti el "truc" quan
+vegullem la càmera (fixeu-vos que si no fem res veurem un arbre sense
+gruix) es modifica l'orientació del polígon texturat en funció de
+l'orientació de l'observador. Dissenyeu un algorisme que implementi
+aquest procediment, imagineu que teniu una imatge amb l'arbre.
+
+<p class=exercici><span class=exernum>Exercici 4.13:</span> Textures
+per a Simular Fum. Imagineu que teniu una textura que és una imatge de
+fum. Si tenim un foc en una escena i volem simular la propagació del
+fum, podem mapar la textura en un polígon que es va "movent"
+(rotant + translladant en visualitzacions succesives) per l'escena
+continuament. D'aquesta manera amb baix cost tenim simulada una
+animació de les partícules del fum. Dissenyeu l'algorisme.
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m3e40_TextSintesi.html">[Anterior]</a>
+[Següent]
+<a href="m3f10_Antialiasing.html">[Següent apartat]</a>
+</div>
+</body>
+</html>

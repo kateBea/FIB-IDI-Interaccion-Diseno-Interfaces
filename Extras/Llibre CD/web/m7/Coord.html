@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M7.1 Procés de visualització 2D.Definicions.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("vis2D","defs");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+<a href="main71.html">[Anterior]</a>
+<a href="FinDef.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class="tit1">Definicions.
+<span class="tit2">Sistemes de coordenades</span>
+</div>
+
+<p>En la implementació del PV2D intervenen dos sistemes de
+coordenades: el <a CLASS="glossari" HREF="javascript:glossari('SCAp.html','*','400','300','no','no','no','yes')" onMouseOver="window.status='Glossari';return true" onMouseOut="window.status='';return true">sistema
+de coordenades de l'aplicació</a> respecte al qual estan referenciats
+els objectes (les seves unitats són les pròpies de l'aplicació)
+i el <a CLASS="glossari" HREF="javascript:glossari('SCDisp.html','*','400','300','no','no','no','yes')" onMouseOver="window.status='Glossari';return true" onMouseOut="window.status='';return true">sistema
+de coordenades de dispositiu</a> associat a la pantalla i que treballa
+en unitats de pixels. En sistemes que permeten multifinestra, cada finestra
+es considerada com un dispositiu gràfic (finestra gràfica)
+independent amb un sistema de coordenades propi. El seu origen es considera
+en el vèrtex inferior esquerra del dispositiu i els seus eixos paral·lels
+als seus costats.
+
+<p>La figura següent mostra a l'esquerra una
+escena i una Finestra_2D definida. A la dreta dues pantalles gràfiques.
+La de sobre té definida només una vista. La de sota representa
+un sistema multifinestra; cada finestra gràfica té definida
+una vista de la seva mateixa grandària. Observeu que cada finestra
+gràfica té associat un sistema de coordenades de dispositiu
+propi.
+
+<CENTER>
+<table>
+<tr><TD>
+<img src="imatges/fig7-1-TOT.jpg" alt="fig7-1-TOT.jpg" border="0">
+</TD>
+</TABLE>
+</CENTER>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="main71.html">[Anterior]</a>
+<a href="FinDef.html">[Següent]</a>
+</div>
+</BODY>
+</HTML>

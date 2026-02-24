@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title>8.3.FILTRAT DE CARES VISIBLES</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" TYPE="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</head>
+<BODY>
+<SCRIPT>
+top.passara("visib","filtr");
+</SCRIPT>
+<DIV CLASS="nav">
+[Anterior]
+[Següent]
+<a href="m8-2.html">[Apartat anterior] </a>
+<a href="m8-4.html">[Següent apartat]</a>
+</div>
+<br><br>
+
+<div class=tit1>Filtrat de cares visibles</div>
+
+<P>
+En aquest apartat descriurem un algorisme que determina la visibilitat
+d'objectes convexos en espai mixt i redueix el cost de la
+visualització de moltes escenes.
+
+<P> Tal com hem introduït en la descripció
+dels objectes geomètrics, les cares dels objectes que configuren
+una escena es consideren amb dues bandes determinades
+per l'orientació de la seva normal. Usualment només la banda exterior
+es considera potencialment visible per l'observador, donat que la
+visió de la banda interior queda obstaculitzada pels punts interiors a
+l'objecte (si aquest es considera opac).
+
+<P>
+L'algorisme de filtratge de cares visibles (conegut per l'anglicisme
+<I>culling</I>), determina, a partir de l'orientació d'una cara i
+d'una posició concreta de visió, a quina banda de la cara s'hi troba
+la càmera; en cas d'ubicar-se en la banda exterior considera que la
+cara és visible per l'observador, altrament que no ho és. Podem veure
+un exemple en la figura.
+
+<P>
+L'algorisme treballa en espai objecte i només calcula la visibilitat
+geomètrica exacta d'una cara si l'escena està formada per un sol
+objecte convex. Altrament, altres cares del propi o d'altre objecte
+poden obstaculitzar totalment o parcial la seva visió i el filtrat de
+cares no ho detectaria donat que per a realitzar el test de
+visibilitat només considera: una cara aïllada i l'observador.
+
+<CENTER>
+<TABLE BORDER=0>
+<TR><TD>
+<img align=left src="imatges/fig-8-7iia.jpg" alt="Cara visible"></TD>
+<TD>
+<img src="imatges/fig-8-7iib.jpg" alt="Cara no visible"></TD></TR>
+</TABLE>
+</CENTER>
+
+<P>
+Generalment, el <I>culling</I> és un algorisme utilitzat com a
+pre-procés d'altres mètodes de determinació de visibilitat donat que
+de manera eficient filtra un nombre important de cares no visibles (de
+l'ordre de la meitat) amb un cost computacional baix.
+
+<P>
+El següent applet mostra un objecte convex i les cares considerades
+visibles des de la càmera; qualsevol que sigui l'orde de visualització
+de les cares produirà una imatge correcta. Si passem a les dues
+imatges següents (pitjant en el botó de fletxa a la dreta en totes
+dues pantalles) veurem un objecte còncau i les cares considerades
+visibles; la cara vermella només es parcialment visible i el
+filtrat la determina visible produint una determinació de visibilitat
+incorrecta. Per últim, si passem a l'última parella d'imatges, es
+mostra una escena amb dos objectes convexos; la determinació de
+visibilitat per cada objecte aïllat és correcte però no ho és la
+conjunta donat que no es detecta que l'objecte blau tapa el
+vermell. En algunes escenes la visualització ordenada de les cares
+filtrades (algorisme espai mixt) produeix imatges correctes des de la
+perspectiva de la visibilitat.
+
+
+<BR>
+<center>
+<TABLE BORDER=0>
+<TR><TD>
+<applet code="browin" archive="browin.jar" width=660 height=340 >
+                <PARAM NAME="fitxer" VALUE="images.lis">
+                <PARAM NAME="numero" VALUE="2" >
+                <PARAM NAME="orientacio" VALUE="h" >
+</applet>
+</TD></TR>
+</TABLE>
+</center>
+
+<P>
+El filtrat es pot ubicar en diferents posicions del procés de
+visualització 3D:
+
+<UL>
+<LI> Si es realitza en el <A
+CLASS="glossari" HREF="javascript:glossari('modelAp.html','*','400','300','no','no','no','yes')" onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">model de l'aplicació</A>,
+una cara C<sub>i</sub> serà potencialment visible <B>ssi</B><BR
+class=noclear>
+<CENTER>
+a<sub>i</sub>*obs.x + b<sub>i</sub>*obs.y + c<sub>i</sub>*obs.z +
+d<sub>i</sub> > 0
+</CENTER>
+on (a<sub>i</sub>,b<sub>i</sub>,c<sub>i</sub>,d<sub>i</sub>) és
+l'equació del pla de la cara C<sub>i</sub> i obs és la posició de
+l'observador.
+</LI>
+<LI> Si es realitza en el <A
+CLASS="glossari" HREF="javascript:glossari('ModelObs.html','*','400','300','no','no','no','yes')" onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">model de l'observador</A>,
+l'observador es troba sobre l'eix z positiu mirant cap a coordenades
+negatives i els objectes són tots interiors a la <A
+CLASS="glossari" HREF="javascript:glossari('PiramVis.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">piràmide
+de visió</A> i potencialment visibles. El filtrat de cares considera
+visibles aquelles cares amb una normal n = (nx,ny,nz) tal que la seva
+component nz (en el model corresponent) sigui positiva (apunti cap a
+l'observador), és a dir nz>0.
+</LI>
+<LI> Si es realitza en el <A
+CLASS="glossari" HREF="javascript:glossari('CoordNorm.html','*','400','300','no','no','no','yes')" onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">model normalitzat</A>,
+l'observador es troba sobre l'eix z negatiu mirant cap a coordenades
+positives i els objectes són tots interiors a la piràmide
+de visió i potencialment visibles. El filtrat de cares considera
+visibles aquelles cares amb una normal n = (nx,ny,nz) tal que la seva
+component nz (en el model corresponent) sigui negativa (apunti cap a
+l'observador), és a dir nz<0.
+</LI>
+</UL>
+
+
+<br><br>
+<DIV CLASS="nav">
+[Anterior]
+[Següent]
+<a href="m8-2.html">[Apartat anterior] </a>
+<a href="m8-4.html">[Següent apartat]</a>
+</div>
+</body>
+</html>

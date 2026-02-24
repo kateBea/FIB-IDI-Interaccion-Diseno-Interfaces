@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M5.4.Representeció d'objectes Sòlids </TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;
+charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("model","soli");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+      <A HREF="main54bis.html">[Anterior]</a>
+      <a href="main54-3.html">[Següent]</a>
+     </div>
+<br><br>
+
+<div class="tit1">Representació d'objectes Sòlids.
+<span class="tit2">Sòlids delimitats per cares planes</span>
+</div>
+
+<P>
+   En el que segueix, suposarem -per simplificar- que la frontera
+   dels objectes està constituïda per cares planes. Això és lògic en els
+   objectes de forma polièdrica que hem vist fins ara. En cas d'objectes
+   curvats, pot ser una bona aproximació si ens basem en les tècniques
+   de la llibreria OpenGL per a suavitzar
+   les cares planes que aproximen una superfície curvada,
+</P>
+
+<CENTER>
+<TABLE><TR><TD>
+  <APPLET CODE ="AppletRep.class" archive="AppletRep.jar,../comuns.jar" WIDTH=220 HEIGHT=280>
+  <PARAM NAME=AppId VALUE="2">
+  <PARAM NAME=fichero0 VALUE="/DAT/modelFr5.dat">
+  <PARAM NAME=fichero1 VALUE="/DAT/modelFr5.dat">
+  <PARAM NAME=Angx VALUE="0.0">
+  <PARAM NAME=Angy VALUE="0.0">
+  </APPLET>
+</TD></TR></TABLE>
+</CENTER>
+
+<P>
+   Observeu -en mode filferros- que l'objecte està modelitzat en
+   realitat per cares planes. Però en canvi, en la visualització suavitzada
+   d'aquest objecte ens desapareixen els límits entre les cares planes.
+</P>
+
+<P>
+   Quan treballem amb objectes amb frontera formada per cares planes,
+   considerarem que els plans suport de les cares són orientats. Així
+   queda garantida l'orientació de la superfície de l'objecte. En el que
+   segueix suposarem que l'<A
+HREF="../m4/plansespai.html#equacio_implicita_pla">equació implícita
+del pla</A> de qualsevol cara
+   de l'objecte té el seu <A HREF="../m4/normal.html">vector
+normal</A> definit en el sentit cap a fora
+   de l'objecte.
+
+<br><br>
+<DIV CLASS="nav">
+       <A HREF="main54bis.html">[Anterior]</a>
+      <a href="main54-3.html">[Següent]</a>
+  </div>
+
+</BODY>
+
+</HTML>
+

@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<BODY>
+<br>
+
+<div class=tit2> Interpolació final </div>
+
+<p> Un cop obtingudes les deformacions de les dues malles, ja podem
+crear la metamorfosi entre les dues imatges. Suposem que les imatges
+inicials són I1, I2 i que les deformacions de warping que hem calculat
+són Def1(I1) i Def2(I2).
+
+<p> El procés de metamorfosi genera una seqüència d'imatges
+intermitges, parametritzades per un paràmetre <b>t</b> que varia
+entre zero i la unitat (a l'applet, podeu desplaçar-vos al llarg de la
+metamorfosi variant el valor del paràmetre <b>t</b> d'interpolació
+amb la barra de desplaçament).  Quan t=0 obtenim la primera imatge, i
+quan t=1 el sistema ens dóna la segona imatge.  Podem pensar també que
+<b>t</b> és el temps, i que estem generant una animació que ens
+porta de la primera imatge a la segona. Per a calcular la imatge per
+un determinat valor intermig del paràmetre <b>t</b>, cal fer el
+següent:
+
+<ul>
+<li> Calcular la deformació de la imatge I1 a l'instant <b>t</b>:
+I1(t) = (1-t)*I1 + t*Def1(I1) </li>
+
+<li> Calcular la deformació de la imatge I2 a l'instant <b>t</b>:
+I2(t) = (1-t)*Def2(I2) + t*I2 . Observeu que ara, a l'instant inicial
+hem de tenir Def2(I2) i no pas I2! </li>
+
+<li> Calcular la interpolació entre les dues imatges I1(t) i I2(t)
+usant l'algorisme de cross dissolving que ja hem vist: I_Final(t) =
+(1-t)*I1(t) + t*I2(t) </li>
+</ul>
+
+<p> Fixeu-vos per tant que la metamorfosi requereix,
+
+<ul>
+<li> Dos processos de deformació (warping), que es poden efectuar de
+forma manual com fem aquí amb l'applet, o de forma semiautomàtica a
+partir de l'especificació de parelles de correspondències entre
+detalls a les imatges </li>
+
+<li> Dues interpolacions per a calcular les deformacions intermitges
+de les malles en un cert instant <b>t</b> </li>
+
+<li> Un procés final d'interpolació de color entre les dues imatges
+deformades a l'instant <b>t</b> </li>
+</ul>
+
+
+<p align=right><a href="javascript:window.close()">tornar </a>
+</body>
+</html>

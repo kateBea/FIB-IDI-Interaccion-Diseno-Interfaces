@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M2.3 El frame buffer. Paletes de colors.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;
+charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("hard","fb");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+      <A HREF="db.html">[Anterior]</a>
+      <a href="fins.html">[Següent]</a>
+     </div>
+<br><br>
+
+<div class="tit1">El Frame Buffer.
+<span class="tit2">Paleta de colors</span>
+</div>
+
+<P>Tanmateix aquesta arquitectura resulta a vegades massa
+cara per a una aplicació determinada i es recorre a una paleta de colors (en anglés <I>color lookup
+table</I> i per tant sovint referida per l'acrònim CLT). En aquest cas el <I> frame
+buffer</I> no emmagatzema directament intensitats de color, sino un
+índex a una taula que descriu les intensitats de cada color per a
+tots els <I> pixels</i> que tinguin aquell valor. Per tant, el nombre de
+colors diferents presentables pot ser molt elevat, pero en un moment
+donat només hi poden haver un cert nombre de colors diferents alhora,
+on el límit vindrà donat pel tamany de la paleta de colors (que
+coincideix amb el nombre de valors diferents que poden emmagatzemar-se
+en cada <I>pixel</I> del <I>frame buffer</I>. El valor més típic es
+256 colors diferents d'entre 16.777.216 colors diferents (quan cada
+pixel disposa d'un byte per a emmagatzemar el seu color, i cada
+entrada en la paleta de colors disposa de tres bytes per a
+emmagatzemar les intensitats de vermell, verd i blau). La següent
+figura mostra esquemàticament aquesta arquitectura (que també podria
+presentar-se en la seva variant de doble buffer):</P>
+<P>
+<center><table><td>
+<img class="centrada" alt="Controlador de vídeo amb paleta de colors" src="imatges/paleta.gif"></td></table></center>
+<P>Observeu que a l'exemple moltes entrades contenen una el·lipsi
+perquè el seu valor és irrellevant a l'exemple. A més les components
+de blau i verd són zero a les entrades rellevants, ja que el triangle
+és de tons de vermell. Observeu també que no hi ha cap relació entre
+l'ordre a la taula i els colors. Vegeu també l'estalvi substancial que
+suposa aquest esquema en memòria (tal vegada que el nombre
+d'entrades a la paleta de colors és sensiblement inferior al nombre de
+<i>pixels</i> de la pantalla.
+
+
+<br><br>
+<DIV CLASS="nav">
+      <A HREF="db.html">[Anterior]</a>
+      <a href="fins.html">[Següent]</a>
+    </div>
+
+</BODY>
+
+</HTML>
+

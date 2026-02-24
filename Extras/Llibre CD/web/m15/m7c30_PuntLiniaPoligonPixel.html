@@ -1,0 +1,303 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("opengl","extop");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m7c20_TransfMatrius.html">[Anterior]</a>
+<a href="m7c40_Buffers.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1> Extensió de crides d'OpenGL.
+<span class=tit2>Punts, línies, polígons i píxels</span>
+</div>
+
+<P>
+En OpenGL, per defecte, els punts es pinten com un únic <A class=glossari Href="javascript:glossari('pixel.html')">píxel</A> de la
+pantalla, les línies es pinten contínues i d'amplada un píxel, i els
+polígons es pinten omplerts amb un patró sòlid. En aquest apartat
+veurem com es poden canviar aquests modes de pintat en cada cas, i
+també tractarem el manegament que es pot fer directament amb píxels
+d'imatges.
+
+<P>
+<a name="glPointSize"></a>
+<div class=tit3><B> Punts</B></div>
+
+<P>
+Per a controlar la mesura en píxels que es vol per a pintar un punt,
+usarem la crida:
+
+<pre class=algoritme>
+          void <b>glPointSize</b> (GLfloat size)
+</pre>
+
+<P>
+on el paràmetre <i>size</i> dóna la mesura en píxels que es vol per a
+pintar un punt a pantalla. Aquest valor ha de ser més gran que 0 i per
+defecte és 1.0.
+
+<P>
+La quantitat de píxels que es pinten en realitat per a un punt depèn
+de si l'<i>antialiasing</i> està activat o no (l'<i>antialiasing</i>
+per punts s'activa amb <b>glEnable</b> (GL_POINT_SMOOTH), i per
+defecte no està activat). Si l'<i>antialiasing</i> no està activat, la
+mesura que es dóna com a píxels per punt, <i>size</i>, és arrodonida a
+un nombre enter i es pinten punts quadrats en el nombre de píxels (si
+<i>size</i> és 2 es pinta un quadrat de 2x2 píxels). Si
+l'<i>antialiasing</i> està activat, es pinta un grup circular de píxels, i
+els píxels de les voreres es pinten amb menys intensitat per a donar
+sensació de suavitat. En aquest cas, els valors de <i>size</i> que no
+siguin enters no són arrodonits.
+
+
+<P>
+<div class=tit3><B> Línies</B></div>
+
+<P>
+En el cas de les línies es pot decidir el gruix que es vol i també el
+patró que es vol que segueixin.
+
+<a name="glLineWidth"></a>
+<pre class=algoritme>
+          void <b>glLineWidth</b> (GLfloat width)
+</pre>
+
+<P>
+Aquesta crida dóna l'amplada en píxels que es vol per a pintar
+línies. El valor de <i>width</i> ha de ser més gran que 0 i per
+defecte és 1.0.
+
+<P>
+De la mateixa manera que pels punts, el pintat de línies es veu
+afectat pel fet que l'<i>antialiasing</i> estigui activat o no. En
+aquest cas l'<i>antialiasing</i> s'activa amb la crida <b>glEnable</b>
+(GL_LINE_SMOOTH). També igual que pels punts, en el cas que
+l'<i>antialiasing</i> estigui activat, es permeten valors que no
+siguin enters i no s'arrodoneixen. També igualment els píxels de la
+vora es pinten amb menys intensitat per a donar aspecte de suavitzat.
+
+<a name="glLineStipple"></a>
+<P>
+Per a decidir el patró de les línies, s'usa la crida:
+
+<pre class=algoritme>
+          void <b>glLineStipple</b> (GLint factor, GLushort pattern)
+</pre>
+
+<P>
+Aquesta crida permet decidir el patró que es vol seguir en el pintat
+de línies. El patró, <i>pattern</i>, és una sèrie de 16 zeros i uns
+que es repeteix per a donar patró a una línia. Un 1 en el patró indica
+que el píxel es pinta i un 0 que no, començant amb el bit de menor
+ordre del patró. Aquest patró també es pot veure afectat per l'altre
+paràmetre, <i>factor</i>, que multiplica a cada subsèrie de zeros i
+uns consecutius (tres uns consecutius es convertiran en sis si el
+factor és 2). Aquest <i>factor</i> es restringeix al rang [1,256].
+
+<P>
+Per a poder usar els patrons de línies, aquesta possibilitat ha
+d'haver estat activada amb la crida <b>glEnable</b> (GL_LINE_STIPPLE),
+i es desactiva passant-li el mateix paràmetre a la crida
+<b>glDisable</b>.
+
+
+<P>
+<div class=tit3><B> Polígons</B></div>
+
+<P>
+Una de les crides referents a polígons és la que decideix entre pintar
+la cara del davant, la del darrera o totes dues, i entre pintar amb
+punts, línies o omplert d'aquest polígon. Aquesta crida
+<b>glPolygonMode</b> ja ha estat explicada a l'apartat <a
+href="m7a20_BasicInstruccPrincipals.html">d'instruccions
+principals</a> de les crides bàsiques d'OpenGL.
+
+<P>
+També es pot, en el cas dels polígons, activar i desactivar el
+suavitzat de les arestes passant-li el valor GL_POLYGON_SMOOTH a les
+crides <b>glEnable</b> i <b>glDisable</b>.
+
+<P>
+El pintat de polígons en OpenGL es fa, per defecte, amb un patró
+sòlid, és a dir pintant tots i cadascun dels píxels que conformen
+l'interior del polígon.
+
+<P>
+Però també es poden pintar seguint un patró diferent que es pot
+especificar mitjançant la crida:
+
+<pre class=algoritme>
+          void <b>glPolygonStipple</b> (const GLubyte *mask)
+</pre>
+
+<P>
+Aquesta crida defineix el patró mitjançant el qual es vol fer el
+pintat de polígons. El paràmetre <i>mask</i> és un punter a un mapa
+de 32x32 bits que s'interpreta com una màscara d'uns i zeros. Allà on
+apareix un 1, el corresponent píxel del polígon es pinta, i allà on
+apareix un 0 el corresponent píxel no es pinta.
+
+<P>
+L'ús de patrons de polígons també s'ha d'activar per a que sigui
+efectiu. Per això, usarem la crida <b>glEnable</b> amb el valor
+GL_POLYGON_STIPPLE com a paràmetre. Per a desactivar-lo, pasarem el
+mateix valor a la crida <b>glDisable</b>.
+
+
+<P>
+<div class=tit3><B> Píxels</B></div>
+
+<P>
+OpenGL ofereix un conjunt de crides que permeten manegar dades
+d'imatge. En aquest punt en veurem les més significatives.
+
+<a name="glReadPixels"></a>
+<pre class=algoritme>
+          void <b>glReadPixels</b> (GLint x, GLint y, GLsizei width,
+                             GLsizei height, GLenum format,
+                             GLenum type, GLvoid *pixels)
+</pre>
+
+<P>
+Aquesta crida llegeix dades de píxels del rectangle del <i>frame
+buffer</i> que té (<i>x,y</i>) com a coordenada inferior esquerra, i
+les dimensions del qual són <i>width</i> i <i>height</i>. Aquestes
+dades les guarda a la taula apuntada per <i>pixels</i>. El paràmetre
+<i>format</i> indica quin dels formats de la següent taula tenen els
+píxels que es llegeixen, i el paràmetre <i>type</i> indica el tipus de
+dades de cada element, aquests tipus poden ser: GL_UNSIGNED_BYTE,
+GL_BYTE, GL_BITMAP, GL_UNSIGNED_SHORT, GL_SHORT, GL_UNSIGNED_INT,
+GL_INT, GL_FLOAT.
+
+<P>
+El buffer del que es llegirà serà aquell que hagi estat seleccionat
+mitjançant la crida <a
+href="m7c40_Buffers.html#glReadBuffer"><b>glReadBuffer</b></a>.
+
+<P>
+<center>
+<table border="2" class=materials>
+<thead>
+<tr><th>Constant de format</th><th>Format de píxel</th></tr>
+</thead>
+<tbody><tr><td>GL_COLOR_INDEX</td><td>índex de color</td></tr>
+<tbody><tr><td>GL_RGB</td><td>component de color vermell, verd i blau</td></tr>
+<tbody><tr><td>GL_RGBA</td><td>components de color vermell, verd, blau i alfa</td></tr>
+<tbody><tr><td>GL_BGR</td><td>components de color blau, verd i vermell</td></tr>
+<tbody><tr><td>GL_BGRA</td><td>components de color blau, verd, vermell i alfa</td></tr>
+<tbody><tr><td>GL_RED</td><td>component de color vermell</td></tr>
+<tbody><tr><td>GL_GREEN</td><td>component de color verd</td></tr>
+<tbody><tr><td>GL_BLUE</td><td>component de color blau</td></tr>
+<tbody><tr><td>GL_ALPHA</td><td>component de color alfa</td></tr>
+<tbody><tr><td>GL_LUMINANCE</td><td>component de luminància</td></tr>
+<tbody><tr><td>GL_LUMINANCE_ALPHA</td><td>component de luminància i alfa</td></tr>
+<tbody><tr><td>GL_STENCIL_INDEX</td><td>índex d'stencil</td></tr>
+<tbody><tr><td>GL_DEPTH_COMPONENT</td><td>component de profunditat</td></tr>
+</table></center>
+
+<a name="glDrawPixels"></a>
+<pre class=algoritme>
+          void <b>glDrawPixels</b> (GLsizei width, GLsizei height, GLenum format,
+                             GLenum type, const GLvoid *pixels)
+</pre>
+
+<P>
+Aquesta crida escriu un rectangle de dades de píxels amb dimensions
+<i>width</i> i <i>height</i>. El rectangle de píxels és escrit amb la
+seva cantonada inferior esquerra a la posició actual de pintat (veure
+<b>glRasterPos</b> més avall). Els paràmetres <i>format</i> i
+<i>type</i> tenen el mateix significat que per la crida anterior (<a
+href="#glReadPixels"><b>glReadPixels</b></a>). La taula apuntada per
+<i>pixels</i> són els píxels a ser pintats. Si la posició actual de
+pintat no és vàlida no es pintarà res.
+
+<P>
+El buffer en el que s'escriurà serà aquell que hagi estat seleccionat
+mitjançant la crida <a
+href="m7c40_Buffers.html#glReadBuffer"><b>glReadBuffer</b></a>.
+
+<a name="glCopyPixels"></a>
+<pre class=algoritme>
+          void <b>glCopyPixels</b> (GLint x, GLint y, GLsizei width,
+                             GLsizei height, GLenum buffer)
+</pre>
+
+<P>
+Amb aquesta crida es copien dades de píxels des del rectangle del
+<i>frame buffer</i> que té (<i>x,y</i>) com a cantonada inferior
+esquerra i que té <i>width</i> i <i>height</i> com a dimensions. Les
+dades es copien a una nova posició que ve donada per la posició actual
+de pintat. el Paràmetre <i>buffer</i> pot ser GL_COLOR, GL_STENCIL o
+GL_DEPTH, especificant el buffer que s'utilitza.
+
+<a name="glPixelStore"></a>
+<pre class=algoritme>
+          void <b>glPixelStore{if}</b> (GLenum pname, TYPE param)
+</pre>
+
+<P>
+Els modes de emmagatzematge de píxels que OpenGL suporta es controlen
+amb aquesta crida. Normalment aquesta crida s'executa diferents cops
+per a donar valors a diferents paràmetres. Els possibles valors per al
+paràmetre <i>pname</i> els veurem a la següent taula juntament amb el
+seu tipus de dades, valor inicial i rang de valors vàlids. Els
+paràmetres GL_UNPACK* controlen com es desempaqueten les dades de
+memòria, i a la inversa els GL_PACK*.
+
+<P>
+<center>
+<table border="2" class=materials>
+<thead>
+<tr><th>Nom del paràmetre</th><th>Tipus</th><th>Valor inicial</th><th>Rang vàlid</th></tr>
+</thead>
+<tbody><tr><td>GL_UNPACK_SWAP_BYTES<br>GL_PACK_SWAP_BYTES</td><td>GLboolean</td><td>fals</td><td>cert/fals</td></tr>
+<tbody><tr><td>GL_UNPACK_LSB_FIRST<br>GL_PACK_LSB_FIRST</td><td>GLboolean</td><td>fals</td><td>cert/fals</td></tr>
+<tbody><tr><td>GL_UNPACK_ROW_LENGTH<br>GL_PACK_ROW_LENGTH</td><td>GLint</td><td>0</td><td>enter positiu</td></tr>
+<tbody><tr><td>GL_UNPACK_SKIP_ROWS<br>GL_PACK_SKIP_ROWS</td><td>GLint</td><td>0</td><td>enter positiu</td></tr>
+<tbody><tr><td>GL_UNPACK_SKIP_PIXELS<br>GL_PACK_SKIP_PIXELS</td><td>GLint</td><td>0</td><td>enter positiu</td></tr>
+<tbody><tr><td>GL_UNPACK_ALIGNMENT<br>GL_PACK_ALIGNMENT</td><td>GLint</td><td>4</td><td>1,2,4,8</td></tr>
+<tbody><tr><td>GL_UNPACK_IMAGE_HEIGHT<br>GL_PACK_IMAGE_HEIGHT</td><td>GLint</td><td>0</td><td>enter positiu</td></tr>
+<tbody><tr><td>GL_UNPACK_SKIP_IMAGES<br>GL_PACK_SKIP_IMAGES</td><td>GLint</td><td>0</td><td>enter positiu</td></tr>
+</table></center>
+
+<P>
+Els quatre últims valors de la taula només afecten a les textures 3D.
+
+<a name="glRasterPos"></a>
+<P>
+La posició actual de pintat és la posició de la pantalla on el següent
+bitmap o imatge es pintarà.
+
+<pre class=algoritme>
+          void <b>glRasterPos{234}{sifd}</b> (TYPE x, TYPE y, TYPE z, TYPE w)
+          void <b>glRasterPos{234}{sifd}v</b> (TYPE *coords)
+</pre>
+
+<P>
+Aquesta crida dóna valor a la posició actual de pintat, és a dir,
+modifica aquesta posició allà on li estem indicant. Els paràmetres que
+se li passen són les coordenades del punt, que seran transformades a
+coordenades de pantalla de la mateixa manera que es fa per
+<b>glVertex*</b> (és a dir amb les matrius de MODELVIEW i PROJECTION).
+
+<P>
+També es pot obtenir la posició actual de pintat mitjançant la crida a
+<a href="m7c70_Interrogacio.html#glGetFloat"><b>glGetFloatv</b></a>,
+passant-li el valor GL_CURRENT_RASTER_POSITION com a paràmetre de
+consulta.
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m7c20_TransfMatrius.html">[Anterior]</a>
+<a href="m7c40_Buffers.html">[Següent]</a>
+</div>
+</body>
+</html>

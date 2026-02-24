@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M5.3.Representació d'objectes 2D i 3D </TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;
+charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("model","rep");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+      <A HREF="main53-2.html">[Anterior]</a>
+      <a href="main53-4.html">[Següent]</a>
+     </div>
+<br><br>
+
+<div class="tit1">Representació d'objectes 2D i 3D.
+<span class="tit2">Exemple de representació instanciada procedural</span>
+</div>
+
+<P>
+   Un possible exemple de representació instanciada procedural en 2D
+   podria consistir en una taula d'objectes amb el seu tipus, paràmetres
+   i posició:
+
+</P>
+<CENTER>
+<TABLE class=m4 width="80%" BORDER>
+<TR align=center><B>Taula d'instàncies d'objectes</B></TR>
+<TR>
+<TD align=center width="15%"><B>Tipus</B></TD>
+<TD align=center width="15%"><B>Paràmetres</B></TD>
+<TD align=center width="15%"><B>Posició</B></TD>
+<TD align=center width="15%"><B>Sim</B></TD>
+<TD align=center width="15%"><B>Color</B></TD>
+</TR>
+<TR>
+<TD align=center width="15%">Rect</TD>
+<TD align=center width="15%">15 &nbsp;&nbsp;&nbsp; 10</TD>
+<TD align=center width="15%">0 &nbsp;&nbsp;&nbsp; 0</TD>
+<TD align=center width="15%" bgcolor="gray">&nbsp;</TD>
+<TD align=center width="15%">ocre</TD>
+</TR>
+<TR>
+<TD align=center width="15%">Rect</TD>
+<TD align=center width="15%">1 &nbsp;&nbsp;&nbsp; 4</TD>
+<TD align=center width="15%">11 &nbsp;&nbsp;&nbsp; 11</TD>
+<TD align=center width="15%"bgcolor="gray">&nbsp;</TD>
+<TD align=center width="15%">negre</TD>
+</TR>
+<TR>
+<TD align=center width="15%">Tri</TD>
+<TD align=center width="15%">9 &nbsp;&nbsp;&nbsp; 6</TD>
+<TD align=center width="15%">-1 &nbsp;&nbsp;&nbsp; 9.5</TD>
+<TD align=center width="15%"bgcolor="gray">&nbsp;</TD>
+<TD align=center width="15%">roig</TD>
+</TR>
+<TR>
+<TD align=center width="15%">Tri</TD>
+<TD align=center width="15%">8 &nbsp;&nbsp;&nbsp; 6</TD>
+<TD align=center width="15%">16 &nbsp;&nbsp;&nbsp; 9.5</TD>
+<TD align=center width="15%">X</TD>
+<TD align=center width="15%">roig</TD>
+</TR>
+<TR>
+<TD align=center width="15%">Rect</TD>
+<TD align=center width="15%">3 &nbsp;&nbsp;&nbsp; 4</TD>
+<TD align=center width="15%">6 &nbsp;&nbsp;&nbsp; 0</TD>
+<TD align=center width="15%"bgcolor="gray">&nbsp;</TD>
+<TD align=center width="15%">blanc</TD>
+</TR>
+<TR>
+<TD align=center width="15%">Cerc</TD>
+<TD align=center width="15%">1.5</TD>
+<TD align=center width="15%">8 &nbsp;&nbsp;&nbsp; 7</TD>
+<TD align=center width="15%"bgcolor="gray">&nbsp;</TD>
+<TD align=center width="15%">blanc</TD>
+</TR>
+</TABLE>
+</CENTER>
+
+<P>
+ En aquest cas ens caldrà disposar de tres procediments o funcions,
+
+
+<p>
+<center><u>Rect (a,b: real)</u></center>
+
+<p>
+<center><u>Tri  (a,b: real)</u></center>
+
+<p>
+<center><u>Cerc (r: real)</u></center>
+
+
+<p class=noind>
+   que generen la geometria d'un rectangle, d'un triangle i d'un
+   cercle respectivament. Podem suposar que cada objecte té un punt
+   representant -el vèrtex inferior esquerra en el rectangle i en el
+   triangle, el centre en el cercle- que queden inicialment situats a
+   l'origen de coordenades. Podem suposar també que el triangle és un
+   triangle rectangle amb l'angle recte al vèrtex inferior dret. Un cop
+   generada cada una de les instàncies, la taula ens indica la seva
+   posició final al pla x-y -les coordenades de la posició s'han
+   d'entendre com el vector de translació que s'haurà d'aplicar al punt
+   representant de l'objecte instanciat-. En un cas general caldria
+   indicar a més una transformació geomètrica de rotació. El darrer camp
+   de la taula, <B>Sim</B>, indica si cal realitzar una transformació
+geomètrica
+   de simetria després de la translació. En aquest exemple, s'ha suposat
+   que, en cas de fer-se, aquesta simetria és respecte la vertical que
+   passa pel punt representant després de la translació.
+<P>
+
+<br><br>
+<DIV CLASS="nav">
+      <A HREF="main53-2.html">[Anterior]</a>
+      <a href="main53-4.html">[Següent]</a>
+  </div>
+
+</BODY>
+
+</HTML>
+

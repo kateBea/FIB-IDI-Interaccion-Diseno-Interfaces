@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M7.1 Procés de visualització 2D.Implementació.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("vis2D","impl");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+[Anterior]
+<a href="SubProc.html">[Següent]</a>
+<a href="main71.html">[Apartat Anterior]</a>
+</div>
+<br><br>
+
+<div class=tit1>Implementació</div>
+
+<p>En aquest apartat analitzarem els subprocessos
+necessaris per a pintar en pantalla punts, segments de recta o
+polígons simples, és a dir, els diferents elements
+geomètrics que integren una escena. Com a única
+acció d'accés a dispositiu tindrem
+<u>setPixel(x,y,color)</u>. 
+
+<p>Cada subprocés implementa una operació sobre
+l'element geomètric a visualitzar. La informació
+addicional requerida serà, fonamentalment, la càmera_2D
+(Finestra2D), la Vista, l'activació de retallat i els
+atributs.
+
+<p>En l'apartat següent s'analitzen tots els subprocessos requerits, globalment anomentats com Procés de Visualització 2D (PV2D) o <i>pipeline</i> de visualització 2D. Per entendre el seu funcionament és important accedir seqüencialment a tots els enllaços que apareixen en el <A HREF="SubProc.html"
+target="principal"><b>mapa sensible</b></a> que esquematitza el seu diagrama funcional.
+
+
+<br><br>
+<DIV CLASS="nav">
+[Anterior]
+<a href="SubProc.html">[Següent]</a>
+<a href="main71.html">[Apartat Anterior]</a>
+</div>
+</BODY>
+</HTML>

@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M3.3.El model cmyk.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("color","cmyk");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+      <A HREF="cmyk1.html">[Anterior]</a>
+      <A HREF="convrgb-cmyk.html" target="principal">[Següent]</a>
+</div>
+<br><br>
+
+<div class="tit1">El model CMY(K).
+<span class="tit2">Exercici</span>
+</div>
+
+<P>
+Aquest programa, semblant a l'usat abans per RGB, genera colors
+aleatòriament cada vegada que prems el botó "Nou Color". Movent les
+
+<APPLET code="TestColorCMYK.class" archive="TestColorCMYK.jar" hspace = 20 vspace = 20 width=335 height=400 ALIGN="left" HSPACE=10>
+<B>L'Applet no s'ha carregat adequadament!</B></APPLET>
+
+barres lliscants o entrant valors numèrics pots especificar un color
+en el model CMY(K), i aquest apareixerà a una altra caixa (inicialment
+blanca).
+
+
+<P>Quan creguis que has reproduït el color proposat, prem el botó
+"Resultat" i veuràs a la caixa inferior els errors que has comès. Com
+abans, no esperis encertar sempre exactament els valors correctes. Una
+desviació de 5 a 10 mil·lèsimes és suficient i mostra que has entès
+com especificar un determinat color en el model CMYK. De fet el que
+pretenem és senzillament això: que puguis trobar la representació en
+el model d'un color que busques, no comprovar l'agudesa de la teva
+percepció del color. Observa que en aquest cas la solució no és única,
+perquè al sistema CMYK hi ha quatre paràmetres per a descriure el color
+(i evidentment la pantalla en que llegeixes això té sols tres, perquè
+és un dispositiu RGB). És doncs equivalent afegir una quantitat de
+negre i treure'n la mateixa dels altres tres. A la pràctica això és
+més complicat donat que hi ha diverses no-linealitats en cada dispositiu
+concret que cal mesurar i calibrar per a obtenir una bona reproducció
+del color. Per tal de trobar els paràmetres d'un color, prova de fer
+servir únicament les components CMY. Després pots incrementar la K
+decrementant en la mateixa quantitat les altres tres i observar
+l'efecte. La teva solució és bona si el valor de les tres expressions
+C+K, M+K i Y+K coincideixen (o aproximen prou) amb les mateixes
+expressions avaluades sobre els valors que dóna el programa.
+
+<br><br>
+<DIV CLASS="nav">
+      <A HREF="cmyk1.html">[Anterior]</a>
+      <A HREF="convrgb-cmyk.html" target="principal">[Següent]</a>
+</div>
+</BODY>
+</HTML>

@@ -1,0 +1,182 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M5.5.Representeció per fronteres </TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;
+charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("model","brep");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+      <A HREF="main55-2.html">[Anterior]</a>
+      <a href="classecara.html">[Següent]</a>
+     </div>
+<br><br>
+
+<div class="tit1">Representació per fronteres.
+<span class="tit2">La classe SolidFronteres</span>
+</div>
+
+<P>
+Com veieu als atributs, el sòlid es representa bàsicament com una
+taula de vèrtexs i una taula de cares. El primer constructor serveix
+per construir un paral·lelepípede a partir de les seves dimensions a, b,
+c. Primer crea els vèrtexs (usant el constructor de la classe Vertex)
+i els guarda a la taula de vèrtexs de l'objecte. Un cop fet això,
+construeix les cares i va assignant a cada una el seu pla i els índexs
+als seus vèrtexs (en ordre cíclic, segons la regla del tirabuixó cap
+a fora de l'objecte). El constructor que usa l'algorisme d'escombrat
+es veurà en els següents apartats d'aquest capítol. La classe també
+ofereix un conjunt de mètodes per obtenir diverses informacions sobre
+el sòlid, que són prou senzills i que no requereixen cap explicació
+especial.
+
+<PRE class=algoritme>
+<B>classe</B> SolidFronteres ()
+   <B>constants</B>
+      ...
+   <B>fconstants</B>
+
+   <B>atributs</B>
+      NumCares:				<B>enter</B>
+      NumVertexs:			<B>enter</B>
+      mat:				Material
+      Vèrtexs:=	<B>Nou</B> Vertex[MAXVERT]:    <B>taula</B> [1..MAXVERT] <B>de</B> Vertex
+      Cares  :=	<B>Nou</B> Cara[MAXCARES]:	<B>taula</B> [1..MAXCARES] <B>de</B> Cara
+   <B>fatributs</B>
+
+   <B>constructor</B> SolidFronteres  (a,b,c: <B>real</B>)
+      // Construeix un paralelepípede d'arestes a, b, c amb el primer
+      // vèrtex al (0,0,0)
+      NumCares := 6
+      NumVertexs := 8
+      mat := <B>Nou</B> Material ()
+
+      Vertexs [1] := <B>Nou</B> Vertex (0,0,0)
+      Vertexs [2] := <B>Nou</B> Vertex (0,b,0)
+      Vertexs [3] := <B>Nou</B> Vertex (a,b,0)
+      Vertexs [4] := <B>Nou</B> Vertex (a,0,0)
+      Vertexs [5] := <B>Nou</B> Vertex (0,0,c)
+      Vertexs [6] := <B>Nou</B> Vertex (0,b,c)
+      Vertexs [7] := <B>Nou</B> Vertex (a,b,c)
+      Vertexs [8] := <B>Nou</B> Vertex (a,0,c)
+
+      Cares[1] := <B>Nou</B> Cara (<B>this</B>)
+      Cares[1].AssignaNumVertexs (4)
+      Cares[1].AssignaComponentsNormal (0,0,-1)
+      Cares[1].AssignaIndexVertex (1,1)
+      Cares[1].AssignaIndexVertex (2,2)
+      Cares[1].AssignaIndexVertex (3,3)
+      Cares[1].AssignaIndexVertex (4,4)
+
+      Cares[2] := <B>Nou</B> Cara (<B>this</B>)
+      Cares[2].AssignaNumVertexs (4)
+      Cares[2].AssignaComponentsNormal (-1,0,0)
+      Cares[2].AssignaIndexVertex (1,2)
+      Cares[2].AssignaIndexVertex (2,1)
+      Cares[2].AssignaIndexVertex (3,5)
+      Cares[2].AssignaIndexVertex (4,6)
+
+       ......
+
+      Cares[6] := <B>Nou</B> Cara (<B>this</B>)
+      Cares[6].AssignaNumVertexs (4)
+      Cares[6].AssignaComponentsNormal (0,0,1)
+      Cares[6].AssignaIndexVertex (1,8)
+      Cares[6].AssignaIndexVertex (2,7)
+      Cares[6].AssignaIndexVertex (3,6)
+      Cares[6].AssignaIndexVertex (4,5)
+   <B>fconstructor</B>
+
+   <B>constructor</B> SolidFronteres  (S: SolidFronteres, TG: TransfGeom)
+      // Construeix una còpia de S aplicant-li una transformació geomètrica
+      ...
+      ...
+        // Aquest constructor ha d'obtenir els vèrtexs i les cares de l'objecte S
+           Després, els ha d'aplicar la transformació geomètrica TG, i els ha de
+           guardar a les taules Vertexs [ ], Cares [ ]
+      ...
+   <B>fconstructor</B>
+   <B>constructor</B> SolidFronteres  (pol: Poligon, LlargadaEscombrat: <B>real</B>)
+      // Construeix un sòlid amb l'<A CLASS="glossari"
+HREF="javascript:glossari('algorEscombrat.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">algorisme d'escombrat</A> d'un polígon
+      ...
+      ...
+   <B>fconstructor</B>
+
+   <B>funció pública</B>  NCares (): <B>enter</B>
+      <B>retorna</B> NumCares
+   <B>ffunció</B>
+
+   <B>funció pública</B>  NVertexs (): <B>enter</B>
+      <B>retorna</B> NumVertexs
+   <B>ffunció</B>
+
+   <B>funció pública</B>  Material (): Material
+      <B>retorna</B> mat
+   <B>ffunció</B>
+
+   <B>funció pública</B>  Vertex (i:<B>enter</B>): Vertex
+      // Retorna el vèrtex i-èssim de l'objecte
+      <B>Si</B> i <= NumVertexs <B>llavors</B>
+         <B>retorna</B> Vertexs[i]
+      <B>fSi</B>
+   <B>ffunció</B>
+
+   <B>funció pública</B>  Cara (i:<B>enter</B>): Cara
+      // Retorna la cara i-èssima de l'objecte
+      <B>Si</B> i <= NumCares <B>llavors</B>
+         <B>retorna</B> Cares[i]
+      <B>fSi</B>
+   <B>ffunció</B>
+
+   <B>mètode públic</B>  PlaCara (i:<B>enter</B>; a,b,c,d: <B>real</B>)
+      // retorna, en (a,b,c,d), el pla de la cara i-èssima
+      <B>Si</B> i <= NumCares <B>llavors</B>
+         a := Cares[i].Normal().ObtenirComponentX()
+         b := Cares[i].Normal().ObtenirComponentY()
+         c := Cares[i].Normal().ObtenirComponentZ()
+         Vertex vaux := Vertexs[Cares[i].Vertex[1]]
+         d := - a*vaux.CoordenadaX() - b*vaux.CoordenadaY() - c*vaux.CoordenadaZ()
+      <B>fSi</B>
+   <B>fmètode</B>
+
+   <B>mètode públic</B>  CaraAresta (i,j: <B>enter</B>; P1, P2: Punt3D)
+      // retorna, en P1 i P2, els dos vèrtexs de l'aresta j-èssima
+      // de la cara i-èssima
+      ...
+      ...
+   <B>fmètode</B>
+
+   <B>mètode públic</B>  CaraCares (i:<B>enter</B>, ...)
+      // retorna les cares adjacents a la cara i-èssima
+      ...
+      ...
+   <B>fmètode</B>
+
+   <B>mètode públic</B>  VèrtexCares (i:<B>enter</B>, ...)
+      // retorna les cares que conflueixen al vèrtex i-èssim
+      ...
+      ...
+   <B>fmètode</B>
+   ...
+   ...
+<B>fclasse</B>
+</PRE>
+
+<br><br>
+<DIV CLASS="nav">
+       <A HREF="main55-2.html">[Anterior]</a>
+      <a href="classecara.html">[Següent]</a>
+  </div>
+
+</BODY>
+
+</HTML>
+

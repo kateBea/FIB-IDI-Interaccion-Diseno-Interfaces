@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title>Limitacions dels algorismes d'espai imatge</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" TYPE="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</head>
+<BODY >
+<SCRIPT>
+top.passara("visib","calg");
+</SCRIPT>
+<DIV CLASS="nav">
+<a href="m8-rayCasting.html">[Anterior]</a>
+<a href="m8-algMix.html">[Següent]</a>
+</div>
+<br><br>
+
+<div CLASS="tit1">Classificació dels algorismes de determinació de visibilitat.
+<span CLASS="tit2">Algorismes d'espai imatge.</span>
+<span CLASS="tit3">Limitacions dels algorismes d'espai imatge</span>
+</div>
+
+<P>
+Tots els algorismes que determinen la visibilitat en espai imatge
+realitzen el càlcul de la visibilitat per un nombre discret de píxels
+(raigs en ray-casting). Aquest fet determina algunes de les
+limitacions d'aquesta família d'algorismes:
+
+<UL>
+<LI> Depenent de la resolució, la visibilitat pot ser molt diferent
+entre píxels veïns (donat que els punts centrals de la cel·la de la
+Finestra_2D corresponent són llunyans en espai objecte) produint-se un
+canvi brusc de color entre ells poc representatiu de la realitat.
+</LI>
+<LI> Hi ha objectes teòricament visibles (existeix un raig de llum que
+uneix un dels seus punts amb l'observador) que poden desaparèixer de
+la imatge final donat que no són visibles des de cap píxel (no
+intersequen cap raig).
+</LI>
+<LI> Segons la grandària dels píxels es veu una imatge molt
+tessalitzada.
+</LI>
+</UL>
+
+<P>
+Mètodes per a dissimular aquests efectes consisteixen en incrementar
+virtualment la resolució de la imatge (es calculen més raigs) i,
+posteriorment, ponderar el color d'un conjunt de píxels virtuals per a
+obtenir-ne el color del píxel real que els representa. Així el color
+d'un objecte que resultava no visible queda representat
+(ponderadament) en el color d'algun píxel.
+
+<P>
+Aquestes tècniques es denominen d'<I>antialiasing</I>, i intenten que
+no sigui visible l'efecte de l'<I>aliasing</I> (discretització) dels
+dispositius raster. Evidentment, el cost computacional dels algorismes
+de determinació de la visibilitat s'incrementa en ser lineal respecte
+el nombre de píxels.
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m8-rayCasting.html">[Anterior]</a>
+<a href="m8-algMix.html">[Següent]</a>
+</div>
+</body>
+</html>

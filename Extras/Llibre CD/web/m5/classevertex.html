@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M5.5.Representeció per fronteres </TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;
+charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("model","brep");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+    <A HREF="classecara.html">[Anterior]</a>
+      <a href="classepoligon.html">[Següent]</a>
+    </div>
+<br><br>
+
+<div class="tit1">Representació per fronteres.
+<span class="tit2">La classe Vertex</span>
+</div>
+
+<P>
+Implementació (parcial) de la classe "Vertex". Aquesta classe
+fa servir una classe "Punt3D" que suposem implementada i
+de la qual necessitem el constructor a partir de les seves tres
+coordenades reals, i els mètodes getX, getY, getZ per a accedir a les
+coordenades del punt:
+
+<PRE class=algoritme>
+<B>classe</B> Vertex ()
+
+   <B>atributs</B>
+      x,y,z: <B>real</B>
+   <B>fatributs</B>
+
+   <B>constructor</B> Vertex (a,b,c: <B>real</B>)
+      x := a
+      y := b
+      z := c
+   <B>fconstructor</B>
+
+   <B>constructor</B> Vertex (P: Punt3D)
+      x := P.getX()
+      y := P.getY()
+      z := P.getZ()
+   <B>fconstructor</B>
+
+   <B>funció pública</B> CoordenadaX (): <B>real</B>
+      <B>retorna</B> x
+   <B>ffunció</B>
+
+   <B>funció pública</B> CoordenadaY (): <B>real</B>
+      <B>retorna</B> y
+   <B>ffunció</B>
+
+   <B>funció pública</B> CoordenadaZ (): <B>real</B>
+      <B>retorna</B> z
+   <B>ffunció</B>
+
+   <B>funció pública</B> CopiaAUnPunt (): Punt3D
+      P := <B>Nou</B> Punt3D(x,y,z)
+      <B>retorna</B> P
+   <B>ffunció</B>
+
+   <B>mètode públic</B> AssignaCoordenades (xP, yP, zP: <B>real</B>)
+      x := xP
+      y := yP
+      z := zP
+   <B>fmètode</B>
+
+   <B>mètode públic</B> IncrementaCoordenadaX (v: <B>real</B>)
+      x := x + v
+   <B>fmètode</B>
+
+   <B>mètode públic</B> IncrementaCoordenadaY (v: <B>real</B>)
+      y := y + v
+   <B>fmètode</B>
+
+   <B>mètode públic</B> IncrementaCoordenadaZ ( v: <B>real</B>)
+      z := z + v
+   <B>fmètode</B>
+   ...
+   ...
+<B>fclasse</B>
+</PRE>
+
+
+<br><br><DIV CLASS="nav">
+     <A HREF="classecara.html">[Anterior]</a>
+      <a href="classepoligon.html">[Següent]</a>
+  </div>
+
+</BODY>
+
+</HTML>
+

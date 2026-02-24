@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M7.1 Procés de visualització 2D.Sistemes de coordenades.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("vis3D","cam");
+</SCRIPT>
+<DIV CLASS="nav">
+<a href="TipusC.html">[Anterior]</a>
+<a href="TamFin.html">[Següent]</a>
+<a href="main62.html">[Començament de l'apartat]</a>
+</div>
+<br><br>
+
+<div CLASS="tit1">Model de la càmera. 
+<span class="tit2">Angle d'obertura de la càmera</span>
+</div>
+
+<p>És l'angle que mesura l'obertura del tros d'espai - una piràmide,
+          la <A CLASS="glossari"
+          HREF="javascript:glossari('PiramVis.html','*','400','300','no','no','no','yes')"
+          onMouseOver="window.status='Glossari';return true"
+          onMouseOut="window.status='';return true">piràmide de
+          visió</A> - que veurem projectada a la vista. Es medeix en
+          el pla vertical - amb més precisió, en el pla y-z en el
+          sistema de coordenades de l'observador.
+
+<p>
+       L'anomenarem <b>alpha</b>. Un angle <b>alpha</b> gran ens
+          simularà una càmera amb objectiu gran angular, mentre que un
+          angle <b>alpha</b> petit simula una càmera amb
+          teleobjectiu. En tot cas, l'angle d'obertura de la càmera
+          només té sentit quan la càmera és de tipus perspectiva.
+
+<p class=exercici><span class=exernum>Exercici:</span> a la següent escena senzilla, proveu de modificar
+           l'angle d'obertura de la càmera i veieu com va canviant la imatge
+           que obtenim a la <A CLASS="glossari" HREF="javascript:glossari('Vista.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">vista</A> a la <A CLASS="glossari" HREF="javascript:glossari('FinGraf.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">finestra gràfica</A>. Podeu canviar
+           interactivament els paràmetres de visualització:
+
+<!--
+                 Applet 2 que visualitza el cub
+                 Camera tipus perspectiva
+                 Botó de modificació de l'angle d'obertura de la
+                      càmera (2.6)
+                 Visualització del frustrum i del sist de
+                       coordenades de l'observador
+-->
+
+  <p>
+  <CENTER><table><tr><td>
+  <APPLET CODE ="AppletG2.class" archive="AppletG2.jar,../comuns.jar" WIDTH=640 HEIGHT=480>
+  <PARAM NAME=NApplet VALUE="4">
+  <PARAM NAME=Vrpx    VALUE="5.0">
+  <PARAM NAME=Vrpy    VALUE="5.0">
+  <PARAM NAME=Vrpz    VALUE="5.0">
+  <PARAM NAME=Angx    VALUE="30.0">
+  <PARAM NAME=Angy    VALUE="45.0">
+  <PARAM NAME=Angz    VALUE="0.0">
+  <PARAM NAME=D       VALUE="20.0">
+  <PARAM NAME=Winy    VALUE="5.0">
+  <PARAM NAME=Zfar    VALUE="25.0">
+  <PARAM NAME=Znear   VALUE="1.0">
+  <PARAM NAME=fich    VALUE="">
+  <PARAM NAME=AngExtx VALUE ="30.0">
+  <PARAM NAME=AngExty VALUE="10.0">
+  <PARAM NAME=fichero VALUE="/DAT/2cuboG.dat">
+  <PARAM NAME=Camara VALUE="1">
+  <PARAM NAME=Alfa VALUE="15.0">
+  </APPLET>
+  </td></TR></table></CENTER>
+
+  <P class=exercici>
+          Cal que modifiqueu l'obertura de la càmera de manera que el conjunt dels cubs
+          es vegi el més gran possible dins la vista, però sense
+          quedar retallat.
+
+<br><br>
+<DIV CLASS="nav">
+<a href="TipusC.html">[Anterior]</a>
+<a href="TamFin.html">[Següent]</a>
+</div>
+</body>
+</html>

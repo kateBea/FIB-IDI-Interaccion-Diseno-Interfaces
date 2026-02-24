@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("realvirt","perif");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m5c02t01t01_pos.html">[Anterior]</a>
+<a href="m5c02t01t01t02_posOpt.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Perifèrics.
+<span class=tit2>Dispositius d'entrada.</span>
+<span class=tit3>Posicionadors magnètics</span>
+</div>
+
+<p>Els posicionadors magnètics es basen en la generació de
+camps electromagnètics i en l'enregistrament de la seva atenuació en un
+sensor.</p>
+
+<p>Els posicionadors magnètics inclouen una <b>font de camp
+magnètic, </b>un o més <b>sensors</b>, i una <b>unitat de control</b>. La
+figura següent mostra aquests elements en el sistema UltraTrack del fabricant
+Polhemus Inc.:</p>
+
+<div ALIGN="center"><img border="0" src="imatges/ultratrack2.jpg" width="317" height="326"></div>
+
+<p>La font de camp magnètic és fixa i consisteix normalment en tres
+bobines perpendiculars entre sí per les que es fa circular un corrent elèctric
+de forma alterna, donant lloc a tres camps magnètics perpendiculars i
+seqüencials en el temps (en la figura anterior es poden apreciar clarament les
+bobines dins l'esfera de metacrilat). </p>
+
+<p>Els sensors també contenen tres bobines, però en aquest cas
+s'hi mesura el corrent elèctric induït pel camp magnètic que envolta el
+sensor. Els sensors es fixen a l'objecte que es vol mesurar.</p>
+
+<p>La unitat de control s'encarrega d'alimentar la font de
+camp magnètic, de llegir les dades enregistrades en els sensors, de resoldre el
+sistema d'equacions i de les comunicacions amb el computador (per exemple, via
+la interfície RS-232). En el sistema d'equacions que ha de resoldre la unitat
+central, les incògnites són les coordenades de posició i els angles de
+rotació de cada sensor (6 incògnites), i les dades són les lectures de
+cadascuna de les tres bobines del sensor per cadascú dels tres camps magnètics
+que crea la font (en total 9 lectures per sensor).</p>
+
+<div class=tit3><b>Prestacions</b></div>
+
+<p>Els fabricants Polhemus i Ascension comercialitzen
+posicionadors magnètics amb freqüències d'actualització de fins a 100 Hz i
+amb una resolució en la posició d'uns 2 mm.</p>
+
+<b>
+<p class=noind>Avantatges</p>
+</b>
+
+<p>Els posicionadors magnètics són, amb diferència, els més
+usats en realitat virtual.</p>
+
+<p>El principal avantatge respecte les tecnologies més
+directament competidores és que no requereix que el sensor &quot;vegi&quot; la
+font, és a dir, els posicionadors magnètics són igualment operatius quan hi
+ha objectes que s'interposen entre el sensor i la font (com veurem, aquesta
+darrera possibilitat és el principal problema dels posicionadors òptics).</p>
+
+<p>Són bastant acurats, permeten detectar múltiples objectes
+(un per sensor) i els sensors acostumen a ser petits.</p>
+
+<b>
+<p class=noind>Inconvenients</p>
+</b>
+
+<p>La distància entre la font i els sensors no pot superar
+certa distància màxima (entre 2 i 10 metres) donada pel fabricant. Per sobre d'aquesta
+distància, la precisió de les mesures decreix ràpidament. Per tant, aquest
+sistema només es pot utilitzar per capturar objectes amb un radi de moviment
+molt acotat.</p>
+
+<p>Degut a que utilitzen tecnologia de camps magnètics, aquests
+sistemes són molt sensibles a les grans superfícies ferromagnètiques, així
+com a qualsevol altre dispositiu que generi camps magnètics i que es trobi als
+voltants dels sensors (transformadors, tubs de televisió...).</p>
+
+<p>Un altre inconvenient són els cables que uneixen cada sensor
+amb la unitat central, cables que en algunes aplicacions poder resultar
+inadequats.</p>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m5c02t01t01_pos.html">[Anterior]</a>
+<a href="m5c02t01t01t02_posOpt.html">[Següent]</a>
+</div>
+</body>
+</html>

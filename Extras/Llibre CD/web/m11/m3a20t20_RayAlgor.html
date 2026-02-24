@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","trasat");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m3a20t10_RayTracFisica.html">[Anterior]</a>
+[Següent]
+<a href="m3b01_Ombres.html">[Següent apartat]</a>
+</div>
+<br><br>
+
+<div class=tit1>Traçat de raigs.
+<span class=tit2>Algorisme de Ray Tracing</span>
+</div>
+
+<p> Tal com acabem d'analitzar en l'apartat anterior, l'algorisme de
+càlcul del color en un punt mitjaçant RayTracing permet una
+implementació recursiva que genera un arbre de raigs de
+reflexió/transmissió de llum per a cada punt en que es desitja
+calcular el color.
+
+<!--A continuació teniu el pseudo-codi de l'algorisme i un exemple
+d'execució pas a pas. Es fa la hipòtesi que donat un punt es coneixen
+les seves coordenades, superfície a la que pertany i propietats
+físiques de l'objecte. Recordeu que el color és una entitat
+tridimensional (l'acció <i>Acumula</i> realitzaria la suma). Afegir
+elpasador de diapositives: algorisme i exemple d'execució pas a pas
+-->
+
+<p> Podeu intentar plantejar el pseudo-codi de l'algorisme; per fer-ho
+tingueu present sobretot la primera de les següents observacions:
+
+<ul>
+<li> Acabament de la recursivitat. Noteu que l'acabament de les crides
+recursives de l'algorisme es produeix quan ens trobem que el raig
+reflectit/transmès no interseca amb cap objecte o bé aquest no és
+reflector/transmissor. Aquest fet pot portar a arbres de recursivitat
+profunds i incrementa considerablement la complexitat de l'algorisme.
+Per a simplificar el càlcul, es pot considerar que cada cop que la
+llum reflectida/transmesa des d'un punt, passa per un "rebot" (incideix
+en altre objecte per a tornar a ser reflectida/transmesa), perd energia
+i per tant s'atenua el seu color. En termes de Ray-Tracing aquesta
+constatació s'implementaria ponderant l'aportació del color dels punts
+intermedis per un factor que és funció del nivell de l'arbre de
+recursivitat i del tipus del material. Quan l'aportació de color sigui
+menor que un cert llindar no es continua la crida recursiva.</il>
+<li>Complexitat. Haureu intuït que l'algorisme té una complexitat
+elevada per haver de calcular constantment interseccions de raigs amb
+l'escena i determinar el punt d'intersecció més proper al punt en que
+es calcula el color. Per aquest motiu, malgrat amb Ray-Tracing
+s'obtenen imatges raonablament realistes i "boniques", en la pràctica
+no és factible obtenir-ne interacció en temps real. És per aquest
+motiu, que quan la determinació de la visibilitat es realiza amb
+z-buffer es fan servir tècniques aproximades pel càlcul de reflexions
+i ombres (recordeu que quan es calcula el color del punt d'una cara
+que es projecta en un pixel es desconeix si aquest punt finalment serà
+visible). S'utilitza Ray-Tracing quan el càlcul de visibilitat es
+realitza mitjançant Ray-Casting, no es requereix interacció i, en
+canvi, es requereix molt realisme. </il>
+</ul>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m3a20t10_RayTracFisica.html">[Anterior]</a>
+[Següent]
+<a href="m3b01_Ombres.html">[Següent apartat]</a>
+</div>
+</body>
+</html>

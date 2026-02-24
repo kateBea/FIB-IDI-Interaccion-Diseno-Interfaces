@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","ombres");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m3b14_OmbresProj2.html">[Anterior]</a>
+<a href="m3b18_OmbresProjExercicis.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Ombres.
+<span class=tit2>Ombres per projecció.</span>
+<span class=tit3>Generació usant Open GL i Stencil Buffer</span>
+</div>
+
+<p> A continuació teniu el llistat del tros rellevant del programa de
+l'applet que heu vist a la pàgina anterior. Podeu veure l'efecte que
+té l'ús de l'Stencil Buffer. Observeu que els comentaris són links a
+explicacions. Premeu en ells, i trobareu els comentaris i explicacions
+en cada cas.
+
+<p> Observeu que l'únic que fa aquest tros de codi és dibuixar una de
+les parets de l'habitació, amb les corresponents ombres projectades
+sobre ella. El programa complet hauria de repetir això per a cada
+paret i pel terra (canviant en cada cas la matriu de projecció), i
+després cridar a la rutina <b>Dibuixa</b> per visualitzar l'objecte
+que produeix l'ombra i el focus de llum.
+
+<pre class=algoritme>
+  <b>glEnable</b>(GL_STENCIL_TEST);
+
+          <a href="m3b16t10_OmbresProjExplicacio.html">/* Dibuixa la paret, a l'stencil buffer */</a>
+  <b>glStencilFunc</b>(GL_ALWAYS, 1, 1);
+  <b>glStencilOp</b>(GL_KEEP, GL_KEEP, GL_REPLACE);
+  <b>Dibuixa</b>(Paret);
+
+          <a href="m3b16t20_OmbresProjExplicacio.html">/* Neteja l'stencil a les zones de paret que queden a l'ombra */</a>
+  <b>glDisable</b>(GL_DEPTH_TEST);
+  <b>glColorMask</b>(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
+  <b>glStencilFunc</b>(GL_EQUAL, 1, 1);
+  <b>glStencilOp</b>(GL_KEEP, GL_KEEP, GL_ZERO);
+  <b>glPushMatrix</b>();
+  <b>glMultMatrixf</b>((GLfloat*) MatriuProjeccio );
+  <b>Dibuixa</b>(ObjecteQueFaOmbra);
+  <b>glPopMatrix</b>();
+
+          <a href="m3b16t30_OmbresProjExplicacio.html">/* Torna a dibuixar la paret a la zona que queda a l'ombra */</a>
+  <b>glEnable</b>(GL_DEPTH_TEST);
+  <b>glDepthFunc</b>(GL_LEQUAL);
+  <b>glColorMask</b>(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+  <b>glDisable</b>(GL_LIGHT0);
+  <b>glStencilFunc</b>(GL_EQUAL, 0, 1);
+  <b>Dibuixa</b>(Paret);
+
+          <a href="m3b16t40_OmbresProjExplicacio.html">/* Torna a l'estat inicial*/</a>
+  <b>glEnable</b>(GL_LIGHT0);
+  <b>glDepthFunc</b>(GL_LESS);
+  <b>glDisable</b>(GL_STENCIL_TEST);
+
+  <b>Dibuixa</b>(ObjecteQueFaOmbra);
+  <b>Dibuixa</b>(FocusDeLlum);
+</pre>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m3b14_OmbresProj2.html">[Anterior]</a>
+<a href="m3b18_OmbresProjExercicis.html">[Següent]</a>
+</div>
+</body>
+</html>

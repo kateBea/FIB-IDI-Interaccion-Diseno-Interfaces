@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M5.3.Representació d'objectes 2D i 3D </TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;
+charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("model","rep");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+      <A HREF="main53.html">[Anterior]</a>
+      <a href="main53-3.html">[Següent]</a>
+     </div>
+<br><br>
+
+<div class="tit1">Representació d'objectes 2D i 3D.
+<span class="tit2">Possibles representacions</span>
+</div>
+
+<P>
+Veurem ara les diferents possibles representacions per objectes 2D
+i 3D. La representació explícita és aquella que emmagatzema
+explícitament la informació geomètrica de l'objecte. En objectes 2D
+-per exemple polígons- una representació explícita guardarà les
+coordenades dels vèrtexs i informació sobre la seva connectivitat
+-arestes-. En objectes 3D, la representació explícita guardarà les
+coordenades dels vèrtexs junt amb informació sobre les arestes i
+cares. La representació estarà formada per taules o llistes de cares,
+arestes i vèrtexs. A la representació explícita també se l'anomena
+representació avaluada. Per exemple, en el cas de la <A
+HREF="filferros.html#figfilferros">figura de la representació per
+filferros</A> teníem ambigüitat que es pot eliminar <A
+HREF="javascript:oWin('infoadicional.html','*','600','450','no','no','no','yes')" onMouseOver="window.status='Informació de cares';return true"
+onMouseOut="window.status='';return true">afegint informació
+addicional</A>.
+</P>
+
+<P>
+Una alternativa a la representació explícita és la instanciada
+procedural. La representació instanciada procedural és aquella
+representació que emmagatzema únicament els paràmetres dels objectes
+de l'escena 2D o 3D. A diferència de la representació explícita, aquí
+no es guarda la geometria. El model consisteix en un conjunt -taula o
+llista- d'instàncies d'objectes parametritzats, que podem ubicar a
+l'espai. Degut a que no guardem la geometria, ens caldrà disposar
+d'una sèrie de procediments -d'aquí ve el nom de procedural- per a
+avaluar la geometria quan sigui necessari.
+</P>
+
+<P>
+En 2D, una possible representació explícita per a modelitzar escenes amb
+polígons inclouria una taula de polígons. Cada polígon contindria
+informació sobre el seu color, nombre de vèrtexs i la taula dels seus
+vèrtexs ordenats cíclicament. En el cas d'acceptar poligonals obertes,
+hauríem de parlar de poligonals enlloc de polígons, i hauríem
+d'incloure informació de si la poligonal és tancada o oberta. Una
+alternativa és que cada polígon contingui una taula d'arestes i una
+taula de vèrtexs. Les arestes són parelles d'índexs a vèrtexs, i els
+vèrtexs contenen les seves coordenades. En aquest cas guardem més
+informació però tenim més llibertat per a guardar les arestes, ja que no
+cal que estiguin orientades en el sentit cíclic. Aquesta darrera
+propietat pot ser útil en algorismes que requereixen una orientació
+particular de les arestes, com per exemple l'algorisme de
+<A HREF="../m4/puntpoligon.html">punt interior a polígon</A>.
+
+
+<br><br>
+<DIV CLASS="nav">
+      <A HREF="main53.html">[Anterior]</a>
+      <a href="main53-3.html">[Següent]</a>
+  </div>
+
+</BODY>
+
+</HTML>
+

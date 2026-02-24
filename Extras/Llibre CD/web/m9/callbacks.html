@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M9.1.Primitives d'entrada.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("entrada","prim");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+      <a href="buclevents.html">[Anterior]</a>
+      <a href="emumodes.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class="tit1">Primitives d'entrada gràfiques.
+<span class="tit2">Callbacks</span>
+</div>
+
+<P> En aquest model d'aplicació, el programador implementa el
+    tractament que li cal per cada tipus d'event a un component
+    determinat en una funció específica. Aleshores Organitza el seu
+    codi de la següent manera:</p>
+
+<PRE class=algoritme>
+      <b>funció</b> TractarUnTipus(...){
+              ....
+      }
+      <b>funció</b> TractarAltreTipus(...){
+              ....
+      }
+      ...
+      <b>funció</b> TractamentFinal(...){
+              ....
+      }
+      <b>funció</b> main(...){
+          Declaracions
+          Inicialitzacions
+          DespatxarEvents(); // sovint és una funció que mai torna
+      <b>ffunció</b>
+</PRE>
+
+<P> En aquest cas, les 'Inicialitzacions' consisteixen també en les
+    pròpies de l'aplicació més la subscripció de les rutines de
+    tractament als events que els hi correspon. Java n'és una
+    excepció, perque els tipus d'events que ens interessen es declaren
+    normalment indicant que la nostra classe implementa una certa
+    interfície. Per exemple, si ens interessen els events de ratolí
+    indicarem en la declaració de la classe
+    <tt>implements MouseListener</tt>, i estarem obligats,
+    evidentment, a implementar els mètodes promesos per aquella
+    interfície. Si un cert event no ens interessa, el mètode tindrà un
+    cos buit. En aquest cas no hi ha una fase de subscripció, però el
+    mètode que tracta un cert event s'ha de dir sempre igual. Per
+    exemple, si volem que l'aplicació faci quelcom quan l'usuari premi
+    el botó del ratolí en una certa finestra, farem que aquella
+    finestra implementi <tt>MouseListener</tt>, i programarem el que
+    volem que faci en prémer aquell botó al mètode
+    <tt>public void mousePressed(MouseEvent evt)</tt>
+    d'aquella classe. Aquí podeu veure <A
+    HREF="javascript:oWin('esquelet.html','*','700','600','no','no','no','yes')">un
+    esquelet d'un applet</a> que tracta events del ratolí. Per a
+    d'altres menes d'events haureu de consultar un manual de
+    programació en Java. Hi ha interficies específiques per a events
+    de teclat, per exemple, o per events relacionats amb moviments
+    del ratolí.
+
+<P>   Aquest model facilita al programador l'estructuració de la seva
+      aplicació, aïllant en funcions separades els diversos
+      tractaments d'events. Tanmateix en algún nivell, els
+      <i>callbacks</i> estan implementats amb un bucle de l'estil del
+      de l'apartat anterior, però aquesta implementació ens està
+      amagada als programadors, perquè el bucle l'implementa algun
+      mòdul del sistema i està parametritzat per a adaptar el seu
+      comportament a la nostra aplicació.</p>
+
+<P> Tant en el cas de l'apartat anterior com en el del present -és
+    a dir tant si fem un bucle de tractament d'events com si usem
+    <i>callbacks</i>- hi ha una complicació afegida. Un event de botó
+    premut és sempre el mateix, però en certs punts de l'aplicació
+    tindrà un significat i en altres un altre (al menys per a
+    aplicacions d'alguna envergadura). Per tant, a més del propi
+    event, el codi que serveix l'event haurà de tenir en compte
+    l'estat present de l'aplicació. Per això generalment les
+    aplicacions basades en events necessiten implementar un autòmata
+    finit que determina la interpretació que els diferents events han
+    de tenir en cada moment (alhora que els propis events determinen
+    habitualment les transicions que l'autòmata ha de fer). En els
+    exemples senzills d'aquest llibre probablement no trobareu aquesta
+    complicació, però l'heu de tenir en compte quan abordeu problemes
+    més complexes, car la seva inclussió d'un bell principi serà
+    sempre més senzilla</p>
+
+
+<DIV CLASS="nav">
+      <a href="buclevents.html">[Anterior]</a>
+      <a href="emumodes.html">[Següent]</a>
+</div>
+</BODY>
+</HTML>

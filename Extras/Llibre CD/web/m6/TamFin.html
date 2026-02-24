@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M7.1 Procés de visualització 2D.Sistemes de coordenades.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("vis3D","cam");
+</SCRIPT>
+<DIV CLASS="nav">
+<a href="AngleO.html">[Anterior]</a>
+<a href="PlansRet.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class="tit1">Model de la càmera. 
+<span class="tit2">Grandària de la finestra 2D</span>
+</div>
+
+<p>En el cas de càmera de tipus axonomètric, no podem parlar d'angle
+         d'obertura ja que l'observador es troba a l'infinit. En
+         canvi, la <A CLASS="glossari"
+         HREF="javascript:glossari('PiramVis.html','*','400','300','no','no','no','yes')"
+         onMouseOver="window.status='Glossari';return true"
+         onMouseOut="window.status='';return true">piràmide de
+         visió</A>, que en aquest cas es redueix a un prisma, es pot
+         especificar donant les dimensions de la seva base en el pla
+         x-y en el sistema de coordenades de l'observador. Aquestes
+         dimensions - ample en direcció x, alt en direcció y - ens
+         defineixen la grandària de la <A CLASS="glossari"
+         HREF="javascript:glossari('Fin2D.html','*','400','300','no','no','no','yes')"
+         onMouseOver="window.status='Glossari';return true"
+         onMouseOut="window.status='';return true">finestra 2D</A>.
+
+<p class=exercici>
+           <span class=exernum>Exercici:</span> a la següent escena
+           senzilla, proveu de modificar la grandària de la finestra 2D i
+           veieu com va canviant la imatge que obtenim a la <A
+           CLASS="glossari"
+           HREF="javascript:glossari('Vista.html','*','400','300','no','no','no','yes')"
+           onMouseOver="window.status='Glossari';return true"
+           onMouseOut="window.status='';return true">vista</A> a la <A
+           CLASS="glossari"
+           HREF="javascript:glossari('FinGraf.html','*','400','300','no','no','no','yes')"
+           onMouseOver="window.status='Glossari';return true"
+           onMouseOut="window.status='';return true">finestra
+           gràfica</A>. Podeu canviar interactivament els paràmetres
+           de visualització.
+
+<!--
+                 Applet 2 que visualitza el cub
+                 Camara tipus axonometric
+                 Botó de modificació de l'amplada de la finestra. Es manté
+                       l'aspect ratio de la vista !!!
+                 Visualització del frustrum i del sist de
+                       coordenades de l'observador
+-->
+ <p>
+  <!--<p>-->
+  <CENTER><table><tr><td>
+  <APPLET CODE ="AppletG2.class" archive="AppletG2.jar,../comuns.jar" WIDTH=640 HEIGHT=480>
+  <PARAM NAME=NApplet VALUE="5">
+  <PARAM NAME=Vrpx    VALUE="5.0">
+  <PARAM NAME=Vrpy    VALUE="5.0">
+  <PARAM NAME=Vrpz    VALUE="5.0">
+  <PARAM NAME=Angx    VALUE="30.0">
+  <PARAM NAME=Angy    VALUE="45.0">
+  <PARAM NAME=Angz    VALUE="0.0">
+  <PARAM NAME=D       VALUE="20.0">
+  <PARAM NAME=Winy    VALUE="5.0">
+  <PARAM NAME=Zfar    VALUE="25.0">
+  <PARAM NAME=Znear   VALUE="1.0">
+  <PARAM NAME=fich    VALUE="">
+  <PARAM NAME=AngExtx VALUE ="30.0">
+  <PARAM NAME=AngExty VALUE="10.0">
+  <PARAM NAME=fichero VALUE="/DAT/2cuboG.dat">
+  <PARAM NAME=Camara VALUE="1">
+  <PARAM NAME=Alfa VALUE="15.0">
+  </APPLET>
+  </td></tr></table></CENTER>
+
+  <p class=exercici>
+          Cal que modifiqueu la grandària de la finestra 2D de manera
+          que el conjunt dels cubs es vegi el més gran possible dins
+          la vista, però sense quedar retallat. Fixeu-vos que ara la
+          projecció és sempre axonomètrica, els cubs no queden
+          deformats.  
+
+<br><br>
+<DIV CLASS="nav">
+<a href="AngleO.html">[Anterior]</a>
+<a href="PlansRet.html">[Següent]</a>
+</div>
+</body>
+</html>

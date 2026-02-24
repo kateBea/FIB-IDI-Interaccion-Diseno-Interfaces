@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title>8</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" TYPE="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</head>
+<BODY >
+<SCRIPT>
+top.passara("visib","zbuf");
+</SCRIPT>
+<DIV CLASS="nav">
+<a href="m8-4.html">[Anterior]</a>
+<a href="m8-ZBuf-limit.html">[Següent]</a>
+</div>
+<br><br>
+
+<div CLASS="tit1">Algorisme de z-buffer.
+<span CLASS="tit2">Optimitzacions</span>
+</div>
+
+<P>
+Com a optimització als processos de verificar si un píxel és
+interior a la projecció del polígon, o al càlcul de profunditat i del
+color, es pot plantejar:
+
+<UL>
+<LI> Rasteritzar virtualment la cara en la vista, és a dir sense
+modificar el color dels píxels, calcular en quins píxels es rasteritza
+(utilitzar l'algorisme de rasterització de polígons
+però sense pintar); d'aquesta manera directament es coneix en quins
+píxels es projecta la cara.</LI>
+<LI> Càlcul incremental de les profunditats dels punts. Coneguda
+l'equació de la cara ax+by+cz+d=0 en el model normalitzat (es pot
+calcular a partir de les coordenades dels seus vèrtexs) i coneguda la
+profunditat de la cara en un pixel p<sub>i,j</sub> (un vèrtex per
+exemple), la profunditat en el pixel p<sub>i+1,j</sub> =
+p<sub>i,j</sub> + zx on zx= -a/c i la profunditat en el píxel
+p<sub>i,j-1</sub> = p<sub>i,j</sub> + zy on zy= b/c. Aquests valors es
+calculen en la hipòtesi que la separació entre píxels veïns és d'una
+unitat en abscisses o ordenades, i que en ells es projecta el
+polígon. Podem concloure que calculant els valors de zx, zy es pot fer
+el càlcul de profunditats utilitzant simples sumes i restes mentre es
+realitza la rasterització (sempre es visiten píxels veïns). Un cop
+calculada la profunditat es discretitza d'acord amb els bits/component
+disponibles.</LI>
+</UL>
+
+<P>
+Tenint en consideració les dues optimitzacions anteriors
+l'actualització de les taules es pot realitzar simultàniament a la
+rasterització i els càlculs a realitzar queden restringits a simples
+sumes, restes i comparacions:
+
+<PRE class=algoritme>
+<B>algorisme</B> z-buffer
+   Inicialitzar buffers
+   <B>per</B> cada_cara <B>fer</B>
+      rasteritzar_cara + càlcul profunditat + actualitzar_buffers
+   <B>fper</B>
+<B>falgorisme</B>
+</PRE>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m8-4.html">[Anterior]</a>
+<a href="m8-ZBuf-limit.html">[Següent]</a>
+</div>
+</body>
+</html>

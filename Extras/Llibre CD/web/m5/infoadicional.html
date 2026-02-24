@@ -1,0 +1,43 @@
+<html lang="CA">
+<HEAD><TITLE>M5.3.Representacions d'objectes 2D i 3D</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+</HEAD>
+
+<BODY>
+<A NAME="inici"></a>
+
+<P>
+La informació de les cares que cal afegir per tal de desambiguar el
+model de filferros pot ser simplement la llista d´índexs dels
+vèrtexs de cada cara:
+</P>
+<CENTER>
+<TABLE class=m4 width="90%" BORDER>
+<TR>
+<TD align=center width="30%"><B>Taula de Cares <BR> v1 v2 v3 v4 </B></TD>
+<TD align=center width="30%"><B>Taula d'Arestes <BR> v1  v2 </B></TD>
+<TD align=center width="30%"><B>Taula de Vèrtexs <BR> x   y   z </B></TD>
+</TR>
+<TR>
+<TD align=center width="30%"> 1  4  3  2 <BR> 5  6  7  8 <BR> 1  2  6  5 <BR> 2  3  7  6 <BR> 3  4  8  7 <BR> 4  1  5  8 </TD>
+<TD align=center width="30%"> ....  <BR> la mateixa informació que teniem a la representació per filferros <BR> ....  </TD>
+<TD align=center width="30%"> ....  <BR> la mateixa informació que teniem a la representació per filferros <BR> ....  </TD>
+</TR>
+</TABLE>
+</CENTER>
+
+<P>
+Observeu que, així com a la figura anterior podiem substituir
+l'aresta (1,5) per la (1,6) i el model deixava de representar un sòlid
+vàlid, ara això no és possible ja que la tercera cara té l'aresta
+(1,5) pero no la (1,6).
+</P>
+</P>
+
+<TABLE width="100%" border="0">
+<TR><TD align="right"><A HREF="javascript:window.close()" onMouseOver="window.status='Tancar'"
+ onMouseOut="window.status='';return true">tancar</A></TD>
+</TR></TABLE>
+</BODY>
+</HTML>

@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("opengl","extop");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m7c01_ExtensIntroduccio.html">[Anterior]</a>
+<a href="m7c20_TransfMatrius.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1> Extensió de crides d'OpenGL.
+<span class=tit2>Eliminació de cares (<i>culling</i>)</span>
+</div>
+
+<P>
+Per a poder fer una eliminació de cares (<i>culling</i>) en OpenGL,
+s'usen les crides <b>glEnable</b>, passant-li com a paràmetre
+GL_CULL_FACE, i <b>glCullFace</b>, a la que se li pot indicar si el
+que es vol eliminar són les cares del darrera (GL_BACK), les cares del
+davant (GL_FRONT), o totes dues (GL_FRONT_AND_BACK). També es pot
+desactivar aquesta eliminació amb la crida a <b>glDisable</b>,
+passant-li GL_CULL_FACE com a paràmetre.
+
+<pre class=algoritme>
+          <b>glEnable</b> (GL_CULL_FACE);
+               ...
+          <b>glCullFace</b> (GL_BACK); // o també GL_FRONT o GL_FRONT_AND_BACK
+               ...
+          <b>glDisable</b> (GL_CULL_FACE);
+</pre>
+
+<P>
+Aquesta eliminació de cares ja havia estat explicada de forma bàsica
+en l'apartat de <a href="m7a20_BasicInstruccPrincipals.html">crides
+bàsiques</a> a OpenGL.
+
+<P>
+En aquest punt, només es vol fer notar l'ús que se'n fa d'ella en
+aquest llibre. En l'apartat d'ombres, per exemple, es juga amb aquesta
+eliminació de cares per a que es faci efectiva en una modificació del
+contingut de l'stencil buffer. En l'apartat de reflexions, s'usa
+variant les cares a eliminar (GL_FRONT o GL_BACK) segons si es volen pintar
+els objectes virtuals o els reals de l'escena.
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m7c01_ExtensIntroduccio.html">[Anterior]</a>
+<a href="m7c20_TransfMatrius.html">[Següent]</a>
+</div>
+</body>
+</html>

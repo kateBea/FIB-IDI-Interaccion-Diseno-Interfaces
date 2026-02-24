@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M9.1.Primitives d'entrada.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("entrada","prim");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+      <a href="callbacks.html">[Anterior]</a>
+      [Següent]
+      <a href="main93.html">[Següent apartat]</a>
+</div>
+<br><br>
+
+<div class="tit1">Primitives d'entrada gràfiques.
+<span class="tit2">Emulació de modes</span>
+</div>
+
+<P> Les aplicacions guiades per events rara vegada tenen
+    necessitat d'emular realment el <i>request mode</i>. En realitat
+    aquesta emulació equivaldria a deixar de processar altres events
+    que no tinguessin a veure amb la dada solicitada, fins
+    rebre-la. Aquest comportament es pot assolir a través del control
+    proporcionat amb l'autòmata que es discutia a l'apartat anterior,
+    però sovint no és necessari ni dessitjable. Si l'aplicació està
+    esperant, per exemple, que l'usuari introdueixi un punt,
+    probablement no hi fa cap mal que l'usuari pugui usar segons
+    quines opcions del menú abans de fer-ho.</p>
+
+<P> Si es vol emular en certa mesura aquest comportament,
+    tanmateix, no hi ha dificultat. Segons la forma en que estigui
+    estructurada l'aplicació els detalls canviaran, però bàsicament el
+    que es fa és esperar un cert event que correspon a la confirmació
+    de l'usuari (prémer un botó del ratolí, prémer una tecla
+    determinada,...)  i en rebre'l processar les dades d'entrada
+    col·locades en un buffer a conseqüència dels events anteriors (per
+    exemple tecles premudes omplen de text un buffer, i quan es prem
+    el canvi de línia es desencadena l'entrada del que hi ha al
+    buffer).</p>
+
+<div class=tit3><B>Emulació del mode <i>sample</i></B></div>
+
+<P> Sovint es disposa d'un mecanisme diferent per a interrogar el
+    sistema i averiguar l'estat d'un perifèric (per exemple la
+    posició actual de l'apuntador). Tanmateix, si no és així el model
+    d'events permet emular-lo. Per exemple en el cas de la posició de
+    l'apuntador, podem tractar els events de moviment del ratolí, que
+    es produeixen cada vegada que l'usuari mou el ratolí. Cada vegada
+    que rebem un event, ens limitem a guardar les coordenades en que
+    es troba l'apuntador en aquell moment en una variable adequada, i
+    per tant l'aplicació pot en qualsevol moment, i de forma
+    assíncrona, consultar el contingut d'aquesta variable (i per tant
+    de l'apuntador).</p>
+
+<P> És evident que el tractament de tots aquests events serà
+    costós, i és per això que sovint es proporciona un altre mecanisme
+    per a fer-ho. En tot cas, si el propòsit del <i>sample</i> era
+    recollir un recorregut lliure fet per l'usuari (per exemple en una
+    aplicació de dibuix), els events de moviment del ratolí
+    proporcionen una manera eficaç de fer-ho.</p>
+
+
+<DIV CLASS="nav">
+      <a href="callbacks.html">[Anterior]</a>
+      [Següent]
+      <a href="main93.html">[Següent apartat]</a>
+</div>
+</BODY>
+</HTML>

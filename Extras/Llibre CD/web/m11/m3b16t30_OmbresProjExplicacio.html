@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","ombres");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m3b16_OmbresProj2OpenGL.html">[Torna a l'algorisme]</a>
+</div>
+<br><br>
+
+<div class=tit3><b>Generació d'ombres usant OpenGL i Stencil Buffer.</b> Explicació - part 3</div>
+
+<p>
+<pre class=algoritme>
+    <b>glEnable</b>(GL_DEPTH_TEST);
+    <b>glDepthFunc</b>(GL_LEQUAL);
+    <b>glColorMask</b>(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+
+    <b>glDisable</b>(GL_LIGHT0);
+    <b>glStencilFunc</b>(GL_EQUAL, 0, 1);
+    <b>Dibuixa</b>(Paret);
+</pre>
+
+<p> Aquest tros de codi torna a dibuixar la paret, a la zona que queda
+a l'ombra. Després de les inicialitzacions (tres primeres línies) del
+Z-Buffer i Stencil Buffer, el que fa és apagar la llum, i dibuixar la
+paret fosca (només a les zones en que l'Stencil buffer és zero, que
+són les zones on s'ha projectat l'ombra).
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m3b16_OmbresProj2OpenGL.html">[Torna a l'algorisme]</a>
+</div>
+</body>
+</html>

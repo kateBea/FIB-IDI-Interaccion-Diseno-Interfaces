@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M7.1 Procés de visualització 2D.Prim. gràfiques.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("vis2D","defs");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+<a href="PrimGrafIni.html">[Anterior]</a>
+<a href="PrimGraf2.html">[Següent]</a>
+<A HREF="main71.html">[Tornar al començament de l'apartat]</a>
+</div>
+<br><br>
+<span class="tit1">Definicions.</span><span class="tit2">Primitives gr&agrave;fiques.</span><span class="tit3">Exemples.</span>
+
+<P>Com hem mencionat, representen les eines de dibuix que podem utilitzar
+dins d'una aplicaci&oacute; inform&agrave;tica per a visualitzar la informaci&oacute;.
+Les llibreries gr&agrave;fiques actuals (i molts acceleradors gr&agrave;fics)
+recullen aquestes primitives i, per tant, implementen, total o parcialment,
+els subprocessos del proc&eacute;s de visualitzaci&oacute; 2D que descriurem
+en el seg&uuml;ent apartat.&nbsp;
+<p>Veiem alguns exemples:
+<p>
+<ul>
+<li>
+<b>Punt(tPunt2D P)</b> : Es requereix per a visualitzar un punt en dispositiu
+de sortida, P designa les coordenades del Punt.&nbsp;</li>
+
+<li>
+<b>Segment (tPunt2D P1, tPunt2D P2)</b>: Es requereix per a visualitzar
+un tram recte en el dispositiu de sortida, P1 i P2 designen les coordenades
+dels seus Punts extrems. La visualitzaci&oacute; d'una poligonal s'efectuar&agrave;
+amb un conjunt de crides a aquesta acci&oacute; b&agrave;sica.&nbsp;</li>
+
+<li>
+<b>Pol&iacute;gon (tPol2D pol)</b>: Es requereix per a visualitzar un pol&iacute;gon
+omplert d'un cert color en dispositiu de sortida. El tipus tPol2D es una
+taula de tPunt2D, per tant, <i>pol</i> especifica seq&uuml;encialment les
+coordenades dels v&egrave;rtexs del pol&iacute;gon.&nbsp;</li>
+</ul>
+<br><br>
+<DIV CLASS="nav">
+<a href="PrimGrafIni.html">[Anterior]</a>
+<a href="PrimGraf2.html">[Següent]</a>
+<A HREF="main71.html">[Tornar al començament de l'apartat]</a>
+</div>
+</body>
+</html>

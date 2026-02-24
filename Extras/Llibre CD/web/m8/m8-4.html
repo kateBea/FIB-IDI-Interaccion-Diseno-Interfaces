@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title>8.4.ALGORISME DE Z-BUFFER</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" TYPE="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</head>
+<BODY >
+<SCRIPT>
+top.passara("visib","zbuf");
+</SCRIPT>
+<DIV CLASS="nav">
+[Anterior]
+<a href="m8-ZBuf-optim.html">[Següent]</a>
+<a href="m8-3.html">[Apartat anterior] </a>
+</div>
+<br><br>
+
+<div CLASS="tit1">Algorisme de z-buffer.
+<span CLASS="tit2">Descripció de l'algorisme</span>
+</div>
+
+<P> Aquest algorisme determina la visibilitat en <A
+HREF="m8-algIma.html">espai imatge</A> i està especialment adequat
+a escenes formades per cares planes opaques. Requereix conèixer les
+coordenades (x,y) dels vèrtexs dels polígons respecte al sistema de
+coordenades de dispositiu i la seva distància a l'observador
+(profunditat).
+
+<P>La següent figura mostra el diagrama de blocs funcionals de la
+implementació del procés de visualització analitzada en el capítol 6, i
+la ubicació de l'algorisme de depht-buffer en ell. Per cada cara a
+visualitzar (interior a la piràmide de visió i no eliminada per
+filtrat de cares), es coneix les coordenades (x,y,z) dels seus
+vèrtexs. Les dues primeres seran valors enters en coordenades de
+dispositiu; la coordenada z mantindrà el valor del model normalitzat i
+estarà compresa en l'interval [-1.0,1.0]. Cal recordar que en aquest
+darrer model, l'observador es troba ubicat a l'infinit sobre l'eix z
+negatiu i per tant quant més gran és el valor de la coordenada z, més
+lluny es troba el punt de l'observador. Per tant el valor de z és
+proporcional a la profunditat del punt.
+
+<CENTER><TABLE><tr><TD>
+<img src="imatges/esquema8-8.jpg" alt="Ubicació de l'algorisme de z-buffer en el procés de visualització">
+</TD></TR></TABLE>
+</CENTER>
+
+<P>
+La implementació de l'algorisme requereix la utilització de dues
+taules auxiliars (<I>buffers</I> en denominació anglesa) de la mateixa
+resolució que la <A
+CLASS="glossari" HREF="javascript:glossari('Vista.html','*','400','300','no','o','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">vista</A>; la component
+[x][y] de cada taula conté informació associada al píxel
+(x,y). Aquestes taules s'anomenen:
+
+<UL>
+<LI> <B>Taula de Colors</B> (<I>color-buffer</I> en denominació
+anglesa). La informació que emmagatzema correspon al color dels píxels
+en <A HREF="../m3/main32.html">codificació RGB</A>. Les seves
+components s'inicialitzen amb el color de fons desitjat per l'escena
+i, al llarg de l'execució de l'algorisme, cada component contindrà el
+color corresponent al punt de la superfície visible des del seu píxel
+associat respecte a les cares processades.</LI>
+<LI> <B>Taula de profunditats</B> (<I>depht-buffer</I> en denominació
+anglesa). La informació que emmagatzema correspon a profunditats de
+punts (inicialment en el rang [-1.0,1.0]) discretitzades d'acord amb
+el nombre de bits associats a cada component. Per exemple si es
+disposa de 8 bits per component les profunditats oscil·laran entre
+[00000000,11111111]. S'inicialitza amb la profunditat més elevada que
+poden tenir els vèrtexs de les cares de l'escena (11111111) i al llarg
+de l'execució contindrà, en cada component, la profunditat
+corresponent al punt de la superfície visible en el seu píxel associat
+respecte a les cares processades.</LI>
+</UL>
+
+<P>
+L'algorisme de principi és el següent:
+
+<PRE class=algoritme>
+   <B>algorisme</B> z-buffer
+      Inicialitzar buffers
+      <B>per</B> cada_cara <B>fer</B>
+         <B>per</B> cada_pixel_de_la_vista <B>fer</B>
+            <B>si</B> la cara es projecta en el pixel <B>llavors</B>
+               z:=Calcul_profunditat_cara (cara, pixel)
+               <B>si</B> z < depht_buffer(pixel) <B>llavors</B>
+                  depht_buffer (pixel) := z
+                  color_buffer (pixel) := color_cara (pixel,z,cara)
+               <B>fsi</B>
+            <B>fsi</B>
+         <B>fper</B>
+      <B>fper</B>
+      mostrar buffer_color
+   <B>falgorisme</B>
+</PRE>
+
+<P>
+Hom pot observar que el principal cost computacional radica en els
+processos de: verificar si un píxel és interior a la
+projecció del polígon, càlcul de profunditat i del color.
+
+<div CLASS="tit3"><b>Execució pas a pas</b></div>
+
+<P>
+El conjunt de diapositives següent mostra l'execució pas a pas de
+l'algorisme per a una escena simple formada per tres polígons
+(A,B,C). Inicialment els buffers estan inicialitzats a color=(0,0,0) i
+a profunditat màxima (si disposa de tres bits:111). Per cada polígon
+s'analitza, seqüencialment, en quins píxels es projecta la seva àrea
+interior; per cada píxel es calcula la coordenada z del punt de la
+cara que s'hi projecta (les coordenades x i y són les mateixes que les
+del píxel). Si aquesta coordenada és més petita que l'emmagatzemada en
+la component corresponent del buffer de profunditats, implica que
+aquest punt és més proper a l'observador que qualsevol altre
+anteriorment processat que es projectava en el píxel i per tant serà
+visible per l'observador. En aquest cas s'actualitza la component de
+la taula de profunditats i es calcula el color del punt que es guarda
+en la component corresponent de la taula de colors. El càlcul del
+color concret de cada punt s'analitza en el <A
+HREF="m8-5.html">següent apartat</A>, de moment es considera la
+cara de color constant. En acabar de processar tots els polígons, en
+el buffer de colors es té la imatge de les cares visibles de
+l'escena. Qualsevol que sigui l'ordre de processat de les cares no es
+modifica ni la imatge final ni la complexitat de l'algorisme.
+
+<P>Per veure l'execució pas a pas (en una nova finestra), premeu el botó:
+
+<center><form action=""><input type=button value="Execució pas a pas" onclick="javascript:MuestraFin('m8-ZBuf-pasapas.html','740','660','no')"></form></center>
+
+
+<h2>Subapartats:</h2>
+
+<ul>
+<li><A HREF='m8-ZBuf-optim.html'> Optimitzacions</A></li>
+<li><A HREF='m8-ZBuf-limit.html'> Limitacions del mètode</A></li>
+</ul>
+
+
+<br><br>
+<DIV CLASS="nav">
+[Anterior]
+<a href="m8-ZBuf-optim.html">[Següent]</a>
+<a href="m8-3.html">[Apartat anterior] </a>
+</div>
+</body>
+</html>

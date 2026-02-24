@@ -1,0 +1,197 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("realvirt","visester");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m5d01t06t04.html">[Anterior]</a>
+<a href="m5d01t07_cod.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Visió estereoscòpica.
+<span class=tit2>Càlcul del parell estereoscòpic.</span>
+<span class=tit3>Pantalla clàssica sense tracking</span>
+</div>
+
+<p>Com hem dit abans, aquesta és la configuració dels sistemes de realitat virtual de baix
+  cost, doncs no requereix cap dispositiu de realitat virtual especialitzat. Es
+  caracteritza perquè <b>no s'utilitza cap sistema de posicionament</b> (<i>tracking</i>),
+  per la qual cosa el sistema no disposa de dades sobre la posició real de l'usuari.&nbsp;</p>
+
+<div align="center"><img border="0" src="imatges/carlosulleres.jpg" width="300" height="212"></div>
+
+<p>Al no disposar de la posició i orientació de l'observador real,
+no ens queda més alternativa que fer algunes suposicions. En concret, suposarem:</p>
+
+<ul>
+  <li>
+    <p class="topo1" style="margin-left:0cm;text-indent:0cm;mso-list:none;tab-stops:
+35.4pt"><span lang="CA" style="mso-ansi-language:CA">Que el vector cap amunt de l'observador
+    real coincideix amb el vector cap amunt de l'observador virtual. Si aquesta
+    coincidència no es dóna en la realitat, les imatges no es veuran de forma
+    correcta. </span></li>
+  <li>
+    <p class="topo1" style="margin-left:0cm;text-indent:0cm;mso-list:none;tab-stops:
+35.4pt"><span style="mso-ansi-language: CA" lang="CA">Que l'observador està enfilat
+    amb el centre de la pantalla, i la seva separació dels ulls és petita en
+    relació a la pantalla. Això ens permetrà definir una piràmide de
+    visió simètrica, determinada únicament per l'angle d'obertura de la càmera
+    (<i>field-of-view, fov</i>).</span><span lang="CA" style="mso-ansi-language:CA"><o:p>
+    </o:p>
+    </span></li>
+</ul>
+
+<p class=noind><b>Càlcul de la càmera</b></p>
+
+<p>Per calcular els paràmetres de la càmera virtual
+necessitem:</p>
+
+<ul>
+  <li>
+    <p class="topo1" style="margin-left:0cm;text-indent:0cm;mso-list:none;tab-stops:
+35.4pt"><b>Posició de l'observador binocular</b> <b>O</b>, que ens permet
+    situar l'observador virtual a l'escena.</li>
+  <li>
+    <p class="topo1" style="margin-left:0cm;text-indent:0cm;mso-list:none;tab-stops:
+35.4pt"><b>Punt de convergència C</b>, que ens permet situar el punt on es
+    creuen els eixos òptics de l'observador virtual, tal i com vam discutir en
+    l'apartat de Fonaments de Visió Estereoscòpica.</li>
+  <li>
+    <p class="topo1" style="margin-left:0cm;text-indent:0cm;mso-list:none;tab-stops:
+35.4pt"><b>Vector cap amunt u</b></li>
+  <li>
+    <p class="topo1" style="margin-left:0cm;text-indent:0cm;mso-list:none;tab-stops:
+35.4pt"><b>Distància interocular iod</b>, que és la distància entre els dos
+    ulls de l'observador virtual.</li>
+  <li>
+    <p class="topo1" style="margin-left:0cm;text-indent:0cm;mso-list:none;tab-stops:
+35.4pt"><b>Distància de l'observador real a la pantalla real i alçada de la
+    pantalla (opcional)&nbsp;</b></li>
+</ul>
+          <p>Un cop disposem d'aquestes dades, els càlculs dels paràmetres de la càmera
+          corresponent a un dels dos ulls, per exemple l'esquerre, es detallen a continuació:</p>
+
+<pre class=algoritme>
+  eye := O - (iod/2)*(OC ^ u)/||OC ^ u ||
+  center := C
+  up := u
+  fovy := 2*arctan(0.5*ALÇADA_PANTALLA/DISTANCIA_OBSERVADOR_PANTALLA)
+</pre>
+
+<p>Per l'ull dret, els càlculs són similars excepte la posició de l'ull, que
+es calcularia com</p>
+
+<pre class=algoritme>
+  eye := O <b>+</b> (iod/2)*(OC ^ u)/||OC ^ u ||
+</pre>
+
+<p>El càlcul dels paràmetres <b>eye, center </b>i <b>up </b>els vam explicar
+quan vam introduir l'observador binocular.&nbsp; </p>
+
+<p>Pel càlcul del paràmetre <b>fovy</b>, cal calcular quina part del camp
+visual de l'observador ocupa la pantalla. Quan es coneixen les dimensions
+físiques de la pantalla i la distància de l'observador a la pantalla, es pot
+utilitzar la fórmula indicada anteriorment. Quan no són conegudes,
+sovint es considera que l'observador
+està situat a una distància de la pantalla tal que aquesta ocupi al voltant de
+60 graus del seu camp visual (per fer-nos una idea, aquest és l'angle que
+ocupa un monitor de 21' quan l'usuari està a uns 30 cm de la pantalla).</p>
+
+<p class=noind><b>Utilització</b></p>
+
+<p>Aquí teniu un exemple d'utilització de la funció anterior per definir
+les transformacions de visualització i de perspectiva amb OpenGL:
+
+<pre class=algoritme>
+   <b>glMatrixMode</b>(GL_MODELVIEW);
+   <b>glLoadIdentity</b>();
+   <b>gluLookAt</b>(eye.x, eye.y, eye.z, center.x, center.y, center.z, up.x, up.y, up.z);
+   <b>glMatrixMode</b>(GL_PROJECTION);
+   <b>glLoadIdentity</b>();
+   <b>gluPerspective</b>(fovy, aspect, near, far)
+</pre>
+
+<p>On <b>aspect </b>és la relació d'aspecte del viewport, expressada com
+l'amplada dividit per l'alçada, i <b>near </b>i <b>far</b> són les distàncies
+dels plans de retallar anterior i posterior, respectivament.</p>
+
+<p class=noind><b>Comentaris addicionals</b></p>
+
+<p>Com hem dit abans, quan la imatge corresponent a l'ull dret i la imatge corresponent a l'ull
+esquerre es projecten en una única pantalla, sovint es parla de <b>parallax</b>
+en comptes en <b>disparitat retinal</b>.&nbsp;</p>
+
+<p>Els objectes de l'escena situats al voltant del punt C tindran <b>parallax
+zero</b>, la qual cosa vol dir que coincidiran les seves projeccions en
+pantalla. Els objectes amb parallax zero es perceben com si estiguessin <b>a la
+mateixa profunditat que la pantalla</b>.&nbsp;</p>
+
+<p>Els objectes de l'escena situats davant del punt C tindran <b>parallax
+negatiu</b> (la projecció per l'ull dret surt més a l'esquerra que la de l'ull
+esquerre). Els objectes amb parallax negatiu es perceben com si estiguessin
+flotant <b>davant del pla de la pantalla</b>.</p>
+
+<p>Els objectes de l'escena situats darrera del punt C tindran <b>parallax
+positiu</b> (la projecció per l'ull dret surt més a la dreta que la de l'ull
+esquerre). Els objectes amb parallax positiu es perceben com si estiguessin <b>darrera
+del pla de la pantalla</b>.</p>
+
+<p>Cal anar amb cura amb els valors que donem als paràmetres <b>iod </b>i a la
+distància de C a O (distància de convergència, <b>conv</b>). </p>
+
+<p>Si <b>iod </b>és massa petit, el parallax serà molt reduït i la sensació
+estereoscòpica serà molt petita.&nbsp; </p>
+
+<p>Si <b>iod</b> és massa gran, els objectes més propers a l'observador
+presentaran un parallax molt gran, obligant a que els ulls convergeixin en un
+punt molt proper i provocant fatiga visual. </p>
+
+<p>Si la distància de convergència <b>conv</b> és molt petita, la majoria
+d'objectes tindran parallax positiu i es percebran com si estiguessin darrera
+del pla de la pantalla. A més a més, si el parallax positiu supera els 6 cm
+(separació mitjana entre ulls en un adult), obliga a que els eixos òptics
+divergeixin, situació completament antinatural que provoca ràpidament fatiga
+visual.&nbsp; </p>
+
+<p>Si <b>conv</b> és massa gran, la majoria dels objectes tindran parallax
+negatiu i es percebran com si estiguessin davant del pla de la pantalla. </p>
+
+<p>Com hem de calcular, doncs, els valors <b>iod</b> i <b>C</b>?</p>
+
+<p>A primera vista, sembla com si haguéssim de triar <b>C </b>en un
+punt situat al mig de l'escena, de forma que la meitat de l'escena
+sembli que surti de la pantalla, i l'altre meitat que estigui darrera
+la pantalla, i que hauríem d'escalar <b>iod</b> segons les dimensions
+de l'escena. </p>
+
+<p>Malauradament, el procediment no és tan senzill. La raó es troba en la
+relació natural entre <b>convergència</b> i<b> acomodació</b>, relació que
+es trenca en la visió estereoscòpica. Recordem que la convergència depèn de
+l'angle que formen els eixos òptics (moguts pels músculs oculars) i que
+l'acomodació depèn de la deformació dels cristal·lí. La convergència té
+com a objectiu centrar el punt d'atenció en el centre de la retina.
+L'acomodació té com a objectiu l'enfocament òptic de l'escena. En la visió
+natural, existeix una relació entre convergència i acomodació, relació que
+hem après des de petits. En canvi, en visió estereoscòpica, aquesta relació
+es trenca: quan mirem una imatge estèreo, els ulls convergeixen a diferents
+distàncies segons l'objecte que acapara la nostra atenció, mentre que
+l'acomodació roman fixada en la pantalla. Aquesta ruptura és manifesta
+especialment amb els objectes amb parallax molt gran (en valor absolut). D'aquí
+que sovint s'aconselli crear imatges amb el mínim parallax que doni lloc a
+sensació de profunditat. </p>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m5d01t06t04.html">[Anterior]</a>
+<a href="m5d01t07_cod.html">[Següent]</a>
+</div>
+</body>
+</html>

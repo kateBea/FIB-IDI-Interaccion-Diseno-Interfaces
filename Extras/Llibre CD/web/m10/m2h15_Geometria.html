@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("proj","basic");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+[Anterior]
+<a href="m2h20_Camera.html">[Següent]</a>
+<a href="m2h10_TecniquesBasiques.html">[Apartat anterior]</a>
+</div>
+<br><br>
+
+<div class=tit1>Conceptes bàsics.
+<span class=tit2>Primitives geomètriques</span>
+</div>
+
+<P>Quan volem enviar geometria per a ser processada pel
+<i>pipeline</i> d'OpenGL, ho fem mitjançant les crides corresponents a
+comandes que defineixen el tipus de primitiva a dibuixar, i crides a
+<tt>glVertex*()</tt> per a donar les coordenades concretes dels punts
+de què es tracti. Aquestes crides apareixen en parts del codi
+parentitzades entre una crida a <tt>glBegin()</tt> i una a
+<tt>glEnd()</tt>. És aquesta <tt>glBegin()</tt> la que especifica el
+tipus de primitiva geomètrica que es construirà a partir dels vèrtexs
+que es rebin. A l'apartat <a
+href="../m15/m7a10_BasicIntroduccio.html">crides bàsiques</a> del
+capítol "OpenGL:referència" podeu trobar informació més extensa sobre
+les diferents primitives possibles.
+
+<P>Moltes comandes (com les <tt>glVertex*()</tt> que tot just hem
+esmentat) venen en diverses variants segons els tipus de dades que
+volem donar-les. En aquests casos tots els noms d'aquestes comandes
+comencen igual (en l'exemple comencen per <tt>glVertex</tt>), i tenen
+a continuació un sufix de dos o tres caràcters que indiquen el tipus
+en què es donaran les dades. Els tres caràcters corresponen a:
+<ul>
+<li><b>Dimensionalitat:</b> per exemple un punt pot estar donat en 2D
+(un punt al plà), 3D (un punt a l'espai) o 4D (en coordenades
+homogènies). En els casos en que sigui necessari distingir la
+dimensionalitat, OpenGL implementarà diferentes crides en què el
+sufix començarà per 2, 3 ó 4 respectivament. (Per exemple existeixen
+les crides <tt>glVertex2f()</tt> i <tt>glVertex3f()</tt>).</li>
+<li><b>Tipus base:</b> designa un de nou tipus possibles en què es
+dóna la informació, segons la següent taula:
+<br><br>
+<center><table border=2px class=codeinfo>
+<tr><th>Caràcter</th>
+    <th>Tipus OpenGL</th>
+</tr>
+<tr><td>b</td> <td>GLbyte</td></tr>
+<tr><td>s</td> <td>GLshort</td></tr>
+<tr><td>i</td> <td>GLint, GLsizei</td></tr>
+<tr><td>f</td> <td>GLfloat, GLclampf</td></tr>
+<tr><td>d</td> <td>GLdouble, GLclampd</td></tr>
+<tr><td>ub</td> <td>GLubyte, GLboolean</td></tr>
+<tr><td>us</td> <td>GLushort</td></tr>
+<tr><td>ui</td> <td>GLuint, GLenum, GLbitfield</td></tr>
+<tr><td>&nbsp;</td> <td>GLvoid</td></tr>
+</table></center>
+<br>
+Per exemple, existeixen les crides <tt>glVertex3f()</tt> i
+<tt>glVertex3d()</tt>, segons es vulgui proporcionar les coordenades
+en valors de coma flotant de simple o doble precisió.
+</li>
+<li><b>Agregació:</b> indica si els arguments es donen en forma de
+vectors o com un seguit de variables escalars. Per exemple, existeixen
+la crida <tt>glVertex2d()</tt> que especifica les coordenades d'un
+punt a un plà mitjançant dos arguments de tipus <tt>GLdouble</tt>, i
+la crida <tt>glVertex2dv()</tt> que especifica les coordenades d'un
+punt a un plà mitjançant un únic paràmetre: una taula de dues
+components de tipus <tt>GLdouble</tt></li>
+</ul>
+
+<br><br>
+<DIV CLASS="nav">
+[Anterior]
+<a href="m2h20_Camera.html">[Següent]</a>
+<a href="m2h10_TecniquesBasiques.html">[Apartat anterior]</a>
+</div>
+</body>
+</html>
+

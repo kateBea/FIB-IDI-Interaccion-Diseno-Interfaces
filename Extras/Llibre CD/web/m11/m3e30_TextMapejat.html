@@ -1,0 +1,301 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html lang="CA">
+
+<head>
+
+<title></title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+
+<script type="text/javascript" src="../upc.js"></script>
+
+<SCRIPT type="text/javascript" SRC="../overlib.js"></SCRIPT>       
+
+<SCRIPT type="text/javascript" SRC="../overlib_cssw3c.js"></SCRIPT>
+
+<SCRIPT>
+
+top.passara("visreal","textu");
+
+</SCRIPT>
+
+<BODY>
+
+<div id="overDiv" style="position: absolute; visibility:hidden; z-index:1000"></div>
+
+<DIV CLASS="nav">
+
+<a href="m3e25_TextGenAutoSh.html">[Anterior]</a>
+
+<a href="m3e30t01_TextCreacio.html">[Següent]</a>
+
+</div>
+
+<br><br>
+
+
+
+<div class=tit1>Textures.
+
+<span class=tit2>Aplicació de textures planes</span>
+
+</div>
+
+
+
+<p> En aquesta secció ens centrarem en l'estudi de la texturació de
+
+polígons i malles de polígons amb textures planes (bi-dimensionals)
+
+sota la perspectiva de la utilització d'OpenGL.
+
+
+
+<p> L'aplicació de la textura es realitza utilitzant mapejat invers
+
+dins de la determinació de <a href="../m8/m8-4.html">visibilitat amb
+
+Z-buffer</a>. La figura següent esquematitza els processos (blocs
+
+taronja) que és necessari incorporar al Procés de Visualització per a
+
+permetre les funcionalitats de les textures, així com les
+
+inicialitzacions (blocs en groc) i els paràmetres específics requerits
+
+(en vermell). A continuació s'introdueixen els esmentats processos que
+
+seran detallats en les subseccions següents. 
+
+<A name="nota1"></a><A class=nota 
+
+Href="javascript:void(0);"
+
+onMouseOut="nd();"
+
+onMouseOver="return overlib('Es recomana una primera lectura seqüencial'+
+
+' d\'aquest apartat.',ABOVE,CSSW3C,DIVCLASS,'notes')">NOTA</a>.
+
+
+
+<br>
+
+<div align=center><img src="imatges/TextPipe.png"></div>
+
+
+
+<ol>
+
+<li><a href="m3e30t01_TextCreacio.html"><b>Especificació de
+
+Textura</b></a>. Procès encarregat de crear en memòria una entitat de
+
+tipus <i>Textura</i>. Requereix com a paràmetres la seva dimensió,
+
+resolució i el tipus d'informació per cada texel. En l'enllaç anterior
+
+trobareu més informació i exemples concrets en OpenGL.</li>
+
+
+
+<li><b>Parametrització o Generació de Coordenades de Textura</b>. És
+
+el procés encarregat d'assignar coordenades de textura normalitzades
+
+als vèrtexs del polígon o de la malla de polígons. Imagineu que teniu
+
+un poliedre (per exemple un cilindre aproximat per cares planes) i
+
+desitjeu mapar sobre cadascun dels seus triangles un trosset d'una
+
+textura. Seria un procediment similar a quan volem embolicar un
+
+objecte tridimensional amb un paper; què ens passa? que o bé ens sobre
+
+paper que hem de retallar/doblegar o ens falta i requeririem
+
+estirar-lo. Matemàticament, la qüestió a resoldre és trobar una funció
+
+<i>F</i> que assigni les coordenades bi-dimensionals de la textura als
+
+vèrtexs de l'objecte que estan definits en tres dimensions, és a dir,
+
+que emboliqui acceptablement (d'acord amb les nostres
+
+intencions). Requerim calcular una funció:
+
+
+
+<center> <i>F</i>  tq  <i>F(x,y,z)=(s,t)</i> i <i>s</i> i
+
+<i>t</i> estan definits en [0,1]</center>
+
+
+
+OpenGL ofereix dos procediments de parametrització:
+
+
+
+<ul>
+
+<li><a href= "m3e30t10_TextGenDirect.html">Parametrització
+
+Directa</a>. S'assignen directament les coordenades de textura als
+
+vèrtexs dels polígons. Usualment s'utilitza per a mapar textures en
+
+polígons i l'assignació l'explicita de manera interactiva l'usuari en
+
+la fase de modelatge de l'escena. Alternativament, és possible pensar
+
+en definir una funció que assigni directament la textura en funció de
+
+les coodenades dels vèrtexs. En l'enllaç trobareu informació
+
+addicional de tècniques d'assignació i les comandes concretes
+
+d'OpenGL.</li>
+
+
+
+<li><a href= "m3e30t20_TextGenAuto.html">Parametrització
+
+Automàtica</a>. En funció de la informació associada als vèrtexs de
+
+l'objecte, OpenGL té determinat un conjunt de funcions que
+
+automàticament calculen les seves coordenades de textura. En
+
+l'enllaç anterior trobareu més informació sobre l'efecte d'escollir
+
+entre diferents funcions i les comandes concretes d'OpenGL. Una
+
+d'aquestes funcions (<i>GL_SPHERE_MAP</i>) permet simular reflexions
+
+especulars de l'entorn sobre objectes reflectors (és l'anomenat
+
+<i>environment mapping</i>).</li>
+
+</ul></li>
+
+
+
+<li><b>Mapat invers de textures</b>. Durant la rasterització dels
+
+polígons es generen coordenades de textura específiques per a cada
+
+pixel interior al polígon. A tal efecte s'interpolen les coordenades
+
+de textura dels vèrtexs dels polígons en un procés similar a com
+
+s'interpola el color en el <a href="../m8/m8-col-gouraud.html">colorat
+
+de Gouraug</a>, és a dir, segons la separació entre els pixels en què
+
+es projecten els vèrtexs. Recordeu que en OpenGL aquesta informació
+
+s'emmagatzema en una entitat anomenada <i>Fragment</i> <!-- Aqui
+
+link--> en que es guarda tot el que es requereix conèixer d'un pixel:
+
+coodenades, profunditat, color, coordenades de textura,... Les
+
+coordenades de textura es calculen pels 4 vèrtexs que limiten el pixel
+
+{(xd,yd)(xd+1,yd),(xd+1,yd)(xd,yd+1)}</li>
+
+
+
+<li><a href= "m3e30t30_TextFiltratge.html"><b>Filtratge</b></a>. Aquest
+
+procés consisteix en assignar al <i>Fragment</i> un atribut/valor
+
+concret de la textura en concordància amb les coordenades de textura
+
+dels seus vèrtexs. Segons la parametrització efectuada i la projecció
+
+dels polígons pot succeir que a cada vèrtex del fragment li
+
+correspongui una coordenada diferent, o a tots la mateixa i, fins i
+
+tot, que a algun/tots tinguin valor fora del rang [0,1]. Diferents
+
+solucions a aquests problemes: assignar el valor del texel més proper,
+
+assignar el valor promig d'un conjunt de texels,... produeixen
+
+diferents efectes en la texturació resultant. En l'enllaç trobareu
+
+les possibilitats que ofereix OpenGL i les seves limitacions.</li>
+
+
+
+<li><a href= "m3e30t40_TextAplicacio.html"><b>Aplicació</b></a>. Aquest
+
+darrer procés consisteix en combinar el color del fragment amb
+
+l'atribut de textura calculat. El més usual és la substitució del
+
+color difós (r,g,b,&#945) pel color de la textura. En l'enllaç
+
+trobareu les possibilitats de combinació que ofereix OpenGL.</li>
+
+</ol>
+
+
+
+<p class=exercici><span class=exernum>Exercici 4.1:</span> A
+
+continuació trobareu l'applet amb el que heu anat fent proves al llarg
+
+de tot el tema. Com sabeu les pestanyes són auto-explicatives del seu
+
+funcionament, però si teniu dubtes i no us recordeu del seu
+
+funcionament aneu <a href= "javascript:MuestraFin('m3e30t50_TextApplet.html','700','550','yes')">aquí</a>. Us
+
+aconsellem que encara que hagueu passat per tots els apartats prèvis i
+
+nomès hagueu estudiat l'apartat actual, jugeu a activar/desactivar les
+
+diferents opcions i analitzeu experimentalment el seu resultat. Una
+
+prova que encara no us hem suggerit és seleccionar
+
+l'objecte=retall. Ara podeu editar un polígon qualsevol en la finestra
+
+de l'esquerra i li seran associades les coordenades de textura
+
+adients d'acord amb el posicionament dels vèrtexs a sobre de la
+
+textura. Proveu de fer un polígon còncau. Noteu que OpenGL només
+
+textura correctament polígons convexes.
+
+
+
+<div align=center><applet code="Interficie.class" archive="Textures.jar,../comuns.jar" height=346 width=500>
+</applet></div>
+
+
+
+
+
+<br><br>
+
+<DIV CLASS="nav">
+
+<a href="m3e25_TextGenAutoSh.html">[Anterior]</a>
+
+<a href="m3e30t01_TextCreacio.html">[Següent]</a>
+
+</div>
+
+</body>
+
+</html>
+

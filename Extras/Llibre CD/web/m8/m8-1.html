@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title>8.1.Determinació de la Visibilitat</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" TYPE="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</head>
+<BODY >
+<SCRIPT>
+top.passara("visib","dete");
+</SCRIPT>
+<DIV CLASS="nav">
+[Anterior]
+[Següent]
+<a href="m8-objectius.html">[Apartat anterior]</a>
+<a href="m8-2.html">[Següent apartat]</a>
+</div>
+<br><br>
+
+<div class=tit1>Determinació de la visibilitat</div>
+
+<P>
+Donats dos punts P i Q qualsevol d'una escena geomètrica,
+definirem que el punt Q és visible des de P, i ho representarem P~Q,
+<B>ssi</B> un raig de llum I que
+parteix de P en direcció a Q (I<sub>P==>Q</sub>), arriba a Q amb una
+intensitat no nul·la.
+
+<CENTER>
+<TABLE BORDER=0>
+<tr><TD>
+<img src="imatges/fig-8-1-a.jpg" alt="Visibilitat entre punts"></TD>
+<TD>
+<img src="imatges/fig-8-1-b.jpg" alt="Exemple d'obstacles"></TD>
+</tr>
+</TABLE>
+</CENTER>
+
+<P>
+L'atenuació de la llum pot ser deguda bé a objectes intermedis que
+atenuen parcialment (objectes transl·lúcids) o total (objectes opacs)
+la intensitat del raig, o bé al propi medi en que es propaga la llum
+(exemples boira, contaminació). Els diferents elements que atenuen la
+llum s'anomenen obstacles (en la figura anterior podem veure alguns
+exemples).
+
+<P>
+En aquest capítol considerarem com a únics obstacles els objectes
+opacs. Això porta a la següent definició de visibilitat geomètrica:
+donats dos punts P i Q qualsevols d'una escena geomètrica, P~Q, <B>ssi</B>
+un segment de recta definit entre P i Q no intersecta amb cap
+superfície de l'escena. La visibilitat geomètrica entre un punt P i
+una superfície, és el conjunt de punts de la superfície visibles des
+de P.
+
+<P>
+Anomenarem determinació de visibilitat d'una escena al càlcul de la
+visibilitat geomètrica entre l'observador i els
+objectes de l'escena. Per a cada posició de l'observador es
+determinaran els punts visibles de les superfícies dels
+objectes. Sovint els diferents algorismes existents es restringeixen a
+la geometria interior a la piràmide de visió i
+com a únics obstacles consideren les cares opaques dels objectes.
+
+<P>
+Un cop es coneix la visibilitat de l'escena, una segona qüestió a
+plantejar-nos per a obtenir-ne una imatge realista és el càlcul del color en cada punt visible.
+
+
+<br><br>
+<DIV CLASS="nav">
+[Anterior]
+[Següent]
+<a href="m8-objectius.html">[Apartat anterior]</a>
+<a href="m8-2.html">[Següent apartat]</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M7.1 Procés de visualització 2D.Sistemes de coordenades.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("vis2D","impl");
+</SCRIPT>
+<A NAME="inici"></A>
+<DIV CLASS="nav">
+<a href="MSTransmet1.html">[Anterior]</a>
+<a href="MSExplicacio3.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Mapa sensible del PV2D.
+<span class=tit2>Transformació Món-Dispositiu</span>
+</div>
+
+<P>Anomenem <b><i>transformació món-dispositiu</i></b>
+al subprocés que modifica les coordenades dels
+vèrtexs de les primitives gràfiques, referenciats respecte
+al sistema de coordenades de l'aplicació, per a referenciar-les
+respecte al sistema de coordenades de dispositiu. Requereix la definició
+prèvia d'una Finestra_2D i d'una Vista:
+
+<center>
+<h4>setFinestra_2D(tPunt2D orgF, real ampF, real alçF)</h4>
+</center>
+
+<center>
+<h4>setVista (tPuntDisp orgV, enter ampV, enter alçV)</h4>
+</center>
+
+<P>
+Per a la realització de la transformació, es fan correspodre
+els límits de la Finestra_2D amb els de la Vista, d'aquesta manera
+es garanteix que tot punt interior a la Finestra_2D es visualitza en el
+interior de la Vista. La figura mostra el sistema de correspondències
+entre la Finestra 2D i la Vista que cal programar.
+
+<CENTER>
+<table>
+<tr><td>
+<img src="imatges/fig7-2a.jpg" alt=""><img src="imatges/fig7-2b.jpg" alt="">
+</td></tr>
+</table>
+</CENTER>
+
+<p>Per tant, la correspondència es pot expressar com dues
+<b>aplicacions afins</b> una respecte a les
+coordenades abscisses i l'altre entre les ordenades:
+
+<pre class=algoritme>
+Pdisp[1] := (ampV/ampF)* P[1]-((ampV/ampF)*orgF[1] - orgV[1])= a * P[1] + b
+Pdisp[2] := (al&ccedil;V/al&ccedil;F)* P[2]-((al&ccedil;/al&ccedil;F)*orgF[2] - orgV[2]) = c * P[2] + d
+</pre>
+
+<P>Òbviament, aquestes aplicacions es poden expressar de forma matricial
+amb <b>coordenades homogènies</b>:
+
+<center>
+<table><tr><td>
+   <img SRC="imatges/img1.gif" ALT="\begin{displaymath}\left[\begin{array}{c}Pdisp[1]\\ Pdisp[2]\\ 1\end{array}\ri... ...cF)*orgF[2]+orgV[2] & P[2]\\  0 & 0 & 1 & 1 \end{array}\right]\end{displaymath}" height=62 width=635>
+  </td></tr></table>
+</center>
+
+<P>Aquesta matriu l'anomenarem de transformació món-dispositiu
+<b>(MTMD)</b> i podeu observar que representa per a cada coordenada un
+escalat i una translació. Els valors de l'escalat són la
+relació d'amplades entre les dues finestres (ampV/ampF) per les
+abscisses, i la relació d'alçades (alçV/alçF)
+per les ordenades. Quan aquests escalats no coincideixen es produeix la
+<b>deformació en la visualització</b>
+que s'ha comentat en apartats anteriors (no es conserva la <b>relació
+d'aspecte</b>).
+
+<p>Malgrat que es pot implementar la transformació món-dispositiu
+com un algorisme que realitza el producte del vector <i>P</i> de coordenades
+del punt per la matriu <i>MTMD</i>, per eficiència de càlculs
+i en funció del hardware que s'utilitzi és preferible realitzar
+el càlcul programant directament l'expressió de transformació
+afí. Cada cop que es redefineix la Finestra_2D i/o la Vista, cal
+recalcular els paràmetres <i>a,b,c</i> i <i>d</i>.
+
+<p>Cal recordar que les coordenades de dipositiu són enteres, per
+tant, un cop efectuada la transformació cal discretitzar a un valor
+enter (generalment es realitza un truncament del valor obtingut).
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="MSTransmet1.html">[Anterior]</a>
+<a href="MSExplicacio3.html">[Següent]</a>
+</div>
+</BODY>
+</HTML>

@@ -1,0 +1,110 @@
+#VRML V2.0 utf8
+
+
+DEF Entry Viewpoint {
+    position 6.0 4.0 10.0
+    orientation 1. 0. -.2 -.3
+    description "Punt de Vista"
+}
+
+NavigationInfo {
+    type [ "EXAMINE", "ANY" ]
+    headlight TRUE
+}
+
+Background {
+    skyColor [ 0. 0.1 0.3 ]
+}
+
+
+# El cos de l'insecte
+
+Transform {
+                        scale 2.0 .3 .5
+			children Shape {
+				appearance Appearance {
+					material  Material { diffuseColor .8 .8 .1 }
+				}
+				geometry Sphere { }
+			}
+	   }
+# El cap
+
+Transform {
+                        translation 2. 0.0 0.0
+                        scale 0.4 0.4 0.4
+			children Shape {
+				appearance Appearance {
+					material  Material { diffuseColor .3 .1 .1 
+                                                             emissiveColor .3 .3 0. }
+				}
+				geometry Sphere { }
+			}
+	   }
+
+#  Les ales
+
+DEF Ala1 Transform {
+        translation 0. .2 -1.
+	center 0. -.2 1.
+        scale 1.5 .2 1.5
+	children  Shape {
+			appearance Appearance {
+				material Material {
+					diffuseColor 0.2 0.8 .0
+				}
+			}
+			geometry Sphere { }
+		   }
+}
+
+DEF Ala2 Transform {
+        translation 0. .2 1.
+	center 0. -.2 -1.
+        scale 1.5 .2 1.5
+	children  Shape {
+			appearance Appearance {
+				material Material {
+					diffuseColor 0.2 0.8 .0
+				}
+			}
+			geometry Sphere { }
+		   }
+}
+
+
+
+#  Animació de les ales
+
+
+DEF Clock TimeSensor {
+	cycleInterval .5
+	loop TRUE
+	startTime 0.0
+	stopTime -1.0
+}
+
+DEF MotorAla1 OrientationInterpolator {
+	key [ 0.0, .5, 1.0 ]
+	keyValue [
+                     1. 0. 0. .8
+                     1. 0. 0. 1.4
+                     1. 0. 0. .8
+	]
+}
+
+ROUTE Clock.fraction_changed TO MotorAla1.set_fraction
+ROUTE MotorAla1.value_changed TO Ala1.set_rotation
+
+DEF MotorAla2 OrientationInterpolator {
+	key [ 0.0, .5, 1.0 ]
+	keyValue [
+                     1. 0. 0. -.8
+                     1. 0. 0. -1.4
+                     1. 0. 0. -.8
+	]
+}
+
+ROUTE Clock.fraction_changed TO MotorAla2.set_fraction
+ROUTE MotorAla2.value_changed TO Ala2.set_rotation
+

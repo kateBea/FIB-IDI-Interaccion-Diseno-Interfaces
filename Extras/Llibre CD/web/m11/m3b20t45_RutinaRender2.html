@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","ombres");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m3b20t20_OmbresExercicis.html">[Torna a l'algorisme]</a>
+</div>
+<br><br>
+
+<div class=tit3><b>Generació de volums d'ombres.</b> Programa que redibuixa l'habitació</div>
+
+<p> El procediment que teniu a continuació fa un redibuix de
+l'habitació, dibuixant el terra (amb textures), les parets i el
+sostre, els objectes de dins i l'esfera que representa el focus de
+llum. Suposem que disposem de quatre procediments
+<b>DibuixPiramide</b>(), <b>DibuixEsferaOpaca</b>(),
+<b>DibuixEsferaLlum</b>() i <b>DibuixTriangleVermell</b>() que
+visualitzen els objectes de dins de l'habitació.
+
+
+<p> Aquest fragment de codi es basa en el programa <b>shadowvol.c</b>,
+de l'<i>Advanced OpenGL Programming</i> tutorial del Siggraph'1999.
+
+<pre class=algoritme>
+<b>void render</b>(void)
+{
+   <b>glColor3f</b>(1.f, 1.f, 1.f);
+
+   /* dibuix del terra */
+   <b>glBegin</b>(GL_QUADS);
+   <b>glNormal3f</b>(0.f, 1.f, 0.f);
+   <b>glVertex3f</b>(-100.f, -100.f, -320.f);
+   <b>glVertex3f</b>( 100.f, -100.f, -320.f);
+   <b>glVertex3f</b>( 100.f, -100.f, -520.f);
+   <b>glVertex3f</b>(-100.f, -100.f, -520.f);
+   <b>glEnd()</b>;
+
+   /* dibuix de les parets i sostre */
+   <b>glBegin</b>(GL_QUADS);
+   /* dibuix de la paret de l'esquerra */
+   <b>glNormal3f</b>(1.f, 0.f, 0.f);
+   <b>glVertex3f</b>(-100.f, -100.f, -320.f);
+   <b>glVertex3f</b>(-100.f, -100.f, -520.f);
+   <b>glVertex3f</b>(-100.f,  100.f, -520.f);
+   <b>glVertex3f</b>(-100.f,  100.f, -320.f);
+   /* dibuix de la paret de la dreta */
+   <b>glNormal3f</b>(-1.f, 0.f, 0.f);
+   <b>glVertex3f</b>( 100.f, -100.f, -320.f);
+   <b>glVertex3f</b>( 100.f,  100.f, -320.f);
+   <b>glVertex3f</b>( 100.f,  100.f, -520.f);
+   <b>glVertex3f</b>( 100.f, -100.f, -520.f);
+   /* dibuix del sostre */
+   <b>glNormal3f</b>(0.f, -1.f, 0.f);
+   <b>glVertex3f</b>(-100.f,  100.f, -320.f);
+   <b>glVertex3f</b>(-100.f,  100.f, -520.f);
+   <b>glVertex3f</b>( 100.f,  100.f, -520.f);
+   <b>glVertex3f</b>( 100.f,  100.f, -320.f);
+   /* dibuix de la paret del fons */
+   <b>glNormal3f</b>(0.f, 0.f, 1.f);
+   <b>glVertex3f</b>(-100.f, -100.f, -520.f); 
+   <b>glVertex3f</b>( 100.f, -100.f, -520.f);
+   <b>glVertex3f</b>( 100.f,  100.f, -520.f);
+   <b>glVertex3f</b>(-100.f,  100.f, -520.f);
+   <b>glEnd</b>();
+
+   /* dibuix dels objectes */
+   <b>DibuixPiramide</b>();
+   <b>DibuixEsferaOpaca</b>();
+   <b>DibuixEsferaLlum</b>();
+   <b>DibuixTriangleVermell</b>();
+}
+</pre>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m3b20t20_OmbresExercicis.html">[Torna a l'algorisme]</a>
+</div>
+</body>
+</html>

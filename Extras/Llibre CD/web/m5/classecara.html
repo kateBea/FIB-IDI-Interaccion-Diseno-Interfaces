@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M5.5.Representeció per fronteres </TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;
+charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("model","brep");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+      <A HREF="main55-3.html">[Anterior]</a>
+      <a href="classevertex.html">[Següent]</a>
+     </div>
+<br><br>
+
+<div class="tit1">Representació per fronteres.
+<span class="tit2">La classe Cara</span>
+</div>
+
+
+<P>
+Implementació (parcial) de la classe "Cara". El paràmetre MAXVERTCARA
+indica el màxim de vèrtexs que pot contenir una cara:
+
+<PRE class=algoritme>
+ <B>classe</B> Cara ()
+
+   <B>atributs</B>
+      normal:				vector3D
+      nv:				<B>enter</B>  // num de vèrtexs de la cara
+      indv := <B>Nou</B> int[MAXVERTCARA]:	<B>taula</B> [1..MAXVERTCARA] <B>de enter</B>
+      solid:				SolidFronteres  // Sòlid Fronteres
+                                                        // al que pertany la cara
+   <B>fatributs</B>
+
+   <B>constructor</B> Cara (s: SolidFronteres)
+      nv := 0
+      solid := s
+   <B>fconstructor</B>
+
+   <B>funció pública</B> NumVertexs (): <B>enter</B>
+      <B>retorna</B> nv
+   <B>ffunció</B>
+
+   <B>funció pública</B> Normal (): vector3D
+      <B>retorna</B> normal
+   <B>ffunció</B>
+
+   <B>funció pública</B> IndexVertex (i:<B>enter</B>): <B>enter</B>
+      <B>retorna</B> indv[i]
+   <B>ffunció</B>
+
+   <B>mètode públic</B> AssignaNumVertexs (n:<B>enter</B>)
+      nv := n
+   <B>fmètode</B>
+
+   <B>mètode públic</B> AssignaIndexVertex (i:<B>enter</B>, valor:<B>enter</B>)
+      indv[i] := valor
+   <B>fmètode</B>
+
+   <B>mètode públic</B> AssignaNormal (v: vector3D)
+      normal.Assigna (v)
+   <B>fmètode</B>
+
+   <B>mètode públic</B> AssignaComponentsNormal (a,b,c:<B>real</B>)
+      normal.AssignaComponentX (a)
+      normal.AssignaComponentY (b)
+      normal.AssignaComponentZ (c)
+   <B>fmètode</B>
+
+   <B>funció pública</B> VertexsCara (): Poligon
+      Pol := <B>Nou</B> Poligon()
+      <B>Per</B> j <B>en</B> [1..nv] <B>fer</B>
+         Pol.AfegeixPunt (solid.Vertex(indv[j]).CopiaAUnPunt())
+      <B>fPer</B>
+      <B>retorna</B> Pol
+   <B>ffunció</B>
+   ...
+   ...
+<B>fclasse</B>
+</PRE>
+
+
+
+<br><br>
+<DIV CLASS="nav">
+      <A HREF="main55-3.html">[Anterior]</a>
+      <a href="classevertex.html">[Següent]</a>
+  </div>
+
+</BODY>
+
+</HTML>
+

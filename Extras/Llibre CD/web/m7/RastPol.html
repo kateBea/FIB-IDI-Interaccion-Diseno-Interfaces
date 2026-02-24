@@ -1,0 +1,156 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.6 [en] (Win98; I) [Netscape]">
+   <title>M7.1 Proc&eacute;s de visualitzaci&oacute; 2D.Implementaci&oacute;.</title>
+<link REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</head>
+<body>
+<script>
+top.passara("vis2D","impl");
+</script>
+<div CLASS="nav">
+<a href="RastSeg.html">[Anterior]</a>
+<a href="MSTransmet4.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Mapa sensible del PV2D.
+<span class=tit2>Rasterització de Polígons</span>
+</div>
+
+<p>Donat un polígon definit pels seus <i>n</i> vèrtexs en coordenades
+de dispositiu ens proposem calcular el conjunt de pixels interiors al polígon
+i pintarlos del color definit per l'atribut corresponent.
+
+<p>Un dels algorismes més utilitzats és l'anomenat de <b><i>Seguit
+del Contorn</i></b>. Aquest algorisme aconsegueix omplir el polígon
+considerant seqüencialment les línies d'escombrat del dispositiu.
+Lleugeres variants de l'algorisme permeten omplir el polígon amb
+ratlles o altres mostres. A continuació l'algorisme de principi
+i un exemple del resultat en una pantalla de baixa resolució que
+mostra els píxels que s'omplirien de color.
+
+<center><table>
+<tr>
+<td><img SRC="imatges/reixat-pintat-0.jpg" ALT="" ></td>
+</tr>
+</table></center>
+
+<pre class=algoritme>
+<b>accio</b> Rasteritza_Poligon (Pol,color)
+   calcul_ymax_ymin(Pol,ymax,ymin)
+   <b>per</b> y <b>en</b> [ymax..ymin] <b>fer</b>
+      calcul_interseccio (y, Pol, P_int, npunts)
+      ordenar_punts_respecte_X (P_int, npunts)
+      <b>per</b> i <b>en</b> [1 .. npunts-1] <b>pas</b> 2 <b>fer</b>
+         pintar_línia_horitzontal(P_int[i],P_int[i+1],color)
+      <b>fper</b>
+   <b>fper</b>
+<b>faccio</b>
+</pre>
+
+<p>L'acció <i>calcul_ymax_ymin</i> calcula les ordenades màxima
+i mínima del polígon que determinen les línies d'escombrat
+amb que intersecta el polígon. Per a cadascuna es calculen els punts
+de la seva intersecció amb les arestes del polígon (acció
+<i>calcul_intersecció</i>).
+Les interseccions trobades s'ordenen respecte la seva coordenada x (<i>ordenar_punts_respecte_x</i>).
+Posteriorment, considerant consecutivament els punts de intersecció
+com punt inici i punt final de segments horitzontals, es pinten els segments.
+Noteu que com els punts d'intersecció seran valors reals, per trobar
+el pixel inicial (final) s'haurà d'arrodonir el seu valor, aquest
+fet fa que no tots els pixels travessats per la rasterització de
+les arestes es considerin interiors.
+
+<p>Per a que l'algorisme funcioni correctament, cal que el nombre d'interseccions
+entre cada línia d'escombrat i el polígon sigui parell (mateix
+concepte que utilitzat en punt interior a polígon), altrament es poden
+omplir zones exteriors. Les línies d'escombrat sempre passen pels
+vèrtexs del polígon (ja que es treballa en coordenades de
+dispositiu), aquest fer pot produir incoherències. Per evitar-les
+les arestes es consideren obertes (no intersecten) respecte al vèrtex
+amb ordenada màxima i no es consideren les arestes horitzontals.
+Amb aquesta hipòtesi, les arestes que són intersecades per
+cada línia d'escombrat seran aquelles amb vèrtexs extrems
+amb ordenada màxima superior a la línia d'escombrat, i ordenada
+mínima inferior o igual. Podeu observar en la figura el correcte
+funcionament del criteri exposat.
+
+<center><table>
+<tr>
+<td><img SRC="imatges/reixat-fletxes.jpg" ALT="" ></td>
+</tr>
+</table></center>
+
+<p>Cal mencionar que per tal d'optimitzar els càlculs que comporten
+les interseccions, es possible utilitzar la coherència entre línies
+d'escombrat successives. Efectivament, si es coneixen dos vèrtexs
+(PI, PF) d'una aresta, queda determinada la seva pendent i un punt d'intersecció
+d'aquesta amb línies d'escombrat, per exemple PI. La intersecció
+amb la següent línia d'escombrat (<i>y=PI[2]-1</i>) es pot
+calcular com <i>x= PI[1]-1/m</i> (deduiu l'expressió a partir dels
+conceptes geomètrics del capítol 4)
+
+<center><table>
+<tr>
+<td><img SRC="imatges/reixat-1.jpg" ALT="" ></td>
+</tr>
+</table></center>
+
+<p>Tenint en compte les consideracions anteriors l'eficiència de
+l'algorisme d'omplert s'incrementa considerablement, evidentment la seva
+complexitat és O(n) o <i>n</i> és el nombre d'arestes del polígon.
+Encara es poden pensar altres optimitzacions organitzant les arestes en
+llistes ordenades segons el seu vèrtex de coordenada màxima
+que permeten detectar ràpidament quines són les arestes <i>actives</i>
+(tallades) per a cda línia d'escombrat.
+
+<p>Varies consideracions:
+<ul>
+<li>
+Al igual que l'algorisme de rasterització de segments, s'observa
+aliasing a l'entorn de la frontera del polígon.</li>
+<li>
+Si es vol omplir amb una mostra el polígon (funció de l'atribut),
+cal considerar-ho en l'acció pinta pixel que utilitza un color o
+altre en funció del pixel a pintar i de la mostra. Veure en
+les figures següents exemples d'omplert en pantalla de resolució
+estandard.</li>
+<li>
+Si es vol omplir un polígon amb un forat, simplement cal considerar
+dins l'algorisme totes les arestes dels polígons contorn i forat.
+Comproveu l'afirmació anterior experimenalment.</li>
+<li>
+Open-GL per optimitzar l'algorisme i facilitar la seva implementació
+per hardware, sempre considera els polígons a omplir com a triangles
+sense forats. La pròpia llibreria disposa de software que, de manera
+transparent a l'aplicació, descompon un polígon convex qualsevol
+en triangles. L'usuari de l'aplicació cal que modifiqui la geometria
+de l'escena si requereix l'omplert de polígons concaus o amb forats
+(cal fer la seva descomposició en triangles).</li>
+<li>
+Altra família d'algorismes d'omplert són els basats en el
+concepte de <i>llavor</i> (seed en anglès). Donat un pixel interior
+i havent rasteritzat el contorn, un simple algorisme recursiu va pintant
+pixels veïns interiors (propaga la llavor) fins trobar punts del contorn
+i/o no quedar cap pixel interior per pintar. Aquests algorismes tenen molts
+problemes (no robustos) degut a casuístiques pròpies de la
+discretització i poden produir omplerts no correctes.</li>
+</ul>
+
+<center><table>
+<tr>
+<td><img SRC="imatges/reixat-pintat-1.jpg" ALT="" ><img SRC="imatges/reixat-pintat-2.jpg" ALT="" ></td>
+</tr>
+</table></center>
+
+<br><br>
+<div CLASS="nav">
+<a href="RastSeg.html">[Anterior]</a>
+<a href="MSTransmet4.html">[Següent]</a>
+</div>
+</body>
+</html>

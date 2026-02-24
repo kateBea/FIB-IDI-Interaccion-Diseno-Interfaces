@@ -1,0 +1,75 @@
+<html>
+<head>
+<title>Llibre de gràfics per la UPC</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" TYPE="text/css" HREF="upc.css">
+
+<SCRIPT>
+	function deteccioPlugin ()
+	{
+		var applet = document.getElementById("detect");
+
+		if (applet == null)
+		{
+			alert (' El teu navegador no permet executar java.\n\n Configuració necessària per a visualitzar el llibre correctament:\n\n\tInternet Explorer 5.5 (o superior) o Netscape 6 o (superior)\n\n\tJava plugin 1.3.1_03.\n\n Podeu trobar aquest software en el mateix CD del llibre.');
+		};
+
+		var version = applet.getJavaVersion();
+
+		if(version == "1.3.1_03")
+		{
+			// es la correcta
+		}
+		else if ((version == "1.3.1_02")||(version == "1.4.0"))
+		{
+			alert (' La versió que tens instal·lada del plugin no permet imprimir els applets.\n\n Configuració necessària per a visualitzar el llibre correctament:\n\n\tInternet Explorer 5.5 (o superior) o Netscape 6 o (superior)\n\n\tJava plugin 1.3.1_03.\n\n Podeu trobar aquest software en el mateix CD del llibre.');
+		}
+		else if ((version.indexOf ("1.2")!=-1) || (version.indexOf ("1.1")!=-1))
+		{
+			alert (' La versió que tens instal·lada del plugin no permet imprimir els applets.\n\n Configuració necessària per a visualitzar el llibre correctament:\n\n\tInternet Explorer 5.5 (o superior) o Netscape 6 o (superior)\n\n\tJava plugin 1.3.1_03.\n\n Podeu trobar aquest software en el mateix CD del llibre.');
+		}
+	}
+</SCRIPT>
+
+</head>
+
+<body onload="deteccioPlugin()" onResize='document.footer.top=window.innerHeight-34;'>
+
+<br><br>
+<span align=left><font face="Times, Arial, Helvetica, sans-serif" size=+5 color=#336699><b>Informàtica Gràfica: <br><br>
+un enfocament multimèdia.</font></b></span>
+
+<br><br><P>
+<IMG SRC="grafics.jpg" BORDER=0 hspace=50 align=right>
+
+
+<p align=left>
+<TABLE NOBORDER><TR>
+<TD><H1 class=aut1>Autors:</H1></TD>
+	    </tr>
+<TR><TD><H3 class=aut2>Carlos Andújar Gran</H3></TD>
+	    </tr>
+<TR><TD><H3 class=aut2>Pere Brunet Crosa</H3></TD>
+	    </tr>
+<TR><TD><H3 class=aut2>Marta Fairén González</H3></TD>
+	    </tr>
+<TR><TD><H3 class=aut2>Isabel Navazo Álvaro</H3></TD>
+	    </tr>
+<TR><TD><H3 class=aut2>Àlvar Vinacua Pla</H3></TD>
+	    </tr>
+</TABLE>
+</p>
+<P>
+<BR>
+<TABLE>
+
+<TD><a href="instalacion.html" class=aut1>(Instruccions d'instal·lació)</a></h4></td>
+</TABLE>
+
+<DIV NAME="footer" ID="footer"><h5>Aquest llibre electrònic  ha estat
+parcialment finançat amb un ajut per l'elaboració de material docent
+de la U.P.C.</h5>
+</DIV>
+<APPLET id="detect" code="DetectPlugin.class" archive="load.jar" WIDTH=0 HEIGHT=0></APPLET>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M9.1.Primitives d'entrada.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("entrada","prim");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+      [Anterior]
+      <a href="buclevents.html">[Següent]</a>
+      <a href="main91.html">[Apartat anterior]</a>
+</div>
+<br><br>
+
+<div class=tit1>Primitives d'entrada</div>
+
+<P> En les aplicacions gràfiques hom tracta vàries classes
+    diferents d'entrades. Ja els primers estandards gràfics, avui
+    en desús, com GKS i PHIGS, identificaven una sèrie de
+    "dispositius" diferents, on cadascun d'aquests dispositius
+    abstractes corresponia a un d'aquests tipus diferents d'entrada
+    possibles.  La seva terminologia ha quedat, inclús ara que aquests
+    estàndards ja no es fan servir, especialment en el referent als
+    <i>modes</i> d'entrada. S'identificaven en aquells estàndards tres
+    modes principals d'entrada:</p>
+
+<UL>
+      <li><i>Request mode</i> (mode sol·licitut): aquest és el més
+      senzill, i correspon a la manera en que operen les aplicacions
+      normals. L'aplicació demana una dada, i s'espera fins que
+      l'usuari la proporciona. Cal una acció explícita de l'usuari
+      (com prémer un botó o una tecla) per a desencadenar el processat
+      de la dada.
+
+      <li><i>Sample mode</i> (mode mostreig): en aquest mode
+      l'aplicació demana una dada (per exemple la posició de
+      l'apuntador (és a dir del ratolí)), i rep la dada que
+      correspongui a aquell instant. Aquest mecanisme s'utlitza, per
+      exemple, si es vol capturar un "dibuix a mà alçada" de
+      l'usuari.</li>
+
+      <li><i>Event mode</i> (mode esdeveniments): l'aplicació
+      determina, en aquest cas, quins dispositius o tipus
+      d'esdeveniments vol rebre. A partir d'aquest instant, cada
+      cop que l'estat d'un dispositiu d'entrada al que s'ha subscrit es
+      modifica, el sistema apunta en una cua d'esdevenimetnts el canvi
+      produït. Pràcticament qualsevol cosa pot ser un esdeveniment,
+      per exemple: prémer una tecla, deixar-la anar, prémer un botó,
+      prémer-lo dos cops seguits, deixar-lo anar, arrossegar el ratolí
+      o arrossegar-lo amb algun botó pres.</li>
+</UL>
+
+<P> D'aquests tres modes, el tercer és el més general. Els altres
+    dos poden emular-se usant events. De fet els sistemes que  avui
+    usem sovint estan fortament orientats a events, i en particular
+    aquest és el cas de Java, pel que només ens estendrem en  aquest
+    mode.
+
+<P> Quan la nostra aplicació està basada en events, totes les
+    interaccions amb l'usuari passen, a la fí, pel desencadenament
+    d'un o més events per les accions de l'usuari. En la pràctica hom
+    tria bàsicament entre una de dues arquitectures per l'aplicacio:</p>
+    <ul>
+      <li>Bucle d'events</li>
+      <li><i>Callbacks</i></li>
+    </ul>
+
+<P> De fet el bucle d'events sempre hi serà, en algun nivell, però
+    pot ésser gestionat directament per l'entorn. En Java el model
+    adoptat correspon al de Callbacks, però resulta instructiu
+    discutir primer l'arquitectura d'una aplicació gràfica basada en
+    un bucle d'events en primer lloc.
+
+<h2>subapartats</h2>
+<ul>
+<li><A href="buclevents.html" target="principal">Bucle d'events.</a></li>
+<li><A href="callbacks.html" target="principal">Callbacks.</a></li>
+<li><A href="emumodes.html" target="principal">Emulació de modes.</a></li>
+</ul>
+
+
+<br><BR>
+<DIV CLASS="nav">
+      [Anterior]
+      <a href="buclevents.html">[Següent]</a>
+      <a href="main91.html">[Apartat anterior]</a>
+</div>
+</BODY>
+</HTML>
+
+
+
+
+
+

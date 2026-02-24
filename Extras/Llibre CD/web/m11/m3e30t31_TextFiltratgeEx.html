@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","textu");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m3e30t30_TextFiltratge.html">[Anterior]</a>
+<a href="m3e30t40_TextAplicacio.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Textures.
+<span class=tit2>Aplicació de textures planes.</span>
+<span class=tit3>Tècniques de filtratge: Exemple d'opcions de filtratge</span>
+</div>
+
+<p>
+<PRE class=algoritme>
+   /* Especifiquem un objecte textura 2D */
+
+   <b>glBindTexture</b> (GL_TEXTURE_1D, texname);
+
+   /* Indiquem funcions de filtratge */
+
+     /* si es produeix magnificació, un filtre lineal */
+     <b>glTexParameter</b> (GL_TEXTURE2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+     /* si es produeix minimització, el texel més proper */
+     <b>glTexParameter</b> (GL_TEXTURE2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
+     /* si excedim el rang en la coordenada s de textura, repetir textura en
+        aquesta coordenada */
+     <b>glTexParameter</b> (GL_TEXTURE2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+
+     /* si excedim el rang en la coordenada t de textura, trucar a valor
+        extrem del rang */
+     <b>glTexParameter</b> (GL_TEXTURE2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+
+   /* Especificar la imatge de contindrà la textura */
+   <b> glTexImage2D</b> (GL_TEXTURE2D, 0, GL_RGBA, 32, 32, 0, GL_RGBA, type,
+                         image);
+
+   /* Habilitar les textures, l'activa és el darrer objecte especificat */
+   <b>glEnable</b>(GL_TEXTURE_2D);
+
+   /* pintem l'objecte especificant o no les coordenades de textura segons
+      tinguem assignació explícita o automàtica */
+   <b>PintaObjecte</b>;
+</PRE>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m3e30t30_TextFiltratge.html">[Anterior]</a>
+<a href="m3e30t40_TextAplicacio.html">[Següent]</a>
+</div>
+</body>
+</html>

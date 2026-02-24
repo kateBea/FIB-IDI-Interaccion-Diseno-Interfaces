@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M4.1. Trnasformacions geomètriques</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;
+charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("geom","trns");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+      <A HREF="transfbasic.html">[Anterior]</a>
+      <A HREF="transfappl.html">[Següent]</a>
+     </div>
+<br><br>
+
+<div class="tit1">Transformacions geomètriques.
+<span class="tit2">Transformacions geomètriques generals</span>
+</div>
+
+ <p>Pot semblar que l'anterior és molt restrictiu. A fi de comptes
+ pot caldre que quelcom giri al voltant d'un punt diferent de
+ l'origen, amb un eix diferent d'un eix coordenat, que s'escali amb un
+ altre centre que no l'origen de coordenades,... De fet altres
+ transformacions que puguin caldre es poden trobar com a composicions
+ de les anteriors (on les matrius es composen usant les regles
+ habituals de producte de matrius). Per exemple, si en el pla cartesià
+ volem aplicar un gir de 30 graus al voltant del punt <i>(2,3)</i>,
+ caldrà composar una translació d'aquest punt a l'origen de
+ coordenades, amb una rotació de 30 graus i una nova translació inversa
+ a l'anterior que porti l'origen un altre cop al punt <i>(2,3)</i>. En
+ altres paraules la transformació que cerquem vindrà donada pel
+ producte
+<!--
+$T(2,3)\;R(\pi/6)\;T(-2,-3)$
+--><IMG WIDTH="180" HEIGHT="28" ALIGN="MIDDLE" BORDER="0"
+ SRC="imatges/img83.gif"
+ ALT="$T(2,3)\;R(\pi/6)\;T(-2,-3)$">. Observeu que les matrius
+ apareixen en l'ordre invers del que volem que s'apliquin les
+ operacions. L'ordre oposat no hauria donat el resultat desitjat, ja
+ que hauria girat entorn de <i>(-2,-3)</i>. Heu doncs de parar molta
+ atenció a l'ordre en que efectueu les operacions. Podeu recordar que
+ el punt al que apliquem la transformació el col·loquem a la
+ dreta, i per tant actuen sobre ell primer les transformacions que
+ especifiquem a la dreta.
+
+ <p>Veieu també la conveniència d'haver reduït totes les
+ transformacions geomètriques a un mateix format. Les matrius que
+ intervenen en qualsevol transformació geomètrica, independentment de
+ la seva complexitat, poden multiplicar-se si cal per a obtenir una
+ única matriu de 4x4 que efectua la transformació desitjada. Quan la
+ mateixa transformació s'ha d'aplicar a cada punt d'un model complex
+ (que pot tenir-ne centenars de milers), la simplificació resulta
+ evident, fins i tot si no es disposa de <i>hardware</i> per a
+ accelerar els productes per matrius. És important que sigueu capaços
+ de calcular les transformacions que necessiteu amb una certa
+ soltura. Us recomanem que solventeu els exercicis enumerats al final
+ d'aquest capítol i els estudieu fins a adquirir aquesta soltura.
+
+ <p>Cal una última nota respecte a la transformació d'altres
+ entitats. Per exemple, com es transformen els vectors, o els plans?
+ En coordenades homogènies, tot punt de l'espai euclidià tridimensional
+ és de la forma <i>(x,y,z,1)</i>, i per tant un vector, essent la
+ diferència entre dos punts, tindrà la forma <!--$(v_x,v_y,v_z,0)$--><IMG WIDTH="90" HEIGHT="28" ALIGN="MIDDLE" BORDER="0"
+ SRC="imatges/img84.gif"
+ ALT="$(v_x,v_y,v_z,0)$">. Sigui
+ donada  una transformació
+ geomètrica <i>M</i>; voldrem que si <!--$\vec v=P-Q$--><IMG WIDTH="76" HEIGHT="26" ALIGN="MIDDLE" BORDER="0"
+ SRC="imatges/img85.gif"
+ ALT="$\vec v=P-Q$"> aleshores el
+ resultat de transformar el vector ha de ser el mateix que el de
+ prendre la diferència entre els punts transformats. Per
+ linealitat de les transformacions, veiem que <!--$MP-MQ=M(P-Q)=M\vec v$--><IMG WIDTH="223" HEIGHT="28" ALIGN="MIDDLE" BORDER="0"
+ SRC="imatges/img86.gif"
+ ALT="$MP-MQ=M(P-Q)=M\vec v$">,
+ i per tant les transformacions tal com les tenim definides operen de
+ forma consistent sobre els vectors (per entendre la geometria
+ d'aquesta expressió, observeu que els vectors, en tenir la quarta
+ component nul·la, no són afectats per la "part de translació"
+ de <i>M</i>, sino sols per la rotació. És fàcil convèncer-vos que
+ això és exactmant el que ha de passar als vectors, que en el fons
+ sols designen orientacions).
+
+ <p>Quan es tracta de modelitzar plans, és costum fer servir la quarta
+ component dels vectors (que com tot just hem vist hauria de ser
+ sempre zero i és per tant innecessari d'emmagatzemar) per emmagatzemar
+ la <i>d</i> de la seva eqüació. D'aquesta forma un pla d'equació
+ <i>ax+by+cz+d=0</i> es representa en un "vector" de cuatre components
+ <i>v=(a,b,c,d)</i>, i l'equació dels punts <i>P</i> que són al pla
+ es pot escriure com <!--$v^T\cdot P=0$--><IMG WIDTH="74" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="imatges/img87.gif"
+ ALT="$v^T\cdot P=0$"> (això és tant com dir que modelitzem
+ els plans de l'espai a través dels plans de l'espai homogeni que
+ passen per l'origen, és a dir pels plans formats per totes les rectes
+ que corresponen a punts del pla original de l'espai
+ tridimensional. Per aquesta raó en l'espai homogeni no tenim el terme
+ independent <i>d</i>). Si ara apliquem una transformació
+ geomètrica <i>M</i> a tot l'espai, voldriem que els transformats dels
+ punts del pla fossin al pla transformat (és a dir requerim que la
+ definició de transformació aplicada als plans sigui consistent amb
+ l'aplicada als punts). Observem que pels punts del pla serà
+<!--$v^T\;M^{-1}M\;P=0$--><IMG WIDTH="123" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="imatges/img88.gif"
+ ALT="$v^T\;M^{-1}M\;P=0$">, i per tant el pla <i>w</i> imatge del pla
+ <i>v</i> per <i>M</i> és
+<!--
+\[
+\bar w=(\bar v^T\;M^{-1})^T=(M^{-1})^T\;\bar v
+\]
+--><div class=formula><IMG WIDTH="203" HEIGHT="26"
+ SRC="imatges/img89.gif"
+ ALT="\begin{displaymath}
+\bar w=(\bar v^T\;M^{-1})^T=(M^{-1})^T\;\bar v\end{displaymath}">.</div>
+
+ <p>Aquesta és la manera en què OpenGL opera amb vectors. Observeu que
+ com la transposada d'una rotació coincideix amb la seva inversa,
+ l'anterior fórmula dóna, sobre les tres primeres components, el
+ mateix que aplicar la rotació directament. A més, amb la mateixa
+ expressió permet calcular el nou valor de <i>d</i> per l'<a
+ href="plansespai.html#equacio_implicita_pla">equació implícita d'un pla a l'espai.</a>
+
+<br><br>
+<DIV CLASS="nav">
+      <A HREF="transfbasic.html">[Anterior]</a>
+      <A HREF="transfappl.html">[Següent]</a>
+   </div>
+
+</BODY>
+
+</HTML>
+

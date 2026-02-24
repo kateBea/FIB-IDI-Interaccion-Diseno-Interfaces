@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M4.1. Trnasformacions geomètriques</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;
+charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("geom","algs");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+      <A HREF="main44.html">[Anterior]</a>
+      <a href="puntpoligon.html">[Següent]</a>
+     </div>
+<br><br>
+
+<div class="tit1">Normal a un polígon</div>
+
+
+<P>Com deiem el primer dels problemes a resoldre en aquest apartat
+<img src="imatges/normalpol.gif" alt="Convenció per l'orientació de polígons a
+l'espai." align="right"> consiteix en obtenir la normal a un polígon de
+l'espai, que ens ve definit per una llista dels seus vèrtexs. Adoptem
+la convenció (universalment acceptada) que els vèrtexs apareixen a
+la llista ordenats en sentit antihorari (veure figura). És a dir que
+la normal al polígon apunta en la direcció en què es mouria un vis
+normal si el giréssim en el sentit en que estan enumerats els vèrtexs
+(equivalentment, si ens imaginem un homenet caminant al llarg de la
+vora del polígon i visitant els vèrtexs en ordre, i si la normal
+apunta en la seva "direcció cap amunt", aleshores el polígon sempre
+està a la seva banda esquerra).
+
+<p>Com sabem que el producte vectorial de dos vectors dóna un vector
+perpendicular a tots dos, podriem pensar en resoldre el problema
+agafant els vectors directors de dues arestes i prenent el seu
+producte vectorial (parant ement a l'orientació) com a
+normal. Tanmateix aquesta no és la solució més recomanable, ja que</p>
+<ul>
+<li>els punts poden no estar tots <b>exactament</b> en el mateix pla,
+amb el que el resultat dependrà de les dues arestes que triem, i
+<li>Pot passar que les dues arestes siguin quasi colineals, donant un
+resultat numèricament inestable.
+</ul>
+
+<p>Per aquestes raons, hom prefereix un mecanisme que tingui en compte
+tots els vèrtexs i atenuï aquests errors. El mecanisme més convenient
+consisteix en aprofitar el fet que la raó entre l'àrea d'un polígon a
+l'espai i l'àrea de la seva projecció en un pla coordenat és igual a
+la component perpendicular a aquest pla de la normal unitària al
+polígon. Així, necessitem primer de tot resoldre un problema més
+senzill que deixem com a exercici.<br>
+
+<hr>
+<P class=exercici><a name="area-pol-2d"></a><span class=exernum>Exercici:</span> Càlcul de l'area d'un polígon al pla. Sigui
+un polígon <i>P</i> donat per la llista dels seus vèrtexs recorreguts
+en sentit antihorari:  <!--$P\sim
+\left\{(x_0,y_0),(x_1,y_1),\ldots,(x_{n-1},y_{n-1})\right\}$--><IMG WIDTH="282" HEIGHT="28" ALIGN="MIDDLE" BORDER="0"
+ SRC="imatges/img90.gif"
+ ALT="$P\sim
+\left\{(x_0,y_0),(x_1,y_1),\ldots,(x_{n-1},y_{n-1})\right\}$">. La figura
+
+<center><table><td>
+<img
+src="imatges/areapol.gif" align=left alt="càlcul de l'àrea d'un poligon al pla
+com a suma (amb signe) de paral·lelograms">
+</td></table></center>
+
+<P class=exercici>mostra un exemple. La idea és calcular l'area del
+polígon sumant tots els paral·lelògrams que "van cap a l'esquerra"
+(segons l'ordre dels vèrtexs) com el que apareix pintat de color mahó,
+i restar les àrees dels que "van cap a la dreta", com el que apareix
+de color daurat. Mireu de convèncer-vos que aquesta estratègia dóna el
+resultat desitjat àdhuc per polígons complexes com el de la figura, i
+mostreu que aleshores s'obté la fórmula:
+<!-- \[
+\begin{array}{l}A(P)=\displaystyle{1\over2}\sum_{i=0}^{n-1}(y_i+y_{i\oplus1})(x_i-x_{i\oplus1})\\
+\mbox{\quad a on }i\oplus1\equiv i+1\;(\mbox{mod } n)\end{array}
+
+\]
+--><div class=formula>
+<IMG WIDTH="247" HEIGHT="73"
+ SRC="imatges/img91.gif"
+ ALT="\begin{displaymath}
+\begin{array}
+{l}A(P)=\displaystyle{1\over2}\sum_{i=0}^{n-1}...
+ ...mbox{\quad a on }i\oplus1\equiv i+1\;(\mbox{mod } n)\end{array}\end{displaymath}"></div>
+</p>
+<hr>
+
+
+<p>Usant aquesta fórmula, trobem doncs la següent expressió de la
+normal al polígon:<br class=noclear>
+
+<div class=formula>
+<!--
+\[
+\begin{array}{rcl}
+       n_x &=&\displaystyle{1\over2}\sum_{i=0}^{n-1}(z_i+z_j)(y_i-y_j)\\
+       n_y &=&\displaystyle{1\over2}\sum_{i=0}^{n-1}(x_i+x_j)(z_i-z_j)\\
+       n_z &=&\displaystyle{1\over2}\sum_{i=0}^{n-1}(y_i+y_j)(x_i-x_j)\\
+       &&\mbox{a on prenem }j\equiv i+1 (\mbox{mod }n)
+       \end{array}
+
+\]
+-->
+<IMG WIDTH="272" HEIGHT="171"
+ SRC="imatges/img92.gif"
+ ALT="\begin{displaymath}
+\begin{array}
+{rcl}
+ n_x &=&\displaystyle{1\over2}\sum_{i=0}...
+ ...\  &&\mbox{a on prenem }j\equiv i+1 (\mbox{mod }n)
+ \end{array}\end{displaymath}">
+</div>
+
+<p>Aquest vector no estarà normalitzat. De fet la seva llargada és igual
+a l'àrea del polígon en tres dimensions.
+
+
+
+
+<br><br>
+<DIV CLASS="nav">
+      <A HREF="main44.html">[Anterior]</a>
+      <a href="puntpoligon.html">[Següent]</a>
+   </div>
+
+</BODY>
+
+</HTML>
+

@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("proj","basic");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m2h30_Matrius.html">[Anterior]</a>
+<a href="m2h50_MaterialsiIlum.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Conceptes bàsics.
+<span class=tit2>Els Buffers</span>
+</div>
+
+<P>Els <i>buffers</i> són estructures de dades que emmagatzemen la
+mateixa informació per cadascún dels píxels d'una imatge. En aquesta
+secció repassarem alguns dels buffers que OpenGL utilitza.
+
+<div class=tit3><b>Frame buffer</b></div>
+
+<p>El frame buffer emmagatzema la informació de color de cada
+píxel. Segons l'arquitectura i la configuració, pot guardar-se sols un
+índex de color (índex a una taula de colors), una definició d'un color
+en RGB, i a vegades també un valor d'opacitat <i>alpha</i>.
+Avui dia en general treballem amb frame buffers que emmagatzemen RGB o
+RGBA.
+
+<p>Habitualment disposem de més d'una instància de frame buffer. Si en
+tenim dos, podem usar una tècnica anomenada <i>double buffering</i>
+per a produir actualitzacions més suaus de l'escena. En aquest cas, en
+cada instant, un dels dos buffers es el de davant (<i>front
+buffer</i>), que ès el que s'ensenya en pantalla. L'altre, el de
+darrera (<i>back buffer</i>) és el que s'actualitza quan es crida a
+qualsevol primitiva de dibuix. Com el buffer de darrera està tapat
+pel de davant, aquestes actualitzacions no es veuen en
+pantalla. Eventualment, quan les actualitzacions han estat
+completades, l'aplicació indica que vol fer del buffer de darrera el
+de davant. El canvi es fa entre el final del refresc d'un frame a
+pantalla i el començament del següent, amb el què resulta totalment
+suau (per contra, les actualitzacions del buffer que s'està ensenyant
+en pantalla produeixen un tremolor de la imatge força molest).
+
+<p>En ocasions ens interessarà l'existència del buffer de darrera per a
+pintar informació auxiliar aprofitant l'acceleració per hardware de
+que disposem, sense tenir intenció d'arribar a ensenyar en cap moment
+el resultat. Vegi's per exemple el métode de <a
+href="m2h60_Seleccio.html#PerColor">selecció per color</a>.
+
+<p>En instal·lacions avançades poden trobar-se més frame-buffers. Per
+exemple quan es soporta <a href="../m13/m5d01_Estereo.html">visió
+estereoscòpica</a> se sol disposar de quatre instàncies, un frame de
+davant i un de darrera per l'ull esquerre, i dos més per l'ull
+dret. Algunes plataformes poden oferir un cert nombre de buffers
+auxiliars per aquests usos. Podem averiguar si es disposa de buffers
+auxiliars cridant a <tt>glGetIntegerv(GL_AUX_BUFFERS,...)</tt>.
+
+<div class=tit3><b>Z-buffer</b></div>
+
+<p>El Z-buffer o buffer de profunditat emmagatzema la component
+<i>z</i> de les coordenades del fragment que arriba al
+frame-buffer. Els valors guardats en aquest buffer es fan servir per a
+filtrar els fragments que arribin per aquella posició, en funció de la
+seva posició relativa al que ja es troba emmagatzemat. L'ús més
+habitual consisteix en descartar els fragments que es troben més lluny
+de l'ull, i per tant tapats pel que ja ha estat pintat.
+
+<p>Pot activar-se aquest mecanisme mitjançant la crida
+<tt>glEnable(GL_DEPTH_TEST)</tt>, i pot igualment desactivar-se
+cridant a <tt>glDisable(GL_DEPTH_TEST)</tt>. La naturalesa de la
+comparació usada per a filtrar els fragments es pot modificar
+mitjançant <tt>glDepthFunc()</tt>, triant entre una llista fixa de
+comparacions possibles. Finalment, <tt>glDepthMask()</tt> permet
+desactivar l'actualització del Z-buffer encara que els valors presents
+al buffer s'estiguin usant per filtrar fragments. L'operació oposada
+(actualitzar el Z-buffer sense que es filtri res) no és disponible; no
+hi ha manera de que el Z-buffer enregistri la mínima fondària i alhora
+tots els fragments passin el filtre, perquè quan un fragment passa el
+filtre, si l'escriptura al Z-buffer està activada, el seu valor de
+<i>z</i> sobreescriu el que havia en el buffer.
+
+<p>Cada frame buffer té el seu Z-buffer; si estem pintant una escena
+amb estereoscopia, les fondàries respecte d'un ull no ens diuen què
+tapa a què respecte de l'altre ull!
+
+<p>Quan es fa servir el Z-buffer per a filtrar fragments, esdevé molt
+important triar correctament els valors de <tt>zNear</tt> i
+<tt>zFar</tt> al fixar la projecció de la càmera, especialment si
+triem una projecció perspectiva.
+
+<p>Després de transformar les coordenades al sistema de coordenades
+normalitzades de dispositiu, els punts que estan sobre el pla de
+retallat anterior (<i>z = </i><tt>zNear</tt>) tindran una coordenada
+<i>z</i> igual a -1; els que estan al pla de retallat posterior (<i>z
+= </i><tt>zFar</tt>), tindran una coordenada <i>z</i> igual a 1. Al
+transformar-les a coordenades de dispositiu, igual que s'aplica una
+transformació linial a les coordenades <i>x</i> i <i>y</i> dels píxels
+per a fer-les correspondre amb les coordenades físiques en pantalla,
+també es transformen les coordenades de profunditat al rang [0,1].
+
+<p>Si la nostra escena està compresa en un interval reduit de tot el
+rang que va des de <tt>zNear</tt> a <tt>zFar</tt>, estarem
+desperdiciant precisió, ja que molts valors possibles del Z-buffer no
+es podran fer servir mai.
+
+<p>En el cas d'una projecció ortogonal, la transformació de <i>z</i>
+del model a <i>z</i> del dispositiu és linial, i aquesta pèrdua
+resulta tolerable en moltes aplicacions. Però en el cas de projecció
+perspectiva, la transformació no és linial (degut a la divisió per la
+distància), i el problema s'agreuja.  En aquest cas la meitat dels
+valors possibles del buffer de profunditat representen fondàries entre
+<tt>zNear</tt> i <tt>2*zNear</tt>. Per tant resulta extremadament
+important fixar el valor de <tt>zNear</tt> tan gros com sigui possible
+sense arribar a retallar geometria rellevant. Quan comencem a
+programar amb OpenGL pot resultar temptador fixar <tt>zNear</tt> molt
+a prop i <tt>zFar</tt> molt lluny i oblidar-nos-hi. Tanmateix això
+deixa molts pocs valors disponibles per a distingir les fondàries dels
+fragments en la porció del volum de visualització que realment s'està
+fent servir, i apareixen efectes desagradables de classificació
+errònia, especialment en escenes complexes. Aquesta classificació
+errònia es veu a pantalla com taques a certes cares de l'escena
+(perquè en aquells punts ha prevalgut una cara de darrera) que es
+mouen bruscament en canviar lleugerament els paràmetres de
+visualització (per exemple movent la càmera un xic).
+
+<p>En general cal trobar un compromís. No es tracta de realitzar un
+càlcul costós per a determinar el valor més gran possible de
+<tt>zNear</tt> que no retalli geometria, sino de trobar
+<em>l'estimació per sota</em> més ajustada possible d'aquest valor
+màxim, però tal que costi poc esforç de calcular. Si la càmera s'està
+movent, interactivament sota control de l'usuari o directament per
+part del programa, sol ser suficient donar un valor adequat fixe a
+<tt>zNear</tt> que funcioni correctament al menys per la majoria de
+posicions de la càmera (si l'usuari s'acosta massa a l'escena, no es
+sorprendrà, en general, perquè part de la geometria vagi
+desapareixent).
+
+<p>El valor de <tt>zFar</tt> és també important, però molt menys
+sensible. D'una part perquè la singularitat en la funció que porta
+fondàries en espai de modelat a fondàries al Z-buffer és al zero, i en
+part perquè un error en l'estimació del valor acceptable de
+<tt>zFar</tt> provocarà que es comenci a retallar geometria, però les
+primeres primitives que es retallaran seran les que són mes lluny de
+l'ull, i per tant molt probablement tapades per altres de més properes
+(i per tant la seva probabilitat d'influir en l'escena final és
+baixa).
+
+<div class=tit3><b>Altres buffers</b></div>
+
+<p>En el <a href="m2i20_AltresBuffers.html">següent apartat</a> veurem
+altres buffers dels quals disposa OpenGL per a usos especials, i que
+permeten fer operacions sobre els fragments que es dibuixen, o imposar
+altres tipus de filtrats de fragments.
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m2h30_Matrius.html">[Anterior]</a>
+<a href="m2h50_MaterialsiIlum.html">[Següent]</a>
+</div>
+</body>
+</html>

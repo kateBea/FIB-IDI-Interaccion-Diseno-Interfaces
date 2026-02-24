@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("proj","basic");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m2h20_Camera.html">[Anterior]</a>
+<a href="m2h40_Buffers.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Conceptes bàsics.
+<span class=tit2>Matrius de transformació</span>
+</div>
+
+<P>En les pàgines anteriors hem parlat en diverses oportunitats de
+transformacions que s'aplicaven, sense concretar més com es determinen
+i gestionen. De fet la màquina de rasterització d'OpenGL disposa de
+vàries piles de matrius, el cim de les quals es fa servir en
+determinats càlculs. Totes elles són matrius de quatre files i quatre
+columnes. El fet que l'estat s'emmagatzemi en aquest cas en piles
+resulta molt convenient, com veurem, per poder fer modificacions
+locals d'aquest estat empilant noves matrius, per més tard retornar a
+l'estat anterior amb un <tt>desempila()</tt>.
+
+<P>En aquest apartat ens interessarà l'ús de dues d'aquestes piles,
+denominades <tt>MODELVIEW</tt> i <tt>PERSPECTIVE</tt>. OpenGL
+implementa també una pila de matrius de transformacions que determina
+les transformacions de coordenades de textures, i, a partir de la
+versió 1.2, una pila de transformacions de color que permet certs
+tractaments d'imatge.
+
+<p>La matriu actual de <tt>MODELVIEW</tt> (és a dir la que hi ha al
+cim de la pila corresponent) transforma tots els vèrtexs que s'envien
+al pipeline de visualització. En canvi a les normals se'ls hi aplica
+aquesta matriu transposada (que és el que dóna el resultat esperat: la
+normal transformada és la normal al mateix pla definit per una sèrie
+de punts transformats d'acord amb aquestes regles). Aquesta
+transformació porta les coordenades de l'usuari (les coordenades de
+mon o de modelatge) a coordenades de l'observador (en què la càmera
+apareix ja a l'origen i mirant cap a l'eix negatiu de les <i>Z</i>).
+
+<p>A continuació es transformen els punts resultants mitjançant la
+matriu <tt>PROJECTION</tt>, que porta les coordenades dels punts a
+coordenades normalitzades de dispositiu. Consulteu les referències de
+les crides usades per a definir la projecció per a veure les matrius
+concretes utilitzades.
+
+<p>Finalment s'aplicarà la divisió per la profunditat per a introduir
+la deformació perspectiva. Això en realitat passa en homogenitzar les
+coordenades dels punts després d'aplicar la transformació perspectiva.
+
+<div class=tit3><b>Gestió de les piles de matrius de transformació</b></div>
+
+<p>Es pot operar amb les matrius de transformació emmagatzemades en
+aquestes piles amb una sèrie de comandes
+específiques:
+<ul>
+<li> <tt>glLoadIdentity()</tt> empila una matriu identitat</li>
+<li> <tt>glPushMatrix()</tt> empila una còpia del cim de la pila. Això
+és útil quan volem fer canvis incrementals a la transformació existent
+(per més tard desfer-los)</li>
+<li><tt>glPopMatrix()</tt> desempila la matriu del cim. No retorna res;
+la matriu que hi havia es destrueix</li>
+<li><tt>glLoadMatrix()</tt> assigna les setze components de la matriu
+del cim</li>
+<li><tt>glMultMatrix()</tt> multiplica una matriu per la que es troba
+al cim, i guarda el resultat al cim de la pila (sobreescrivint la
+matriu que hi havia)</li>
+<li><tt>glTranslate(), glRotate(), glScale()</tt> proporcionen formes
+molt convenients de multiplicar la matriu del cim per transformacions
+determinades. Equivalen a construir la corresponent matriu de
+transformació i cridar a continuació a <tt>glMultMatrix()</tt></li>
+</ul>
+
+<p>No cal especialitzar totes aquestes crides per les diferents
+matrius.  En comptes d'això, OpenGL disposa del concepte de pila
+actual. Mitjançant <tt>glMatrixMode()</tt> podem determinar sobre
+quina pila actuaran les nostres crides (fins que una nova crida a
+aquesta funció seleccioni una nova pila). La pila de transformacions
+de <tt>MODELVIEW</tt> es selecciona passant-li la constant
+<tt>GL_MODELVIEW</tt>, i la pila de transformacions
+<tt>PERSPECTIVE</tt> amb la constant <tt>GL_PERSPECTIVE</tt>.
+
+<P>OpenGL té també una pila de transformacions geomètriques per a
+coordenades de textures, i a partir de la versió 1.2 té una altra per
+a transformacions de color. L'ús d'aquestes piles és anàleg al
+descrit, però no entrarem aquí en els detalls.
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m2h20_Camera.html">[Anterior]</a>
+<a href="m2h40_Buffers.html">[Següent]</a>
+</div>
+</body>
+</html>

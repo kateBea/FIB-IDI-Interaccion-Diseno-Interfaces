@@ -1,0 +1,196 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html lang="CA">
+
+<head>
+
+<title></title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+
+<script type="text/javascript" src="../upc.js"></script>
+
+<SCRIPT>
+
+top.passara("visreal","ombres");
+
+</SCRIPT>
+
+<BODY>
+
+<DIV CLASS="nav">
+
+<a href="m3b16_OmbresProj2OpenGL.html">[Anterior]</a>
+
+<a href="m3b20_OmbresVol.html">[Següent]</a>
+
+</div>
+
+<br><br>
+
+
+
+<div class=tit1>Ombres.
+
+<span class=tit2>Càlcul d'ombres per projecció.</span>
+
+<span class=tit3>Exercicis</span>
+
+</div>
+
+
+
+<p> Fixeu-vos en el següent applet, i proveu de fer els següents
+
+exercicis:
+
+
+
+<p class=exercici><span class=exernum>Exercici 1.1:</span>
+
+En primer lloc, mantingueu activat l'Stencil buffer i el Backface
+
+culling (el Backface culling s'activa o desactiva durant la projecció
+
+de les cares de l'objecte per tal d'obtenir els polígons
+
+d'ombra). Podeu fer el següent:
+
+
+
+<ul class=exerc>
+
+<li> Veure tota l'escena des de diferents punts de vista. Observeu que
+
+les ombres sempre surten bé, i que sempre es projecten en el mateix
+
+lloc, perque la seva projecció només depèn de la posició relativa
+
+entre el focus de llum i el cub que fa l'ombra, i aquesta no
+
+canvia.</li>
+
+<li> Canviar interactivament la posició del focus de llum (i si voleu,
+
+tornar a examinar l'escena des de diferents punts de vista). Ara si
+
+que canvia la projecció de l'ombra. Feu que l'ombra es projecti només
+
+sobre el terra, que es projecti sobre el terra i una paret, o sobre el
+
+terra i més d'una paret. Poseu el focus de manera que l'ombra surti
+
+dels límits de les parets.</li>
+
+</ul>
+
+
+
+<p class=exercici><span class=exernum>Exercici 1.2:</span>
+
+Ara desactiveu l'Stencil buffer i també el Backface culling. En
+
+aquest cas podeu fer el següent:
+
+
+
+<ul class=exerc>
+
+<li> Veure tota l'escena des de diferents punts de vista. Observeu què
+
+passa quan l'ombra es projecta sobre més d'una paret, i ens mirem
+
+l'escena des del darrera. Podeu explicar el fenomen que veieu?</li>
+
+<li> Canviar interactivament la posició del focus de llum (i si voleu,
+
+tornar a examinar l'escena des de diferents punts de vista). Feu que
+
+l'ombra es projecti només sobre el terra, que es projecti sobre el
+
+terra i una paret, o sobre el terra i més d'una paret. Poseu el focus
+
+de manera que l'ombra surti dels límits de les parets. Fixeu-vos que
+
+l'ombra és realment un conjunt de polígons, i per tant "té entitat"
+
+per sí mateixa. Proveu d'anar activant i desactivant l'Stencil buffer,
+
+per tal d'entendre què és el que produeix. </li>
+
+</ul>
+
+
+
+<p class=exercici><span class=exernum>Exercici 1.3:</span>
+
+Finalment, desactiveu l'Stencil però deixeu activat el Backface
+
+culling. I ara podeu fer el següent:
+
+
+
+<ul class=exerc>
+
+<li> Veure tota l'escena des de diferents punts de vista. Observeu què
+
+passa quan l'ombra es projecta sobre més d'una paret, i ens mirem
+
+l'escena des del darrera. Podeu explicar perquè ara és diferent?
+
+
+
+<br><br>
+
+<span class=sollnk><a
+
+href="javascript:MuestraFin('m3b18t10_OmbresProjSolucio.html','400','200','yes')" title="">Solució</a></span>
+
+<br><br></li>
+
+
+
+<li> Canviar interactivament la posició del focus de llum (i si voleu,
+
+tornar a examinar l'escena des de diferents punts de vista). Feu que
+
+l'ombra es projecti només sobre el terra, que es projecti sobre el
+
+terra i una paret, o sobre el terra i més d'una paret. Poseu el focus
+
+de manera que l'ombra surti dels límits de les parets. Com és que ara
+
+torna a sortir diferent? </li>
+
+</ul>
+
+
+
+<p>
+
+<div align=center>
+
+<applet code="InterficieOmbres.class" archive="Ombres.jar,../comuns.jar" height=600 width=545></applet> 
+
+</div>
+
+
+
+
+
+<br><br>
+
+<DIV CLASS="nav">
+
+<a href="m3b16_OmbresProj2OpenGL.html">[Anterior]</a>
+
+<a href="m3b20_OmbresVol.html">[Següent]</a>
+
+</div>
+
+</body>
+
+</html>
+

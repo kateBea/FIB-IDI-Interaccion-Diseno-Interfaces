@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M4.1. Conversió de representacions</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;
+charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("geom","2D");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+      <A HREF="rectespla.html">[Anterior]</a>
+      <a href="puntrectapla.html">[Següent]</a>
+     </div>
+<br><br>
+
+<div class="tit1">Elements geomètrics al pla.
+<span class="tit2">Conversió de representacions</span>
+</div>
+
+
+<p>Com sigui que disposem de moltes representacions diferents d'una
+recta, pot caldre convertir entre diferents representacions. La
+següent taula ens dóna les conversions entre elles:</P>
+
+<center><table class=m4 width="60%" border>
+<tr><th>de\a</th><th>Per 2 pnts.</th><th>Pt. i vector</th><th>Pt. i normal</th><th>Pendent i ordenada</th>
+	      </tr>
+<!--      -->
+<tr><th>Per 2
+pnts.</th><td bgcolor="gray">&nbsp;</td><td><i>v=Q-P</i></td><td><i>n<sub>x</sub>=-Q<sub>y</sub>+P<sub>y</sub>,&nbsp;&nbsp;&nbsp;
+n<sub>y</sub>=Q<sub>x</sub>-P<sub>x</sub></i></td>
+<td><!--$m=\frac{-Q_y+P_y}
+{Q_x-P_x}, \;\;\;b=\frac{\left(P_x(-Q_y+P_y)+P_y(Q_x-P_x)\right)}{Q_x-P_x}$-->
+<IMG WIDTH="309" HEIGHT="37" ALIGN="MIDDLE" BORDER="0"
+ SRC="imatges/img20.gif"
+ ALT="$m=\frac{-Q_y+P_y}
+{Q_x-P_x}, \;\;\;b=\frac{\left(P_x(-Q_y+P_y)+P_y(Q_x-P_x)\right)}{Q_x-P_x}$"></td>
+<!-- <table>  border="3pt" cellpadding="2px" align="left"
+<tr><td>&nbsp;<td>-Q_y+P_y
+<tr><td><i>m=</i><td align=center>&nbsp;<hr>
+<tr><td>&nbsp;<td>Q_x-P_x
+</table> -->
+	      </tr>
+<!--      -->
+<tr><th>Pt. i vector</th><td><i>Q=P+v</i></td><td
+bgcolor="gray">&nbsp;</td><td><i>n=(-v<sub>y</sub>,
+v<sub>x</sub>)</i></td><td><i>m=v<sub>y</sub>&divide;v<sub>x</sub></i>,&nbsp;&nbsp;&nbsp;
+<i>b=P<sub>y</sub>- v<sub>y</sub>P<sub>x</sub>&divide;v<sub>x</sub></i>
+		</td>
+	      </tr>
+<!--      -->
+<tr><th>Pt. i
+normal</th><td><i>Q=P+(n<sub>y</sub>,-n<sub>x</sub>)</i></td><td><i>v=(n<sub>y</sub>,-n<sub>x</sub>)</i></td><td
+bgcolor="gray">&nbsp;</td><td><i>m=-n<sub>x</sub>&divide;n<sub>y</sub></i>,
+&nbsp;&nbsp;&nbsp; <i>b=P<sub>y</sub>+n<sub>x</sub>P<sub>x</sub>&divide;n<sub>y</sub></i></td>
+	      </tr>
+<!--      -->
+<tr><th>Pendent i ordenada</th><td><i>P=(0,b),
+Q=(1,b+m)</i></td><td><i>P=(0,b)</i>, <i>v=(1,m)</i></td><td><i>P=(0,b)</i>, <i>n=(-m,1)</i></td><td bgcolor="gray">&nbsp;</td>
+	      </tr>
+</table></center>
+
+
+
+<br><br>
+<DIV CLASS="nav">
+       <A HREF="rectespla.html">[Anterior]</a>
+      <a href="puntrectapla.html">[Següent]</a>
+   </div>
+
+</BODY>
+
+</HTML>
+

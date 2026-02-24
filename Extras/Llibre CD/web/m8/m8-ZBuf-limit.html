@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title>8</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" TYPE="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</head>
+<BODY >
+<SCRIPT>
+top.passara("visib","zbuf");
+</SCRIPT>
+<DIV CLASS="nav">
+<a href="m8-ZBuf-optim.html">[Anterior]</a>
+[Següent]
+<a href="m8-5.html">[Següent apartat]</a>
+</div>
+<br><br>
+
+<div CLASS="tit1">Algorisme de z-buffer.
+<span CLASS="tit2">Limitacions del mètode</span>
+</div>
+
+<P>
+Les principals limitacions d'aquest mètode són:
+<UL>
+<LI> La gran quantitat de memòria que requereix. Si la resolució de la
+vista és 1024x768, per a codificar el color es disposa de 24 bits i 16
+bits per a codificar la profunditat, la memòria necessària és:
+
+<PRE class=algoritme>
+    Memòria = mem_taula_color + memoria_taula_profunditats =
+              1024x768x24bits + 1024x768x16 bits
+    Memòria = 3.84 Mbytes
+</PRE>
+
+No obstant, cal considerar que l'abaratiment del cost de la memòria
+RAM està permeten plaques gràfiques de baix cost amb òptimes
+prestacions.</LI>
+<LI> Càlcul discret de visibilitat. De manera
+similar a tots els algorismes de càlcul de visibilitat en espai
+imatge, en funció de la resolució de la vista i de la grandària de
+l'escena, poden existir salts bruscos de color entre píxels veïns
+donat que els punts que s'hi projecten poden estar distanciats en
+espai imatge. D'altra banda, poden haver cares que es projectin en un
+sol píxel i desapareguin de la imatge final.</LI>
+<LI> Càlcul discret
+de profunditat. Si el nombre de bits disponibles per a cada component
+de la taula de profunditats no és molt elevat (8 bits per exemple). La
+discretització de profunditats comporta que a vèrtexs propers se'ls
+associï una mateixa profunditat (només hi haurien 256 valors diferents
+de profunditats en l'exemple anterior). En aquest cas segons l'ordre
+de pintat de les cares, pot canviar la visibilitat de l'escena en
+considerar-se com a punt visible el primer que es pinta dels que tenen
+igual profunditat.</LI> 
+<LI> Al voltant de les arestes dels polígons
+s'observa la discretització (aliasing) dels polígons. Per a evitar
+aquest efecte existeixen algorismes específics que intenten dissimular
+l'efecte promitjant els colors entre píxels veïns d'aquesta manera es
+difumina el salt de color que una aresta comporta. L'animació que hem
+vist a la introducció d'aquest capítol ha utilitzat z-buffer pel
+càlcul de visibilitat, observeu l'aliasing en les rajoles del
+terra.</LI>
+</UL>
+
+<P>
+No obstant, gran part d'aquestes limitacions estan essent superades
+per la possibilitat de treballar amb plaques gràfiques que incorporen
+gran quantitat de memòria RAM i implementen per hardware el procés de
+visualització i l'algorisme de z-buffer, aconseguint dibuixar un
+elevat nombre de polígons en temps real.
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m8-ZBuf-optim.html">[Anterior]</a>
+[Següent]
+<a href="m8-5.html">[Següent apartat]</a>
+</div>
+</body>
+</html>

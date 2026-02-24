@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("proj","basic");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m2h50_MaterialsiIlum.html">[Anterior]</a>
+<a href="m2h60_Seleccio.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Conceptes bàsics.
+<span class=tit2>Llums</span>
+</div>
+
+<p>Podem incloure a l'escena un cert nombre de fonts de llum, en
+diferents posicions i amb diferents característiques. El nombre màxim
+de llums disponibles és variable (depèn de la plataforma), però
+l'especificació d'OpenGL demana que en tot cas no sigui inferior a
+8. El valor exacte disponible pot obtenir-se, com sempre, interrogant
+a OpenGL mitjançant <tt>glGetIntegerv(GL_MAX_LIGHTS)</tt>.
+
+<P>Per tal de fer-les servir, haurem d'activar els càlculs
+d'il·luminació amb <tt>glEnable(GL_LIGHTING)</tt>, i aleshores podrem
+encendre i apagar cada una de les llums independentment usant crides a
+<tt>glEnable()</tt> i <tt>glDisable()</tt> usant les constants
+<tt>GL_LIGHT0, GL_LIGHT1,</tt> ... per a indicar la llum que volem
+encendre o apagar.
+
+<P>Cada una de les llums està definida per un seguit de paràmetres,
+que inclouen la intensitat en RGBA de llum ambient, difosa i
+especular. Aquestes respectives intensitats es fan servir en el càlcul
+de la component ambient, difosa i especular quan la llum il·lumina un
+objecte concret, de la mateixa manera que s'usa un color diferent de
+l'objecte en cada càlcul. Observeu que encara que els colors difús i
+reflexiu d'una llum depenen de la font de llum, la component ambient
+depèn en realitat del color dominant en els objectes de l'escena, ja
+que se suposa que modela la llum remanent de múltiples interreflexions
+en els objectes de l'escena.
+
+<P>Hi ha diversos paràmetres més per descriure una llum, que donen
+lloc a diferents tipus de llums, però no totes les combinacions tenen
+sentit o són vàlides. Aquests paràmetres es fixen mitjançant crides a
+<tt>glLight*()</tt>.
+
+<P>Les llums definides en OpenGL poden ser <em>posicionals</em> o <em>
+direccionals</em>. Les primeres tenen una posició determinada. Les
+segones estan a una distància tant gran (infinita) que els seus raigs
+són tots paral·lels entre sí (com passa amb els raigs del sol). La
+posició d'una llum s'especifica donant un punt en coordenades
+homogènies. Si la component d'homogenització <i>w</i> és diferent de
+zero, s'està definint una llum posicional. La posició es guarda en
+coordenades d'observador, després d'aplicar la matriu
+<tt>MODELVIEW</tt> a la posició donada. Si en canvi es dóna una
+posició amb <i>w=0</i>, les tres primeres components s'interpreten com
+una direcció, que també es guarda transformada per la matriu de
+<tt>MODELVIEW</tt>, i dóna lloc a una llum direccional.
+
+<P>Les llums posicionals poden a més modificar-se donant-les-hi una
+atenuació en funció de la distància, que atenua la seva intensitat
+dividint-la per una funció quadràtica de la distància entre la llum i
+el punt il·luminat.
+
+<P>Finalment, una llum posicional pot convertir-se en un focus
+("spotlight") descrivint la direcció en què apunta i la seva apertura
+(en graus), i opcionalment l'atenuació en allunyar-se de la direcció
+central (que es dona com un exponent a aplicar al cosinus de la
+desviació abans de multiplicar el resultat per la intensitat de la
+llum, pel que com més gran sigui aquest coeficient, més concentrada
+estarà la llum en el punt central cap a on l'hem apuntat).
+
+<P>Podeu trobar els detalls d'aquests paràmetres a la referència
+d'OpenGL <a href="../Biblio.html#OpenGLRef">[OpenGL: Reference Manual]</a> o
+<a href="../m15/m7a30_BasicIlluminacio.html">al capítol d'OpenGL</a>
+
+<P>Finalment, cal visitar ràpidament les crides
+<tt>glLightModel*()</tt>, que controlen aspectes globals del model
+d'il·luminació. Aquestes crides permeten donar una intensitat global
+de llum ambient que se sumarà a les contribucions de llum de les
+diferentes fonts de llum al calcular la il·luminació d'un punt concret
+de l'escena. Altres combinacions de paràmetres permeten triar entre el
+mode inicial en què sols es dóna color a les cares que miren cap a
+l'observador ("one-sided lighting") i un altre, ja mencionat, en que
+es calculen (usant definicions de material possiblement diferents)
+tant la il·luminació de les cares de front com la de les d'esquena
+(invertint la direcció de les normals d'aquestes darreres). Una
+darrera opció que ens obre aquesta crida és triar si en el càlcul de
+les reflexions especulars s'usa sempre la mateixa direcció de visió
+(la de l'eix de les <i>z</i>), o es calcula la direcció real del punt
+de la primitiva a l'origen de coordenades en coordenades
+d'observador. La primera de les dues opcions és una simplificació que
+dóna resultats acceptables en molts casos, i estalvia força
+càlculs. Inicialment està activada.
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m2h50_MaterialsiIlum.html">[Anterior]</a>
+<a href="m2h60_Seleccio.html">[Següent]</a>
+</div>
+</body>
+</html>

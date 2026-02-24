@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<BODY>
+<br>
+
+<div class=tit2> Deformació de la primera imatge </div>
+
+<p> La deformació (warping) de la cada una de les imatges per
+adaptar-les a la forma de l'altra imatge és molt important i té una
+gran influència en el resultat final.  Proveu vosaltres mateixos,
+usant l'applet, de generar la metamorfosi sense haver fet la
+deformació inicial de les malles i les imatges, i observeu la pèrdua
+de qualitat.
+
+<p> El problema és disposar d'algorismes automàtics o semi-automàtics
+per generar aquestes deformacions, ja que un sistema d'interacció
+manual com el que heu usat a l'applet pot ser molt lent.
+
+<p> Una de les propostes més utilitzades, és la que es proposa a
+ l'article de T. Beier i S. Neely que ja hem comentat.  Es tracta d'un
+ sistema semiautomàtic, que calcula la deformació a partir d'un
+ conjunt de correspondències entrades per l'usuari:
+
+<ul>
+<li> L'usuari entra parelles de característiques o detalls que es
+corresponen, un a cada imatge. La manera d'indicar cada una d'aquestes
+correspondències és dibuixant dos petits segments rectes, un a cada
+imatge. Si per exemple es vol indicar la correspondència entre els
+ulls esquerra (de dues persones) a una i altra imatge, haurem de
+dibuixar un segment recte damunt d'un i altre ull. Això es pot repetir
+tantes vegades com es vulgui, afegint noves correspondències entre
+detalls. </li>
+
+<li> El sistema calcula automàticament, per mínims quadrats, la
+deformació de la malla de la primera imatge que s'adapta de forma
+òptima a les correspondències entrades. Evidentment, l'adaptació
+podrà ser molt ajustada si usem malles de suficient finura. </li>
+</ul>
+
+<p> L'avantatge d'aquest mètode és que la deformació s'adapta
+automàticament als detalls que volguem resaltar. Si volem fer una
+metamorfosi entre les cares de dues persones, el més lògic serà entrar
+parelles de segments que ens informin de les correspondències entre
+les línies dels ulls, llavis, nas, parts del contorn de la cara,
+etc. Si un cop entrats els segments homòlegs veiem que en una certa
+zona, la metamorfosi no és encara prou acurada, només caldrà que
+afegim més parelles de segments homòlegs en aquesta zona.
+
+<p> S'han proposat altres mètodes, més avançats, i que tenen en compte
+no sols els trets característics de les dues imatges sinó que també
+intenten minimitzar la deformació de la imatge a les seves zones
+intermitges. Aquests mètodes van més enllà del que podem explicar en
+aquest llibre. En tot cas comentarem algun d'ells al final d'aquest
+capítol.
+
+
+<p align=right><a href="javascript:window.close()">tornar </a>
+</body>
+</html>

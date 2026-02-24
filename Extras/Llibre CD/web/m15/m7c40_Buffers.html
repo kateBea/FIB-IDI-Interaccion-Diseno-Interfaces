@@ -1,0 +1,360 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("opengl","extop");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m7c30_PuntLiniaPoligonPixel.html">[Anterior]</a>
+<a href="m7c50_BlendingAntalias.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1> Extensió de crides d'OpenGL.
+<span class=tit2> Tractaments dels buffers</span>
+</div>
+
+<P>
+<div class=tit3><B> Esborrat dels buffers</B></div>
+
+<a name="glClear"></a>
+<P>
+La crida per a esborrar els diferents buffers de que disposa OpenGL és
+la crida <b>glClear</b>. Aquesta crida ja havia estat introduïda en
+l'apartat de les <a href="m7a20_BasicInstruccPrincipals.html">crides
+bàsiques d'OpenGL</a>. El seu prototipus és:
+
+<pre class=algoritme>
+          void <b>glClear</b> (GLbitfield mask)
+</pre>
+
+<P>
+on <i>mask</i> és una operació OR lògica entre els diferents buffers
+de que disposa OpenGL: GL_COLOR_BUFFER_BIT (buffer de color),
+GL_DEPTH_BUFFER_BIT (Z-buffer o buffer de profunditat),
+GL_ACCUM_BUFFER_BIT (buffer d'acumulació) i GL_STENCIL_BUFFER_BIT
+(buffer d'stencil). Una extensa explicació d'aquests buffers s'ha fet
+en els apartats <a href="../m10/m2h40_Buffers.html">Els buffers</a> i
+<a href="../m10/m2i20_AltresBuffers.html">Altres buffers</a> en les
+tècniques bàsiques i avançades d'OpenGL al capítol 10. Aquells buffers
+que prenguin part en aquesta màscara seran els que s'esborraran (per
+exemple, en el cas de l'algorisme de volum d'ombres la màscara és:
+GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT, i per
+tant dóna ordre d'esborrar els buffers de color, el Z-buffer i el
+d'stencil).
+
+<a name="glClearColor"></a><a name="glClearDepth"></a>
+<a name="glClearAccum"></a><a name="glClearStencil"></a>
+<P>
+Cal notar també relacionat amb aquesta crida, que si no es diu el
+contrari, l'esborrat es fa amb els valors per defecte que OpenGL
+disposa per a cada un d'aquests buffers. Aquests valors es poden
+canviar amb les corresponents crides:
+
+<pre class=algoritme>
+          void <b>glClearColor</b> (GLclampf red, GLclampf green,
+                             GLclampf blue, GLclampf alpha)
+
+          void <b>glClearDepth</b> (GLclampd depth)
+
+          void <b>glClearAccum</b> (GLfloat red, GLfloat green,
+                             GLfloat blue, GLfloat alpha)
+
+          void <b>glClearStencil</b> (GLint s)
+</pre>
+
+<P>
+Aquestes crides especifiquen els valors que es volen usar per a
+esborrar respectivament el buffer de color (en mode RGBA), el buffer
+de profunditat, l'stencil buffer i el buffer d'acumulació. Els tipus
+GLclampf i GLclampd (<i>clamped</i> GLfloat i GLdouble) estan
+restringits al rang [0.0,1.0]. El valor per defecte per a esborrar el
+buffer de profunditat és 1.0, en tots els altres casos és 0.0.
+
+<P>
+<div class=tit3><B> Canviar màscares dels buffers</B></div>
+
+<P>
+Un cop un buffer ha estat activat, abans de permetre que s'escriguin
+dades en ell, se'ls aplica una màscara que permetrà o no que
+s'escrigui en aquests buffers. En tots els casos es farà una operació
+AND entre la màscara i la dada que es vol escriure en el buffer.
+
+<a name="glColorMask"></a><a name="glDepthMask"></a>
+<a name="glStencilMask"></a>
+<P>
+Les crides que ens permeten controlar aquestes màscares en cada cas
+són les següents:
+
+<pre class=algoritme>
+          void <b>glColorMask</b> (GLboolean red, GLboolean green,
+                            GLboolean blue, GLboolean alpha)
+
+          void <b>glDepthMask</b> (GLboolean flag)
+
+          void <b>glStencilMask</b> (GLuint mask)
+</pre>
+
+<P>
+En el cas de la crida <b>glColorMask</b>, els valors booleans <i>red,
+green, blue</i> i <i>alpha</i> controlen si es pot o no escriure en la
+corresponent component de color del buffer de color. De la mateixa
+manera funciona el paràmetre de la crida a <b>glDepthMask</b>. Els
+valors que poden prendre aquests flags booleans són GL_TRUE i
+GL_FALSE, i per defecte són sempre cert (GL_TRUE), per tant, a menys
+que es canviïn els valors de la màscara usant aquestes crides, per
+defecte es permet modificar els valors d'aquests buffers.
+
+<P>
+En els cas de la crida <b>glStencilMask</b>, la màscara que s'aplica
+és una màscara de bits, per tant si el bit corresponent de la màscara
+està a 1 es permet modificar el bit corresponent del buffer d'stencil
+amb el nou valor.
+
+
+<P>
+<div class=tit3><B> Test del buffer de profunditat (Z-buffer)</B></div>
+
+<P>
+A aquestes alçades ja és ben conegut en què consisteix el test de
+Z-buffer. El buffer de profunditat (<i>depth buffer</i>) guarda
+informació de la distància entre el punt de visió i l'objecte que
+ocupa el corresponent píxel. Quan s'ha de pintar un nou objecte que
+afecta al píxel en qüestió, si el test de Z-buffer passa, es modifica
+aquesta distància al punt de visió per aquest píxel en el buffer de
+profunditat i, en general, també es modifica el buffer de color per a
+que el color del píxel passi a ser el del nou objecte. Amb això
+s'aconsegueix que aquells objectes que estan tapats per d'altres en el
+con de visió no es pintin.
+
+<P>
+Si el que es vol fer és això mateix, només cal activar el test de
+profunditat amb la crida <b>glEnable</b> (GL_DEPTH_TEST) i
+assegurar-se d'esborrar amb <b>glClear</b> aquest buffer cada cop que
+es pinta l'escena (aquesta utilització del test de Z-buffer és la que
+està expicada entre les <a
+href="m7a20_BasicInstruccPrincipals.html">instruccions principals</a>
+en l'apartat de crides bàsiques d'OpenGL).
+
+<a name="glDepthFunc"></a>
+<P>
+Però si el que es vol és canviar els efectes d'aquest test, es pot fer
+usant la crida:
+
+<pre class=algoritme>
+          void <b>glDepthFunc</b> (GLenum func)
+</pre>
+
+<P>
+Aquesta crida permet escollir una comparació per al test de Z-buffer,
+que no té perquè ser una comparació de "menor que" que és la que hi ha
+per defecte. Les possibles comparacions que es poden usar com a
+paràmetres d'aquesta crida són: GL_LESS "menor que" (és el que hi ha
+per defecte), GL_LEQUAL "menor o igual que", GL_EQUAL "igual que",
+GL_GEQUAL "més gran o igual que", GL_GREATER "més gran que",
+GL_NOTEQUAL "diferent que", GL_NEVER "mai passa el test", GL_ALWAYS
+"sempre passa el test". Un nou valor de profunditat passa el test si
+compleix la condició respecte al que hi havia en el buffer, és a dir:
+
+<pre class=algoritme>
+          <b>Si</b> (valor_nou <i>funció</i> valor_del_buffer = cert)
+             <b>llavors</b> valor_del_buffer := valor_nou
+          <b>fsi</b>
+</pre>
+
+<P>
+Lògicament, igual que podem activar el test de profunditat (Z-buffer)
+amb <b>glEnable</b> (GL_DEPTH_TEST), també el podem desactivar sempre
+que volguem amb <b>glDisable</b> (GL_DEPTH_TEST). De fet, en alguns
+algorismes dels presentats en aquest llibre, es juga amb l'activació i
+desactivació del test de profunditat decidint en quines parts de
+l'algorisme interessa que aquest test es faci i en quines no.
+
+<P>
+<div class=tit3><B> Test del buffer d'stencil</B></div>
+
+<P>
+El test del buffer d'stencil només pot fer-se si existeix aquest
+buffer (si no existeix el test sempre dona cert). En l'apartat de <a
+href="../m10/m2i30_StencilBuffer.html">Stencil Buffer</a> en les
+tècniques avançades d'OpenGL del capítol 10 ja haviem vist les
+utilitats d'aquest buffer.
+
+<P>
+Com en el cas del test de Z-buffer, aquest test es pot activar i
+desactivar segons interessi. Per a activar i desactivar aquest test,
+cal usar les crides <b>glEnable</b> i <b>glDisable</b> passant-li com a
+paràmetre la constant GL_STENCIL_TEST.
+
+<a name="glStencilFunc"></a>
+<P>
+La funció de comparació que s'utilitza, el valor de referència i la
+modificació que es realitza en passar aquest test, són variables que
+es poden canviar usant les crides <b>glStencilFunc</b> i
+<b>glStencilOp</b>. Veiem com s'usen aquestes crides i quins són els
+possibles valors dels seus paràmetres.
+
+<pre class=algoritme>
+          void <b>glStencilFunc</b> (GLenum func, GLint ref, GLuint mask)
+</pre>
+
+<P>
+Aquesta crida indica quina és la funció de comparació, <i>func</i>, el
+valor de referència, <i>ref</i>, i la màscara, <i>mask</i>, que es vol
+usar en el test d'stencil. El valor de referència es compara amb el
+valor que hi ha emmagatzemat al buffer usant la funció de comparació
+indicada, però aquesta comparació només tindrà efecte en aquells bits
+que tinguin un 1 en la màscara.
+
+<P>
+Els valors de la funció poden ser: GL_ALWAYS "sempre passa el test",
+GL_NEVER "mai passa el test", GL_LESS "menor que", GL_LEQUAL "menor o
+igual que", GL_EQUAL "igual que", GL_GEQUAL "més gran o igual que",
+GL_GREATER "més gran que", o GL_NOTEQUAL "diferent que". El valor de
+referència passa el test si compleix la condició (funció) respecte al
+valor que hi havia al buffer. Abans de fer la comparació, la màscara
+s'aplica (fent un AND bit a bit) tant al valor de referència com al valor
+contingut al buffer. Per defecte, la funció és GL_ALWAYS, el valor de
+referència és 0 i la màscara té tots els bits a 1.
+
+<a name="glStencilOp"></a>
+<pre class=algoritme>
+          void <b>glStencilOp</b> (GLenum fail, GLenum zfail, GLenum zpass)
+</pre>
+
+<P>
+Amb aquesta crida el que es pot controlar és l'acció que cal fer quan
+un valor passa o no el test d'stencil, és a dir, quina modificació cal
+fer en el buffer quan el test passa o falla.
+
+<P>
+Les tres accions, <i>fail</i>, <i>zfail</i> i <i>zpass</i>, poden
+tenir els següents valors: GL_KEEP "es manté el valor que hi ha al
+buffer", GL_ZERO "es canvia el valor del buffer per 0", GL_REPLACE "es
+canvia el valor del buffer pel valor de referència <i>ref</i>",
+GL_INCR "s'incrementa el valor del buffer", GL_DECR "es decrementa el
+valor del buffer", o GL_INVERT "s'inverteix cada un dels bits del
+valor del buffer". Per defecte, les tres accions prenen valor GL_KEEP.
+
+<P>
+L'acció <i>fail</i> s'aplica quan el test d'stencil falla. Si aquest
+test passa, aleshores, si el test de profunditat (Z-buffer) falla
+s'aplica l'acció <i>zfail</i>, i si el test de profunditat passa o no
+es realitza s'aplica l'acció <i>zpass</i>.
+
+<P>
+<div class=tit3><B> El buffer d'acumulació</B></div>
+
+<P>
+El buffer d'acumulació s'utilitza per a obtenir alguns efectes
+específics usant OpenGL (per exemple per aconseguir
+<i>antialiasing</i> o <i>motion blur</i> -desenfocament per a simular
+un objecte en moviment en una imatge estàtica-).
+
+<P>
+Les operacions d'OpenGL no escriuen directament en el buffer
+d'acumulació. Normalment es genera una sèrie d'imatges en un dels
+buffers estàndard de color, i aquestes imatges s'acumulen una per una
+en el buffer d'acumulació. Quan l'acumulació s'acaba, el resultat es
+torna a copiar al buffer de color per a ser visualitzat. Fer la
+rasterització per a més d'una imatge és evidentment més costós en
+temps que per a una sola, però el resultat és de més qualitat.
+
+<a name="glAccum"></a>
+<pre class=algoritme>
+          void <b>glAccum</b> (GLenum op, GLfloat value)
+</pre>
+
+<P>
+Aquesta crida controla el buffer d'acumulació. El paràmetre <i>op</i>
+selecciona l'operació a realitzar. Aquestes operacions poden ser:
+
+<ul>
+<li>GL_ACCUM: llegeix cada píxel del buffer seleccionat actualment per
+llegir amb la crida <b>glReadBuffer</b>. Multiplica els valors R, G, B
+i alfa pel valor <i>value</i> passat a la crida i suma el resultat al
+buffer d'acumulació.</li>
+<li>GL_LOAD: és el mateix que GL_ACCUM excepte que els valors de la
+multiplicació substitueixen els que hi havia en el buffer d'acumulació
+en lloc de sumar-los-hi.</li>
+<li>GL_RETURN: agafa els valors del buffer d'acumulació, els
+multiplica pel valor <i>value</i> i posa el resultat en el buffer de
+color que està actiu per escriptura.</li>
+<li>GL_ADD i GL_MULT: simplement sumen i multipliquen, respectivament,
+el valor de cada píxel del buffer d'acumulació al valor <i>value</i>,
+deixant el resultat al buffer d'acumulació. Per GL_MULT, <i>value</i>
+està restringit al rang [-1.0,1.0], però no és així per GL_ADD.</li>
+</ul>
+
+<P>
+<div class=tit3><B> Selecció del buffer de color per a escriure i llegir</B></div>
+
+<P>
+El resultat de les operacions d'escriure o llegir es poden produir en
+qualsevol dels buffers de color: <i>front, back, front-left,
+back-left, front-right, back-right</i> o qualsevol dels buffers
+auxiliars (ja s'havia parlat d'aquests buffers a l'apartat <a
+href="../m10/m2h40_Buffers.html">Els buffers</a> en les tècniques
+bàsiques d'OpenGL en el capítol 10).
+
+<P>
+Es pot escollir en quin dels buffers s'escriu o es llegeix. Per a
+escriure, es poden escollir més d'un alhora. Usarem les crides a
+<b>glDrawBuffer</b> i <b>glReadBuffer</b> per a seleccionar el/els
+buffer/s que ens interessi.
+
+<P>
+Quan usem <i>double buffering</i>, normalment voldrem escriure en el
+buffer del darrera <i>back</i>, i fer el canvi quan hem acabat de
+pintar. Però en algunes ocasions es pot voler usar el <i>double
+buffering</i> per a simular un únic buffer dient-li que escrigui en
+tots dos buffers (<i>front</i> i <i>back</i>) alhora.
+
+<P>
+<b>glDrawBuffer</b> també s'utilitza per a seleccionar els buffers en
+visió estereoscòpica (GL_{FRONT/BACK}_{LEFT/RIGHT}), i també per a
+pintar en els buffers auxiliars (GL_AUXi).
+
+<a name="glDrawBuffer"></a>
+<pre class=algoritme>
+          void <b>glDrawBuffer</b> (GLenum mode)
+</pre>
+
+<P>
+Seleciona el/s buffer/s de color que s'activen per escriptura o
+esborrat i desactiva els que haguessin estat seleccionats prèviament
+amb aquesta mateixa crida. Els valors de <i>mode</i> poden ser:
+GL_FRONT, GL_BACK, GL_LEFT, GL_RIGHT, GL_FRONT_LEFT, GL_FRONT_RIGHT,
+GL_BACK_LEFT, GL_BACK_RIGHT, GL_FRONT_AND_BACK, GL_AUXi, o
+GL_NONE.
+
+<P>
+Els arguments que no diuen si és esquerra/dreta o davant/darrera, fan
+referència a tots dos valors. Per defecte, <i>mode</i> és GL_FRONT si
+no tenim <i>double buffering</i> i GL_BACK si el tenim.
+
+<a name="glReadBuffer"></a>
+<pre class=algoritme>
+          void <b>glReadBuffer</b> (GLenum mode)
+</pre>
+
+<P>
+Selecciona el buffer de color que s'activa per lectura, i desactiva
+els que haguessin estat seleccionats anteriorment per aquesta mateixa
+crida. Els valors de <i>mode</i> poden ser: GL_FRONT, GL_BACK,
+GL_LEFT, GL_RIGHT, GL_FRONT_LEFT, GL_FRONT_RIGHT, GL_BACK_LEFT,
+GL_BACK_RIGHT, o GL_AUX<i>i</i>. Per defecte, <i>mode</i> és GL_FRONT
+si no tenim <i>double buffering</i> i GL_BACK si el tenim.
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m7c30_PuntLiniaPoligonPixel.html">[Anterior]</a>
+<a href="m7c50_BlendingAntalias.html">[Següent]</a>
+</div>
+</body>
+</html>

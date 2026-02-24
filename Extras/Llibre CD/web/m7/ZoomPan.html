@@ -1,0 +1,75 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.6 [en] (Win98; I) [Netscape]">
+   <title>M7.1 Proc&eacute;s de visualitzaci&oacute; 2D.Prim. gr&agrave;fiques.</title>
+<link REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</head>
+<body>
+<script>
+top.passara("vis2D","defs");
+</script>
+<a NAME="inici"></a>
+<div CLASS="nav">
+<a href="PrimGrafIni.html">[Anterior]</a>
+<a href="ARatio.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class="tit1">Definicions.
+<span class="tit2">Zoom i Pan</span>
+</div>
+
+<p>S'anomena <b>Zoom</b> a la realització
+d'un escalat de la imatge visualitzada. La imatge corresponent a la visualització
+de la Finestra_2D es veu ampliada/reduida dins la vista. Això comporta
+que part de la imatge inicial pot no ser visible. Per obtenir aquest efecte
+simplement cal la modificació de la <b>grandària de la Finestra
+2D</b>, generalment escalant els seus costats respecte el seu centre. Fixeu-vos
+que les dades geomètriques de l'escena no varien, només la
+seva escala en el dispositiu.
+
+<p>S'anomena <b>Pan</b> a la realització
+d'un <b>desplaçament de la Finestra 2D. </b>Comporta una modificació
+de la part de l'escena que es visualitza dins la vista. Les dades geomètriques
+de l'escena no es traslladen, només la seva ubicació en el
+dispositiu. En certes aplicacions s'utilitza aquesta translació
+de la vista per simular que els objectes es traslladen en direcció
+oposada.
+
+<p>És important tenir en consideració que tant la modificació de la Finestra_2D
+com de la vista afecta a totes les visualitzacions que s'efectuin després
+de la seva moficicació. Els elements visualitzats prèviament
+ja estan transformats en píxels (ja han passat pel PV2D). Per tant,
+per a veure l'efecte de la modificació d'aquestes finestres (Finestra_2D
+i/o Vista) cal tornar a redibuixar l'escena (tornar a executar les <a href="javascript:glossari('PrimGraf.html','*','400','300','no','no','no','yes')" CLASS="glossari" onMouseOver="window.status='Glossari';return true" onMouseOut="window.status='';return true">primitives
+gràfiques</a>).
+
+<p class=exercici><span class=exernum>Exercici:</span>
+Donada l'escena següent, proveu de modificar la Finestra_2D utilitzant
+els scrollbars (mides) o arrossegant-la amb el ratolí (posicionament).
+Analitzeu com va canviant el que es visualitza en la vista quan modifiqueu
+la Finestra_2D (primer feu un "zoom" i després un "pan"). Posteriorment
+modifiqueu la vista (mida amb els scrollbars i posicionament arrossegant-la
+amb el ratolí), vegeu com es modifica l'àrea d'ubicació
+de la imatge dins de la Finestra gràfica (pantalla). Recordeu que
+l'aplicació restringeix les modificacions de la vista de manera
+que aquesta sempre és interior a la pantalla.
+
+<center><table>
+<tr>
+<td><applet CODE ="Applet2D.class" archive="../comuns.jar" WIDTH=520 HEIGHT=370><param NAME=AppId VALUE="1">
+</applet></td>
+</tr>
+</table></center>
+
+
+<br><br>
+<div CLASS="nav">
+<a href="PrimGrafIni.html">[Anterior]</a>
+<a href="ARatio.html">[Següent]</a>
+</div>
+</body>
+</html>

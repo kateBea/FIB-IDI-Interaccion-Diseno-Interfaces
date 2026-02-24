@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M5.6.Construcció de nous models </TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;
+charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("model","nous");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+      <A HREF="main56.html">[Anterior]</a>
+      <a href="main56-3.html">[Següent]</a>
+     </div>
+<br><br>
+
+<div class="tit1">Construcció de nous models.
+<span class="tit2">Constructor d'objectes per escombrat</span>
+</div>
+
+<P>
+   Veiem ara el mètode constructor d'objectes per escombrat de
+   translació. El mètode rep un polígon i una llargada d'escombrat.
+   Per simplicitat, podem suposar que el polígon es troba en el pla
+   x-y i que l'escombrat es fa en
+   la direcció z. El resultat és un objecte en <A CLASS="glossari"
+HREF="javascript:glossari('representFronteres.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">representació per
+   fronteres</A> que representa un prisma que té com a base el polígon
+donat
+   i com alçada la llargada d'escombrat. L'algorisme comença
+   inicialitzant a zero el nombre de cares i vèrtexs de l'objecte,
+
+<PRE class=algoritme>
+      NumCares := 0
+      NumVertexs := 0
+</PRE>
+
+<P>
+Després, afegeix els vèrtexs del polígon pol a la taula de vèrtexs,
+
+<PRE class=algoritme>
+      <B>Per</B> i <B>en</B> [ 1..pol.numvertexs() ] <B>fer</B>
+         NumVertexs := NumVertexs + 1
+         Punt := pol.ObtenirVertex(i)
+         Vertexs[NumVertex] := <B>Nou</B> Vertex (Punt)
+      <B>fPer</B>
+</PRE>
+
+<P>
+   Un cop afegits els vèrtexs del polígon inicial, falta completar la
+   taula de vèrtexs amb els de la segona base del prisma, que s'obtenen
+   per translació dels de la primera base. Suposem que la translació es
+   fa en direcció de l'eix z, però evidentment podríem incloure
+   components de la translació en direcció x i/o y per generar prismes
+   inclinats. El corresponent bucle de l'algorisme és,
+
+<PRE class=algoritme>
+      <B>Per</B> i <B>en</B> [ 1..pol.numvertexs() ] <B>fer</B>
+         NumVertexs := NumVertexs + 1
+         Punt := pol.ObtenirVertex(i)
+         Punt.IncrementaCoordenadaZ (LlargadaEscombrat)
+         Vertexs [NumVertex] := <B>Nou</B> Vertex (Punt)
+      <B>fPer</B>
+</PRE>
+
+<P>
+Observeu que l'escombrat es podria fer molt més general. Si substituïm
+la sentència que incrementa la coordenada Z del Punt per una operació
+general de transformació geomètrica de cada un dels punts de la base,
+podem traslladar la base en qualsevol direcció (o inclús
+girar-la). L'algorisme ens genera sempre l'objecte que s'obté per unió
+de la base inicial i d'aquesta nova base transformada.
+
+<P>
+   Ara podem començar a omplir la taula de cares de l'objecte. Les
+   primeres cares que construirem són les dues bases. Si suposem que es
+   compleix la precondició que el polígon pol està orientat de manera
+   que el seu <A HREF="../m4/normal.html">vector normal</A> té
+component z negativa i per tant té sentit
+   contrari al sentit de l'escombrat, l'ordre dels vèrtexs en el polígon
+   inicial pol ens dona l'ordenació correcta dels vèrtexs en la primera
+   base del prisma:
+
+<PRE class=algoritme>
+      NumCares := NumCares + 1
+      Cares[NumCares] := <B>Nou</B> Cara (solidfronteres)
+      Cares[NumCares].AssignaNumVertexs (pol.numvertexs() )
+      <B>Per</B> i <B>en</B> [ 1..pol.numvertexs() ] <B>fer</B>
+         Cares[NumCares].AssignaIndexVertex (i, i)
+      <B>fPer</B>
+      Cares[NumCares].AssignaNormal(CalculaNormal (Cares[NumCares], Vertexs))
+
+      NumCares := NumCares + 1
+      Cares[NumCares] := <B>Nou</B> Cara (solidfronteres)
+      Cares[NumCares].AssignaNumVertexs (pol.numvertexs() )
+      <B>Per</B> i <B>en</B> [ 1..pol.numvertexs() ] <B>fer</B>
+         Cares[NumCares].AssignaIndexVertex (i, NumVertexs + 1 - i)
+      <B>fPer</B>
+      Cares[NumCares].AssignaNormal(CalculaNormal (Cares[NumCares], Vertexs))
+</PRE>
+
+<P>
+   (a la primera part s'inclou la primera base, i després s'inclou la
+   base oposada; en aquesta darrera, l'ordre de recorregut dels
+   vèrtexs ha de ser invers per tal de mantenir la coherència amb el seu
+   vector normal cap enfora).
+</P>
+
+<P>
+   L'acció CalculaVectorNormal retorna el vector normal
+   de la cara a partir de la taula de vèrtexs i dels
+   índexs dels vèrtexs de la cara. L'algorisme d'aquesta acció és
+   l'algorisme ja vist de càlcul del vector normal a un polígon.
+</P>
+
+<P>
+   Finalment, només cal incloure les cares laterals. Observeu que
+   totes aquestes cares tenen quatre vértexs -dos de cada base- i que
+   existeix una regla molt senzilla per a saber quins són els índexs a
+   aquests vèrtexs. A més, el nombre total de cares laterals -que
+   dóna lloc al bucle més extern- és igual al nombre de vèrtexs del
+   polígon inicial pol:
+
+<PRE class=algoritme>
+      <B>Per</B> i <B>en</B> [ 1..pol.numvertexs() ] <B>fer</B>
+         NumCares := NumCares + 1
+         Cares[NumCares] := <B>Nou</B> Cara (solidfronteres)
+         Cares[NumCares].AssignaNumVertexs (4)
+
+         i1 := i+1; i2 := i; i3 := i + pol.numvertexs(); i4 := i3 + 1
+         <B>Si</B> i1 > pol.numvertexs()   <B>llavors</B> i1 := 1 <B>fSi</B>
+         <B>Si</B> i4 > 2*pol.numvertexs() <B>llavors</B> i4 := pol.numvertexs() + 1 <B>fSi</B>
+
+         Cares[NumCares].AssignaIndexVertex (1, i1)
+         Cares[NumCares].AssignaIndexVertex (2, i2)
+         Cares[NumCares].AssignaIndexVertex (3, i3)
+         Cares[NumCares].AssignaIndexVertex (4, i4)
+
+         Cares[NumCares].AssignaNormal(CalculaNormal(Cares[NumCares],Vertexs))
+      <B>fPer</B>
+</PRE>
+
+<br><br>
+<DIV CLASS="nav">
+     <A HREF="main56.html">[Anterior]</a>
+      <a href="main56-3.html">[Següent]</a>
+  </div>
+
+</BODY>
+
+</HTML>
+

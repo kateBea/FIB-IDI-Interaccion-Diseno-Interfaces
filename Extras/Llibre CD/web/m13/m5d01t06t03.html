@@ -1,0 +1,268 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("realvirt","visester");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m5d01t06t02.html">[Anterior]</a>
+<a href="m5d01t06t04.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Visió estereoscòpica.
+<span class=tit2>Càlcul del parell estereoscòpic.</span>
+<span class=tit3>Pantalla fixa amb head-tracking</span>
+</div>
+
+<p>Com hem dit abans, aquesta és la configuració que adopten els
+sistemes estereoscòpics basats en projecció, com ara la CAVE o les
+taules estereoscòpiques. Es caracteritza perquè la pantalla real és
+estàtica i perquè el sistema coneix en tot moment la posició dels ulls
+de l'observador real.
+
+<p>En aquesta animació podeu veure un usuari inspeccionant un model
+geomètric en la CAVE. Com podreu observar, les imatges segueixen els
+moviments de l'usuari.&nbsp;</p>
+
+<div align="center"><img border="0" src="imatges/caveX.gif" width="250" height="200"></div>
+
+<SCRIPT>
+// Codi per obrir una nova finestra amb l'animació
+var prem;
+prem = new String(location);
+
+function trobarURLabs(relativa){
+  if(relativa.indexOf('http://',0)==0) return relativa;
+  if(relativa.indexOf('ftp://',0)==0) return relativa;
+
+  var n;
+  var quants;
+  var URLabs;
+
+  quants = 0;
+  URLabs = prem;
+
+  if(relativa.indexOf('/',0)==0){
+	n=URLabs.lastIndexOf('/web/');
+	URLabs=URLabs.substring(0,n);
+  }
+  else
+  {
+	n = relativa.indexOf('../',0);
+	if(n != -1){
+    		while(n!=-1){
+      		n = relativa.indexOf('../',n+3);
+      		quants++;
+    		}
+    	relativa = relativa.substring((quants*3),relativa.length);
+  	}
+
+  	if(URLabs.indexOf('\\',0)==-1)
+  	{
+  	  for(var i=0; i<quants+1;i++){
+  	    URLabs = URLabs.substring(0,URLabs.length-1);
+  	    URLabs = URLabs.substring(0,URLabs.lastIndexOf('/')+1);
+  	  }
+  	}
+  	else{
+  	 for(var i=0; i<quants+1;i++){
+  	    URLabs = URLabs.substring(0,URLabs.length-1);
+  	    URLabs = URLabs.substring(0,URLabs.lastIndexOf('\\')+1);
+  	  }
+  	}
+  }
+  URLabs +=relativa;
+  return URLabs;
+}
+
+function docLoad(Url, target) {
+var loc;
+loc = target;
+loc += '.location';
+eval(loc + '=trobarURLabs(Url);');
+}
+
+function oWin(plana,type,tam1,tam2,mbar,locat,rsize,stat){
+ var resWin;
+      var w;
+      var h;
+      var nom;
+      var cadena;
+
+ if (type == "*")
+            nom= getWinNm();
+ else nom=type;
+
+ if ((tam1 == "*") || (tam2 == "*")) {
+  w = 600;
+  h = 400;
+ }
+ else {
+     w=tam1;
+     h=tam2;
+ }
+
+  cadena = 'width='+w+',height='+h+',menubar=' + mbar + ',location=' + locat + ',resizable=' + rsize + ',scrollbars=yes,status=' + stat;
+  resWin = window.open(trobarURLabs(plana),nom,cadena);
+
+  if (navigator.appName == "Netscape") {
+	resWin.focus();
+ }
+}
+
+function getIm(imatge)
+{
+	var im;
+	im = new Image;
+	im.src=trobarURLabs(imatge);
+	return imatge;
+}
+
+function mouseOver(banner) {
+ self.status=banner;
+ }
+
+function mouseOut() {
+ self.status="";
+ }
+
+function getWinNm()     {
+        var now = new Date();
+        var hr = new String(now.getHours());
+        var mn = new String(now.getMinutes());
+        var sc = new String(now.getSeconds());
+        var winNm = hr + mn + sc;return winNm;
+        }
+</SCRIPT>
+
+<CENTER>
+<TABLE BORDER=0>
+<TD><div class=exercici><form><span><input value="Animació CAVE amb més qualitat"
+ type=button
+ onclick="oWin('imatges/cave.avi','*','352','288','no','no','no','yes')"></span></form></div>
+</TD>
+</TABLE>
+</CENTER>
+
+<p class=noind><b>Càlcul de la càmera</b>
+
+<p>Per calcular els paràmetres de la càmera virtual necessitem: </p>
+
+<ul>
+  <li>
+    <p class="topo1" style="margin-left:0cm;text-indent:0cm;mso-list:none;tab-stops:
+35.4pt"><span style="mso-ansi-language: CA" lang="CA"><b>Posició i orientació
+    de la pantalla virtual. </b>Aquestes dades, expressades respecte el
+    sistema de coordenades de l'aplicació, ens permeten situar </span>la
+    pantalla virtual en el model 3D, i són actualitzades per
+l'aplicació en funció de la part del model que es vol inspeccionar, o del
+    moviment del vehicle en el qual viatja l'observador. Aquestes dades ens
+    permeten transformar coordenades del món real a coordenades del món
+    virtual.</li>
+  <li>
+    <p class="topo1" style="margin-left:0cm;text-indent:0cm;mso-list:none;tab-stops:
+35.4pt"><span style="mso-ansi-language: CA" lang="CA"><b>Posició dels ulls de
+    l'observador real</b>.&nbsp; Aquestes dades són proporcionades pel sistema
+    de posicionament. </span>Cal tenir en compte que les coordenades de la
+    posició de l'ull que proporciona el posicionador estan expressades respecte un sistema de coordenades local relacionat amb la pantalla real, i
+    per tant cal expressar aquestes coordenades en el sistema de coordenades de
+    l'aplicació, fent servir per aquesta tasca les dades sobre la situació de
+    la pantalla en el món virtual.</li>
+  <li>
+    <p class="topo1" style="margin-left:0cm;text-indent:0cm;mso-list:none;tab-stops:
+35.4pt"><b>Distància dels plans de retallat. </b>El pla de retallat anterior es
+    situa a pocs centímetres de l'observador virtual. El pla de retallat
+    posterior es situa lluny de l'observador, per exemple a la distància de l'objecte més llunyà a l'observador.</li>
+  <li>
+    <p class="topo1" style="margin-left:0cm;text-indent:0cm;mso-list:none;tab-stops:
+35.4pt"><b>Geometria de la piràmide de visió</b>. Per calcular la geometria de
+    la piràmide de visió, hem de calcular quina és la piràmide definida per
+    l'observador real, la pantalla real, i els plans de retallat.</li>
+</ul>
+
+<p>Un cop disposem d'aquestes dades, els càlculs dels paràmetres de la càmera
+          corresponent a un dels dos ulls, per exemple l'esquerre, es detallen a continuació:</p>
+
+<pre class=algoritme>  
+  eye := &lt;posició de l'ull esquerre&gt; /*dada subministrada pel posicionador, que haurem de passar a coordenades de l'aplicació)*/
+  center := &lt;qualsevol punt en la direcció del raig que neix a la posició eye i és perpendicular a la pantalla virtual&gt;
+  up := &lt;vector cap amunt de la pantalla virtual, que depèn de la orientació de la pantalla virtual&gt;
+  near := &lt;distancia del pla de retallat anterior&gt;
+  far := &lt;distancia del pla de retallat posterior&gt;
+  left := &lt;extrem esquerre de la piràmide de visió&gt;
+  right := &lt;extrem dret de la piràmide de visió&gt;
+  bottom := &lt;extrem esquerre de la piràmide de visió&gt;
+  top := &lt;extrem superior de la piràmide de visió&gt;
+</pre>
+
+<p>De forma simètrica, podem calcular la càmera corresponent a l'ull dret:</p>
+
+<div align="center"><img border="0" src="imatges/cameramodel4.jpg" width="480" height="364">&nbsp;</div>
+
+          <p>Fixeu-vos que estem situant la càmera virtual en la mateixa
+          posició que l'observador virtual (<b>eye</b>=posició ull), però en
+          canvi la seva orientació, determinada per punt <b>centre</b> i el
+          vector <b>up, </b>és independent de l'orientació dels ulls de
+          l'observador, i només depèn de la orientació de la pantalla i de la
+          posició de l'observador. Per aquest motiu sovint es diu que els
+          sistemes basats en projecció presenten una gran estabilitat davant
+          girs del cap de l'usuari, doncs les imatges només es veuen afectades
+          per la posició dels ulls.</p>
+
+<p class=noind><b>Utilització</b></p>
+
+<p>Aquí teniu un exemple d'utilització de les dades anteriors per definir
+les transformacions de visualització i de perspectiva amb OpenGL:
+
+<pre class=algoritme>
+   <b>glMatrixMode</b>(GL_MODELVIEW);
+   <b>glLoadIdentity</b>();
+   <b>gluLookAt</b>(eye.x, eye.y, eye.z, center.x, center.y, center.z, up.x, up.y, up.z);
+   <b>glMatrixMode</b>(GL_PROJECTION);
+   <b>glLoadIdentity</b>();
+   <b>glFrustum</b>(left, right, bottom, top, near, far);
+</pre>
+
+<p class=noind><b>Comentaris addicionals</b></p>
+
+<p>Quan la imatge corresponent a l'ull dret i la imatge corresponent a l'ull
+esquerre es projecten en una única pantalla, sovint es parla de <b>parallax</b>
+en lloc de <b>disparitat retinal</b>. El parallax també és la distància
+entre punts homòlegs de les imatges, però el parallax es mesura sobre la
+pantalla real mentre que la disparitat normalment es mesura sobre la
+retina. La diferència és important perquè el parallax és independent de la
+convergència dels ulls de l'observador real (que varia contínuament segons l'objecte
+que concentra l'atenció de l'usuari), mentre que la disparitat retinal sí depèn de la
+convergència real:</p>
+
+<div align="center"><img border="0" src="imatges/proj_conjunta2s.jpg" width="350" height="249"> </div>
+
+<p>Els objectes virtuals situats sobre el pla de la pantalla virtual tindran <b>parallax
+zero</b>, la qual cosa vol dir que coincidiran les seves projeccions en
+pantalla. Els objectes amb parallax zero es perceben com si estiguessin <b>a la
+mateixa profunditat que la pantalla real</b>.&nbsp; </p>
+
+<p>Els objectes virtual situats davant del pla de la pantalla virtual tindran <b>parallax
+negatiu</b> (la projecció per l'ull dret surt més a l'esquerra que la de l'ull
+esquerre). Els objectes amb parallax negatiu es perceben com si estiguessin
+flotant <b>davant del pla de la pantalla real</b>.</p>
+
+<p>Els objectes virtuals situats darrera del pla de la pantalla virtual tindran <b>parallax
+positiu</b> (la projecció per l'ull dret surt més a la dreta que la de l'ull
+esquerre). Els objectes amb parallax positiu es perceben com si estiguessin <b>darrera
+del pla de la pantalla real</b>.</p>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m5d01t06t02.html">[Anterior]</a>
+<a href="m5d01t06t04.html">[Següent]</a>
+</div>
+</body>
+</html>

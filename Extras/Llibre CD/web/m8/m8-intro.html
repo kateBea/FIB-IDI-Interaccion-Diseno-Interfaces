@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title>8.Introducció</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" TYPE="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</head>
+<BODY>
+<SCRIPT>
+top.passara("visib","intr");
+</SCRIPT>
+<DIV CLASS="nav">
+[Anterior]
+[Següent]
+<a href="m8-objectius.html">[Següent apartat]</a>
+</div>
+<br><br>
+
+<div class=tit1> Introducció </div>
+
+<P>
+Donada una escena constituïda per objectes polièdrics, en els capítols
+precedents hem analitzat el procediment per a visualitzar-la en un
+dispositiu de sortida bi-dimensional, pintant les seves arestes i
+considerant les seves cares transparents.
+
+<P>
+Per a incrementar el grau de realisme de la imatge obtinguda, és a
+dir, que aquesta s'assembli al màxim a una fotografia virtual de
+l'escena, és necessari introduir dos conceptes bàsics. D'una banda,
+considerar que per a una posició concreta de la
+<A CLASS="glossari" HREF="javascript:glossari('camara.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">càmera</A>
+només una part
+dels objectes són visibles donat que d'altres obstaculitzen la seva
+visió. D'altra banda, determinar el color amb que cal pintar les cares
+visibles dels objectes d'acord amb l'entorn d'il·luminació de
+l'escena.
+
+<P>
+L'animació següent mostra tres animacions relatives a una ciutat
+virtual en la que es passeja un robot. En la primera, una càmera
+virtual segueix els seus moviments; fixeu-vos que els objectes
+visibles varien d'acord amb els moviments de la càmera i que els
+edificis de l'extrem del carrer principal són quasi sempre
+visibles. En la segona animació hem introduït boira que modifica la
+visibilitat degut a que absorbeix energia de la llum i impedeix que
+aquesta arribi a objectes llunyans; fixeu-vos que els edificis de què
+parlàvem desapareixen de la nostra visió quan ens allunyem (la boira
+els tapa). En la tercera animació s'ha disminuït la llum ambient (s'ha
+fet fosc) i s'han incorporat nous focus de llums de diferents colors,
+fixeu-vos (sobre tot es nota en el terra) que el color dels objectes
+es modifica d'acord amb el color del focus que il·lumina i que es perd
+la visibilitat d'alguns edificis.</P>
+
+<CENTER>
+<TABLE BORDER=0>
+<tr><TD>
+<div class=exercici><form action=""><span><input value="Animació 1"
+ type=button
+onclick="javascript:MuestraFin('Robot1.html','320','320','yes')"></span></form></div>
+</TD>
+
+<TD>
+<div class=exercici><form action=""><span><input value="Animació 2"
+ type=button
+onclick="javascript:MuestraFin('Robot2.html','320','320','yes')"></span></form></div>
+</TD>
+
+<TD>
+<div class=exercici><form action=""><span><input value="Animació 3"
+ type=button
+onclick="javascript:MuestraFin('Robot3.html','320','320','yes')"></span></form></div>
+</TD>
+</tr>
+</TABLE>
+</CENTER>
+
+<P>
+Podem concloure després de veure les imatges que els objectes visibles
+i el seu color són funció de la ubicació de l'observador, de la
+il·luminació de l'entorn i del medi.
+
+<P>
+En l'animació hem utilitzat diferents conceptes gràfics per a
+incrementar el realisme: simulació de la il·luminació de l'entorn,
+mapeig de textures en les parets dels edificis per a simular el
+material de construcció, una imatge pregravada per a simular l'ull del
+robot i ombres en el terra.
+
+<P>
+En el marc d'aquest capítol no pretenem generar escenes tan vistoses,
+però sí adequades per moltes aplicacions. Per aquest propòsit,
+introduïrem els conceptes fonamentals i bàsics per al càlcul de la
+visibilitat i del color dels objectes per a una posició donada de la
+càmera. A més a més, analitzarem els procediments més comunament
+utilitzats en <A HREF="../m6/main64.html">llibreries gràfiques tridimensionals
+</A> i les seves limitacions.
+
+<br><br>
+<DIV CLASS="nav">
+[Anterior]
+[Següent]
+<a href="m8-objectius.html">[Següent apartat]</a>
+</div>
+</body>
+</html>

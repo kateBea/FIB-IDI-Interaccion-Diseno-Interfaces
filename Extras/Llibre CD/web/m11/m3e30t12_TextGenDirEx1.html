@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","textu");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m3e30t11_TextGenDirectOpenGL.html">[Anterior]</a>
+<a href="m3e30t15_TextGenDirEx2.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Textures.
+<span class=tit2>Aplicació de textures planes.</span>
+<span class=tit3>Parametrització directa: Parametrització Directa d'un polígon</span>
+</div>
+
+<p> Anem a desenvolupar un exemple de parametrització per un polígon
+simple ubicat en un pla qualsevol.  <!--Ens basarem pel
+desenvolupament en la figura adjunta.
+
+<center><img src="imatges/TextGenDirectPol.png"></center>-->
+
+<p>Seguirem les següents etapes:
+
+<ol>
+<li> Establiment del sistema de coordenades de parametrització
+local. Consisteix en definir un sistema de coordenades sobre el pla
+que defineix el polígon. Com origen de coordenades s'ha escollit un
+vèrtex del polígon i com orientació dels eixos <i>u</i> i <i>v</i>
+una de les arestes.</li>
+
+<li> Definició de la funció de parametrització <i>F1</i>. Fixeu-vos
+que es pot interpretar que tenim una càmera 3D que defineix un
+sistema de coordenades de l'observador amb origen en el <i>VRP</i>,
+eixos <i>xobs</i> i <i>yobs</i> que coincideixen, respectivament, amb
+<i>u</i> i <i>v</i> i amb l'eix <i>zobs</i> amb l'orientació de la
+normal al pla. Per tant, podem trobar la funció <i>F1</i> per
+composició de matrius de transformacions geomètriques.</li>
+
+<li> Definició de la correspondència entre l'espai parametritzat i
+l'espai normalitzat de textura. Fixeu-vos que per establir la relació
+podem definir una finestra que englobi el polígon en l'espai
+parametritzat (finestra_2D) i la seva correspondència total o parcial
+amb la textura (vista). La funció <i>F2</i> també es podrà expressar
+mitjançant una matriu.</li>
+
+<li> Definició de la funció de parametrització directa global com el
+producte de les matrius definides per <i>F1</i> i <i>F2</i>.
+</ol>
+
+<p>Noteu que l'orientació de la textura en el polígon dependrà de la
+definició del sistema de coordenades de la parametrització. Tanmateix
+si no es respecta la relació d'aspecte de la textura en la definició
+de la transformació <i>F2</i> es tindrà un efecte de deformació de
+la textura similar a si allarguem, encongim o tallem el paper amb el
+que volem "embolicar" el polígon.
+
+<p>Noteu també que la transformació resultant s'aplica als vèrtexs del
+polígon per a obtenir-ne les coordenades de textura però que mai
+modifica la geometria del polígon.
+
+<p class=exercici><span class=exernum>Exercici 4.3:</span> Donat un
+polígon simple en un pla qualsevol, deduïu les funcions F1 i F2
+anteriors i dissenyeu l'algorisme que implementa la funció de
+parametrització directa resultant.
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m3e30t11_TextGenDirectOpenGL.html">[Anterior]</a>
+<a href="m3e30t15_TextGenDirEx2.html">[Següent]</a>
+</div>
+</body>
+</html>

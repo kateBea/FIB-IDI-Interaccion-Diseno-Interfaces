@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("realvirt","tecacc");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m5f01t02.html">[Anterior]</a>
+<a href="m5f01t04.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Tècniques d'acceleració d'imatge.
+<span class=tit2>Level of detail rendering</span>
+</div>
+
+<p>El terme <b>nivell de detall</b> (Level-of-detail, LOD) fa referència a la
+possibilitat d'utilitzar diferents representacions d'un objecte que varien en
+precisió i complexitat.</p>
+
+<p>La principal aplicació dels nivells de detall és l'acceleració de
+la visualització: els objectes que estan lluny de l'observador i que
+per tant ocupen una petita part de la pantalla es poden visualitzar
+amb una representació simplificada (amb un nombre molt reduït de
+cares), mentre que les representacions més detallades es reserven pels
+objectes que estan en primer pla:</p>
+
+<div align="center"><img border="0" src="imatges/pera.jpg" width="381" height="143"></div>
+
+<p>La utilització de nivells de detall requereix:</p>
+
+<ul>
+  <li>Disposar d'un model d'escena <b>multiresolució</b> que proporcioni
+    diferents representacions de cada objecte, amb diferents graus de detall i
+    complexitat. Sovint les diferents simplificacions d'un objecte es calculen
+    de forma automàtica mitjançant algorismes de simplificació. El model
+    multiresolució ha d'incloure, per cada representació simplificada, una
+    mesura de l'<b>error d'aproximació</b>, que serà utilitzat per
+    seleccionar la representació més adient per visualitzar l'objecte.
+    Sovint en comptes de l'error d'aproximació, es proporciona directament
+    el rang de distàncies vàlides per la visualització d'una representació
+    determinada.</li>
+  <li>Disposar en temps de visualització d'un <b>algorisme de selecció del
+    nivell de detall</b>, en funció de la seva grandària, la seva distància a
+    l'observador, la seva importància semàntica, etc.</li>
+</ul>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m5f01t02.html">[Anterior]</a>
+<a href="m5f01t04.html">[Següent]</a>
+</div>
+</body>
+</html>

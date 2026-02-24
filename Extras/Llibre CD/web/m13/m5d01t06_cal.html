@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("realvirt","visester");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m5d01t05_gen.html">[Anterior]</a>
+<a href="m5d01t06t01.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Visió estereoscòpica.
+<span class=tit2>Càlcul del parell estereoscòpic</span>
+</div>
+
+<p>El càlcul del parell estereoscòpic consisteix en generar en el frame buffer
+una representació digital de les imatges que, en una etapa posterior, es
+visualitzaran en un dispositiu físic (pantalla).</p>
+
+<p>Un pas previ al càlcul del parell estereoscòpic és el càlcul dels
+paràmetres de la càmera virtual. Donat que hem de generar dues imatges, la que
+veurà l'ull dret i la que veurà l'ull esquerre, necessitarem calcular dues
+càmeres.</p>
+
+<p>Un aspecte important és que el càlcul de les càmeres depèn
+fortament de la <b> posició de la pantalla física respecte l'usuari</b>,
+aspecte que no havíem de tenir en consideració quan generàvem imatges
+monoscòpiques.</p>
+
+<p>Per aquest motiu, després d'introduir algunes consideracions prèvies, estudiarem les diferents configuracions possibles
+segons com sigui la relació entre la posició de la pantalla real i la posició de
+l'observador real, per després detallar el càlcul dels paràmetres de les
+càmeres segons cada cas.</p>
+
+<p>Un cop calculades les dues càmeres, el procés de càlcul de les imatges
+segueix les mateixes etapes que el procés de visualització clàssic, repetit per cadascuna de les dues càmeres, per la qual cosa no
+ens hi estendrem més.</p>
+
+<h2>subapartats:</h2>
+
+<UL>
+	<LI><a href="m5d01t06t01.html" target="principal">Consideracions preliminars</a></LI>
+	<LI><a href="m5d01t06t02.html" target="principal">Configuracions possibles</a></LI>
+	<LI><a href="m5d01t06t03.html" target="principal">Pantalla fixa amb head-tracking</a></LI>
+	<LI><a href="m5d01t06t04.html" target="principal">Pantalles mòbils amb head-tracking</a></LI>
+	<LI><a href="m5d01t06t05.html" target="principal">Pantalla clàssica sense tracking</a></LI>
+</UL>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m5d01t05_gen.html">[Anterior]</a>
+<a href="m5d01t06t01.html">[Següent]</a>
+</div>
+</body>
+</html>

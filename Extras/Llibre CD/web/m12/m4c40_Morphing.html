@@ -1,0 +1,206 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html lang="CA">
+
+<head>
+
+<title></title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+
+<script type="text/javascript" src="../upc.js"></script>
+
+<SCRIPT>
+
+top.passara("anim","morph");
+
+</SCRIPT>
+
+<BODY>
+
+<DIV CLASS="nav">
+
+<a href="m4c30_CrossDisolving.html">[Anterior]</a>
+
+<a href="m4c50_MorphingExemples.html">[Següent]</a>
+
+<a href="m4c10_MorphingIntro.html">[Començament de l'apartat]</a>
+
+</div>
+
+<br><br>
+
+
+
+<div class=tit1> Morphing.
+
+<span class=tit2>Metamorfosi entre imatges</span>
+
+</div>
+
+
+
+<p> En aquest apartat explicarem els conceptes bàsics de la
+metamorfosi entre imatges. Encara que també es pot parlar de
+metamorfosi entre els models 3D dels objectes, aquí ens extendrem més
+en la metamorfosi (morphing) entre imatges 2D i només al final
+introduirem alguns dels mètodes que es poden usar en 3D.
+</p>
+
+<p> L'objectiu de la metamorfosi és transformar de manera suau una
+imatge en una altra. L'algorisme més conegut, que explicarem aquí es
+basa en l'article "Feature-Based Image Metamorphosis" de Thaddeus
+Beier i Shawn Neely (aparegut al ACM Siggraph'1992, pàgs 35 a 42) i
+utilitza de forma conjunta les dues tècniques que hem vist fins ara:
+la deformació d'imatges (Image warping) junt amb la transformació de
+color.
+</p>
+
+
+<p> Per entendre el mecanisme de morphing, utilitzarem l'applet que
+teniu a continuació (<a
+href="javascript:MuestraFin('m4c50t10_AppletExplicacio.html','700','500','yes')">aquí</a>
+teniu més informació sobre el funcionament de l'applet):
+</p>
+
+<p>
+
+<div align=center>
+
+     <applet code="Interficie.class" archive="MorphingCopes.jar,../comuns.jar" height=570 width=750>
+     </applet>
+
+</div>
+
+
+
+<p> Com veieu, l'applet ens mostra dues imatges, corresponents a dues
+
+copes de formes diferents. L'applet consta de 5 finestres: dues
+
+corresponents a la imatge de la primera copa, dues corresponents a la
+
+imatge de la segona copa, i una finestra final que ens mostrarà el
+
+resultat de la metamorfosi.
+
+
+
+<p> Proveu de deformar la imatge de la primera copa per tal que el seu
+
+contorn agafi la mateixa forma que el contorn de la copa que tenim a
+
+la segona imatge. Si us calen més detalls sobre el procediment a
+
+seguir per fer aquesta deformació (que no és més que un procés de
+
+warping dels que hem vist abans) llegiu l'explicació de l'applet.
+
+
+
+<p> Proveu ara de fer el mateix amb la segona copa: es tracta de
+
+deformar la imatge de la segona copa per tal que el seu contorn agafi
+
+la mateixa forma que el contorn de la copa que tenim a la primera
+
+imatge.
+
+
+
+<p> Un cop fetes les dues deformacions, ja podeu visualitzar la
+
+metamorfosi a la darrera finestra (que finalment, ens mostra la
+
+interpolació entre les dues imatges deformades). Fixeu-vos que podeu
+
+desplaçar-vos al llarg de la metamorfosi variant el valor del
+
+paràmetre <b>t</b> d'interpolació amb la corresponent barra de
+
+desplaçament.
+
+
+
+<p> Vegem amb més detall els passos que cal fer en el procés de
+
+metamorfosi entre dues imatges. Aneu als corresponents enllaços per
+
+veure els detalls de cada una de les tres fases:
+
+
+
+<ul>
+
+<li> <A
+
+HREF="javascript:MuestraFin('m4c40s10_MorphWarp1.html','600','400','yes')">Deformació
+
+(warping) de la primera imatge</A> per adaptar-se a la forma de la
+
+segona imatge </li>
+
+
+
+<li> <A
+
+HREF="javascript:MuestraFin('m4c40s20_MorphWarp2.html','600','400','yes')">Deformació
+
+(warping) de la segona imatge</A> per adaptar-se a la forma de la
+
+primera </li>
+
+
+
+<li> <A
+
+HREF="javascript:MuestraFin('m4c40s30_MorphInterpolacioFinal.html','600','400','yes')">Interpolació
+
+per fer la metamorfosi</A> entre les dues imatges </li>
+
+</ul>
+
+
+
+
+
+<p> Algunes vegades, el que es vol no és una metamorfosi entre dues
+
+imatges sinó un morphing entre dues seqüències animades o de vídeo. En
+
+aquest cas, les deformacions de warping s'han de calcular per cada
+
+parella d'imatges homòlogues a determinats instants (key frames) de
+
+l'animació. Un cop fet això, es poden calcular per interpolació les
+
+corresponents deformacions entre qualsevol parella d'imatges
+
+homòlogues, i obtenir de forma automàtica la metamorfosi al llarg de
+
+l'animació. L'únic problema és que s'incrementa la feina que ha de
+
+fer l'animador, que ara ha de generar deformacions de warping a cada
+
+key-frame.  
+
+
+
+
+
+<br><br>
+
+<DIV CLASS="nav">
+
+<a href="m4c30_CrossDisolving.html">[Anterior]</a>
+
+<a href="m4c50_MorphingExemples.html">[Següent]</a>
+
+</div>
+
+</body>
+
+</html>
+

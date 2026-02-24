@@ -1,0 +1,281 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html lang="CA">
+
+<head>
+
+<title></title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+
+<script type="text/javascript" src="../upc.js"></script>
+
+<SCRIPT type="text/javascript" SRC="../overlib.js"></SCRIPT>       
+
+<SCRIPT type="text/javascript" SRC="../overlib_cssw3c.js"></SCRIPT>
+
+<SCRIPT>
+
+top.passara("visreal","reflex");
+
+</SCRIPT>
+
+<BODY>
+
+<div id="overDiv" style="position: absolute; visibility:hidden; z-index:1000"></div>
+
+<DIV CLASS="nav">
+
+<a href="m3d10_intro.html">[Anterior]</a>
+
+<a href="m3d42_ObjVirtualsGL.html">[Següent]</a>
+
+</div>
+
+<br><br>
+
+
+
+<a name="ObjVirtuals"></a>
+
+<div class=tit1>Reflexions.
+
+<span class=tit2>Objectes Virtuals</span>
+
+</div>
+
+
+
+<P>Quan volem aprofitar les prestacions d'una llibreria gràfica
+
+estàndard per a generar imatges que inclouen reflexions, hem de trobar
+
+altres maneres de generar-les. Com les llibreries estàndard que
+
+discutim estan orientades a la creació d'imatges de forma ràpida
+
+(idealment interactiva), no poden permetre's d'implementar un <a
+
+href="m3a20_RayTracIntro.html">traçat de raigs</a>, que comporta un
+
+cost de càlcul molt alt<A class=nota 
+
+Href="javascript:void(0);"
+
+onMouseOut="nd();"
+
+onMouseOver="return overlib('Naturalment existeixen '+
+
+'programes i APIs que inclouen el traçat de raigs i d\'altres algoritmes '+
+
+'de creació d\'imatges de més realisme, però la seva execució és bastant '+
+
+'menys que interactiva per a escenes de mínima complexitat',WIDTH,400,LEFT,ABOVE,CSSW3C,DIVCLASS,'notes')">NOTA</a>.
+
+
+
+<P>Existeixen dues maneres d'introduir reflexions en una escena sense
+
+apel·lar al traçat de raigs. Una consisteix en usar textures per
+
+a presentar l'escena aproximada que es veuria en el mirall. Aquest
+
+mètode el discutirem <a href="m3d60_Textures.html">més endavant</a>.
+
+
+
+<P>La segona, que per miralls plans i amb certes limitacions de les
+
+escenes, produeix imatges exactes que inclouen les reflexions,
+
+consisteix en pintar els objectes dues vegades: en la seva posició a
+
+l'escena i en la posició reflectits pel mirall.
+
+
+
+<P>Aquests <i>objectes virtuals</i> que representen no un objecte de
+
+l'escena sino la seva reflexió es poden calcular fàcilment si es
+
+disposa de transformacions de modelat: hi ha prou amb insertar a
+
+l'esquerra de les demés transformacions geomètriques de l'objecte una
+
+simetria respecte al pla del mirall. D'aquesta manera el cost
+
+addicional existirà pel dibuixat (la geometria que ens cal enviar al
+
+<i>pipeline</i> de visualització és el doble de complexa), però no en
+
+l'emmagatzemament del model (ja que no ens cal realment duplicar els
+
+objectes al model).
+
+
+
+<a name=appletReflexions1></a>
+
+<P>El següent <i>applet</i> ens mostra un exemple d'aquesta
+
+tècnica. L'escena consisteix en una habitació frugalment moblada, amb
+
+una llum cenital i una altra de direccional. Podeu encendre i apagar
+
+les llums mitjançant els botons de la interfície.
+
+
+
+<center>
+
+<a NAME="AppletReflexions1"></a><table><tr><td>
+
+<applet CODE="Interficie.class" ARCHIVE="AppletReflexions.jar" WIDTH=750 HEIGHT=500>
+<PARAM NAME=FitxerEscena VALUE="dormitori/dormitori.esc">
+<PARAM NAME=AlfaInic     VALUE=15>
+<PARAM NAME=VelTrasl     VALUE=10.0>
+<PARAM NAME=VelRot       VALUE=20.0>
+</applet></td></tr></table>
+
+</center>
+
+
+
+<P> Usant les tecles "fletxa amunt" i "fletxa avall" del teclat,
+
+(després d'haver fet un <i>click</i> del ratolí sobre l'applet per a
+
+donar-li el focus), podeu caminar per l'habitació.  Si arrosseguem el
+
+ratolí prement el botó de l'esquerra, ens permet canviar la direcció
+
+de visió. Prement la tecla "Ctrl" simultàniament podem pujar, baixar i
+
+traslladar la càmera. Proveu de navegar per l'escena per a
+
+familiaritzar-vos-en, i pareu atenció a la reflexió al mirall per a
+
+convèncer-vos que és correcta.
+
+
+
+<P>Per tal d'augmentar el realisme de l'efecte, cal que l'espai del
+
+mirall l'ocupi un polígon <b>parcialment</b> transparent. Els miralls
+
+que ens trobem quotidianament estan lluny de ser perfectes, i sols
+
+retornen una fracció de la llum que hi incideix. En general un mirall
+
+que deixi passar un 90% o un 95% de la llum provinent dels objectes
+
+virtuals donarà la impressió adequada. Si fem el polígon perfectament
+
+transparent, la sensació de reflexió serà menys creible. Per a què
+
+pugueu experimentar amb aquest aspecte hem inclòs a l'applet la barra
+
+d'arrossegament que us permet modificar la transparència del mirall a
+
+l'escena. Proveu diferents valors d'aquest paràmetre, i per a cadascun
+
+modifiqueu la posició de la càmera mirant l'efecte aconseguit al
+
+mirall.
+
+
+
+<P>En aquest exemple sabem que tots els objectes del model estan
+
+davant del mirall. En general això no té perquè ser cert. Per exemple
+
+podriem tenir a una base de dades gràfica el model de tot un
+
+edifici. Una estratègia naïve de presentar una vista particular
+
+d'aquest model enviaria al <i>pipeline</i> de visualització tots els
+
+polígons de la base de dades, deixant al subsistema gràfic la feina de
+
+filtrar les cares irrellevants, sigui per ser fora del <i>frustum</i>
+
+o per ser darrera una paret, per exemple. Si en aquest cas uséssim
+
+l'estratègia que estem discutint, en entrar a una habitació amb mirall
+
+veuriem no sols la reflexió dels objectes de l'habitació al mirall,
+
+sino també els objectes de l'habitació colindant <b>dins</b>
+
+l'habitació en que estem! Per tal d'evitar-ho, hom pot activar un pla
+
+addicional de retallat coincident amb el pla del mirall i amb la
+
+normal apuntant cap a dins del mirall durant el pintat dels objectes
+
+virtuals. Tingueu present tanmateix que els plans addicionals de
+
+retallat estan generalment implementats en <i>software</i>, i per tant
+
+col·locar aquest pla, inclús si no fa falta, pot fer l'aplicació
+
+notablement més lenta. (Nota: Els plans de retallat s'apliquen als
+
+fragments, i per tant bastant tard en el <i>pipeline</i> de
+
+visualització d'OpenGL.)
+
+
+
+<P>Observeu també que l'estratègia descrita funciona en aquest exemple
+
+perquè la paret en què es troba el mirall amaga els objectes virtuals
+
+usats per a representar les reflexions. Aquest mecanisme, que explota
+
+el z-buffer de la llibreria, resulta molt ràpid (especialment si es
+
+disposa d'acceleració per <i>hardware</i>). Tanmateix no totes les
+
+escenes admitiran aquesta solució. Podria passar que calgués deixar
+
+als usuaris moure's per zones del model des d'on veurien els objectes
+
+virtuals, com passa a l'applet quan premem el botó retolat "Veure
+
+Truc". Aquesta situació és fàcil d'imaginar: si per exemple hem de
+
+modelitzar vàries habitacions, o si en l'escena hi ha un mirall que no
+
+està penjat a la paret, sinó col·locat a un marc, per exemple.
+
+
+
+
+
+<p>En aquest cas cal en general alguna tècnica que impedeixi que els
+
+objectes virtuals contribueixin a la imatge més que a través del
+
+mirall. En les pròximes seccions comentem algunes d'elles.
+
+
+
+
+
+<br><br>
+
+<DIV CLASS="nav">
+
+<a href="m3d10_intro.html">[Anterior]</a>
+
+<a href="m3d42_ObjVirtualsGL.html">[Següent]</a>
+
+</div>
+
+</body>
+
+</html>
+

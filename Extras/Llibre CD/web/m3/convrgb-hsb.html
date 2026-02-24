@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M3.3.El model HSB.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+
+<BODY >
+<SCRIPT>
+top.passara("color","hsb");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+      <A HREF="exercicihsb.html">[Anterior]</a>
+      <A HREF="exerciciConvHSB_RGB.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class="tit1">El model HSB.
+<span class="tit2">Conversió de RGB a HSB i viceversa</span>
+</div>
+
+<P>
+Si mirem el cub de colors RGB de forma que la diagonal que uneix el
+(0,0,0) (el negre) i el (1,1,1) (blanc) estigui alineat amb la
+direcció de visió, amb el blanc més a prop de l'observador, veurem un
+hexàgon amb els colors vermell, groc, verd, cian, blau i magenta als
+vèrtexs. La projecció en un pla ens dóna la base del con HSB. Si en
+comptes de començar amb tot el cub de color RGB començem amb un subcub
+[<I>0,c</I>]<SUP>3</SUP>, on <I>0<=c<1</I>, obtenim un hexàgon com
+l'anterior, però més petit. La seva projecció a un pla correspon a una
+secció del con per <I>B=c</I>. Podem doncs descriure la conversió del
+model RGB al HSB com un algorisme que converteix uns valors de R,G, i
+B a altres de H, S i B que representin el mateix color:
+
+<p class=noind>
+<B>Algorisme de conversió (r,g,b) ==> (H,S,B):</B>
+
+<PRE class=algoritme>
+    // Calculem la intensitat (B):
+    B :=  Màxim(r,g,b);
+    min := Mínim(r,g,b);
+    // Calculem la saturació (S):
+    <B>si</B> (B != 0) <B>llavors</B>
+       S := (B-min)/B;
+    <B>sino</B>
+         S := 0;
+    <B>fsi</B>
+    // Calculem el tinte (H):
+    <B>si</B> (S = 0) <B>llavors</B>
+      H := 0;
+    <B>sino</B>
+       <B>si</B> (r = B) <B>llavors</B>
+          // el color està entre groc i magenta:
+          H := (g-b)/(B-min);
+       <B>sino</B>
+	  <B>si</B> (g = B) <B>llavors</B>
+             // el color està entre cian i groc:
+	     H := 2+(b-r)/(B-min);
+	  <B>sino</B>
+	     <B>si</B> (b = B) <B>llavors</B>
+                // el color està entre magenta i cian:
+		H := 4+(r-g)/(B-min);
+	     <B>fsi</B>
+	  <B>fsi</B>
+       <B>fsi</B>
+       H := 60*H;
+       <B>si</B> (H < 0) <B>llavors</B>
+          H := H+360;
+       <B>fsi</B>
+    <B>fsi</B>
+</PRE>
+
+<P>
+Recíprocament, podem convertir un color representat en el model HSB al
+mateix color representat en el model RGB mitjançant el següent
+algorisme:
+
+
+<p class=noind>
+<B>Algorisme de conversió (h,s,b) ==> (R,G,B):</B>
+
+<PRE class=algoritme>
+    // Normalitzem h a [0,6):
+    <B>si</B> (h = 360) <B>llavors</B> h:=0; <B>fsi</B>
+    h := h/60;
+    // calculem la diferència entre el més gran i el més petit
+    // dels components RGB per ús posterior:
+    delta :=  s*b;
+    // Ara cal distingir casos:
+    <B>si</B> (h<1 <B>ó</B> h>=5) <B>llavors</B>
+       // el component dominant és el vermell:
+       R := b;
+       <B>si</B> (h < 1) <B>llavors</B>
+          // estem entre el vermell i el groc:
+          B := b-delta;
+	  G := h*delta+B;
+       <B>sino</B> // estem entre el magenta i el vermell:
+	  G := b-delta;
+	  B := G-(h-6)*delta;
+       <B>fsi</B>
+    <B>sino</B>
+       <B>si</B> (h>=1 <B>i</B> h<3) <B>llavors</B>
+          // el component dominant és el verd:
+	  G := b;
+	  <B>si</B> (h < 2) <B>llavors</B>
+             // estem entre el groc i el verd:
+	     B := b-delta;
+	     R := B-(h-2)*delta;
+	  <B>sino</B> // estem entre el verd i el cian:
+	     R := b-delta;
+	     B := R+(h-2)*delta;
+	  <B>fsi</B>
+       <B>sino</B>
+	  <B>si</B> (h >= 3 /* <B>i</B> h < 5 */) <B>llavors</B>
+             // el component dominant és el blau:
+	     B := b;
+	     <B>si</B> (h < 4) <B>llavors</B>
+                // estem entre el cian i el blau:
+		R := b-delta;
+		G := R-(h-4)*delta;
+	     <B>sino</B> // estem entre el blau i el magenta:
+		G := b-delta;
+	        R := G+(h-4)*delta;
+	     <B>fsi</B>
+	  <B>fsi</B>
+       <B>fsi</B>
+    <B>fsi</B>
+</PRE>
+
+
+<br><br>
+<DIV CLASS="nav">
+      <A HREF="exercicihsb.html">[Anterior]</a>
+      <A HREF="exerciciConvHSB_RGB.html">[Següent]</a>
+</div>
+</BODY>
+</HTML>

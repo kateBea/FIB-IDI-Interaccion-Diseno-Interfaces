@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title>8</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" TYPE="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</head>
+<BODY >
+<SCRIPT>
+top.passara("visib","iemp");
+</SCRIPT>
+<DIV CLASS="nav">
+<A HREF="m8-7.html">[Anterior]</a>
+<A HREF="m8-empir-exeAmb.html">[Següent]</a>
+</div>
+<br><br>
+
+<div CLASS="tit1">Models d'il·luminació empírics.
+<span CLASS="tit2">Model empíric ambient</span>
+</div>
+
+<P>
+En aquest model no es consideren els focus de llum que puguin existir
+en l'escena. Es realitzen les hipòtesis que la llum existent no és
+direccional i que és deguda a les reflexions difoses de llum entre
+objectes, per tant es considera que existeix una certa llum ambient
+(<!-- $I_{a\lambda}$ --><IMG WIDTH="25" HEIGHT="25" ALIGN="MIDDLE"
+BORDER="0" SRC="imatges/formula10.gif" ALT="Llum ambient">) que no
+prové de cap focus específic i no té cap direcció concreta (o dit
+d'altre manera les té totes).
+
+<P>
+Tots els punts de l'escena reben la mateixa aportació de llum i tots
+els materials es comporten respecte a ella com reflectors difosos
+purs. Per tant, independentment de la posició de l'observador, aquest
+sempre observarà el mateix color en tots els punts d'un mateix objecte
+(tots reben la mateixa llum en totes les direccions i tenen les
+propietats de material respecte a la reflexió difosa).
+
+<P>
+L'equació de càlcul del color en un punt Q serà:
+
+<!-- $$I_{\lambda}(Q) = I_{a\lambda} o_{d\lambda} k_a$$ -->
+<CENTER>
+<IMG WIDTH="122" HEIGHT="26" SRC="imatges/formula20.gif"
+ALT="Càlcul del color en un punt">
+</CENTER>
+
+<UL>
+<LI><!-- $I_{a\lambda}$ --><IMG WIDTH="25" HEIGHT="25" ALIGN="MIDDLE"
+BORDER="0" SRC="imatges/formula10.gif" ALT="$I_{a\lambda}$">: color
+(r,g,b) de la llum ambient.</LI>
+<LI><I>k<sub>a</sub></I>:coeficient de reflexió difosa
+ambient. Proporció de la llum ambient que es reflecteix de manera
+difosa. Valor entre [0,1]. Generalment s'associa el mateix valor que a
+<I>k<sub>d</sub></I>.</LI>
+<LI><!-- $o_{d\lambda}$ --><IMG WIDTH="25" HEIGHT="24" ALIGN="MIDDLE"
+BORDER="0" SRC="imatges/formula8.gif" ALT="$o_{d\lambda}$">:
+representa la proporció de cada color fonamental de la llum ambient
+que s'emet degut al color de l'objecte. Representa el color de
+l'objecte il·luminat per llum ambient blanca (el sol).</LI>
+</UL>
+
+<P>
+Tal com es pretenia, per cada objecte de l'escena, l'equació anterior
+produeix el mateix color en tots els seus punts. Per tant, cada
+objecte es veurà de color constant i només es distingirà la seva
+silueta.La figura següent es una mostra de com es visualitzaria en un
+entorn amb llum ambient <I>I<sub>a</sub></I>=1.0, una esfera de color
+<I>o<sub>d</sub></I>=(1.0,1.0,1.0) variant la <I>k<sub>a</sub></I>
+={0.2, 0.4, 0.6, 0.8, 1.0} d'esquerra a dreta.</P>
+
+<CENTER>
+<TABLE><tr><TD>
+<img src="imatges/image1.jpg" alt="">
+</TD></TR></TABLE>
+</CENTER>
+
+<BR>
+<CENTER>
+<TABLE><tr><TD>
+<img src="imatges/fig8-13-AMBT.jpg" alt="">
+</TD></TR></TABLE>
+</CENTER>
+
+<P><A HREF='m8-empir-exeAmb.html'> Exercici demostració</A>
+
+
+<br><br>
+<DIV CLASS="nav">
+<A HREF="m8-7.html">[Anterior]</a>
+<A HREF="m8-empir-exeAmb.html">[Següent]</a>
+</div>
+</body>
+</html>

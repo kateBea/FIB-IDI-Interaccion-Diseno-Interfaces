@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M3.1.El model RGB.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("color","rgb");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+      <A HREF="main32.html">[Anterior]</a>
+      <A HREF="exercicirgb.html">[Següent]</a>
+    </div>
+<br><br>
+
+<div class="tit1">El model RGB.
+<span class="tit2">Definició del model RGB</span>
+</div>
+
+<P> Del que hem discutit a l'
+<A HREF="main31.html">
+apartat anterior</A>, resulta natural la idea de representar un color com una
+terna de números representant intensitats de vermell (en aglés
+<I>red</I>), verd (en anglés <I>green</I>) i blau (en anglés
+<I>blue</I>). Aquest és escencialment el <A
+CLASS="glossari" HREF="javascript:glossari('rgb.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true"> model RGB</A> de color,
+anomenat així per les inicials angleses dels tres colors. En gràfics
+aquest model realment representa els colors mitjançant tres nombres
+reals entre 0 i 1, on naturalment el zero denota absència de llum, i
+el 1 denota una llum d'intensitat màxima d'aquell color. Es pot
+representar aquest model mitjançant un cub on apareixen tots els
+colors expressables en el model, dit el cub RGB: a la figura veieu una
+representació del cub RGB. Si premeu el botó esquerre del ratolí sobre
+la figura i l'arrossegueu, podreu girar el cub per veure'l des
+d'altres costats. Observeu que en realitat no té sentit parlar d'una
+<applet code="RgbApplet.class" archive="RgbApplet.jar" hspace = 20 vspace = 20 ALIGN="left" CODEBASE=. width=400 height=400>
+</applet>
+intensitat màxima de llum (com es fa aquí quan s'assigna un 1 com
+valor màxim), perquè sempre podem trobar una altra font de llum més
+intensa. El model té sentit, però, si pensem en els dispositius
+<I>hardware</I> que representaran el model, que sí són capaços
+d'emetre un cert màxim de llum en cada una d'aquestes tres components.
+Sobre aquests temes parlarem més en detall en el <A
+HREF="rgb2.html">següent subapartat</A>, i quan introduïm
+<a href="main35.html">el model CIE</A> de color més endavant en aquest
+capítol.
+
+<p>Aquest model correspon a un model aditiu del color: cada color s'obté
+afegint certes quantitats de llum de cada un dels tres colors base.
+Tot i que no es correspon amb la nostra experiència més directa, sí es
+correspon molt estretament amb la manera en que els nostres ulls
+perceben el color, com hem vist a l'<a
+href="main31.html#llumicolor2">apartat anterior</A>.
+També es correspon estretament amb la manera en que
+produeixen els diferents colors les pantalles de televisió o de
+computadors (com veurem també al següent apartat). La
+suma de llum vermella i verda dóna llum groga, la suma de llum
+vermella i blava dóna llum lilosa (color magenta), i la suma de llum
+verda i blava dóna llum de color cian. Per tal que podeu
+familiaritzar-vos amb això, vet aquí un exemple basat en una imatge
+sintètica (pot trigar uns quants segons): la imatge representa una
+esfera blanca il·luminada per tres fonts de llum de colors vermell
+verd i blau, que projecten tres cons de llum sobre l'esfera i sobre
+una pantalla blanca col·locada darrera l'esfera. Les diferents
+regions de la pantalla apareixen doncs il·luminades per les tres llums
+(zona blanca), dues llums, sols una, o cap (la zona negra de forma
+"triangular"). Allò que queda fora dels tres cons de llum resta negre.
+Les tres zones circulars colorejades que apareixen rodejades de blanc
+representen les ombres de cada una d'aquestes llums. La que apareix
+més amunt i a la dreta és l'ombra del focus vermell. Només els focus
+verd i blau il·luminen porcions seves, donant lloc a un troç verd, un
+troç blau, un troç cian (il·luminat per igual pels focus verd i blau)
+i un troç negre on no incideix cap dels tres focus. Anàlogament la
+regió circular ubicada a dalt i a l'esquerra és l'ombra del focus blau,
+i la inferior és l'ombra del focus verd.
+
+<P>
+<center><table><tr><td> 
+
+<APPLET code="RGBColor.class"  archive="RGBColor.jar" hspace = 20 vspace = 20 codebase="./" width=700 height=450>
+<B>L'Applet no s'ha carregat adequadament!</B>
+<B>Aquí applet esfera. Si veus aquest
+missatge, quelcom ha anat malament en carregar l'applet. Probablement
+el teu navegador no és capaç d'executar java?</B>
+</APPLET>
+
+</td></table></center>
+
+<p>
+Amb els cursors podeu modificar la intensitat de llum emesa per cada
+un dels focus, i veure'n l'efecte a l'escena. Jogueu-hi i mireu de
+pensar sobre les relacions entre les modificacions de la il·luminació
+que feu i les modificacions que produeixen en l'escena.  Experimenteu
+desconectant una de les llums (fent la seva intensitat igual a zero),
+i comparant l'escena amb la discussió anterior. El requadre que
+apareix a sota dels cursors lliscants mostra el color de llum que
+s'està fent servir (és a dir el color que resulta de la composició de
+vermell, verd i blau que s'ha especificat). Opcionalment podeu també
+entrar directament valors numérics als requadres vermell, verd i blau
+que apareixen a sobre de cada cursor. Per això col·loqueu el cursor
+sobre el número que hi apareix, i premeu el botó esquerre del
+ratolí. Apareixerà un cursor de texte i podreu editar el valor que hi
+ha. Quan premeu l'"Enter" s'actualitzarà la corresponent component de
+color. Si entreu valors negatius o superiors a 1, es convertiran en
+zero i u respectivament. Pot succeir que el valor que entreu canvïi
+lleugerament en confirmar l'entrada, degut a errors d'arrodoniment.
+
+<br><br>
+<DIV CLASS="nav">
+      <A HREF="main32.html">[Anterior]</a>
+      <A HREF="exercicirgb.html">[Següent]</a>
+    </div>
+</BODY>
+</HTML>

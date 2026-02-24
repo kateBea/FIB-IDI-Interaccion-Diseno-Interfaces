@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","antial");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+[Anterior]
+<a href="m3f20_AntialiasingLinies.html">[Següent]</a>
+<a href="m3e10_Textures.html">[Apartat anterior]</a>
+</div>
+<br><br>
+
+<div class=tit1>Antialiasing.
+<span class=tit2>Supressió de l'efecte d'escala</span>
+</div>
+
+<p> Degut a que tota imatge digital està formada per pixels i aquests
+són discrets, el procés de rasterització es veu obligat a aproximar
+les línies, els segments rectes i els contorns de polígons, tal com ja
+hem vist en capítols anteriors. Segons l'orientació de les línies i
+dels contorns de les cares poligonals i dels objectes, l'efecte de la
+rasterització es fa més important. A aquest efecte se l'anomena efecte
+d'escala, o <em>aliasing</em> en anglès. A la imatge següent,
+generada a partir del model geomètric de la sala de màquines d'un
+vaixell, podeu veure aquest efecte d'escala sobretot a les arestes i
+línies inclinades:
+
+<br>
+<div align=center><img src="imatges/aliasing1.jpg"></div>
+
+<p> Si fem una ampliació de la imatge anterior (o bé si ens acostem a la
+pantalla del computador), l'efecte es fa més palès sobretot en les arestes
+bastant horitzontals (o bastant verticals). Fixeu-vos en el contorns entre
+elements negres i elements grisos de l'escena:
+
+<br>
+<div align=center><img src="imatges/aliasing2.jpg" width=436 height=320 ></div>
+
+<p>
+<p> En canvi, i com és lògic, podeu observar que les arestes verticals
+no mostren aquests errors de discretització.
+
+<p> En aquest apartat veurem els recursos que ens dóna OpenGL per a suprimir
+l'efecte d'escala. El conjunt de tècniques que permeten suprimir o aminorar
+aquest efecte s'anomenen tècniques de'<em>antialiasing</em> o de supressió de
+l'efecte d'escala.
+
+<p> El problema de l'efecte d'escala és degut als casos en que una
+línia o bé el contorn d'un polígon travessa pel mig l'espai quadrat
+corresponent a un pixel. En aquests casos (observeu els contorns
+inclinats de la figura anterior), el procés de rasterització ha
+d'assignar un color al pixel, i alguns cops li assignarà el color del
+polígon que està rasteritzant mentre que altres cops el deixarà amb el
+color del fons. La solució "correcta" sería pintar les dues parts del
+pixel amb colors diferents, però això evidentment no és possible. Les
+tècniques de supressió de l'efecte d'escala o tècniques d'antialiasing
+es basen en pintar el pixel amb un color intermig. Si en un pixel
+d'àrea Ap s'hi projecta un fons de color Cfons i també s'hi projecta
+part del contorn d'un polígon de color Cpol de forma que aquesta
+projecció ocupa una part del pixel d'àrea Apol, es pot veure que
+l'efecte visual de pintar el pixel amb el color,
+
+<div class=formula>
+Cfons * ( 1 - Apol/Ap ) + Cpol * ( Apol/Ap)
+</div>
+
+<p class=noind> és força semblant a l'efecte que tindriem si poguéssim
+pintar de forma exacta la projecció del polígon dins del pixel:
+
+<br>
+<div align=center><img src="imatges/aliasingpixel.jpg" ></div>
+
+<p> Aquest és el principi en què es basen les tècniques de supressió
+de l'efecte d'escala en OpenGL. Als propers apartats veurem en detall
+dues d'aquestes tècniques: les que es basen en les transparències
+d'OpenGL per a fer la barreja del color, i les que es basen en l'ús
+del buffer d'acumulació.  
+
+
+<br><br>
+<DIV CLASS="nav">
+[Anterior]
+<a href="m3f20_AntialiasingLinies.html">[Següent]</a>
+<a href="m3e10_Textures.html">[Apartat anterior]</a>
+</div>
+</body>
+</html>

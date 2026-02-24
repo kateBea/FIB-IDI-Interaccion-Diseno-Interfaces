@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M7.1 Procés de visualització 2D.Sistemes de coordenades.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("vis3D","estr");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+[Anterior]
+<a href="ProjTipusCam.html">[Següent]</a>
+<a href="main62.html">[Apartat anterior]</a>
+</div>
+<br><br>
+
+<div class=tit1>Estructuració del procés de visualització 3D</div>
+
+<P>Com hem dit, el procés de visualització 3D inclou les transformacions
+que parteixen del model 3D de l'escena i generen la geometria de la
+projecció 2D que veurem en pantalla, encara sense passar a coordenades
+de dispositiu. Això implica que s'ha de fer una projecció de 3D a
+2D. Una manera senzilla d'interpretar aquesta projecció és
+representar-la en el pla anterior de la <A CLASS="glossari" HREF="javascript:glossari('PiramVis.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">piràmide de visió</A>: La
+projecció de cada punt P de l'escena és la intersecció de la recta PO
+amb el <A CLASS="glossari" HREF="javascript:glossari('PlaProj.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">pla de projecció</A>. Com que la informació que es
+visualitzarà està totalment continguda dins de la piràmide de visió,
+és clar que la projecció de l'escena visible apareix dins d'un
+rectangle en el pla de projecció (la base anterior de la piràmide de
+visió) que anomenarem <A CLASS="glossari" HREF="javascript:glossari('Fin2D.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">finestra 2D</A>. Un cop acabat el procés de
+visualització 3D, els subprocessos del <A CLASS="glossari" HREF="javascript:glossari('ProcVisu2D.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">procés de visualització 2D</A>
+s'encarregaran de transformar tot el que s'ha projectat dins la
+finestra 2D a coordenades de dispositiu i aplicar totes les
+operacions de realisme i rasterització necessàries per obtenir
+la imatge final a la <A CLASS="glossari" HREF="javascript:glossari('Vista.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">vista</A> dins la <A CLASS="glossari" HREF="javascript:glossari('FinGraf.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">finestra gràfica</A>.
+
+<H2>Subapartats:</h2>
+
+<UL class=temes>
+<li><A HREF="ProjTipusCam.html" target="principal">Projecció segons el
+tipus de càmera</a></li>
+ <li><A HREF="ARatio.html"
+target="principal">Relació d'aspecte</a></li>
+<li><A
+HREF="MapaIntro.html" target="principal">Subprocessos del procés de visualització 3D</a>.
+    <ul><li><b>Important:</b> <A HREF="SubProc.html">Mapa Sensible Procés de visualització 3D</a></li>
+    </ul></li>
+ </UL>
+
+
+<br><br>
+<DIV CLASS="nav">
+[Anterior]
+<a href="ProjTipusCam.html">[Següent]</a>
+<a href="main62.html">[Apartat anterior]</a>
+</div>
+</BODY>
+</HTML>

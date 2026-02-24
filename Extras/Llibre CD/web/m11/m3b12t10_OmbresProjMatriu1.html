@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","ombres");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m3b12_OmbresProjOpenGL.html">[Anterior]</a>
+<a href="m3b12t20_OmbresProjMatriu2.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Ombres.
+<span class=tit2>Ombres per projecció.</span>
+<span class=tit3>Generació usant OpenGL</span>
+</div>
+
+<br>
+<div class=tit3><b>Ombres per projecció sobre el pla ax+by+cz+d=0 (Llum a l'origen)</b></div>
+
+<p> Generació d'ombres amb la font de llum a l'origen i projectant-se
+sobre el pla ax+by+cz+d=0
+
+<p> Donat un vèrtex de l'objecte V=(vx,vy,vz,1), la seva projecció
+sobre el pla ax+by+cz+d=0 on es projecta l'ombra és el punt W=[P]V, on
+la matriu P és la que té com a files (-d, 0, 0, 0), (0, -d, 0, 0), (0,
+0, -d, 0) i (a, b, c, 0).
+
+<p> En efecte, fixeu-vos que el producte [P]V ens dona el punt
+projectat W = (-d*vx/(a*vx, b*vy, c*vz), -d*vy/(a*vx, b*vy, c*vz),
+-d*vz/(a*vx, b*vy, c*vz) ) (s'ha fet ja la divisió per la quarta
+component). Podeu comprovar vosaltres mateixos que el punt projectat W
+compleix l'equació del pla ax+by+cz+d=0. D'altra banda és immediat
+veure que W es troba sobre la recta de projecció que uneix l'origen de
+coordenades amb el punt V, ja que les seves coordenades són
+proporcionals a les de V.
+
+<p> En resum, la matriu de projecció <b>GLfloat MatriuProjeccio
+[4][4]</b> es calcula com:
+
+<pre class=algoritme>
+    MatriuProjeccio [0][0] = -d
+    MatriuProjeccio [1][0] = 0.
+    MatriuProjeccio [2][0] = 0.
+    MatriuProjeccio [3][0] = 0.
+
+    MatriuProjeccio [0][1] = 0.
+    MatriuProjeccio [1][1] = -d
+    MatriuProjeccio [2][1] = 0.
+    MatriuProjeccio [3][1] = 0.
+
+    MatriuProjeccio [0][2] = 0.
+    MatriuProjeccio [1][2] = 0.
+    MatriuProjeccio [2][2] = -d
+    MatriuProjeccio [3][2] = 0.
+
+    MatriuProjeccio [0][3] = a
+    MatriuProjeccio [1][3] = b
+    MatriuProjeccio [2][3] = c
+    MatriuProjeccio [3][3] = 0.
+</pre>
+
+<p> Un cop sabem projectar els punts, la generació de l'ombra de
+l'objecte és immediata i consisteix, com ja hem dit, en dibuixar tots
+els polígons de l'objecte - de fet només caldria dibuixar els que
+estan orientats cap al focus de llum -, amb el color d'ombra i usant
+les coordenades projectades per a cada un dels seus vèrtexs.
+
+<p> Si el focus de llum no és a l'origen, es pot aplicar el procés
+descrit amb la mateixa matriu de projecció, si és abans es fa una
+translació de tota l'escena i focus de llum, que porti el focus de llum
+a l'origen. Si la posició del focus és el punt (xf, yf, zf),
+
+<pre class=algoritme>
+    p = -a*xf - b*yf - c*zf - d
+    MatriuProjeccio [0][0] = p + xf * a
+    MatriuProjeccio [1][0] =   + xf * b
+    MatriuProjeccio [2][0] =   + xf * c
+    MatriuProjeccio [3][0] =   + xf * d
+
+    MatriuProjeccio [0][1] =   + yf * a
+    MatriuProjeccio [1][1] = p + yf * b
+    MatriuProjeccio [2][1] =   + yf * c
+    MatriuProjeccio [3][1] =   + yf * d
+
+    MatriuProjeccio [0][2] =   + zf * a
+    MatriuProjeccio [1][2] =   + zf * b
+    MatriuProjeccio [2][2] = p + zf * c
+    MatriuProjeccio [3][2] =   + zf * d
+
+    MatriuProjeccio [0][3] = a
+    MatriuProjeccio [1][3] = b
+    MatriuProjeccio [2][3] = c
+    MatriuProjeccio [3][3] = p + d
+</pre>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m3b12_OmbresProjOpenGL.html">[Anterior]</a>
+<a href="m3b12t20_OmbresProjMatriu2.html">[Següent]</a>
+</div>
+</body>
+</html>

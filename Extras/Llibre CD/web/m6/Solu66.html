@@ -1,0 +1,27 @@
+<html lang="CA">
+<HEAD><TITLE>M6.1 Procés de visualització 3D.MapaSensible.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+</HEAD>
+
+<BODY>
+<A NAME="inici"></a>
+<br>
+
+<div class=tit2>Solució exercici 6.6</div>
+
+<P> Cal multiplicar la matriu <i>MPers</i> pel vector
+            (0, .5*zNear/f, -zNear, 1).
+            El resultat del producte és el vector (0, .5*zNear, -zNear, zNear).
+
+<p>      Per tant el punt corresponent en 3 dimensions és el <b>(0, .5, -1)</b>.
+
+<p> Observeu que el resultat és normalitzat, i que els valors
+            màxim i mínim de les coordenades es donen en els punts
+            límits del frustrum. En aquest cas les coordenades normalitzades
+            arriben a valer 1 o bé -1.
+
+
+<p align=right><a href='javascript:this.close();'>tancar</a>
+</BODY>
+</HTML>

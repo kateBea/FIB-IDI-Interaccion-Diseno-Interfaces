@@ -1,0 +1,58 @@
+./imatges/algor-zbuf.gif
+8
+2
+./imatges/fig-8-9-a1.jpg
+1..8 A l'inici de l'algorisme
+./imatges/fig-8-9-a2.jpg
+1..8 Buffer de color
+./imatges/fig-8-9-a3.jpg
+1..8 Depth buffer (z-buffer)
+3
+./imatges/fig-8-9-b1.jpg
+2..8 Tractem objecte b
+./imatges/fig-8-9-a2.jpg
+2..8 Buffer de color
+./imatges/fig-8-9-a3.jpg
+2..8 Depth buffer (z-buffer)
+12
+./imatges/fig-8-9-b1.jpg
+3..8 Tractem objecte b
+./imatges/fig-8-9-b2.jpg
+3..8 Buffer de color
+./imatges/fig-8-9-b3.jpg
+3..8 Depth buffer (z-buffer)
+3
+./imatges/fig-8-9-c1.jpg
+4..8 Tractem objecte a
+./imatges/fig-8-9-b2.jpg
+4..8 Buffer de color
+./imatges/fig-8-9-b3.jpg
+4..8 Depth buffer (z-buffer)
+12
+./imatges/fig-8-9-c1.jpg
+5..8 Tractem objecte a
+./imatges/fig-8-9-c2.jpg
+5..8 Buffer de color
+./imatges/fig-8-9-c3.jpg
+5..8 Depth buffer (z-buffer)
+3
+./imatges/fig-8-9-d1.jpg
+6..8 Tractem objecte c
+./imatges/fig-8-9-c2.jpg
+6..8 Buffer de color
+./imatges/fig-8-9-c3.jpg
+6..8 Depth buffer (z-buffer)
+12
+./imatges/fig-8-9-d1.jpg
+7..8 Tractem objecte c
+./imatges/fig-8-9-d2.jpg
+7..8 Buffer de color
+./imatges/fig-8-9-d3.jpg
+7..8 Depth buffer (z-buffer)
+14
+./imatges/fig-8-9-fi-a.jpg
+8..8 Resultat de l'algorisme
+./imatges/fig-8-9-d2.jpg
+8..8 Buffer de color
+./imatges/fig-8-9-fi-RENDER.jpg
+8..8 Imatge final

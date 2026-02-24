@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M3.3.El model HSB.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("color","hsb");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+      <A HREF="main33.html">[Anterior]</a>
+      <A HREF="exercicihsb.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class="tit1">El model HSB.
+<span class="tit2">Definició</span>
+</div>
+
+<P>El model <A
+CLASS="glossari" HREF="javascript:glossari('rgb.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">RGB</A> es troba molt a prop
+de la representaci&oacute; que del color fan certs dispositius gr&agrave;fics, i de
+la manera en que funciona el mecanisme de percepci&oacute; del color en
+nosaltres. Tanmateix &eacute;s lluny de la nostra percepci&oacute; subjectiva del
+color. Existeixen diversos models que han estat proposats per a
+acostar-se m&eacute;s a aquesta percepci&oacute;.  Aqu&iacute; sols tenim lloc per a
+explicar un: el model <A
+CLASS="glossari" HREF="javascript:glossari('hsb.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">HSB</A>. En aquest model el
+par&agrave;metre H, mesurat en graus sexagesimals, mesura la classe de color
+de que es tracta. Als zero graus (o als 360 graus) trobem el vermell,
+i variant H de 0 a 360 passem pel groc, verd, cian, blau, magenta, i
+tornem al vermell (En Java aquest par&agrave;metre varia sols entre 0 i
+1. Per a traduir-lo al valor est&agrave;ndard sols cal multiplicar-ho per 360).
+
+<P>
+Podem representar aquest model de color mitjan&ccedil;ant un con, on
+el vèrtex correspon al negre i l'eix conté els diferents
+nivells de gris, amb el blanc al centre de la base. La figura ens
+
+<applet code="HSBApplet.class" archive="HSBApplet.jar" hspace = 20 vspace = 20 Align=left Hspace=10px width=400 height=400>
+</applet>
+
+mostra una vista d'aquest model. Com passava amb el cub RGB a
+l'apartat anterior, podeu girar-lo per veure'l des de diferents punts
+de vista prement el botó esquerre del vostre ratolí sobre la figura i
+arrossegant-lo. Mireu d'estudiar la figura en relació a l'explicació
+del model que segueix.
+
+<p>En aquest con la direcció de l'eix correspon amb el paràmetre B
+(<I>Brightness</I>, intensitat), i la distància radial a l'eix
+principal representa la saturació, és a dir la presència de gris
+barrejada amb el color (on <I>S=0</I> denota que tot és gris). Els
+colors "purs" ocorren doncs al perímetre de la base, on <I>S=B=1</I>.
+Al vèrtex <I>B=0</I>, els valors de <I>H</I> i <I>S</I> són
+irrellevants. Al llarg del perímetre de la base, els colors
+complementaris apareixen en punts diametralment, oposats de
+l'hexàgon.
+
+<br><br>
+<DIV CLASS="nav">
+      <A HREF="main33.html">[Anterior]</a>
+      <A HREF="exercicihsb.html">[Següent]</a>
+</div>
+</BODY>
+</HTML>

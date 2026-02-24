@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M3.1.El model RGB.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("color","rgb");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+      <A HREF="exercicirgb.html">[Anterior]</a>
+      [Següent]
+      <A HREF="main33.html">[Següent Apartat]</a>
+    </div>
+<br><br>
+
+<div class="tit1">El model RGB.
+<span class="tit2">Relació amb el Hardware Gràfic. Discretització del color. Sobresaturació.</span>
+</div>
+
+<P>
+Els colors que modelem eventualment els voldrem mostrar utilitzant
+algun dispositiu de sortida gràfic, en general una impressora a color
+o una pantalla d'algun tipus. Per a fer-ho haurem de convertir el
+nostre model al del dispositiu. En el cas de pantalles, el model més
+natural és el model <a
+CLASS="glossari" HREF="javascript:glossari('rgb.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">RGB</a>, però la seva
+representació sol diferir de la presentada més amunt. Com sigui que la
+pantalla ha de ser capaç de refrescar-se ràpidament per a evitar que
+faci pampellugues (<I>flickering</I>), cal fer algunes
+simplificacions. La més generalitzada és usar sols aritmètica entera
+pel que fa a les intensitats de colors, amb el que l'intèrval
+<I>[0,1]</I> es representa mitjançant els enters entre <I>0</I> i
+<I>2<SUP>n</SUP>-1</I>, on <I>n</I> designa el nombre de bits
+destinats a representar la intensitat en aquell color. Per exemple, si
+<I>n=8</I>, les intensitats es representaran pels enters <I>0</I>
+(apagat), <I>1</I> (mínima intensitat que podem mostrar d'aquest
+color), <I>2, ..., 255</I> (intensitat màxima d'aquest color que el
+dispositiu és capaç de presentar).  <a name="discr"></a>
+
+<P>
+Aquesta conversió introdueix necessàriament un <A
+CLASS="glossari" HREF="javascript:glossari('arrod.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">error de
+discretització</A> (o d'arrodoniment). La figura ens mostra la
+seva naturalesa. <a name="arrodoniment"></a>
+<img src="imatges/Arrod.gif" alt="" align="left">
+Aquest error no serà apreciable si <I>n</I> és prou gran, però sí si
+és petit. De fet veiem a la figura que el valor màxim d'aquest error
+és <I>1 / 2(2<sup>n-1</sup>)</I>. En realitat experimentalment es
+comprova que l'ull humà no pot diferenciar més d'unes 40 intensitats
+diferents d'un color, pel que els 255 nivells que ens donen 8 bits són
+més que suficients per a aconseguir un efecte de gradació contínua de
+color. En moltes ocasions és possible enganyar l'ull perquè es
+conformi amb molt menys. La figura de l'esfera il·luminada per tres
+focus de color usada més amunt tenia sols 255 colors diferents.
+Tanmateix, això requereix una cuidadosa elecció dels colors. Si
+repartim 8 bits entre les tres components de color, podrem dedicar,
+per exemple, 3 bits a dues d'elles i dos a la tercera (típicament al
+blau, al que som menys sensibles). Però tres bits sols ens donaran
+vuit nivells diferents en cada una d'aquestes components, i seran del
+tot insuficients per a representar gradacions contínues de color.
+
+<P>Cal tenir en compte que a vegades aquest error d'arrodoniment, en
+actuar independentment en les tres components de color, pot produir
+efectes inesperats. Suposem per exemple que <i>a</i> és un dels valors
+de transició entre dos valors discrets (un dels punts en què la
+diagonal negra talla una de les rectes verticals), i sigui <i>S</i> el
+salt entre dos valors discrets. Considereu un color com
+<I>(a-S/10000,a+S/10000,a+S-1/10000)</i>, que l'arrodoniment mapejarà
+sobre <I>(a-S/2,a+S/2,a+S/2)</i>. Així el color original, que era un
+gris lleugerament blavós es converteix, per la discretització, en un
+gris semblant, però lleugerament cian.
+
+<P>
+Un altre aspecte que cal tenir en compte en l'ús dels models de color
+és la sobresaturació, que resulta per la imposició artificial d'un
+nivell màxim d'energia a la llum. Així, quan fem càlculs amb models de
+llum, pot resultar que la intensitat d'una (o més) components valguin
+més d'u (veure <a href="../m8/m8-7.html">Models
+d'il·luminació empírics</a>). En aquests casos caldrà escalar
+uniformement totes les intensitats (de totes les components de color)
+per tal que la màxima intensitat de l'escena sigui 1.0.  Això suposa
+un comportament linial, que no es correspon realment amb els nostres
+ulls; en alguns casos pot interessar fer altres correccions no linials
+perquè (per exemple) les parts en ombra d'una escena altrament molt
+brillant no siguin completament negres.
+
+<br><br>
+<DIV CLASS="nav">
+      <A HREF="exercicirgb.html">[Anterior]</a>
+      [Següent]
+      <A HREF="main33.html">[Següent Apartat]</a>
+    </div>
+</BODY>
+</HTML>

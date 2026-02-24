@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("anim","vrml");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m4b40_AnimacioExercicis.html">[Anterior]</a>
+[Següent]
+<a href="m4c10_MorphingIntro.html">[Següent apartat]</a>
+</div>
+<br><br>
+
+<div class=tit1>Animació amb vrml.
+<span class=tit2>Altres mètodes i algorismes</span>
+</div>
+
+<p> Com hem vist al principi d'aquesta secció, les tècniques
+d'animació es poden classificar (vegeu el llibre <A
+HREF="../Biblio.html">[The Computer Image]</a>) de la següent manera:
+
+
+<ul>
+<li> Tècniques per l'animació d'objectes rígids.
+<li> Tècniques per l'animació d'estructures articulades.
+<li> Tècniques per l'animació de malles i estructures deformables.
+<li> Tècniques per l'animació basades en la física.
+<li> Tècniques per l'animació procedural.
+<li> Animació del comportament.
+<li> Animació del cos humà i tècniques per l'animació facial.
+</ul>
+
+<p> Als apartats anteriors hem introduït els conceptes bàsics del
+llenguatge vrml'97, i hem vist com generar animacions 3D senzilles per
+animar conjunts d'objectes rígids, estructures articulades simples i
+deformacions que es puguin modelar amb escalats anisotròpics. Veurem
+ara algunes propostes més avançades que s'han fet els darrers anys. En
+tot cas, i com a ampliació, podeu consultar el capítol sobre animació
+per ordinador (pàgs 209 a 227) del llibre "Informática Gráfica",
+ediciones de la Univ. de Castilla la Mancha, 1998, ISBN 84-89958-23-8
+o l'article de B. Robertson sobre Toy Story, "Toy Story: A triumph of
+Animation", Computer Graphics World, Vol 18, 1995, pàgs 28-38.
+
+<p> Pel que fa a les tècniques per l'animació d'estructures
+articulades, que tenen aplicació a la simulació del moviment de
+robots, palanques i màquines i al moviment d'animals i persones en que
+modelitzem l'animació del seu esquelet, s'han fet diferents propostes per
+animar de forma coordinada les diferents parts del conjunt. Quan es
+volen obtenir les posicions de tots els elements d'una cadena
+d'objectes articulats a partir del moviment dels extrems (moviment de
+totes les articulacions del braç, per exemple, quan ens donen la
+trajectoria que volem que segueixi un dit), s'utilitzen tècniques de
+cinemàtica inversa: R. Boulic, R. Mas, D. Thalmann, "A Robust Approach
+for the Center of Mass Position Control with Inverse Kinetics",
+Journal Computers & Graphics Vol 20 (5), 1996.  En alguns casos
+s'utilitzen sistemes (anomenats de rotoscòpia) per captar la dinàmica
+del moviment natural i després aplicar-la a l'animació de l'escena
+sintètica; això és força habitual en aplicacions on cal animar el
+moviment d'animals o el moviment humà. Vegeu per exemple l'article de
+R. Maiocchi, "3D Character Animation Using Motion Capture", al llibre
+"Interactive Computer Animation", de D. Thalmann i N. Thalmann Eds.,
+Prentice Hall 1996.
+
+<p> Dins les tècniques per l'animació de malles i estructures
+deformables, les possibles aplicacions inclouen la deformació de
+vestits i teixits o les deformacions d'òrgans en aplicacions en
+medicina. Pel que fa a la simulació de la deformació dels teixits, un
+article interessant és el de David Baraff i A. Witkin "Large Steps in
+Cloth Simulation", al ACM Siggraph 1998 pàgs 43-54. Pel que fa a la
+deformació volumètrica d'òrgans en medicina, podeu consultar l'article
+de S.Cotin, H.Delingette i N.Ayache "Real Time Elastic Deformations of
+Soft Tissues for Real Time Surgery Simulation", de la revista IEEE
+Transactions on Visualization and Computer Graphics, Vol 5, 1999, pàgs
+62-72, o bé l'article de D.Bielser, V.A. Maiwald i Markus Gross
+"Interactive Cuts Through 3-Dimensional Soft Tissue", aparegut a
+Computer Graphics Forum Vol 18 (3), Eurographics 1999, ISSN 0167-7055,
+pàgs 31-38.
+
+<p> El camp de les tècniques per animació basades en la física és molt
+ampli i depenent de l'aplicació, ja que les lleis de la física són
+diferents en cada cas. Un article recent sobre el control interactiu
+en aquests sistemes d'animació és el "Interactive Control for
+Physically-Based Animation", de J.Laszlo, M. van de Panne i Eugene
+Fiume, aparegut al ACM Siggraph 2000, pàgs 201 a 208.  Un article que
+presenta una visió més general -encara que més antic- és el de Bruno
+Arnaldi, G. Dumont i Gerard Hegron, "Dynamics and Unification of
+Animation Control", aparegut a la revista The Visual Computer, Vol 5
+nums 1-2, 1989, pàgs 22-31.
+
+<p> Pel que fa a l'animació del comportament (cas en que els objectes
+tenen comportament propi i reaccionen als estímuls externs) un treball
+interessant, que introdueix el modelatge cognitiu, és l'article de
+John Funge, X. Tu i Demetri Terzopoulos, "Cognitive Modeling:
+Knowledge, Reasoning and Planning of Intelligent Characters", aparegut
+al ACM Siggraph 1999, pàgs 29 a 38. Els autors presenten dues
+aplicacions en que animen animals prehistòrics i el moviment dels
+peixos.
+
+<p> Finalment, en el camp de l'animació del cos humà i de les
+tècniques per l'animació facial s'hi ha treballat molt i es disposa de
+molta biliografia. Teniu un primer article resum a la revista The
+Visual Computer, Vol 3, pàgs 254-264 (D. Tost, X. Pueyo, "Human Body
+Animation: A Survey", The Visual Computer 1988). Més recentment,
+tenim, entre molts d'altres,
+
+<ul>
+<li> El treball de T. Capin, I.S. Pandzic, N. Magnenat-Thalmann i
+D. Thalmann titulat "Virtual Humans for Representing Participants in
+Immersive Virtual Environments" (Proc. of the FIVE Conference, London
+1995) </li>
+
+<li> L'article de D. Coco, "Breathing Live into 3D Humans" a la
+revista Computer Graphics World, Vol 18 (8), 1995, pàgs 41-49 </li>
+
+<li> L'article sobre edició de moviments humans de John Lee i
+S.Y. Shin, "A Hierarchical Approach to Interactive Motion Edition for
+Human Like Figures", del ACM Siggraph 1999, pàgs 39 a 48 </li>
+</ul>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m4b40_AnimacioExercicis.html">[Anterior]</a>
+[Següent]
+<a href="m4c10_MorphingIntro.html">[Següent apartat]</a>
+</div>
+</body>
+</html>

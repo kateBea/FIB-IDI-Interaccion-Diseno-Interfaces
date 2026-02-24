@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html lang="CA">
+
+<head>
+
+<title></title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+
+<script type="text/javascript" src="../upc.js"></script>
+
+<SCRIPT>
+
+top.passara("visreal","ombres");
+
+</SCRIPT>
+
+<BODY>
+
+<DIV CLASS="nav">
+
+<a href="m3b12t20_OmbresProjMatriu2.html">[Anterior]</a>
+
+<a href="m3b16_OmbresProj2OpenGL.html">[Següent]</a>
+
+</div>
+
+<br><br>
+
+
+
+<div class=tit1>Ombres.
+
+<span class=tit2>Ombres per projecció.</span>
+
+<span class=tit3>Projecció sobre més d'un pla</span>
+
+</div>
+
+
+
+<p>Si l'ombra es projecta sobre més d'un polígon (com en el cas d'una
+
+ombra que es projecta sobre diverses parets en una habitació),
+
+l'algorisme és una mica més complicat perque el procés s'ha de
+
+repetir. En el cas d'una habitació, per a cada paret on es projecten
+
+ombres haurem de fer el següent:
+
+
+
+<ul>
+
+<li> inicialitzar l'stencil buffer de forma que deixi pintar dins de
+
+     la projecció de la corresponent paret i no deixi fora,</li>
+
+<li> projectar les cares de l'objecte sobre el pla de la paret,</li>
+
+<li> pintar els polígons projectats, usant el color de l'ombra.</li>
+
+</ul>
+
+
+
+<p> A l'applet següent, podeu observar l'efecte quan aquest bucle el
+
+repetim, no per totes les parets de l'habitació, sinó solament pel
+
+terra i per la paret de l'esquerra. Proveu d'observar l'escena des de
+
+diferents punts de vista, i també de canviar la posició del focus de
+
+llum. En els exercicis al final d'aquest apartat, utilitzareu una
+
+altra vegada aquest applet per a practicar els conceptes de projecció
+
+de l'ombra i l'efecte de l'stencil buffer.
+
+
+
+<div align=center>
+
+<applet code="InterficieOmbres.class" archive="Ombres.jar,../comuns.jar" height=600 width=545></applet> 
+
+</div>
+
+
+
+<p> El problema d'aquest enfoc d'obtenció d'ombres per projecció, és
+
+que l'algorisme és laboriós en el cas que l'ombra es projecti sobre
+
+objectes amb moltes cares. En aquest cas, caldrà usar algorismes més
+
+sofisticats que veurem més endavant. Ara veurem les possibles
+
+implementacions en OpenGL de l'algorisme que hem descrit.
+
+
+
+
+
+<br><br>
+
+<DIV CLASS="nav">
+
+<a href="m3b12t20_OmbresProjMatriu2.html">[Anterior]</a>
+
+<a href="m3b16_OmbresProj2OpenGL.html">[Següent]</a>
+
+</div>
+
+</body>
+
+</html>
+

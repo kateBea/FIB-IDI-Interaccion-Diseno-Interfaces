@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("proj","avanc");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m2i40_Accum.html">[Anterior]</a>
+[Següent]
+<a href="m2j10_resum.html">[Següent apartat]</a>
+</div>
+<br><br>
+
+<div class=tit1>Conceptes avançats.
+<span class=tit2>Manegant píxels</span>
+</div>
+
+<p>Hi ha ocasions en les que volem operar directament amb taules de
+píxels, sigui per capturar una escena que hem pintat amb OpenGL, com
+per pintar una escena obtinguda d'altra forma, potser per
+digitalització d'imatges o per fer servir imatges generades en memòria
+per un programa. Per a aquests casos OpenGL ofereix una sèrie de
+mecanismes per tractar bitmaps (en que la informació és d'un sol bit
+per píxel) i en general imatges o <i>pixmaps</i> que contenen una
+quantitat arbitrària d'informació per píxel.
+
+<p>Els bitmaps es fan servir fonamentalment per a definir fonts
+rasteritzats. El seu ús no el discutirem aquí, tot i que podeu
+consultar les <a href="../manpages/gl/bitmap.html">pàgines de
+manuals</a> si els voleu fer servir.
+
+<p>Les operacions que hom vol realitzar amb les imatges són:
+llegir-les d'un buffer a la memòria del nostre procés, dibuixar-les a
+partir d'una imatge digital a la memòria del nostre procés, o
+copiar-les d'un buffer a un altre o d'un buffer al mateix buffer però
+en una altra posició. L'esquema a seguir és senzill. Es fa servir
+<tt>glReadBuffer</tt> per a designar l'origen de les operacions de
+lectura, i <tt>glDrawBuffer</tt> per a designar el destí de les
+d'escriptura. Aleshores podem llegir una regió rectangular d'un buffer
+a la memòria del nostre procés mitjançant <tt>glReadPixels()</tt>,
+escriure-la des de memòria cap al buffer triat mitjançant
+<tt>glDrawPixels()</tt>, copiar-la d'un buffer a un altre mitjançant
+<tt>glCopyPixels()</tt> o d'un buffer a la memòria de textures amb
+<tt>glCopyTexImage*()</tt> o <tt>glCopyTexSubimage*()</tt>. Aquestes
+dues darreres crides es discuteixen a <a
+href="../m11/m3e40_TextSintesi.html">l'apartat de textures</a> del
+capítol següent. També hi ha una crida (<tt>glGetTexImage()</tt>) per
+a copiar una textura de la memòria de textures a la memòria del nostre
+procés, que no discutirem en aquest llibre, però per la qual podeu
+consultar les <a href="../manpages/gl/getteximage.html">pàgines de
+manuals</a>.
+
+<p>Les primitives d'escriptura requereixen totes que hi hagi una
+"posició actual al raster" vàlida. Aquesta posició representa la
+posició del <i>viewport</i> a partir de la qual es copiarà el
+rectangle de la imatge desitjada (la posició en qüestió serà on es
+pinti la cantonada inferior esquerra de la imatge). Aquesta posició es
+determina cridant a <tt>glRasterPos*()</tt>. Si en el moment de cridar
+a <tt>glDrawPixels()</tt> o a <tt>glCopyPixels()</tt>, per exemple, la
+posició al raster no és correcta (l'indicador
+<tt>GL_CURRENT_RASTER_POSITION_VALID</tt> és fals), aleshores aquestes
+crides tenen un efecte nul (no modifiquen l'estat d'OpenGL).
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m2i40_Accum.html">[Anterior]</a>
+[Següent]
+<a href="m2j10_resum.html">[Següent apartat]</a>
+</div>
+</body>
+</html>

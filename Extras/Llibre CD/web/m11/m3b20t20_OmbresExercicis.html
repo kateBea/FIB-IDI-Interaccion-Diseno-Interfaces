@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","ombres");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m3b20t10_OmbresOpenGL.html">[Anterior]</a>
+<a href="m3b20t30_OmbresVolFinal.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Ombres.
+<span class=tit2>Càlcul per volums d'ombres.</span>
+<span class=tit3>Exemples i exercicis</span>
+</div>
+
+<p> Aqui teniu altra vegada el programa de simulació d'ombres en una
+habitació (ara, els objectes són una mica diferents). Fixeu-vos que
+ara cada línia de codi té un caràcter d'indentificació al principi de
+la mateixa.
+
+<p class=exercici><span class=exernum>Exercici 1.4:</span>
+Proveu d'anar eliminant algunes línies de codi, i podeu
+anar veient l'efecte que té el que feu sobre la imatge final que teniu
+al costat. En particular, podeu fer el següent:
+
+<ul class=exerc>
+<li> Que ens passaria si eliminem la crida a <b>render</b> de les
+línies de codi "b"?
+</li>
+<li> Que ens passaria si eliminem la línia de codi "d"? I si eliminem
+la "f"? I si la que eliminem és la "h"? </li>
+<li> Que ens passaria si eliminem la línia de codi "k" i/o la "l"?
+</li>
+<li> Que ens passaria si a la línia de codi "m" copiéssim els
+paràmetres de la línia "j"?
+</li>
+</ul>
+
+<p class=exercici><span class=sollnk><A
+HREF="javascript:MuestraFin('m3b20s25_ShadVolDiapos.html','470','540','yes')">Solució</A>.</span>
+<br><br>
+Podeu dir perquè s'obté cada un dels efectes ?
+
+<p>
+<pre class=algoritme>
+<b>void redraw_shadow</b>(void)
+{
+  a  <b>glClear</b>(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+
+       /* Visualitzem l'escena desactivant el buffer de color */
+  b  <b>glColorMask</b>(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
+  b  <b>render</b>(); /* <a href="m3b20t45_RutinaRender2.html"> visualitza l'escena </a> */
+
+       /* Activem l'stencil buffer i el modifiquem amb les cares frontals */
+  c  <b>glEnable</b>(GL_STENCIL_TEST);
+  c  <b>glDepthMask</b>(GL_FALSE);
+  c  <b>glStencilFunc</b>(GL_ALWAYS, 0, 0);
+  c  <b>glEnable</b>(GL_CULL_FACE);
+  c  <b>glStencilOp</b>(GL_KEEP, GL_KEEP, GL_INCR);
+  d  <b>glCullFace</b>(GL_BACK);
+  e  <b>Dibuixa</b>(SHADOWVOL);
+       /* Modifiquem l'stencil buffer amb les cares posteriors del volum d'ombra */
+  e  <b>glStencilOp</b>(GL_KEEP, GL_KEEP, GL_DECR);
+  f  <b>glCullFace</b>(GL_FRONT);
+  g  <b>Dibuixa</b>(SHADOWVOL);
+  g  <b>glDepthMask</b>(GL_TRUE);
+  g  <b>glColorMask</b>(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+  h  <b>glCullFace</b>(GL_BACK);
+  i  <b>glDepthFunc</b>(GL_LEQUAL);
+  i  <b>glStencilOp</b>(GL_KEEP, GL_KEEP, GL_KEEP);
+  i  <b>glDisable</b>(GL_CULL_FACE);
+
+       /* Apaguem la llum i visualitzem els polígons foscos */
+  j  <b>glStencilFunc</b>(GL_EQUAL, 1, 1);
+  k  <b>glDisable</b>(GL_LIGHT0);
+  l  <b>render</b>(); /* <a href="m3b20t45_RutinaRender2.html"> visualitza l'escena </a> */
+
+       /* Encenem la llum i pintem els polígons clars de l'escena */
+  m  <b>glStencilFunc</b>(GL_EQUAL, 0, 1);
+  n  <b>glEnable</b>(GL_LIGHT0);
+  o  <b>render</b>(); /* <a href="m3b20t45_RutinaRender2.html"> visualitza l'escena </a> */
+
+    <b>glDepthFunc</b>(GL_LESS);
+    <b>glDisable</b>(GL_STENCIL_TEST);
+
+    <b>glutSwapBuffers</b>();
+    <b>glFlush()</b>;
+}
+</pre>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m3b20t10_OmbresOpenGL.html">[Anterior]</a>
+<a href="m3b20t30_OmbresVolFinal.html">[Següent]</a>
+</div>
+</body>
+</html>

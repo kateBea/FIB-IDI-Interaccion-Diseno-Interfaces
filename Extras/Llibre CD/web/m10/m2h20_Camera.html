@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("proj","basic");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m2h15_Geometria.html">[Anterior]</a>
+<a href="m2h30_Matrius.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Conceptes bàsics. 
+<span class=tit2>Càmera</span>
+</div>
+
+<P>A més d'especificar la geometria que volem pintar, cal dir "com
+l'estem mirant". Una analogia útil és pensar en que col·loquem una
+càmera i fem una foto de l'escena. Amb la mateixa escena, podem
+obtenir moltes fotografies diferents segons la disposició de la càmera
+i de les seves característiques.
+
+<P>Amb <em>disposició</em> volem dir on és (la seva posició) i cap a
+on (i com) apunta (la seva orientació). Amb les seves
+<em>característiques</em> volem dir l'apertura del seu objectiu (si
+fem servir un gran angular o un teleobjectiu), i el tipus de projecció
+que usa (és a dir projecció perspectiva, com qualsevol càmera real, o
+paral·lela, volent dir que la càmera recull els raigs de llum
+provinents de l'escena en una direcció donada  únicament. Aquest és un
+sistema de projecció molt usat en la representació de peces en
+enginyeria).
+
+<P>En OpenGL, la càmera està en realitat sempre a l'origen de
+coordenades, i mira sempre en la direcció de l'eix negatiu de les
+<i>Z</i>. La direcció "cap amunt" a la foto sempre és la de l'eix
+positiu de les <i>Y</i>. Si volem pensar en una càmera posada en un altre
+posició, el que en realitat fem es moure tota l'escena "al revés" per
+tal que una càmera com la que tot just hem descrit vegi el mateix
+que la càmera que voliem. Per tal de fer-ho, hem d'empilar a la pila
+de matrius de <tt>MODELVIEW</tt> una transformació adequada, que podem
+calcular nosaltres mateixos o la podem calcular usant la rutina
+<tt>gluLookAt()</tt>.
+
+<p>Pel que fa a l'apertura i projecció, les especificarem en la matriu
+de projecció (<tt>PROJECTION</tt>), usant <tt>glOrtho()</tt>,
+<tt>glFrustum()</tt> o <tt>gluPerspective</tt>. Aquestes crides
+permeten especificar els sis plans que delimiten el volum de l'espai
+que es projectarà a la pantalla. En el cas de la projecció paral·lela
+(<tt>glOrtho()</tt>) aquests plans són paral·lels dos a dos, i
+ortogonals entre parelles diferents.  En canvi en la projecció
+perspectiva (amb <tt>glFrustum()</tt> o <tt>gluPerspective()</tt>) el
+volum és un tronc de piràmide. És important que en aquestes crides
+doneu valors raonables als paràmetres <tt>zNear</tt> i <tt>zFar</tt>
+que especifiquen els plans de retallat anterior i posterior,
+respectivament. Recordeu que aquests es donen en <em>distància a
+l'observador</em>, i que haurien d'estar el més ajustats possible a
+l'escena a presentar per tal de treure el màxim profit del <i>buffer
+de profunditat</i>.
+
+<p>La definició de càmera descrita fins ara transforma la geometria de
+l'escena que es vol visualitzar a coordenades normalitzades de
+dispositiu. Encara no s'ha donat informació de la naturalesa del
+dispositiu físic en què la visualització tindrà lloc. Les coordenades
+són encara nombres reals (normalitzats a l'interval
+[-1.0,1.0]). Finalment, la definició del <i>viewport</i> mitjançant
+una crida a <tt>glViewport()</tt> permetrà transformar aquestes en
+coordenades del dispositiu físic concret. En l'analogia de la càmera,
+això correspon, en part, a la definició de la pel·lícula que fem
+servir. La resolució del dispositiu (donada per l'amplada i alçada del
+<i>viewport</i>) es correspon amb el "gra" de la pel·lícula (si bé el
+gra té una forta component aleatòria, mentre que els píxels tenen una
+distribució totalment regular).
+
+<p>Tanmateix hi ha un altre aspecte relacionat amb la definició del
+<i>viewport</i> sense paral·lel senzill en aquesta analogia. Si la <a
+class=glossari href="javascript:glossari('RelAs.html');"><em>relació
+d'aspecte</em></a> no coincideix amb la donada a la finestra en 3D
+(explícitament en la crida a <tt>gluPerspective()</tt> i implícitament
+en les crides a <tt>glOrtho()</tt> i <tt>glFrustum()</tt>), es
+produirà una deformació de l'escena. És responsabilitat de les nostres
+aplicacions fer que això no succeeixi (a menys que es vulgui).
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m2h15_Geometria.html">[Anterior]</a>
+<a href="m2h30_Matrius.html">[Següent]</a>
+</div>
+</body>
+</html>

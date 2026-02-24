@@ -1,0 +1,201 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("anim","vrml");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m4b30t20_TransformacionsEnVRML.html">[Anterior]</a>
+<a href="m4b40_AnimacioExercicis.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Animació amb vrml.
+<span class=tit2>Generació d'animacions simples usant el llenguatge vrml</span>
+</div>
+
+<p> Una animació, com sabem, ha de modificar alguna característica de
+l'escena al llarg del temps (la posició si volem simular el moviment
+d'un vehicle, l'orientació si estem simulant una nòria o un molí, el
+color si estem simulant el canvi de llum al llarg del dia, etc).
+
+<p> Com veurem a continuació, en vrml'97 podem generar animacions
+senzilles a partir d'escenes estàtiques com les que hem construït fins
+ara. Les animacions ens podran modificar (segons un "guió" que
+especificarem, basat en determinades situacions clau) la posició,
+rotació, escalat i material d'objectes i/o de grups d'objectes. És
+important veure que tota animació requereix tenir un control sobre el
+temps: cal saber quan començar, quan acabar, i com de ràpid s'ha
+d'anar. En tot cas, per a generar una animació en vrml'97 ens cal:
+
+<ul>
+<li> Una escena vrml com les que ja hem generat </li>
+
+<li> Un rellotge que ens va generant events i ens va marcant el ritme
+de l'animació.
+<A HREF="javascript:MuestraFin('m4b30s31_Relotge.html','600','400','yes')">
+Aquí teniu informació detallada </A> sobre la sintaxi de l'especificació dels
+rellotges a les animacions </li>
+
+<li> Un node que envia events. Els events són missatges que s'envien
+entre nodes. Tot event conté informació d'un instant de temps (el
+moment en que ha estat enviat) i conté també el valor d'un atribut,
+que és la dada que enviem (una translació, un color, etc). Els nodes
+que envien events han de tenir un nom, indicat amb un "DEF".
+<A HREF="javascript:MuestraFin('m4b30s32_Motors.html','600','400','yes')">
+Aquí trobareu els detalls de la sintaxi d'aquests nodes </A>, que els
+anomenarem motors de l'animació </li>
+
+<li> Un node que rep els events de l'animació i que els usa per a
+modificar alguns dels seus atributs. Aquest node també cal que tingui
+un nom, que haurem d'indicar amb un "DEF".
+<A HREF="javascript:MuestraFin('m4b30s33_ReceptorsEvents.html','600','400','yes')">
+Aquí teniu informació detallada </A> sobre la sintaxi dels receptors
+d'events </li>
+
+<li> Una ruta que ens connecti un node que produeix events amb un altre
+dels que en rep. Les rutes són les connexions que ens permeten
+configurar les animacions mitjançant la definició de cap on aniran els
+events </li>
+</ul>
+
+<p> Una sentència de tipus ruta, <b>ROUTE</b>, connecta dos nodes entre
+sí. Un d'ells és el que envia events, i el segon és el que els
+rep. Una sentència <b>ROUTE</b> sempre indica:
+
+<ul>
+<li> Quin node és el que envia, i quin és el nom de l'"eventOut" </li>
+<li> Quin node és el que reb l'event, i quin és el nom de l'"eventIn" </li>
+</ul>
+
+<p> La sintaxi, en un cas en que volguéssim canviar la rotació d'un
+node, seria,
+
+<pre class=algoritme>
+       <b>ROUTE </b>NodeQueEnvia.rotation_changed
+          <b>TO </b>NodeQueReb.set_rotation
+</pre>
+
+<p> Cal observar que les paraules clau <b>ROUTE</b> i <b>TO</b> han
+d'estar sempre en majúscules.
+
+<p> L'especificació de rutes sempre es fa de dues en dues: Per a cada
+atribut que calgui animar ens caldrà indicar una ruta del rellotge al
+motor de l'animació, i una altra que recull els events de sortida
+d'aquest motor i els envia al node que hem d'animar.
+
+<p> Vegem un exemple senzill. (<A
+HREF="javascript:MuestraFin('m4b30s34_CubOscila.html','600','400','yes')">Aquí</A>
+podeu veure el corresponent model en vrml'97):
+
+<p><center><a href="vrml/CubOscila.wrl"> Cub que oscil·la </a> </center>
+
+<p> Fixeu-vos que el model anterior conté la definició del cub i
+l'esfera, un rellotge, un motor i l'especificació de la ruta. El motor
+és un PositionInterpolator, que dona les posicions a 5 instants de
+temps claus (t=0., t=0.25, t=0.5, t=0.75, t=1.). Fixeu-vos també que
+la posició per t=1 coincideix amb la posició per t=0, per evitar salts
+durant l'animació. El fet que la coordenada z vagi variant entre 2 i 3
+és el que produeix l'efecte que el cub no sols va de dreta a
+esquerra, sino que s'acosta a l'esfera quan passa més aprop
+d'ella. Pel que fa a la ruta, primer enviem els events de rellotge al
+motor: "ROUTE Clock.fraction_changed TO Motor.set_fraction", i després
+enviem els events de sortida del motor a l'atribut de translació del
+cub: "ROUTE Motor.value_changed TO Cub.set_translation".
+
+<p> Vegem ara un altre exemple, que amplia una mica l'anterior. Ara el
+cub gira a més d'oscil·lar (<A
+HREF="javascript:MuestraFin('m4b30s35_CubOscilaGira.html','600','400','yes')">Aquí
+</A> podeu veure el corresponent model en vrml'97).
+
+<p><center><a href="vrml/CubOscilaGira.wrl"> Cub que oscil·la i va girant </a> </center>
+
+<p> Fixeu-vos que simplement hem afegit un motor de tipus
+"OrientationInterpolator" al que ja teniem, i hem definit una segona
+ruta per a que els events d'aquest nou motor ens governin la rotació
+del cub. Per simplicitat hem posat els mateixos instants clau als dos
+motors, pero podrien ser diferents. Podeu provar d'editar el fitxer
+vrml i canviar els valors de qualsevol dels dos interpoladors, veient
+l'efecte que es produeix.
+
+<p> En aquest altre exemple que mostrem a continuació tenim un
+cilindre, un cub i un motor d'interpolació de posicions. L'únic
+diferent respecte l'exemple anterior és que la trajectòria és més
+complicada i requereix l'especificació d'un nombre molt més gran de
+posicions a instants clau de temps. En general, podeu especificar
+trajectòries suaus i tot el complexes que volgueu, a base
+d'especificar la posició a un nombre suficientment elevat de punts
+clau. <A
+HREF="javascript:MuestraFin('m4b30s36_Helix.html','600','400','yes')">Aquí
+</A> podeu veure el corresponent model en vrml'97:
+
+<p><center><a href="vrml/CubHelixSuau.wrl"> Trajectòria en hèlix </a> </center>
+
+<p> A l'exemple següent tenim un altre cas d'utilització d'un
+interpolador d'orientacions.  (<A
+HREF="javascript:MuestraFin('m4b30s37_Insecte.html','600','400','yes')">Aquí
+</A> podeu veure el corresponent model en vrml'97):
+
+<p><center><a href="vrml/Insecte.wrl"> Un insecte </a> </center>
+
+<p> Observeu en primer lloc que les quatre parts de l'insecte (cos,
+cap, i les dues ales) en realitat són esferes, amb escalats i
+rotacions adequats. A les ales, a més d'indicar el seu escalat i
+translació, hem d'especificar l'origen de coordenades per tal que
+girin al voltant de l'eix del cos -recordeu que les rotacions es fan
+al voltant d'eixos que passen per l'origen de coordenades-. El model
+conté dos motors d'orientació, un per cada ala (MotorAla1 i MotorAla2)
+que generen valors simètrics de la rotació. Les rutes especifiquen com
+sempre el camí del rellotge a cada un dels motors, i de cada un dels
+motors al "set_rotation" de la corresponent ala de l'insecte.
+
+<p> Vegem ara un altre exemple que inclou animació del moviment,
+deformació i canvi de color.  (<A
+HREF="javascript:MuestraFin('m4b30s38_TresEsferes.html','600','400','yes')">Aquí
+</A> podeu veure el corresponent model en vrml'97):
+
+<p><center><a href="vrml/EsferesDeformaOscilaSimple.wrl"> Tres esferes
+que xoquen </a> </center>
+
+<p> Fixeu-vos en primer lloc que la definició de l'Esfera2 no és
+explícita, sinó que usa la definició de la forma i material de la
+primera Esfera. D'altra banda, i a part del rellotge (Clock) ara tenim
+quatre motors: un per la posició de cada esfera lateral que simulen la
+seva oscil·lació, un per la deformació de l'esfera central -fixeu-vos
+que la deformació es simula simplement amb un canvi d'escala, però que
+l'efecte és força realista- i un darrer motor pel canvi de color de
+l'esfera central. Els noms dels motors són "Oscilador1", "Oscilador2",
+"Deformador" i "CanviColor". Fixeu-vos també que el nombre d'intants
+clau de temps que seran interpolats durant l'animació és diferent per
+cada un dels motors.
+
+<p> Finalment podeu veure l'animació d'una serp. (<A
+HREF="javascript:MuestraFin('m4b30s39_Serp.html','600','400','yes')">Aquí</A>
+podeu veure el corresponent model en vrml'97). Aquest és un exemple
+preparat per <a
+href="javascript:MuestraFin('m4b30s15_Nadeau.html','300','250','yes')">
+David Nadeau </a>,
+
+<p><center><a href="vrml/NadeauSnake.wrl"> Una serp ...  </a>
+</center>
+
+<p> Observació general: El codi vrml'97 que editeu no es compila,
+directament és visualitzat pel navegador. Això implica que no hi ha
+detecció dels errors que pogueu fer quan editeu el vostre fitxer. Si
+aquest conté errors, el que us passarà és que el navegador no
+carregarà el model i quedarà amb la pantalla en negre. En aquest cas,
+haureu de repassar la sintaxi del fitxer vrml'97 que heu creat.
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m4b30t20_TransformacionsEnVRML.html">[Anterior]</a>
+<a href="m4b40_AnimacioExercicis.html">[Següent]</a>
+</div>
+</body>
+</html>

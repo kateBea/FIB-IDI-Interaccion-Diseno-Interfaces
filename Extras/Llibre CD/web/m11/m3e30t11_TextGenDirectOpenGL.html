@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","textu");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m3e30t10_TextGenDirect.html">[Anterior]</a>
+<a href="m3e30t12_TextGenDirEx1.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Textures.
+<span class=tit2>Aplicació de textures planes.</span>
+<span class=tit3>Parametrització directa: Assignació directa per polígons</span>
+</div>
+
+<p> Veiem primer un exemple d'assignació directa de coordenades de
+textura.
+
+<PRE class=algoritme>
+   /* Activació de l'objecte textura corresponent */
+   <b>glBindTexture</b> (GL_TEXTURE_2D, texname);
+
+   /* Pinta un quadrat texturat */
+   <b>glBegin</b> (GL_QUADS);
+   <b>glTexCoord2f</b>(0.0,0.0); <b>glVertex3f</b>(-2.0,-1.0,0.0);
+   <b>glTexCoord2f</b>(0.0,1.0); <b>glVertex3f</b>(-2.0,1.0,0.0);
+   <b>glTexCoord2f</b>(1.0,1.0); <b>glVertex3f</b>(0.0,1.0,0.0);
+   <b>glTexCoord2f</b>(1.0,0.0); <b>glVertex3f</b>(0.0,-1.0,0.0);
+   <b>glEnd</b>();
+</PRE>
+
+<p>En l'enllaç següent trobareu informació addicional sobre la comanda
+ <a href="../m15/m7c60_Textures.html#glTexCoord"><b>glTexCoord</b></a>.
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m3e30t10_TextGenDirect.html">[Anterior]</a>
+<a href="m3e30t12_TextGenDirEx1.html">[Següent]</a>
+</div>
+</body>
+</html>

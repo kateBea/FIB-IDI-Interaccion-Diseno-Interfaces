@@ -1,0 +1,237 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("proj","basic");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m2h55_Ilum.html">[Anterior]</a>
+[Següent]
+<a href="m2i10_DisplayLists.html">[Següent apartat]</a>
+</div>
+<br><br>
+
+<div class=tit1>Conceptes bàsics.
+<span class=tit2>Selecció</span>
+</div>
+
+<p>Quan implementem aplicacions interactives, sovint l'usuari ha
+d'indicar sobre quina o quines entitats geomètriques vol operar. Per
+exemple l'usuari de l'aplicació pot voler esborrar un objecte, i el
+més natural és que l'assenyali amb el ratolí per a indicar-nos a quin
+es refereix. En altres casos pot voler moure un vèrtex, col·lapsar una
+aresta, modificar el color d'una cara,... En general qualsevol de les
+entitats que formen el model pot ser passible d'aquest tractament.
+
+<P>Tanmateix el càlcul que indiqui a quina entitat es referia l'usuari
+quan va prèmer el botó del ratolí en un píxel determinat pot no ser
+trivial. Donada la resolució actual de les pantalles, no es pot
+demanar als usuaris, per començar, que seleccionin un píxel determinat
+<em>exactament</em>. Per contra cal esperar que simplement ho hagin
+fet a prop del punt que volien. Per tant la nostra aplicació es veuria
+obligada a calcular a partir del píxel l'equació d'un raig que passés
+pel píxel en qüestió i per l'ull (l'origen de coordenades en
+coordenades d'observador), hauriem d'invertir la transformació de
+<tt>MODELVIEW</tt>, i recòrrer la base de dades cercant entitats del
+tipus desitjat que fossin prou a prop del raig. Observeu a més que
+algunes d'aquestes distàncies no són immediates de calcular, com per
+exemple la distància d'una aresta al raig. Tot el procés tindria doncs
+un cost apreciable, i requeriria un esforç de desenvolupament no
+menyspreable.
+
+<P>OpenGL ofereix un mecanisme de selecció per a facilitar aquestes
+tasques.  Per tal d'entendre'l i fer-lo servir, però, hem d'entendre
+primer com associar noms a les primitives per tal que OpenGL ens pugui
+dir les que han estat triades.
+
+<p>Per a establir aquesta associació, OpenGL fa servir una pila de
+noms. Un nom és simplement un enter que podem triar com ens plagui. La
+raó per a tenir una pila de noms és que permet tenir les entitats
+agrupades jeràrquicament. Un cub pot, per exemple, ser l'objecte
+'<tt>5</tt>' de l'escena, i  les seves cares '<tt>1</tt>' a
+'<tt>6</tt>'. Aleshores podem col·locar a la pila un <tt>5</tt> quan
+començem a pintar el cub, i empilar el nom corresponent de cada cara
+abans de pintar-la.
+
+<P>En un moment donat, OpenGL es trobarà en un de tres estats
+possibles respecte del mode de dibuix. El primer (que és en el què es
+troba inicialment) és <tt>GL_RENDER</tt>. En aquest mode les comandes
+que li arriben produeixen fragments que s'envien a la resta del
+pipeline, i poden eventualment dibuixar-se al buffer. Els altres dos
+modes són <tt>GL_SELECT</tt>, i <tt>GL_FEEDBACK</tt>. El que ens
+interessa aquí és òbviament <tt>GL_SELECT</tt>. Quan OpenGL està en
+aquest mode, les primitives que enviem no arriben mai a pintar-se. En
+canvi, qualsevol primitiva que intersecti el volum de visió (retallat
+si s'ha especificat pels plans de retallat addicionals que es vulgui),
+produeix una anotació en un buffer que haguem designat
+nosaltres. Consultant aquell buffer, en acabar, podrem determinar
+totes les primitives que intersecaven un cert volum (determinat per
+les transformacions de visualització que estéssim fent servir).
+
+<P>Aqest mecanisme, que tot just hem descrit grollerament, té algunes
+particularitats que hem de conèixer:
+<ul>
+<li>Totes les primitives dins del volum, amb l'excepció que expliquem
+a continuació, produiran anotacions, inclús si no superarien el test de
+profunditat. És a dir que veurem anotacions tant per les cares
+visibles com per les que no.
+<li>Si una cara és filtrada per l'opció de <i>culling</i> aleshores no
+produirà cap anotació, malgrat estigui dins el volum designat
+<li>Algunes altres operacions (com certes operacions amb píxels) poden
+produir anotacions
+<li>Sols es produeix una anotació quan ha hagut (al menys) una
+primitiva dins del volum del <i>frustum</i>, i fem un canvi a la pila de
+noms, o quan tornem al mode <tt>GL_RENDER</tt>. D'aquesta manera un
+objecte format per moltes primitives apareixerà un sol cop a la llista
+si totes les primitives comparteixen el mateix nom (i es dibuixen
+consecutivament)
+</ul>
+
+<p>L'esquelet d'un programa que utilitzi aquest mecanisme pot ser el següent:
+
+<PRE class=algoritme>
+      GLuint selectBuf[BSIZE];  // buffer per rebre les anotacions
+      ...
+      glSelectBuffer (BSIZE, selectBuf);  // li ho indiquem a OpenGL
+      glRenderMode   (GL_SELECT);         // ens col·loquen en mode GL_SELECT
+      glInitNames();                      // esborrem la pila de noms
+      InitSelectionViewingTransf();       // indiquem el volum a fer servir
+      glPushName(0);
+      pintaObjecteZero();
+      glLoadName(1);
+      pintaObjecteU();
+      glLoadName(2);
+      pintaObjecteDos();
+      ...
+      glFlush();
+      numAnotacions = glRenderMode(GL_RENDER);
+      /* ara selectBuf conté els noms dels objectes que intersequen
+       * el volum designat. numAnotacions és un enter que diu quantes
+       * n'hi ha
+       */
+</PRE>
+
+<p>Observeu com la crida a <tt>glRenderMode()</tt> al final d'aquest
+tros de codi retorna el nombre d'anotacions fetes al buffer. Heu de
+tenir en compte també que tot el que passa en mode <tt>GL_SELECT</tt>
+no afecta al que es veu a pantalla. Així mateix, si no torneu al mode
+<tt>GL_RENDER</tt> la vostra aplicació ja no tornarà a dibuixar! (I a
+més no sabreu que les anotacions a <tt>selectBuf</tt> estiguin completes.)
+
+<p>Mireu també l'ús de <tt>glPushName()</tt> i
+<tt>glLoadName()</tt>. La definició de <tt>glLoadName()</tt> és que
+sobreescriu el nom del cim de la pila amb l'argument que li
+passem. Però si no hi ha un nom al cim, és un error. Per això sempre
+cal cridar al menys un cop a <tt>glPushName()</tt> abans de poder fer
+crides a <tt>glLoadName()</tt>. Si no voleu fer servir una estructura
+jeràrquica de noms, podeu empilar un nom arbitrari al començar, tot
+just després de cridar a <tt>glInitNames()</tt>, i a partir
+d'aleshores fer servir sols <tt>glLoadName()</tt>. Tingueu sempre
+present que la pila de noms tindrà una fondària màxima que depén de la
+vostra instal·lació.
+
+<p>A l'exemple hem postergat explicar com indicar el volum de selecció,
+relegant l'operació a una subrutina
+<tt>InitSelectionViewingTransf()</tt>. En la majoria dels casos el que
+ens interessa és restringir aquesta regió a un tros del frustum que la
+nostra aplicació fa servir, que es projecta "prop" d'un punt (on es
+troba el cursor). Per tal d'aconseguir això, la llibreria d'utilitats
+ens ofereix la crida <tt>gluPickMatrix()</tt>. Per exemple, podriem
+fer servir el següent codi en una rutina cridada quan l'usuari ha premut
+el botó del ratolí al píxel <i>(x,y)</i> en coordenades de dispositiu:
+
+<pre class=algoritme>
+    ...
+    glGetIntegerv(GL_VIEWPORT, viewport); // obtenim el viewport d'OpenGL
+    glSelectBuffer(BSIZE, selectBuf);
+    glRenderMode(GL_SELECT);
+    glInitNames();
+    glPushName(0);
+    glMatrixMode(GL_PROJECTION);          // anem a redefinir la projecció
+    glPushMatrix();                       // salvem l'actual
+    glLoadIdentity();			  // Posem la identitat al cim
+    gluPickMatrix( (GLdouble) x,	  // Coordenada de disp. x del ratolí
+                   (GLdouble) viewport[3]-y, // Coord y del ratolí
+		   5.0, 5.0 ,	          // ample i alt de la zona de selecció
+		   viewport);		  // tamany actual del viewport
+    glOrtho o gluPerspective....
+    pintaEscena();
+    glMatrixMode(GL_PROJECTION);
+    glPopMatrix();                        // restablim la transf. de vis.
+    glFlush();
+    numAnotacions = glRenderMode(GL_RENDER);
+    ...
+</pre>
+
+<p>Fixeu-vos que essencialment el que es fa és afegir al final de les
+transformacions de projecció una matriu calculada per
+<tt>gluPickMatrix()</tt>, que defineix un petit <i>viewport</i> al voltant de
+les coordenades <i>(x,y)</i> del ratolí. Llavors es torna a pintar
+l'escena en mode <tt>GL_SELECT</tt> per a veure quines primitives es
+projectarien en aquella regió. Finalment tornem al mode
+<tt>GL_RENDER</tt> perquè la nostra aplicació pugui continuar
+refrescant normalment la pantalla, i perquè s'actualitzin les
+anotacions al buffer de selecció. També restablim la matriu de
+projecció a la que hi havia abans de començar el procés.
+
+<p>Cada anotació al buffer de selecció consisteix dels següents
+camps:
+<ul>
+<li>El nombre de noms a la pila de noms en el moment en que s'ha
+pintat la (primera) primitiva que origina l'anotació
+<li>El mínim i màxim valor de <i>z</i> (en coordenades de dispositiu)
+de totes les primitives que han intersecat el volum de selecció des
+de la darrera anotació (és a dir el mínim i màxim per les primitives
+que comparteixen aquests noms)
+<li>Els noms que hi ha a la pila de noms, començant pel fons
+</ul>
+
+<p>Com veieu l'extracció de la informació del buffer de selecció
+requereix un petit parsejat. Tingueu en compta que les coordenades de
+profunditat estan normalitzades per dispositiu. El pla de retallat
+anterior correspondrà a la fondària zero, mentre que el de retallat
+posterior a la fondària màxima (<tt>0xffffffff</tt>). Si voleu valors
+normalitzats, haureu de fer el quocient entre el valor retornat i el
+valor màxim possible tot just citat; però assegureu-vos que feu la
+pertinent conversió a coma flotant abans de dividir!
+
+
+
+<A name="PerColor"></a>
+<div class=tit3><b>Mètode alternatiu: selecció per color</b></div>
+
+<p>Quan hem de seleccionar una entre moltes cares, sovint es recorre a
+una altra tècnica. Es tria un color diferent per cada cara (en general
+disposarem de 24 o 32 bits!), i es pinten totes les cares al <i>back
+buffer</i> (és a dir es pinten amb double buffering activat, però no
+s'emet la crida per actualitzar la imatge a pantalla) amb "flat
+shading" (<tt>glShadeModel(GL_FLAT)</tt>). Aleshores l'usuari prem el
+botó del ratolí a un píxel, i el programa simplement consulta quin
+color té aquell píxel. D'aquesta manera s'obté directament la cara
+<b>visible</b> en aquell punt, i a més el procés resulta més senzill i
+ràpid. Cal evidentment esborrar el back buffer i refrescar-lo abans de
+fer la crida que el copia al front buffer!
+
+<p>Per contra, aquest mètode no donarà bons resultats si el que es vol
+seleccionar és una aresta o un vèrtex, ja que no és fàcil
+incorporar-li una regió d'atracció, i caldria per tant que l'usuari
+encertés exactament un píxel en que es veiés l'element corresponent.
+
+<p>Per poder usar aquesta tècnica necessitarem conèixer els mecanismes
+per a treballar amb píxels que s'expliquen al <a
+href="m2i80_Pixels.html">següent apartat</a> d'aquest capítol.
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m2h55_Ilum.html">[Anterior]</a>
+[Següent]
+<a href="m2i10_DisplayLists.html">[Següent apartat]</a>
+</div>
+</body>
+</html>
+

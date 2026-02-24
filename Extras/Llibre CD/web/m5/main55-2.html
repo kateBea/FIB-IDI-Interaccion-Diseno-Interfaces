@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M5.5.Representeció per fronteres </TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;
+charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("model","brep");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+      <A HREF="main55.html">[Anterior]</a>
+      <a href="main55-3.html">[Següent]</a>
+     </div>
+<br><br>
+
+<div class="tit1">Representació per fronteres.
+<span class="tit2">Descripció de la classe SolidFronteres</span>
+</div>
+
+<P>
+Existeixen moltes possibles representacions internes que compleixen
+aquests requisits. A continuació us presentem una classe
+"SolidFronteres" que dóna una implementació molt simple per a que la
+pogueu usar en els exercicis de la resta del llibre. A la literatura
+podeu trobar altres representacions (com la anomenada Winged Edge),
+que se'n van més enllà de l'àmbit d'aquest llibre.
+</P>
+
+<P>
+Com veieu a la classe "SolidFronteres", es defineix la geometria i
+topologia de la frontera de l'objecte a través del nombre de cares
+(NumCares) i de vèrtexs (NumVertexs) i de dues taules (Cares, Vertexs)
+que emmagatzemen les cares i vèrtexs de l'objecte. Cada cara
+emmagatzema el seu <A HREF="../m4/normal.html">vector normal</A> i una
+taula d´índexs als seus vèrtexs dins de la taula de vèrtexs de
+l'objecte, mentre que cada vèrtex emmagatzema la seva
+geometria. Entendrem que el vector normal a cada cara està sempre
+dirigit en el sentit cap enfora de l'objecte. De la mateixa manera,
+els vèrtexs de tota cara es troben ordenats cíclicament i de manera
+coherent amb el seu vector normal, segons la regla del tirabuixó.
+</P>
+
+<P>
+La classe "SolidFronteres" ha estat definida amb tres constructors
+(d'un cub -paral·lelepípede-, de còpia amb transformació geomètrica i
+d'un prisma obtingut per escombrat), però evidentment podríem definir
+altres constructors (vegeu exercici 11 a l'apartat
+d'autoavaluació). El constructor d'escombrat s'explica al següent
+apartat. A part d'altres funcions i mètodes públics, la classe
+"SolidFronteres" permet accedir al vèrtex i-èssim de l'objecte,
+obtenir els punts 3D i el vector normal de la cara i-èssima, així com
+interrogar l'objecte sobre diverses relacions geomètriques i
+topològiques. En ares de la brevetat, no s'han inclòs tots els
+possibles mètodes públics d'interrogació. La classe no emmagatzema les
+arestes de forma explícita, però inclou un mètode CaraAresta, que
+retorna els dos punts extrems de l'aresta donades la cara i la posició
+de l'aresta en la cara.
+</P>
+
+<P>
+Observeu que, a part de la geometria de la frontera, la classe
+"SolidFronteres" usa una classe "Material" que ens permet codificar el
+material de l'objecte i que ens servirà per a obtenir-ne visualitzacions
+realistes. La representació i ús dels materials es veurà amb més
+detall en el capítol de <A HREF="../m8/m8-7.html">models d'il·luminació</A>.
+</P>
+
+
+<br><br>
+<DIV CLASS="nav">
+      <A HREF="main55.html">[Anterior]</a>
+      <a href="main55-3.html">[Següent]</a>
+  </div>
+
+</BODY>
+
+</HTML>
+

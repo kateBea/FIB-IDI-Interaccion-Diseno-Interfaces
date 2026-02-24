@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","ombres");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m3b10_OmbresProj.html">[Anterior]</a>
+<a href="m3b12t10_OmbresProjMatriu1.html">[Següent]</a>
+</div>
+<br><br>
+
+
+<div class=tit1>Ombres.
+<span class=tit2>Ombres per projecció.</span>
+<span class=tit3>Generació usant OpenGL</span>
+</div>
+
+<p> Comencem per veure com obtenir l'ombra d'un objecte arbitrari
+des d'un focus de llum arbitrari - que pot trobar-se a l'infinit - i
+projectada sobre un pla arbitrari. En OpenGL símplement cal trobar la
+matriu de projecció adequada, multiplicar-la a la pila de matrius, i
+dibuixar l'objecte en el color de l'ombra. (Cal tenir en compte que si
+l'ombra es projecta sobre més d'un pla, això s'ha de repetir per cada
+un dels plans restringits amb l'stencil buffer).
+
+<p> Veiem com trobar la matriu de projecció en dos casos. Imaginem que
+volem generar ombres que es projecten sobre el pla ax+by+cz+d = 0. Per
+a calcular la matriu de projecció, podem pensar que <a
+href="m3b12t10_OmbresProjMatriu1.html">tenim la font de llum a
+l'origen de coordenades</a> (això ens serveix en general per una font
+puntual a qualsevol posició si abans fem una translació de tota
+l'escena a l'origen), o bé ens podem trobar en el cas que <a
+href="m3b12t20_OmbresProjMatriu2.html">tinguem una font de llum
+direccional</a> situada a l'infinit. Prement en els dos links, podeu
+veure els detalls de com calcular la matriu de projecció en els dos
+casos.
+
+<p> Ara, un cop hem calculat la matriu de projecció, el que cal fer en
+OpenGL és el següent:
+
+<pre class=algoritme>
+   <b>Dibuixa</b> (QuadratAlPlaDeProjeccio);
+   <b>glDisable</b> (GL_DEPTH_TEST);
+
+   <b>glMatrixMode</b> (GL_MODELVIEW);
+   <b>glPushMatrix</b> ();
+   <b>glMultMatrixf</b> ( (GLfloat*) MatriuProjeccio);
+   <b>glDisable</b> (GL_LIGTH0);
+   <b>Dibuixa</b> (ObjecteQueProdueixOmbra);
+   <b>glPopMatrix</b> ();
+
+   <b>glEnable</b> (GL_LIGTH0);
+   <b>glEnable</b> (GL_DEPTH_TEST);
+   <b>Dibuixa</b> (ObjecteQueProdueixOmbra);
+   <b>Dibuixa</b> (FocusDeLlum);
+</pre>
+
+<p> A les primeres dues crides, es dibuixa el polígon (aquí és un
+quadrat, però podria tenir qualsevol forma) al pla ax+by+cz+d=0 sobre
+el qual es projectaran les ombres, i es desactiva el test de
+profunditat per tal que el dibuix de l'ombra en el mateix pla de
+projecció no ens doni problemes.
+
+<p> El segon bloc, de cinc crides, empila la matriu de projecció
+<b>MatriuProjeccio</b> que hem calculat abans, apaga la llum i dibuixa
+l'objecte que produeix l'ombra. Com que hem empilat la matriu de
+projecció (i l'hem multiplicat per la transformació que teniem abans a
+la pila), tots els polígons de l'objecte es pinten en color d'ombra i
+projectats sobre el pla de projecció. Un cop acabat el dibuix,
+desempilem la matriu de projecció i deixem la pila com abans.
+
+<p> Finalment, el tercer bloc encén la llum, torna a activar el test
+de profunditat al Frame buffer, i dibuixa la resta de l'escena.
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m3b10_OmbresProj.html">[Anterior]</a>
+<a href="m3b12t10_OmbresProjMatriu1.html">[Següent]</a>
+</div>
+</body>
+</html>

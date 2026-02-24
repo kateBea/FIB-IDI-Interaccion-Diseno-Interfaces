@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("proj","avanc");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+[Anterior]
+<a href="m2i20_AltresBuffers.html">[Següent]</a>
+<a href="m2h15_Geometria.html">[Apartat anterior]</a>
+</div>
+<br><br>
+
+<div class=tit1>Conceptes avançats.
+<span class=tit2>Display lists</span>
+</div>
+
+<p>Els programes gràfics sovint necessiten avaluar grups de comandes
+repetides vegades, sense canvis. Per exemple, si la vostra aplicació
+presenta un objecte en pantalla que l'usuari pot moure arrossegant el
+ratolí, el que l'aplicació farà internament és calcular una nova
+transformació de visualització (o si preferiu una nova posició de la
+càmera), i tornar a enviar a dibuixar tota la geometria de l'objecte.
+
+<p>OpenGL ofereix un mecanisme molt eficient per a accelerar aquest
+tipus d'aplicacions: les display lists. Aquestes display lists
+permeten emmagatzemar (sovint al propi hard gràfic, però en tot cas en
+el servidor) un seguit d'operacions gràfiques preavaluades, de tal
+manera que la seva reavaluació es limita al mínim necessari. Tots els
+càlculs auxiliars que OpenGL necessita quan la crida s'emet la primera
+vegada no li caldrà repetir-los, perquè la display list haurà
+emmagatzemat el resultat.
+
+<p>Per contra, les display lists no poden llegir-se, editar-se ni
+ampliar-se. Sí poden, en canvi, cridar-se des de dins d'altres display
+lists. La majoria de crides a OpenGL poden fer-se dins d'una display
+list, i tenen l'efecte de modificar l'estat o els buffers d'OpenGL
+quan s'executa la llista de la mateixa manera que ho hauria fet la
+crida (o seguit de crides) en aquell punt. L'excepció més important
+són les crides que interroguen l'estat d'OpenGL. Com a regla general,
+les crides que retornen un resultat o reben paràmetres per referència
+(com totes les <tt>glGet*</tt>) no poden emmagatzemar-se a una display
+list.
+
+<p>Recordeu doncs que pot interessar guardar en una display list no
+sols geometria, sino també instruccions per a dur l'estat a un
+determinat. Per exemple, el càlcul de matrius de transformació implica
+l'avaluació de funcions trigonomètriques, i sovint suposa la
+concatenació (i per tant la multiplicació) de diverses matrius. Si
+aquestes transformacions s'emmagatzemen a una display list, es
+guardaran ja avaluades; una implementació pot triar inclús guardar el
+resultat del producte de totes les matrius, únicament. L'execució de
+la display list comportarà doncs la definició de la transformació a una
+fracció del cost.
+
+<P>Per accedir a les display lists, cadascuna d'elles vé designada
+per un nom. Aquest nom és un nombre natural (diferent de zero). Per
+tal d'obtenir noms que no estiguin en ús, fem servir la funció
+<tt>glGenLists(num)</tt>, que ens retorna un nom <i>n</i> (un <tt>GLuint</tt>)
+tal que cap de les llistes <i>n, n+1, ... ,n+num-1</i> està en
+ús. Retorna zero (que no és el nom de cap llista) si no és possible
+satisfer la demanda.
+
+<p>Un cop obtingut un nom de display list disponible, podem
+emmagatzemar crides a OpenGL en la display list col·locant-les entre
+<tt>glNewList()</tt> i <tt>glEndList()</tt>.
+
+<p><tt>glNewList()</tt> té dos paràmetres. El primer és el nom de la
+llista que volem assignar, i el segon el mode en què ho farem. Si la
+llista contenia alguna cosa, el fet de cridar a <tt>glNewList()</tt>
+la destruirà abans de començar a emmagatzemar noves crides. El mode és
+una de les constants <tt>GL_COMPILE</tt> o
+<tt>GL_COMPILE_AND_EXECUTE</tt>. Si fem servir <tt>GL_COMPILE</tt>,
+les crides que emmagatzemem es guarden a la display list però no tenen
+efecte sobre l'estat d'OpenGL ni sobre els continguts dels
+buffers. Sols el tindran quan més tard executem la llista. En el mode
+<tt>GL_COMPILE_AND_EXECUTE</tt>, en canvi, les crides s'executen en
+mode immediat a més d'emmagatzemar-se.
+
+<p>Les crides que no es poden emmagatzemar (com <tt>glGet*</tt>,
+<tt>glGenLists</tt>, <tt>glPixelStore</tt> i <tt>glFlush</tt>, per
+exemple) s'executen en mode immediat encara que es cridin entre
+<tt>glNewList()</tt> i <tt>glEndList()</tt>.
+
+<p>Quan volem executar una display list, cridem a
+<tt>glCallList(nom)</tt>, i l'efecte és com si inseríssim en aquell
+punt les crides emmagatzemades a la display list <b>amb els valors que
+tenien els paràmetres en el moment en que es van guardar a la display
+list</b>. Les display lists no són paramètriques. Si després de crear
+una display list modifiquem els valors dels paràmetres que haviem fet
+servir, el canvi no tindrà cap efecte en l'execució futura de la
+display list.
+
+<p>Les display lists poden parametritzar-se fins un cert punt a través
+de llistes anidades. Com hem mencionat dins de la definició d'una
+display list podem cridar a <tt>glCallList()</tt>. L'efecte no és que
+la citada llista s'insereixi en aquell punt, sino sols una referència
+a aquella altra llista. De fet ni tant sols és necessari en aquell
+punt que la llista que cridem estigui definida. Més endavant, podrem
+anar canviant el contingut de la llista cridada, modificant així el
+comportament de la llista contenidora.
+
+<p>Tingueu present que hi pot haver un màxim per a la fondària en què
+poguem anidar llistes. OpenGL garanteix que aquesta fondària és
+almenys 64, i podeu averiguar la que correspon a una implementació
+donada interrogant-la mitjançant
+<tt>glGetIntegerv(GL_MAX_LIST_NESTING,...)</tt>.
+
+<p>Els métodes <tt>glGet*</tt>, com hem dit, no es poden emmagatzemar
+a una display list. Si volem evitar que les crides d'una display list
+modifiquin l'estat d'OpenGL en algun aspecte, podem fer servir
+<tt>glPushAttrib()</tt> i <tt>glPopAttrib()</tt>, que a més resulten
+més eficients (veure <a
+href="../manpages/gl/pushattrib.html">manpages</a>).
+
+<br><br>
+<DIV CLASS="nav">
+[Anterior]
+<a href="m2i20_AltresBuffers.html">[Següent]</a>
+<a href="m2h15_Geometria.html">[Apartat anterior]</a>
+</div>
+</body>
+</html>
+

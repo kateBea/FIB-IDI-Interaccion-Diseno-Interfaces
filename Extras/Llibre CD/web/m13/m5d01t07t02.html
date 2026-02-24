@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("realvirt","visester");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m5d01t07t01.html">[Anterior]</a>
+<a href="m5d01t07t03.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Visió estereoscòpica.
+<span class=tit2>Codificació i visualització d'imatges estereoscòpiques.</span>
+<span class=tit3>Estèreo passiu</span>
+</div>
+
+<p>L'estèreo passiu es basa en la utilització de filtres polaritzadors per
+projectar les imatges de l'ull dret i de l'ull esquerre sobre una única
+pantalla de forma simultània, de forma que la llum dirigida a l'ull dret té
+una polarització perpendicular a la llum dirigida a l'ull esquerre. Per tant,
+es basa en fer una <b>separació en la direcció de polarització de la llum</b>.</p>
+
+<div align="center"><img border="0" src="imatges/passiu2.jpg" width="200" height="220"></div>
+
+<p>Per utilitzar estèreo passiu es requereixen <b>dos canals de vídeo. </b>Un
+canal proporcionarà la imatge per l'ull esquerre, i l'altre la imatge per l'ull
+dret. Això es pot aconseguir, bé utilitzant una estació gràfica amb dues
+sortides gràfiques, bé combinant les sortides gràfiques de dos computadors,
+que hauran d'estar sincronitzats.&nbsp;</p>
+
+<p class=noind><b>Codificació de les imatges al frame buffer</b></p>
+
+<p>Donat que cada canal de vídeo porta el seu propi buffer, per l'estèreo
+passiu n'hi ha prou amb usar doble-buffering.</p>
+
+<p class=noind><b>Codificació del senyal de vídeo</b></p>
+
+<p>En estèreo passiu, hi ha dos senyals de vídeo, cadascú dels quals codifica
+la imatge d'un dels dos ulls. Aquesta figura mostra com evolucionen els senyals
+en funció del temps:</p>
+
+<div align="center"><img border="0" src="imatges/estereopassiu.jpg" width="481" height="313"></div>
+
+<p class=noind><b>Dispositiu de visualització</b></p>
+
+<p>L'estèreo passiu requereix que dos senyals de vídeo es visualitzin en una
+única pantalla, cadascuna amb una polarització diferent. Per tant no és pot
+utilitzar amb els monitors; només és compatible amb els sistemes basats en
+projecció.&nbsp;</p>
+
+<p>La solució més freqüent per l'estèreo passiu és utilitzar dos
+projectors, on a la sortida del projector es situa un filtre polaritzador. El
+filtre polaritzador actua deixant passar només la llum que oscil·la en la
+direcció determinada pel seu eix de polarització. Un filtre es col·loca amb
+l'eix de polarització vertical, i l'altre amb l'eix de polarització
+horitzontal. Els projectors s'ajusten perquè projectin les imatges exactament
+en la mateixa zona de la pantalla:</p>
+
+<div align="center"><img border="0" src="imatges/passiu3.jpg" width="300" height="293"></div>
+
+<p class=noind><b>Separació del parell estereoscòpic</b></p>
+
+<p>De cara a que cada ull de l'usuari pugui veure només les imatges que li
+corresponen, l'usuari ha de dur unes <b>ulleres de polarització</b>  (<i>polariser
+glasses</i>) que porten filtres polaritzadors davant de cada ull, amb els eixos de
+polarització perpendicular l'un respecte de l'altre. D'aquesta forma aconseguim
+que cada ull vegi només les imatges que li pertoquen.&nbsp;Aquesta figura
+mostra unes ulleres polaritzades, amb els eixos de polarització col·locats a
+45 i -45 graus.&nbsp;</p>
+
+<div align="center"><img border="0" src="imatges/white.polarized2.jpg" width="600" height="71"></div>
+
+<p class=noind><b>Requeriments</b></p>
+
+<p>En síntesi, per utilitzar estèreo passiu necessitem:</p>
+
+<ul>
+  <li>Hardware gràfic amb dos canals de vídeo</li>
+  <li>Dos projectors</li>
+  <li>Dos filtres de polarització, col·locats a la sortida de cada projector.</li>
+  <li>Pantalla de projecció que preservi la polarització de la llum</li>
+  <li>Ulleres de polarització (ulleres passives)</li>
+</ul>
+
+<p class=noind><b>Visualització</b>&nbsp;</p>
+
+<pre class=algoritme>
+  // Procés que controla el canal de vídeo dret:
+  // dibuixem imatge per l'ull dret
+  calculCamera(ull dret); // calculem els paràmetres de la càmera virtual
+  <b>glClear</b>(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+  dibuixarEscena(...);
+</pre>
+
+<pre class=algoritme>
+  // Procés que controla el canal de vídeo esquerre:
+  // dibuixem imatge per l'ull esquerre
+  calculCamera(ull esquerre); // calculem els paràmetres de la càmera virtual
+  <b>glClear</b>(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+  dibuixarEscena(...);
+</pre>
+
+<p>Els dos processos anteriors poden executar-se en una mateixa màquina
+(estacions de treball amb sortida gràfica dual) o en diferents màquines
+sincronitzades.</p>
+
+<p class=noind><b>Valoració&nbsp;</b></p>
+
+<p>El principal avantatge és que permet utilitzar projectors més econòmics,
+doncs no cal que suportin freqüències de refresc molt elevades, i que les
+ulleres són molt econòmiques.</p>
+
+<p>El principal inconvenient és que requereix duplicar bona part del hardware,
+incloent-hi els projectors.</p>
+
+<p>Aquest sistema s'utilitza per la projecció en pantalles de gran format, com
+a l'IMAX 3D.</p>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m5d01t07t01.html">[Anterior]</a>
+<a href="m5d01t07t03.html">[Següent]</a>
+</div>
+</body>
+</html>

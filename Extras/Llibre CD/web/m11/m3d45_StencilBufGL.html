@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","reflex");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m3d43_StencilBuffer.html">[Anterior]</a>
+<a href="m3d47_ClippingPlanes.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Reflexions.
+<span class=tit2>Reflexions en miralls plans: ús d'stencil buffer.</span>
+<span class=tit3>Exemple d'implementació en OpenGL</span>
+</div>
+
+<P>Ara veurem una versió lleugerament diferent que fa servir
+l'<i>stencil buffer</i> per a evitar pintar fora del mirall els objectes
+reflectits.
+
+<pre class=algoritme>
+   <a href="m3d45t10_Init.html">/* Esborrem i pintem l'escena */</a>
+   <b>glClear</b>(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+
+   <a href="m3d45t20_InitStencil.html">/* Inicialitzem l'Stencil Buffer */</a>
+   <b>glEnable</b>(GL_STENCIL_TEST);
+   <b>glStencilFunc</b>(GL_ALWAYS, 1, 0);
+   <b>glStencilOp</b>(GL_KEEP, GL_KEEP, GL_REPLACE);
+   <b>glDepthMask</b>(GL_FALSE);
+   <b>glColorMask</b>(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
+   pintaPoligonMirall();
+   <b>glDepthMask</b>(GL_TRUE);
+   <b>glColorMask</b>(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+   <b>glStencilFunc</b>(GL_EQUAL, 1, 1);
+   <b>glStencilOp</b>(GL_KEEP, GL_KEEP, GL_KEEP);
+
+   <a href="m3d45t30_EscenaRefl.html">/* Ara pintem els objectes virtuals */</a>
+   <b>glPushMatrix</b>();
+   <b>glScalef</b>(-1.f, 1.f, 1.f);
+   <b>glTranslatef</b>(-200.f, 0.f, 0.f);
+   <b>glLightfv</b>(GL_LIGHT0, GL_POSITION, lightpos);
+   <b>glCullFace</b>(GL_FRONT);
+   pintaEscena();
+
+   <a href="m3d45t40_Mirall.html">/* Restablim l'status normal i pintem el mirall i l'escena real */</a>
+   <b>glPopMatrix</b>();
+   <b>glLightfv</b>(GL_LIGHT0, GL_POSITION, lightpos);
+   <b>glCullFace</b>(GL_BACK);
+   <b>glColor4d</b>(1., 1., 1., 0.15);
+   <b>glEnable</b>(GL_BLEND);
+   <b>glBlendFunc</b>(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+   pintaPoligonMirall();
+   <b>glDisable</b>(GL_BLEND);
+   <b>glDisable</b>(GL_STENCIL_TEST);
+   pintaEscena();
+</pre>
+
+<p>Com ja s'ha subratllat, aquest mètode té l'avantatge de servir
+inclús quan l'observador podria veure els objectes virtuals (és a dir
+que no hi ha cap altre objecte que s'hi interposi en la visió d'ells),
+com quan el mirall es troba no sobre una paret, sinó al bell mig d'una
+cambra.
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m3d43_StencilBuffer.html">[Anterior]</a>
+<a href="m3d47_ClippingPlanes.html">[Següent]</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M6.1 Procés de visualització 3D.MapaSensible.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("vis3D","estr");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+<a href="MSExplicacio6.html">[Anterior]</a>
+<a href="MSTransmet6.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Subprocessos.
+<span class=tit2>Algorisme per a la visualització en filferros 5</span>
+</div>
+
+<P>
+En aquest cas només cal transformar les coordenades (x,y) de cada
+punt de la taula <i>PuntsProj</i> per tal de passar de les coordenades
+normalitzades de la finestra gràfica 2D a coordenades de
+dispositiu. Si les coordenades (en píxels) dels extrems inferior
+esquerra i superior dret de la <A CLASS="glossari" HREF="javascript:glossari('Vista.html','*','400','300','no','no','no','yes')" onMouseOver="window.status='Glossari';return true" onMouseOut="window.status='';return true">vista</A> són (xmin,ymin) i (xmax,ymax) respectivament, tindrem:
+
+<PRE class=algoritme>
+<b>Per</b> i en [1..np] <b>fer</b>
+   x := PuntsProj[i].Punt.x
+   y := PuntsProj[i].Punt.y
+   PuntsDisp[i].x := xmin + (xmax - xmin)*(x + 1.)/2.
+   PuntsDisp[i].y := ymin + (ymax - ymin)*(y + 1.)/2.
+<b>fPer</b>
+</PRE>
+
+<P class=noind>
+on <i>PuntsDisp</i> és una taula de punts amb coordenades enteres.
+
+<br><br>
+<DIV CLASS="nav">
+<a href="MSExplicacio6.html">[Anterior]</a>
+<a href="MSTransmet6.html">[Següent]</a>
+</div>
+</BODY>
+</HTML>

@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M2.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;
+charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("model","brep");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+      [Anterior]
+      <a href="main55-2.html">[Següent]</a>
+      <a href="main54.html">[Apartat anterior]</a>
+    </div>
+<br><br>
+
+<div class=tit1>Representació per Fronteres</div>
+
+<p>La representació per fronteres és una <A CLASS="glossari"
+HREF="javascript:glossari('representExplicita.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">representació explícita</A>
+3D per a objectes <A CLASS="glossari"
+HREF="javascript:glossari('solid.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">sòlids</A>. Una
+representació per fronteres emmagatzema informació geomètrica i
+topològica sobre les entitats geomètriques -cares, arestes i vèrtexs-
+que conformen la superfície de l'objecte. Nosaltres suposarem que
+tenim encapsulada la representació per fronteres en una classe. Per a
+que aquesta representació sigui correcta es demana que la classe pugui
+respondre a qualsevol pregunta sobre la geometria de la superfície
+(equació del pla de les cares, coordenades de qualsevol vèrtex) i a
+qualsevol interrogació sobre la topologia de la superfície. Les
+interrogacions topològiques ens informen sobre les relacions de
+veïnitat entre les entitats geomètriques -cares, arestes i vèrtexs-
+de la frontera.
+
+
+<P>
+Pel que fa a la topologia, es demana que tota representació per
+fronteres pugui respondre a qualsevol de les nou interrogacions
+bàsiques que podeu veure a la
+<A
+HREF="javascript:oWin('taulaRelTopolog.html','*','600','300','no','no','no','yes')"
+onMouseOver="window.status='Ampliació';return true"
+onMouseOut="window.status='';return true">
+
+taula de relacions
+topològiques</A>. Cada una d'aquestes interrogacions ens informa de
+la llista d'entitats veïnes a una donada. Per exemple, la relació
+
+
+<P>
+<CENTER>
+<B>C: {C}</B>
+</CENTER>
+
+<P>
+ens retornarà la llista de cares veïnes a la cara C (en altres
+paraules, la llista de cares que comparteixen alguna aresta amb C).
+
+<h2>subapartats</h2>
+
+<ul>
+<li><A href="main55-2.html" target="principal">Descripció de la classe SolidFronteres.</a></li>
+<li><A HREF="main55-3.html" target="principal">La classe SolidFronteres.</a></li>
+<li><A HREF="classecara.html" target="principal">La classe Cara.</a></li>
+<li><A HREF="classevertex.html" target="principal">La classe Vertex.</a></li>
+<li><A HREF="classepoligon.html" target="principal">La classe Poligon.</a></li>
+<li><A HREF="main55-4.html" target="principal">Exercici.</a></li>
+
+</ul>
+
+<BR><BR>
+<br><DIV CLASS="nav">
+      [Anterior]
+      <a href="main55-2.html">[Següent]</a>
+      <a href="main54.html">[Apartat anterior]</a>
+    </div>
+
+</BODY>
+
+</HTML>
+

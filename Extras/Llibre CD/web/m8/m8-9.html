@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title>8.9.Suavitzat d'arestes</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" TYPE="text/css" HREF="../upc.css">
+</head>
+<BODY >
+<SCRIPT>
+top.passara("visib","suav");
+</SCRIPT>
+<DIV CLASS="nav">
+[Anterior]
+<A HREF="m8-suav-normal.html">[Següent]</a>
+<A HREF="m8-8.html">[Apartat anterior]</a>
+</div>
+<br><br>
+
+<div class=tit1>Suavitzat d'arestes</div>
+
+<P>
+Algunes tècniques de determinació de la visibilitat, com el z-buffer,
+estan restringides a escenes compostes per conjunts de polígons
+plans. Aquest fet comporta que prèviament a la visualització
+d'objectes amb frontera no plana (superfícies esculpides,
+quàdriques,...), s'hagi de procedir a la seva triangularització o
+altres mètodes d'aproximació per cares planes. En la visualització
+d'aquests nous objectes s'observaran arestes no existents en el seu
+model real.
+
+<P>
+Els algorismes de suavitzat permeten introduir tècniques per a
+dissimular les arestes fictícies en la visualització. Es basen en
+l'efecte experimental que una aresta es nota en la visualització
+degut a que a les cares que la comparteixen se'ls assigna un color
+molt diferent a l'entorn dels punts de l'aresta (hi ha un "salt"
+visual de colors). Això és degut a que els models d'il·luminació es
+basen en la normal de la cara i aquesta és diferent per dues cares
+veïnes. A tal efecte, les tècniques de suavitzat, intenten aconseguir
+que les dues cares que comparteixen una aresta fictícia tinguin la
+mateixa il·luminació al llarg d'aquesta. Un procediment és la
+utilització dels <A HREF="m8-8.html#colorejat">mètodes de
+colorat</A> en punts interiors als polígons. Si es calcula el mateix
+color en els vèrtexs extrems de l'aresta en les dues cares, s'assolirà
+una degradació de color equivalent en les dues al llarg de l'aresta
+que la dissimularan. Però, no oblidem que el color és funció de la
+normal en el punt, per tant als vèrtexs extrems de l'aresta cal que
+els hi assignem la mateixa normal per les dues cares. Podeu veure un
+exemple en la figura següent, a la dreta un objecte no suavitzat i a
+l'esquerra un suavitzat. Observeu la silueta dels objectes com sí que
+es mostra poligonalitzada.</P>
+
+<CENTER>
+<TABLE BORDER=0>
+<TR><TD>
+<img src="imatges/fig8-13-b-GOURAUD.jpg" alt="No suavitzat"></TD>
+<TD>
+<img src="imatges/fig8-13-b-PHONG.jpg" alt="Suavitzat"></TD></TR>
+</TABLE>
+</CENTER>
+
+<p>
+<div class=tit2>Etapes de l'algorisme</div>
+
+<UL>
+<LI><A HREF='m8-suav-normal.html'>Càlcul normal en els vèrtexs </A></LI>
+<LI><A HREF='m8-suav-poligon.html'>Colorat polígons</A></LI>
+</UL>
+
+
+<br><br>
+<DIV CLASS="nav">
+[Anterior]
+<A HREF="m8-suav-normal.html">[Següent]</a>
+<A HREF="m8-8.html">[Apartat anterior]</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title>8.4</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" TYPE="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</head>
+<BODY >
+<SCRIPT>
+top.passara("visib","calg");
+</SCRIPT>
+<DIV CLASS="nav">
+<a href="m8-algIma.html">[Anterior]</a>
+<a href="m8-rayLimit.html">[Següent]</a>
+</div>
+<br><br>
+
+<div CLASS="tit1">Classificació dels algorismes de determinació de visibilitat.
+<span CLASS="tit2">Algorismes d'espai imatge.</span>
+<span CLASS="tit3">Algorisme de Ray Casting</span>
+</div>
+
+<P>
+En l'applet següent mostrem l'algorisme de ray-casting i un exemple de
+funcionament. Partim d'una escena, la finestra 2D i la seva subdivisió
+en la mateixa resolució que la vista (cada element es correspon a un
+píxel). Per a cada element calculem un raig r<sub>ij</sub> que uneix
+l'observador Obs amb el seu centre p<sub>ij</sub>. Calculem la
+intersecció del raig amb totes les cares de l'escena i analitzem quina
+de totes les interseccions és la més propera a l'observador
+(visibilitat del píxel). Pintem el píxel del color d'aquest punt. Si
+el raig no interseca amb cap cara pintarem el píxel del color definit
+com a fons de l'escena.
+
+<P>
+<CENTER>
+<TABLE><tr><TD>
+<applet code="algor3" archive="algor3.jar" width=676 height=560 >
+                <PARAM NAME="fitxer" VALUE="raytracing2.lis">
+                <PARAM NAME="numero" VALUE="2" >
+                <PARAM NAME="ample_algor" VALUE="289" >
+                <PARAM NAME="alt_algor"   VALUE="240" >
+</applet>
+</TD></TR></TABLE>
+</CENTER>
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m8-algIma.html">[Anterior]</a>
+<a href="m8-rayLimit.html">[Següent]</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M5.4.Representeció d'objectes Sòlids </TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;
+charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("model","soli");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+      <A HREF="main54-3.html">[Anterior]</a>
+      [Següent]
+      <a href="main55.html">[Següent apartat]</a>
+     </div>
+<br><br>
+
+<div class="tit1">Representació d'objectes Sòlids.
+<span class="tit2">Equació d'Euler. Extensió.</span>
+</div>
+
+<P>
+   En el cas que algun forat passant incideixi en la part central
+   d'una cara, cal considerar que aquesta cara té un forat o bé s'ha de
+   subdividir i considerar que està formada per varies subcares
+   coplanars. En el primer cas, als forats 2D de les cares els anomenarem
+   anells. Una cara amb un anell és una cara amb dos polígons; el polígon
+   interior és l'espai per on surt el forat passant de l'objecte. Si ens
+   imaginem que estem construint l'objecte físicament com un poliedre amb
+   cares de cartulina, els anells equivaldrien als forats que hauriem de
+   practicar a les cares. Ara l'equació d'Euler ha d'incorporar el
+   nombre total d'anells,
+</P>
+
+<center>
+<span class=form>
+        Cares + Vèrtexs = Arestes + Anells + 2 * ( Components - Forats )
+</span>
+</center>
+
+<P>
+   Ara, el nombre de cares de l'objecte més el nombre de vèrtexs ha de ser
+   igual al nombre d'arestes més el nombre d'anells més dues vegades
+   el nombre de components connexes menys el nombre de forats passants.
+</P>
+
+<P>
+   En el següent exemple podeu veure un cas diferent d'objecte amb
+   un component i un forat passant:
+</P>
+
+<CENTER>
+<TABLE><TR><TD>
+  <APPLET CODE ="AppletRep.class" archive="AppletRep.jar,../comuns.jar" WIDTH=220 HEIGHT=280>
+  <PARAM NAME=AppId VALUE="2">
+  <PARAM NAME=fichero0 VALUE="/DAT/modelFr7.dat">
+  <PARAM NAME=fichero1 VALUE="/DAT/modelFr7b.dat">
+  <PARAM NAME=Angx VALUE="0.0">
+  <PARAM NAME=Angy VALUE="0.0">
+  </APPLET>
+</TD></TR></TABLE>
+</CENTER>
+
+<P class=exercici><span class=exernum>Exercici: </span> 
+Comproveu que es compleix l'equació d'Euler en
+aquest objecte.
+
+<br><br>
+<span class=sollnk>
+<A HREF="javascript:oWin('solucio54-4.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Resposta';return true"
+onMouseOut="window.status='';return true">[Solució]</A></span>
+
+
+<br><br>
+<DIV CLASS="nav">
+      <A HREF="main54-3.html">[Anterior]</a>
+      [Següent]
+      <a href="main55.html">[Següent apartat]</a>
+  </div>
+
+</BODY>
+
+</HTML>
+

@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("realvirt","tecacc");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m5f01_acel.html">[Anterior]</a>
+<a href="m5f01t02.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Tècniques d'acceleració d'imatge.
+<span class=tit2>Etapes del pipeline de visualització</span>
+</div>
+
+<p>El procés de visualització s'anomena <b><i>pipeline gràfic</i></b>
+degut a que conceptualment funciona com un sistema de producció en cadena.</p>
+
+<p>Com tot procés de producció en cadena, el pipeline gràfic
+consta d'una sèrie d'etapes, executades en paral·lel, de forma que la
+sortida d'una etapa enllaça amb l'entrada de la següent, i de forma que <b>la
+velocitat de tot el conjunt està determinada per la velocitat del component
+més lent</b>.</p>
+
+<p>Quan un procés estrictament seqüencial amb <i>n </i>etapes
+es transforma en un procés en cadena, teòricament s'obté un factor d'acceleració
+de <i>n</i>. Per exemple, un telecadira amb una sola cadira és molt ineficient;
+si hi afegim més cadires aconseguirem incrementar la productivitat de forma
+proporcional.</p>
+
+<p>Les tres etapes bàsiques del pipeline gràfic són les
+següents:</p>
+
+<p class=noind><b>Etapa de l'aplicació</b></p>
+
+<p>Durant aquesta etapa, després de duu a terme el tractament
+de dades d'entrada i la part de simulació física, es procedeix a recórrer
+el graf de l'escena per tal d'enviar la geometria a la següent etapa del
+pipeline.</p>
+
+<p>Sobre aquesta etapa el programador té un control absolut,
+doncs sempre està implementada per software.</p>
+
+<p class=noind><b>Etapa de geometria</b></p>
+
+<p>Aquesta etapa correspon al procés de visualització 3D, ja
+que es fan les transformacions de coordenades, els càlculs d'il·luminació,
+la projecció, el retallat lateral i el pas a coordenades de dispositiu.</p>
+
+<p>Si a l'entrada teníem els vèrtexs i els focus de llum
+sense transformar, a la sortida tenim els vèrtexs en coordenades de dispositiu,
+amb el color corresponent.</p>
+
+<p>Cal tenir en compte que aquesta etapa és molt intensiva en
+càlculs. Encara que només hi hagi un focus de llum, cada vèrtex de l'escena
+requereix al voltant de 100 operacions en coma flotant. Per aquest motiu, la
+major part de subprocessos d'aquesta etapa estan implementats per hardware
+especialitzat.</p>
+
+<b>
+<p class=noind>Etapa de rasterització</p>
+</b>
+
+<p>Aquesta etapa correspon al procés de visualització 2D. En
+aquesta etapa es rasteritzen (es converteixen en pixels) els vèrtexs
+transformats, utilitzant els colors, coordenades de textura, etc, proporcionats
+per l'etapa anterior. Aquesta etapa es veu afectada per les textures, les
+comparacions amb el z-buffer, i altres operacions a nivell de pixels en el frame
+buffer. La major part de la major part de subprocessos d'aquesta etapa estan
+implementats per hardware especilitzat.</p>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m5f01_acel.html">[Anterior]</a>
+<a href="m5f01t02.html">[Següent]</a>
+</div>
+</body>
+</html>

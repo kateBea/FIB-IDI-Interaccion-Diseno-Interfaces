@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M4.1. Trnasformacions geomètriques</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;
+charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("geom","trns");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+      <A HREF="main43.html">[Anterior]</a>
+      <a href="transfgenerals.html">[Següent]</a>
+     </div>
+<br><br>
+
+<div class="tit1">Transformacions geomètriques.
+<span class="tit2">Transformacions geomètriques bàsiques</span>
+</div>
+
+    <p>Una operació que necessitarem molt sovint és la d'aplicar una
+      d'aquestes transformacions geomètriques a una entitat
+      geomètrica. Aquesta operació és relativament costosa i molt
+      freqüent, pel que gran quantitat d'esforços han anat adreçats a
+      millorar-les. Avui dia molts equips, àdhuc equips relativament
+      econòmics destinats al consum domèstic, disposen de dispositius
+      <i>hardware</i> que acceleren el càlcul d'aquestes operacions
+      quan s'efectuen en certes formes estandaritzades.
+
+      <p>Aquesta estandarització expressa totes les transformacions
+      geomètriques en l'espai tridimensional mitjançant matrius de
+      4x4 (Al pla calen matrius de 3x3). D'aquesta manera tot el que
+      cal per accelerar aquestes operacions per <i>hardware</i> és
+      proporcionar l'operació de multiplicació de matrius 4x4.
+
+      <p>La dimensió addicional prové d'un subterfugi per a expressar
+      les translacions com a productes per matrius. Com sabeu la
+      multiplicació per una matriu d'un vector correspon a l'aplicació
+      d'una funció lineal, però la translació evidentment no ho és (ja
+      que en la translació per un vector <i>t</i> l'origen no s'aplica
+      a l'origen sinó al punt <i>O+t</i>). Per a expressar aquestes
+      translacions mitjançant productes per matrius, hom introdueix una
+      quarta coordenada als punts amb la següent convenció <!--
+      $(x,y,z,w)\simeq({x\over w},{y\over w},{z\over w})$ --><IMG
+      WIDTH="161" HEIGHT="28" ALIGN="MIDDLE" BORDER="0"
+      SRC="imatges/img74.gif" ALT="$(x,y,z,w)\simeq({x\over w},{y\over
+      w},{z\over w})$">.
+
+      <p> Així, a cada punt de l'espai li fem correspondre tota una
+      recta per l'origen a l'espai de quatre dimensions. Calculant amb
+      aquesta convenció veiem que <!-- \
+      [ \left[\begin{array}{cccc} 1&0&0&t_x\\ 0&1&0&t_y\\ 0&0&1&t_z\\
+      0&0&0&1\end{array}\right]\;\left[\begin{array}{c}x\\y\\z\\1\end{array}\right]=
+      \left[\begin{array}{c}x+t_x\\y+t_y\\z+t_z\\1\end{array}\right]
+      \] -->
+	<div class=formula>
+	<IMG WIDTH="267" HEIGHT="81" SRC="imatges/img75.gif"
+      ALT="\begin{displaymath} \left[\begin{array} {cccc} 1&0&0&t_x\\
+      0&1&0&t_y\\ 0&0&1&...  ...ft[\begin{array} {c}x+t_x\\ y+t_y\\
+      z+t_z\\ 1\end{array}\right]\end{displaymath}"></span>
+      </DIV>
+
+      <p class=noind>
+      amb el que veiem que efectivament hem aconseguit expressar la
+      translació com una operació de multiplicació per una
+      matriu. Aquesta matriu la denotarem <!--$T(\vec t)$--><IMG
+      WIDTH="32" HEIGHT="32" ALIGN="MIDDLE" BORDER="0" SRC="imatges/img76.gif"
+      ALT="$T(\vec t)$">.
+
+      <p>El cas dels escalats (centrats a l'origen) és més simple:
+
+      <div class=formula><!-- \[ \left[\begin{array}{cccc}
+      s_x&0&0&0\\ 0&s_z&0&0\\ 0&0&s_z&0\\
+      0&0&0&1\end{array}\right]\;\left[\begin{array}{c}x\\y\\z\\1\end{array}\right]=
+      \left[\begin{array}{c}s_x x\\s_y y\\s_z z\\1\end{array}\right]
+      \] --><IMG WIDTH="264" HEIGHT="81" SRC="imatges/img77.gif"
+      ALT="\begin{displaymath} \left[\begin{array} {cccc} s_x&0&0&0\\
+      0&s_z&0&0\\ 0&0&s_...  ...t[\begin{array} {c}s_x x\\ s_y y\\ s_z
+      z\\ 1\end{array}\right]\end{displaymath}"></div>
+
+      <p>Aquesta matriu la denotarem <!--$S(s_x, s_y, s_z)$--><IMG
+      WIDTH="85" HEIGHT="28" ALIGN="MIDDLE" BORDER="0" SRC="imatges/img78.gif"
+      ALT="$S(s_x, s_y, s_z)$">. Quan els tres factors d'escalat són
+      idèntics hom parla d'escalat homogeni, i si no ho són d'escalat
+      no homogeni. La major part de les vegades sols ens interessarà
+      el cas homogeni, i escriurem simplement <!--$S(s)$--><IMG
+      WIDTH="33" HEIGHT="28" ALIGN="MIDDLE" BORDER="0" SRC="imatges/img79.gif"
+      ALT="$S(s)$">.
+
+      <p>Les operacions anteriors s'apliquen igualment al pla. Sols
+      cal esborrar les terceres files i columnes de cada matriu i cada
+      punt (és a dir les referents a les <i>z</i>. En el cas de les
+      rotacions, serà més fàcil recórrer el camí invers. Començarem
+      doncs per descriure com calcular rotacions al voltant de
+      l'origen al pla, i després les extendrem a rotacions al voltant
+      d'un eix coordenat a l'espai.
+
+      <p>En el pla, els girs venen donats per matrius de la forma
+
+<!--
+$\left[ \begin{array}{cc} \cos(\alpha)& -\sin(\alpha)\\
+      \sin(\alpha)& \cos(\alpha)\end{array} \right]$
+--><div class=formula><IMG WIDTH="152" HEIGHT="50" ALIGN="ABSMIDDLE" BORDER="0"
+ SRC="imatges/img80.gif"
+ ALT="$\left[ \begin{array}
+{cc} \cos(\alpha)& -\sin(\alpha)\\  \sin(\alpha)& \cos(\alpha)\end{array} \right]$"></div>
+
+    <P> Aquesta matriu fa
+      un gir d'<!--$\alpha$--><IMG WIDTH="13" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="imatges/img81.gif"
+ ALT="$\alpha$"> radians al voltant de l'origen, en el sentit
+      contrari a les agulles d'un rellotge (Podeu deduir-la fàcilment
+      si recordeu que podem identificar els punts <i>(x,y)</i> del pla
+      amb nombres complexes <i>x+iy</i>, i que en el pla complex la
+      multiplicació per un número de mòdul unitat provoca un gir igual
+      al seu argument). Naturalment en coordenades homogènies en el
+      pla haurem d'afegir una fila i una columna amb un 1 a l'element
+      diagonal:
+<!--
+\[
+\left[ \begin{array}{ccc} \cos(\alpha)&
+      -\sin(\alpha)&0\\ \sin(\alpha)& \cos(\alpha)&0\\ 0&0&1\end{array}
+      \right]
+\]
+-->
+ <div class=formula><IMG WIDTH="168" HEIGHT="62"
+ SRC="imatges/img-2.1.gif"
+ ALT="\begin{displaymath}
+\left[ \begin{array}
+{ccc} \cos(\alpha)&
+ -\sin(\alpha)&0\\  \sin(\alpha)& \cos(\alpha)&0\\  0&0&1\end{array} \right]\end{displaymath}"></div>
+
+      <p>A l'espai, podem aplicar l'anterior per a calcular rotacions
+      al voltant de qualsevol eix, afegint una fila i una columna a la
+      posició de l'eix coordenat que triem com eix de gir (la primera
+      per l'eix <i>x</i>, la segona per l'eix <i>y</i> i la tercera pel
+      <i>z</i>). Tenim doncs ja la forma de calcular rotacions al
+      voltant de cada eix coordenat. Per exemple, per girar al voltant
+      de l'eix <i>y</i> <!--$\alpha$-->
+<IMG WIDTH="13" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="imatges/img81.gif"
+ ALT="$\alpha$"> graus en sentit contrari a les agulles del
+      rellotge (quan mirem des del costat positiu de l'eix <i>y</i>),
+      usarem la matriu:
+<!--
+\[
+R_y(\alpha)=\left[ \begin{array}{cccc} \cos(\alpha)&0&
+      -\sin(\alpha)&0\\0&1&0&0\\ \sin(\alpha)&0& \cos(\alpha)&0\\ 0&0&0&1\end{array}
+      \right]
+\]
+-->
+<div class=formula>
+<IMG WIDTH="260" HEIGHT="83"
+ SRC="imatges/img82.gif"
+ ALT="\begin{displaymath}
+R_y(\alpha)=\left[ \begin{array}
+{cccc} \cos(\alpha)&0&
+ -\s...
+ ...\  \sin(\alpha)&0& \cos(\alpha)&0\\  0&0&0&1\end{array} \right]\end{displaymath}">
+</div>
+
+
+
+<br><br>
+<DIV CLASS="nav">
+      <A HREF="main43.html">[Anterior]</a>
+      <a href="transfgenerals.html">[Següent]</a>
+   </div>
+
+</BODY>
+
+</HTML>
+

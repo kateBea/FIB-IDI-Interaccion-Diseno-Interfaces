@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title>8.2.3 Algorismes d'espai mixt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" TYPE="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</head>
+<BODY >
+<SCRIPT>
+top.passara("visib","calg");
+</SCRIPT>
+<DIV CLASS="nav">
+<a href="m8-rayLimit.html">[Anterior]</a>
+[Següent]
+<a href="m8-3.html">[Següent apartat]</a>
+</div>
+<br><br>
+
+<div CLASS="tit1">Classificació dels algorismes de determinació de visibilitat.
+<span CLASS="tit2">Algorismes d'espai mixt</span>
+</div>
+
+<P>
+Parteixen de la geometria de l'escena i, generalment, en funció de
+la posició de l'observador, realitzen una ordenació espacial de les
+cares que garanteix l'obtenció d'una imatge amb visibilitat correcta
+si les cares s'envien al <A HREF="../m6/main63.html">procés de
+visualització</A> en l'ordre establert. Les cares les haurem de pintar
+amb primitives d'omplert de polígons. L'eliminació de la geometria no
+visible es produeix de manera natural degut al rasteritzat seqüencial
+dels polígons sobre els mateixos píxels. S'anomenen algorismes de
+determinació de visibilitat en espai mixt perquè l'etapa d'ordenació
+es realitza en espai objecte mentre que el còmput real de la
+visibilitat es realitza en espai imatge (s'obté un conjunt de píxels
+amb el seu color). En la figura següent mostrem el diagrama funcional
+d'un algorisme genèric i l'il·lustrem amb un exemple concret.
+
+<CENTER>
+<TABLE><TR><TD>
+<img src="imatges/esquema8-7i.jpg" alt="" height="180" width="600" usemap="#espmixt">
+<MAP NAME="espmixt">
+<area onmouseover="window.status='Geometria escena';return true" onmouseout="window.status='';return true" shape="RECT" coords="0,74,94,187" href="javascript:javascript:oWin('imatges/fig-8-7i-1.jpg','','340','260','','','','yes')" alt="">
+<area onmouseover="window.status='Geometria ordenada';return true" onmouseout="window.status='';return true" shape="RECT" coords="254,72,379,195" href="javascript:javascript:oWin('imatges/fig-8-7i-2.jpg','','340','260','','','','yes')" alt="">
+<area onmouseover="window.status='Imatge final';return true" onmouseout="window.status='';return true" shape="RECT" coords="533,53,606,181" href="javascript:javascript:oWin('imatges/fig-8-7i-3.jpg','','340','260','','','','yes')" alt="">
+</MAP>
+</TD></TR></TABLE>
+</CENTER>
+
+<br>
+<div class=tit3><b>Exemples d'algorismes d'aquesta família:</b></div>
+
+<P>
+L'algorisme del pintor consisteix en determinar l'ordre de
+visualització dels objectes d'acord amb la seva disposició espacial i
+de la posició de l'observador. És d'utilitat en escenes amb objectes
+convexos fàcilment separables en cel·les que a la seva vegada es
+puguin ordenar respecte al punt de vista tenint en consideració el
+solapament entre les seves projeccions. Els objectes es pintaran en
+l'ordre determinat per les cel·les que els contenen. La restricció a
+objectes convexos és deguda a que l'eliminació de les seves cares
+ocultes és directa utilitzant tècniques de filtrat de
+cares. Altrament caldrien tècniques específiques per a determinar
+la visibilitat de cada objecte, fet que complicaria la simplicitat de
+l'algorisme que ens ocupa. Noteu que per cada posició de l'observador
+s'ha de recalcular l'ordre de visualització de les cel·les.
+
+<P>
+El BSP és un algorisme extremadament eficient que realitza una
+ordenació topològica de les cares de l'escena independent de la
+posició de l'observador i l'emmagatzema en un arbre binari. En els
+nodes de l'arbre s'emmagatzemen cares (o trossos de cares)de
+l'escena. La posició de l'observador determina l'ordre de recorregut i
+visualització dels nodes de l'arbre, fet que produeix de manera
+natural una visualització de les cares que elimina les parts
+ocultes. Destacar que en modificar la posició de l'observador no es
+requereix recalcular l'arbre binari.</p>
+
+<div class=tit3><b>Complexitat dels algorismes d'espai mixt</b></div>
+
+<P>
+La complexitat d'aquesta família d'algorismes ve determinada pel cost
+de realització de l'ordenació i varia segons l'algorisme; el cost de
+pintat és lineal respecte al nombre de cares.
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m8-rayLimit.html">[Anterior]</a>
+[Següent]
+<a href="m8-3.html">[Següent apartat]</a>
+</div></body>
+</html>

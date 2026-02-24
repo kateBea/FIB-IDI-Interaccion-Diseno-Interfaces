@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M6.1 Procés de visualització 3D.MapaSensible.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("vis3D","cam");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+<a href="PlansRet.html">[Anterior]</a>
+[Següent]
+<a href="main63.html">[Següent apartat]</a>
+</div>
+<br><br>
+
+<div class="tit1">Model de la càmera. 
+<span class="tit2">Sistema de coordenades de l'observador</span>
+</div>
+
+<P> Ara que ja hem definit la càmera virtual i els paràmetres que la
+determinen, podem donar una definició precisa del sistema de
+coordenades de l'observador: és un sistema que té el seu origen a la
+posició O de l'observador, l'eix z dirigit en la direcció contrària al
+vector OC - de manera que el punt C es troba sempre sobre la part
+negativa de l'eix z -, l'eix y en el pla definit per l'eix z i el
+vector cap amunt - perpendicular a z i en el semiplà respecte z que
+conté el vector cap amunt -, i l'eix x perpendicular a y, z. El
+triedre és directe. Veiem ara en el següent exercici com varía el
+sistema de coordenades de l'observador en funció de la posició i
+paràmetres de la càmera virtual.
+
+<p class="exercici"><span class=exernum>Exercici:</span> a la següent
+           escena senzilla, proveu de modificar els paràmetres de la
+           càmera i veieu com va canviant la imatge que obtenim a la
+           <A CLASS="glossari"
+           HREF="javascript:glossari('Vista.html','*','400','300','no','no','no','yes')"
+           onMouseOver="window.status='Glossari';return true"
+           onMouseOut="window.status='';return true">vista</A> a la <A
+           CLASS="glossari"
+           HREF="javascript:glossari('FinGraf.html','*','400','300','no','no','no','yes')"
+           onMouseOver="window.status='Glossari';return true"
+           onMouseOut="window.status='';return true">finestra
+           gràfica</A> i el sistema de coordenades de
+           l'observador. Podeu canviar interactivament els paràmetres
+           de visualització. Observeu també com es va modificant la <A
+           CLASS="glossari"
+           HREF="javascript:glossari('PiramVis.html','*','400','300','no','no','no','yes')"
+           onMouseOver="window.status='Glossari';return true"
+           onMouseOut="window.status='';return true">piràmide de
+           visió</A>.
+
+<!--
+   Applet 2 que visualitza el cub i piràmide
+                 Botons de modificació de  O, C, up-vector, angle d'obertura
+                                           i plans de retallat
+                 Visualització del frustrum i del sistema de
+                       coordenades de l'observador
+-->
+<p>
+<CENTER><TABLE><tr><TD>
+  <APPLET CODE ="AppletG2.class" archive="AppletG2.jar,../comuns.jar" WIDTH=640 HEIGHT=480>
+  <PARAM NAME=NApplet VALUE="7">
+  <PARAM NAME=Vrpx    VALUE="5.0">
+  <PARAM NAME=Vrpy    VALUE="5.0">
+  <PARAM NAME=Vrpz    VALUE="5.0">
+  <PARAM NAME=Angx    VALUE="30.0">
+  <PARAM NAME=Angy    VALUE="45.0">
+  <PARAM NAME=Angz    VALUE="0.0">
+  <PARAM NAME=D       VALUE="20.0">
+  <PARAM NAME=Winy    VALUE="5.0">
+  <PARAM NAME=Zfar    VALUE="25.0">
+  <PARAM NAME=Znear   VALUE="1.0">
+  <PARAM NAME=fich    VALUE="">
+  <PARAM NAME=AngExtx VALUE ="30.0">
+  <PARAM NAME=AngExty VALUE="10.0">
+  <PARAM NAME=fichero VALUE="/DAT/2cuboG.dat">
+  <PARAM NAME=Camara VALUE="1">
+  <PARAM NAME=Alfa VALUE="15.0">
+  </APPLET>
+  </TD></TABLE></CENTER>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="PlansRet.html">[Anterior]</a>
+[Següent]
+<a href="main63.html">[Següent apartat]</a>
+</div>
+</BODY>
+</HTML>

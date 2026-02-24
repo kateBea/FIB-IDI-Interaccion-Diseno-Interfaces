@@ -1,0 +1,567 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("opengl","cridbas");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m7a15_BasicCaracterist.html">[Anterior]</a>
+<a href="m7a30_BasicIlluminacio.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1> Crides bàsiques d'OpenGL.
+<span class=tit2>Instruccions principals</span>
+</div>
+
+<br>
+<div class=tit3><b>Esborrat de pantalla</b></div>
+
+<p>Per fer un esborrat de pantalla, el que cal fer és donar a cada un
+dels píxels el color que volem com a color de fons de la nostre
+imatge. Així doncs, hem d'indicar d'alguna manera quin és el color
+d'esborrat que usarem, és a dir, quin és el color de fons de la nostra
+imatge.
+
+<p>En OpenGL el color de cada un dels píxels es guarda en el buffer de
+color (o <i>frame buffer</i>), i es pot guardar en format RGBA o com a
+índex a una taula de colors. Avui en dia en general treballem amb el
+format RGBA i aquest és el que usarem habitualment.
+
+<P>
+Així doncs, el que cal fer per a esborrar una finestra en la que volem
+tornar a pintar és primer indicar quin color usarem per a esborrar
+(color de fons) i després donar l'ordre d'esborrat. Per a establir el
+color que volem que s'usi per a fer l'esborrat cal usar la crida
+<PRE class=algoritme>
+          void <B>glClearColor</B> (GLclampf red, GLclampf green,
+                             GLclampf blue, GLclampf alpha)
+</PRE>
+
+<P>
+Aquesta crida estableix el color RGBA que usarà la crida "glClear" per
+a esborrar el frame buffer. Els 4 paràmetres són els valors de les
+components de vermell, verd, blau i alfa del color amb el que es vol
+esborrar. Aquests valors estan restringits al rang [0,1].
+
+<P>
+Un cop hem establert el color que volem per a esborrar, cal indicar a
+OpenGL que esborri la finestra. Això es fa mitjançant la crida
+<PRE class=algoritme>
+          void <B>glClear</B> (GLbitfield mask)
+</PRE>
+
+<br>
+on en el paràmetre <I>mask</I> especifica el/s buffer/s que es vol
+esborrar. Aquest paràmetre serà un OR de les màscares dels buffers
+corresponents que volem esborrar:
+<UL>
+<li> buffer de color: GL_COLOR_BUFFER_BIT</li>
+<li> Z-buffer: GL_DEPTH_BUFFER_BIT</li>
+<li> buffer d'acumulació: GL_ACCUM_BUFFER_BIT</li>
+<li> buffer de <I>stencil</I>: GL_STENCIL_BUFFER_BIT</li>
+</UL>
+
+<P>
+Normalment els que interessen són el buffer de la imatge (buffer de
+color) i el Z-buffer:
+<PRE class=algoritme>
+          <B>glClear</B> (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+              /* esborra el buffer de color i el Z-buffer */
+</PRE>
+
+<BR>
+<P><A NAME="primitives"></A>
+<div class=tit3><b>Primitives gràfiques. Pintat de punts, línies i polígons</b></div>
+
+<P>
+Les primitives gràfiques
+d'OpenGL són punts, línies i polígons. Totes elles es descriuen en
+termes dels seus respectius vèrtexs. Cada vèrtex es caracteritza per 2
+o 3 números que corresponen a les coordenades dels eixos cartesians
+-(x,y) en 2D o (x,y,z) en 3D respectivament-. També es poden
+representar mitjançant les <A class=glossari Href="javascript:glossari('CoordHomog.html')"><I>coordenades
+homogènies</I></A> on cada punt es descriu amb 4 números (x,y,z,w).
+
+<P>
+La gran diferència amb les altres llibreries gràfiques és que els
+vèrtexs dels objectes es donen en coordenades de món i la
+implementació d'OpenGL s'encarrega de la transformació
+món-pantalla.
+
+<P>
+Degut a les diferents opcions descrites per a representar un vèrtex,
+OpenGL ofereix una família de rutines depenent del nombre i tipus dels
+seus paràmetres:
+<PRE class=algoritme>
+          void <B>glVertex{234}{sifd}[v]</B> (TYPE coords)
+</PRE>
+
+<P>
+El que hi ha entre claus ({ }) forma part del nom de la rutina. La
+rutina pot prendre 2, 3 o 4 paràmetres en els diferents tipus:
+<I>short, int, float, double</I>. Opcionalment aquests paràmetres es
+poden donar en forma de vector (v). Veiem alguns exemples de possibles
+crides:
+<PRE class=algoritme>
+          <B>glVertex2s</B> (1,2);  /* coordenades x,y tipus short */
+          <B>glVertex2i</B> (2300,43);  /* coordenades x,y tipus int */
+          <B>glVwertex3f</B> (1.0,1.0,5.87)  /* coordenades x,y,z tipus float */
+          float vector[3];
+          <B>glVertex3fv</B> (vector);
+</PRE>
+
+<P>
+OpenGL interpreta qualsevol seqüència de vèrtexs depenent del seu
+context. El context es declara en el parell de rutines <I>glBegin
+(GLenum mode)</I> i <I>glEnd()</I> i qualsevol sentència
+<I>glVertex*</I> que es trobi en mig d'aquestes dues s'interpreta
+d'acord al valor del <I>mode</I>.
+
+<P>
+El patró de definició aleshores seria:
+<PRE class=algoritme>
+          <B>glBegin</B> (TIPUS_PRIMITIVA);
+          <B>glVertex3f</B> (X0, Y0, Z0);   /* defineix vertex 0 */
+          <B>glVertex3f</B> (X1, Y1, Z1);   /* defineix vertex 1 */
+              ...
+          <B>glVertex3f</B> (Xn-1, Yn-1, Zn-1);  /* defineix vertex n-1 */
+          <B>glEnd</B> ();
+</PRE>
+
+<br>
+i el valor de TIPUS_PRIMITIVA indica què és el que OpenGL ha de
+pintar. Els tipus de primitives (valors que es poden posar en el
+"glBegin") suportats per OpenGL són els següents:
+
+<BR><BR>
+<CENTER>
+<TABLE BORDER="2px">
+<TR>
+<TD>GL_POINTS</TD>
+<TD>Pinta un punt a cada un dels n vèrtexs</TD>
+<TD><img align=center src="imatges/tip1.jpg"></TD>
+</TR>
+<TR>
+<TD>GL_LINES</TD>
+<TD>Pinta línies desconectades</TD>
+<TD><img align=center src="imatges/tip2.jpg"></TD>
+</TR>
+<TR>
+<TD>GL_POLYGON</TD>
+<TD>Pinta un polígon amb vèrtexs V0,..,Vn-1. n ha de ser com a mínim 3 i el polígon ha de ser convex i no intersecar les seves arestes</TD>
+<TD><img align=center src="imatges/tip3.jpg"></TD>
+</TR>
+<TR>
+<TD>GL_TRIANGLES</TD>
+<TD>Pinta una sèrie de triangles. Si n no és múltiple de 3 ignora els vèrtexs restants</TD>
+<TD><img align=center src="imatges/tip4.jpg"></TD>
+</TR>
+<TR>
+<TD>GL_LINE_STRIP</TD>
+<TD>Pinta una sèrie de línies seguides. (V0-V1, V1-V2, ...). Poden intersecar entre elles. Poligonal oberta.</TD>
+<TD><img align=center src="imatges/tip5.jpg"></TD>
+</TR>
+<TR>
+<TD>GL_LINE_LOOP</TD>
+<TD>Igual que GL_LINE_STRIP però tancant la poligonal. Poligonal tancada.</TD>
+<TD><img align=center src="imatges/tip6.jpg"></TD>
+</TR>
+<TR>
+<TD>GL_QUADS</TD>
+<TD>Pinta una sèrie de quadrilàters usant l'agrupació de vèrtexs: V0-V1-V2-V3, V4-V5-V6-V7, etc.</TD>
+<TD><img align=center src="imatges/tip7.jpg"></TD>
+</TR>
+<TR>
+<TD>GL_QUAD_STRIP</TD>
+<TD>Pinta una sèrie de quadrilàters consecutius fent: V0-V1-V3-V2, V2-V3-V5-V4, etc.</TD>
+<TD><img align=center src="imatges/tip8.jpg"></TD>
+</TR>
+<TR>
+<TD>GL_TRIANGLE_STRIP</TD>
+<TD>Pinta una sèrie de triangles consecutius fent: V0-V1-V2, V2-V1-V3, V2-V3-V4, etc.</TD>
+<TD><img align=center src="imatges/tip9.jpg"></TD>
+</TR>
+<TR>
+<TD>GL_TRIANGLE_FAN</TD>
+<TD>Similar a GL_TRIANGLE_STRIP però amb la peculiaritat que tots els triangles comparteixen el vèrtex V0: V0-V1-V2, V0-V2-V3, V0-V3-V4, etc.</TD>
+<TD><img align=center src="imatges/tip10.jpg"></TD>
+</TR>
+</TABLE></CENTER>
+
+<P>
+És a dir, que si definim una seqüència de crides com per exemple:
+<PRE class=algoritme>
+          <B>glBegin</B> (GL_POLYGON);
+          <B>glVertex2f</B> (1.0, 2.5);   /* primer vèrtex */
+          <B>glVertex2f</B> (3.0, 3.0);   /* segon vèrtex */
+          <B>glVertex2f</B> (5.0, 2.5);   /* tercer vèrtex */
+          <B>glVertex2f</B> (4.0, 1.0);   /* quart vèrtex */
+          <B>glVertex2f</B> (1.0, 0.0);   /* cinquè i últim vèrtex */
+          <B>glEnd</B> ();
+</PRE>
+
+<br>
+estariem definint el polígon 2D mostrat a la figura.<BR>
+
+<br>
+<CENTER><table><td>
+<img src="imatges/polig2D.jpg">
+</td></table></CENTER>
+
+<BR>
+<div class=tit3><b>Color</b></div>
+
+<P>
+OpenGL manté un color actual en la
+seva informació d'estat, i aquest color és el que fa servir per a
+pintar. Existeix una crida de la llibreria que permet canviar el color
+actual. De la mateixa manera que passava amb la crida per a pintar un
+vèrtex, aquesta crida per a canviar el color pot ser usada de forma
+diferent segons el nombre i el tipus dels paràmetres. El nombre de
+paràmetres pot ser 3 o 4 depenent que s'utilitzi un valor per a la
+component <I>alpha</I> del color o no.
+
+<P>
+Les components del color
+s'especifiquen en ordre donant valors pel vermell (<I>red</I>), pel
+verd (<I>green</I>) i pel blau (<I>blue</I>). Els valors de les
+components estan dins del rang [0..1], on 1 correspon a màxima
+intensitat. En el cas que el seu tipus sigui un <i>unsigned byte</i> el rang
+passa a ser [0..255]. Així doncs podem tenir crides de la forma
+següent:
+<PRE class=algoritme>
+          <B>glColor3f</B> (1.0, 0.0, 0.0);  /* vermell usant floats */
+          <B>glColor3ub</B> (0, 255, 0);     /* verd usant unsigned bytes */
+          GLfloat mycolour[3] = {0,0,1};
+          <B>glColor3fv</B> (mycolour);      /* blau usant vector de floats */
+</PRE>
+
+<P>
+La quarta component del color és la component <I>alpha</I>. Aquesta
+component és la que dona el nivell de transparència associat a aquest
+color i per tant permet la composició d'imatges en un mateix punt. En
+realitat podriem dir que el valor de la component <I>alpha</I> és el
+grau d'opacitat del color, ja que si aquest valor és 0.0 el color és
+totalment transparent, i si el valor és 1.0 el color és totalment
+opac. En les crides que no especifiquen aquesta component del color,
+el valor per defecte que se li dona és de 1.0 (color opac).
+
+<P>
+Aquesta crida a "glColor" és una de les que s'accepta que estigui
+situada dins d'un bloc de definició de primitiva, és a dir entre un
+"glBegin" i un "glEnd". Això implica també que es permet donar color
+diferent als diferents vèrtexs d'una primitiva.
+
+<BR>
+<P><A NAME=z-buffer></A>
+<div class=tit3><b>Activar Z-buffer</b></div>
+
+<P>
+En OpenGL és necessari activar certes característiques per a que
+siguin efectives. Aquest és el cas del <A
+HREF="../m10/m2h40_Buffers.html">Z-buffer</A>, o de la il·luminació entre
+d'altres. Aquesta activació de característiques es fa mitjançant la
+crida a "glEnable", a la que se li passa com a paràmetre un valor que
+és el que indica a OpenGL què és el que es vol activar.
+
+<PRE class=algoritme>
+          void <B>glEnable</B> (GLenum cap)
+</PRE>
+
+<P>
+En el cas del Z-buffer el valor que ha de prendre el paràmetre que li
+passem a la crida és GL_DEPTH_TEST, per tant per a activar el Z-buffer
+en els nostres programes haurem de fer una crida a
+<PRE class=algoritme>
+          <B>glEnable</B> (GL_DEPTH_TEST);
+</PRE>
+
+<P>
+Els casos d'il·luminació els veurem en la secció corresponent.
+
+<P>
+Lògicament tot allò que es pot activar s'ha de poder també desactivar
+quan volguem prescindir de la característica que haviem activat
+anteriorment. La crida "glDisable" amb el mateix paràmetre faria
+aquesta funció.
+<PRE class=algoritme>
+          void <B>glDisable</B> (GLenum cap)
+</PRE>
+
+<BR>
+<P>
+<div class=tit3><b>Dibuixat en <A class=glossari Href="javascript:glossari('representFilferros.html')">filferros</A> (<I>wireframe</I>)</b></div>
+
+<P>
+Per defecte OpenGL treballa en mode d'omplert de polígons, és a dir,
+pinta l'interior dels polígons amb el color dels seus vèrtexs. Però en
+ocasions es pot voler dibuixar l'escena en filferros
+(<I>wireframe</I>), i per a fer-ho cal canviar el mode de pintat de
+polígons. La rutina:
+<PRE class=algoritme>
+          void <B>glPolygonMode</B> (GLenum face, GLenum mode)
+</PRE>
+
+<br>
+controla aquest mode de pintat en els polígons de l'escena. El primer
+paràmetre <I>face</I> especifica els polígons als que s'aplicarà el
+<I>mode</I> de pintat. Els valors possibles són: GL_FRONT pels
+polígons de cara a l'observador, GL_BACK pels polígons d'esquena a
+l'observador, i GL_FRONT_AND_BACK per tots dos casos.
+
+<P>
+El segon paràmetre <I>mode</I> especifica el mode en que han de ser
+pintats els polígons, i els valors que pot prendre són: GL_POINT,
+GL_LINE i GL_FILL (aquest últim és el que actua per defecte per a tots
+els polígons de l'escena).
+
+<P>
+Així doncs si es vol canviar el mode per a dibuixar en filferros només
+cal fer una crida com la següent:
+<PRE class=algoritme>
+          <B>glPolygonMode</B> (GL_FRONT_AND_BACK, GL_LINE);
+</PRE>
+
+<BR>
+<P>
+<div class=tit3><b>Eliminació de les cares del darrera (<I>culling</I>)</b></div>
+
+<P>
+En un objecte tancat construït a partir de polígons opacs les cares
+que miren enrera no són mai visibles. Si l'observador es troba a
+l'exterior de l'objecte, es pot activar el <I>culling</I> per a descartar els polígons que
+OpenGL determina que estan al darrera (i per tant no serien
+visibles). Per a fer això cal utilitzar la crida a
+<PRE class=algoritme>
+          void <B>glCullFace</B> (GLenum mode);
+</PRE>
+
+<P>
+que indica quins polígons han de ser descartats abans de fer la transformació a coordenades de
+pantalla. El <I>mode</I> pot ser GL_FRONT, GL_BACK o
+GL_FRONT_AND_BACK indicant si es vol descartar els polígons que estan
+de cara a l'observador, d'esquena o tots respectivament.
+
+<P>
+Per a que aquesta crida a "glCullFace" tingui efecte cal activar el
+mode <I>culling</I> executant la crida a
+<PRE class=algoritme>
+          <B>glEnable</B> (GL_CULL_FACE);
+</PRE>
+
+<br>
+que podrà ser desactivada passant-li el mateix paràmetre a la crida
+"glDisable".
+
+<BR>
+<P>
+<div class=tit3><b>Especificació de la transfomació món-pantalla</b></div>
+
+<P>
+Com ja hem dit al punt <a href="#primitives">primitives gràfiques</a>,
+OpenGL s'encarrega de fer la transformació
+món-pantalla i per tant podem donar-li les coordenades dels
+vèrtexs en coordenades de món (coordenades de l'aplicació 3D). Però de
+tota manera cal que li especifiquem quina ha de ser aquesta
+transformació a fer per cada cas. És a dir, li hem de comunicar les
+dades necessàries per a que pugui fer la transformació.
+
+<P>
+Com sabem la transformació món-pantalla (3D-pantalla) consta de
+diferents passos que fan la traducció de coordenades de món a
+coordenades de pantalla passant per les coordenades de
+l'observador i les coordenades homogènies.
+<PRE>
+                  Coordenades de món
+                            |
+                            V
+                  Coordenades de l'observador
+                            |
+                            V
+                  Coordenades homogènies
+                            |
+                            V
+                  Coordenades de pantalla
+</PRE>
+
+<P>
+En tot moment OpenGL manté dues matrius per a les transformacions: la
+matriu MODELVIEW que transforma les coordenades de món a coordenades
+de l'observador; i la matriu PROJECTION que transforma les coordenades
+de l'observador a coordenades homogènies. Hi ha funcions d'OpenGL que
+poden actuar sobre totes dues matrius, per tant primer cal seleccionar
+la matriu amb la que volem traballar en cada moment.
+<PRE class=algoritme>
+          <B>glMatrixMode</B> (GL_MODELVIEW);  /* treballar amb la
+                                         * matriu MODELVIEW */
+          <B>glMatrixMode</B> (GL_PROJECTION); /* treballar amb la
+                                         * matriu PROJECTION */
+</PRE>
+
+<P>
+Després, en tots dos casos, abans d'especificar cap matriu de
+transformació és recomenable carregar la matriu identitat:
+<PRE class=algoritme>
+          <B>glLoadIdentity</B> ();
+</PRE>
+
+<P>
+Per a definir les transformacions a coordenades de l'observador i a
+coordenades homogènies usarem dues rutines que no són propiament del
+nucli d'OpenGL sinó que pertanyen a una llibreria d'utilitats que
+sempre es troba en les distribucions d'OpenGL: la llibreria GLU.
+
+<P>
+La rutina
+<PRE class=algoritme>
+          void <B>gluLookAt</B> (GLdouble eyeX, GLdouble eyeY, GLdouble eyeZ,
+                          GLdouble centerX, GLdouble centerY,
+                          GLdouble centerZ,
+                          GLdouble upX, GLdouble upY, GLdouble upZ)
+</PRE>
+
+<P>
+és la que usarem per a passar a coordenades de l'observador. Aquesta
+rutina fixa la <A class=glossari Href="javascript:glossari('PosObs.html')">posició de l'observador</A>
+(<I>eyeX, eyeY, eyeZ</I>), el <A class=glossari Href="javascript:glossari('CentreEsc.html')">centre de l'escena</A>
+(<I>centerX, centerY, centerZ</I>) y el <A class=glossari Href="javascript:glossari('VAmunt.html')">vector up</A> (<I>upX, upY,
+upZ</I>). La crida a aquesta rutina doncs l'aplicarem a la matriu
+MODELVIEW. L'ordre de crides en aquest cas és:
+<PRE class=algoritme>
+          <B>glMatrixMode</B> (GL_MODELVIEW);
+          <B>glLoadIdentity</B> ();
+          <B>gluLookAt</B> (eyeX,eyeY,eyeZ,centerX,centerY,centerZ,
+                     upX,upY,upZ);
+</PRE>
+
+<P>
+I per altra banda usarem la rutina
+<PRE class=algoritme>
+          void <B>gluPerspective</B> (GLdouble field_of_view,
+                               GLdouble aspect_ratio,
+                               GLdouble znear, GLdouble zfar)
+</PRE>
+
+<br>
+per a la transformació a coordenades homogènies. Els paràmetres
+d'aquesta rutina són: <I>field_of_view</I> és <A class=glossari Href="javascript:glossari('angleO.html')">l'angle d'obertura de la
+càmera</A> (mesurat en graus), <A class=glossari Href="javascript:glossari('ARatio.html')"><I>aspect_ratio</I></A> ha
+de coincidir amb la del viewport: amplada/alçada (si no és així
+tindrem deformació), <I>znear</I> és la distància a l'observador del
+<A class=glossari Href="javascript:glossari('PlansRet.html')">pla de retallat
+anterior</A>, i <I>zfar</I> és la distància a l'observador del pla de
+retallat posterior.
+
+<P>
+La crida a aquesta rutina s'aplicarà a la matriu PROJECTION i l'ordre
+de crides habitual és:
+<PRE class=algoritme>
+          <B>glMatrixMode</B> (GL_PROJECTION);
+          <B>glLoadIdentity</B> ();
+          <B>gluPerspective</B> (field_of_view,aspect_ratio,znear,zfar);
+</PRE>
+
+<P>
+Usant la rutina "gluPerspective" el que fem és utilitzar una projecció
+en perspectiva per a visualitzar la nostre imatge, però també podem
+voler una projecció ortogonal on el volum de visibilitat és un
+paral·lelepípede rectangular. Per a fer aquesta projeció OpenGL ens
+ofereix la rutina
+<PRE class=algoritme>
+          void <B>glOrtho</B> (GLdouble left, GLdouble right,
+                        GLdouble bottom, GLdouble top,
+                        GLdouble near, GLdouble far)
+</PRE>
+
+<P>
+on els punts (<I>left,bottom,-near</I>) i (<I>right,top,-near</I>)
+representen les cantonades de baix a l'esquerra i dalt a la dreta del
+pla més proper del paral·lelepípede de visió, i
+(<I>left,bottom,-far</I>) i (<I>right,top,-far</I>) representen les
+cantonades de baix a l'esquerra i dalt a la dreta del pla més llunyà
+del paral·lelepípede de visió. Els valors de <I>near</I> i <I>far</I>
+tant poden ser positius com negatius.
+
+<P>
+Si ho volem pel cas especial d'una projecció bidimensional també podem usar la crida a
+<PRE class=algoritme>
+          void <B>gluOrtho2D</B> (GLdouble left, GLdouble right,
+                           GLdouble bottom, GLdouble top)
+</PRE>
+
+<P>
+que és idèntica a la crida tridimensional "glOrtho" excepte que les
+coordenades <I>z</I> dels objectes de l'escena s'assumeixen entre els
+valors -1.0 i 1.0.
+
+<P>
+Per a especificar una transformació a coordenades de pantalla
+(definició del <i>viewport</i>) s'haurà d'usar la crida a
+<PRE class=algoritme>
+          void <B>glViewport</B> (GLint x, GLint y,
+                           GLsizei width, GLsizei height)
+</PRE>
+
+<br>
+on <I>x,y</I> són les coordenades de la cantonada inferior esquerra
+del rectangle de la finestra de visualització, i <I>width</I> i
+<I>height</I> són les dimensions del <i>viewport</i>. Tots aquests paràmetres
+es donen en píxels. Si no s'usa aquesta crida, OpenGL per defecte
+utilitza com a <i>viewport</i> tota l'àrea de la finestra gràfica.
+
+<P>
+Hi ha també altres transformacions que es poden aplicar, com són
+directament la translació, rotació o escalat, que es poden aplicar a
+tota l'escena (afegint aquestes transformacions a una de les matrius,
+MODELVIEW o PROJECTION), o fins i tot només a un objecte. Per a fer-ho
+només per a un objecte cal però primer guardar l'estat de la matriu
+per a tota l'escena per a poder-la recuperar quan s'hagi acabat la
+transformació per a l'objecte.
+
+<P>
+La descripció de les rutines de transformacions
+geomètriques són:
+<PRE class=algoritme>
+          void <B>glTranslated</B> (GLdouble x, GLdouble y, GLdouble z)
+          void <B>glTranslatef</B> (GLfloat x, GLfloat y, GLfloat z)
+          void <B>glScaled</B> (GLdouble x, GLdouble y, GLdouble z)
+          void <B>glScalef</B> (GLfloat x, GLfloat y, GLfloat z)
+          void <B>glRotated</B> (GLdouble angle, GLdouble x,
+                          GLdouble y, GLdouble z)
+          void <B>glRotatef</B> (GLfloat angle, GLfloat x,
+                          GLfloat y, GLfloat z)
+</PRE>
+
+<br>
+i per a guardar l'estat d'una matriu per a tota l'escena i poder
+modificar-la només per part de l'escena, el que es fa és mantenir una
+pila de matrius, per tant podrem fer <I>push</I> i <I>pop</I> de la
+matriu actual quan calgui:
+<PRE class=algoritme>
+          void <B>glPushMatrix</B> (void)
+          void <B>glPopMatrix</B> (void)
+</PRE>
+
+<P>
+És a dir, per cada tipus de matriu OpenGL manté una pila de matrius,
+en el top de la qual es troba la matriu actual. Quan es fa una crida a
+"glPushMatrix" es duplica aquesta matriu actual sobre el top de la
+pila, de manera que es pot modificar tenint una còpia en la posició
+següent. Quan s'acaba d'actuar amb la còpia de la matriu es pot
+recuperar la que es tenia fent la crida a "glPopMatrix", que elimina
+la que hi ha actual al top de la pila i per tant deixa la que hi ha a
+la següent posició (que és la que haviem volgut conservar).
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m7a15_BasicCaracterist.html">[Anterior]</a>
+<a href="m7a30_BasicIlluminacio.html">[Següent]</a>
+</div>
+</body>
+</html>

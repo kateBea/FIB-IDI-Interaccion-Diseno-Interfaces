@@ -1,0 +1,120 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.6 [en] (Win98; I) [Netscape]">
+   <title>M7.1 Proc&eacute;s de visualitzaci&oacute; 2D.Implementaci&oacute;.</title>
+<link REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</head>
+<body>
+<script>
+top.passara("vis2D","impl");
+</script>
+<div CLASS="nav">
+<a href="RetPunt.html">[Anterior]</a>
+<a href="RetPol.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Mapa sensible del PV2D.
+<span class=tit2>Retallat de Segment</span>
+</div>
+
+<p>Analitza si un segment de recta definit per dos punts P1 i P2, és interior,
+exterior o parcialment interior a una finestra. El subprocés corresponent
+indica si el segment és visible o no i retorna el tros de segment visible.
+
+<p>Un dels algorismes més utilitzats és el de Cohen-Sutherland,
+donat que una bona part de les operacions es fan en lògica de bits.
+Es basa en detectar eficientment els segments totalment visibles i gran
+part dels no visibles. En casos dubtosos, es detecta amb un mínim
+de càlculs quines rectes de la finestra tallen el segment i es calculen
+el punts de tall que seran considerats nous vèrtexs del segment
+substituint als exteriors a la finestra.
+
+<p>Per realitzar aquests càlculs es consideren les 9 regions de l'espai
+que les rectes limitadores de la finestra defineixen, etiquetades amb 4
+bits de manera que el <i>bit_i</i> i=1..4 val 0 si els punts de la zona
+són interiors a la recta <i>r_i</i> de la finestra. Analitzeu en
+la figura l'etiquetatge de les diferents zones. També a la figura
+s'han dibuixat diferents segments ambs els que podeu analitzar el seguiment
+de l'algorisme que a continuació s'especifica.
+
+<p>
+<table>
+<tr>
+<td><img SRC="imatges/quadr-breshen.jpg" ALT="" ></td>
+<td><img SRC="imatges/taula-quadr-breshen.jpg" ALT=""  align=RIGHT></td>
+</tr>
+</table>
+
+<p>Donat un segment limitat per dos punts P1 i P2:
+<ul>
+<li>
+S'assigna a cada vèrtex extrem un codi igual al de la seva zona
+d'ubicació (CodiI, CodiF).</li>
+<li>
+El segment es classifica com totalment <i>visible</i> si els seus dos extrems
+tenen codi 0000 (segment <i>a</i> de la figura).</li>
+<li>
+El segment es classifica com totalment <i>exterior</i> a la finestra, si
+els seus dos extrems es troben a la banda exterior d'una mateixa recta
+de la finestra, és a dir, tenen el mateix <i>bit_i</i>=1 en ambdós
+codis (segment <i>b</i> de la figura).</li>
+<li>
+El segments que no compleixen les especificacions anteriors es consideren
+no classificats (<i>?</i>). Sempre compleixen tenir al menys un vèrtex
+en una zona exterior a la finestra (un <i>bit_i</i> = 1 en el codi). Si
+analitzem els codis dels vèrtexs P1 i P2, la recta <i>r_i</i> candidata
+a <i>tallar</i> el segment serà aquella respecte a la qual els codis
+tenen un mateix <i>bit_i</i> amb valor oposat (la recta suport del segment
+talla a <i>r_i</i>). El punt d'intersecció entre el segment i <i>r_i</i>
+és simple de calcular, donat que<i> r_i</i> és paral·lela a un eix
+de coordenades. El segment quedarà subdividit en dos trossos. El
+que conté el vèrtex del segment inicial que era exterior
+a <i>r_i</i>, serà exterior a la finestra i, per tant, retallat.
+L'altre tros es considera com <i>nou</i> segment a analitzar, substituint
+el vèrtex extern del segment incial pel vèrtex intersecció
+trobat. Es tornarà a repetir el procés amb aquest nou segment.
+Veure com exemples els segments <i>c,d</i> i <i>e </i>de la figura; en
+color verd el tros visible.</li>
+</ul>
+
+<p>Podeu fer el seguiment del retallat dels segments de la figura sobre l'algorisme
+resultant. Si intenteu implementar l'algorisme, utilitzeu lògica
+de bits per a detectar la classificació dels punts.
+
+<pre class=algoritme>
+<b>accio</b> Retalla_Segment(P1,P2,xm,ym,xM,yM,visible)
+   codifica (P1,xm,ym,xM,yM,codi1)
+   codifica (P2,xm,ym,xM,yM,codi2); fi:=fals;
+   <b>repetir</b>
+      <b>si</b> dins(codi1,codi2) <b>llavors</b> visible:=cert; fi:=cert
+      <b>altrament</b>
+         <b>si</b> fora(codi1,codi2) <b>llavors</b> visible:=fals; fi:=cert
+         <b>altrament</b>
+            <b>si</b> exterior(codi1) <b>llavors</b>
+               troba_frontera_finestra_exterior(codi1,i)
+               nou_extrem_segment (P1,i)
+               codifica (P1,codi1)
+            <b>altrament</b>
+               troba_frontera_finestra_exterior(codi2,i)
+               nou_extrem_segment (P2,i)
+               codifica (P2,codi2)
+            <b>fisi</b>
+         <b>fisi</b>
+      <b>fisi</b>
+   <b>finsque</b> fi
+   <b>firepetir</b>
+<b>fiaccio</b>
+</pre>
+
+
+<br><br>
+<div CLASS="nav">
+<a href="RetPunt.html">[Anterior]</a>
+<a href="RetPol.html">[Següent]</a>
+</div>
+</body>
+</html>

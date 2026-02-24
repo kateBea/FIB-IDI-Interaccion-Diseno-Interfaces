@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","ombres");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m3b01_Ombres.html">[Anterior]</a>
+<a href="m3b12_OmbresProjOpenGL.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Ombres.
+<span class=tit2>Càlcul d'ombres per projecció</span>
+</div>
+
+<p> El cas més senzill per al càlcul d'ombres usant els recursos
+d'OpenGL és el cas en que l'ombra cau sobre una superfície plana (o bé
+sobre molt poques superfícies planes). Suposem primer que l'ombra de
+l'objecte es projecta sobre una única superfície plana. En aquest cas,
+el que farem és projectar l'objecte des del focus puntual sobre el
+pla, i pintar els polígons que s'obtenen per projecció de les cares,
+amb el color de l'ombra.
+
+<br>
+<div align=center><img src="imatges/OmbraPlana.png"></div>
+
+<p>Aquest algorisme és senzill i va bé per ombres sobre el terra, però
+pot donar problemes per exemple si el polígon en que es projecta
+l'ombra és massa petit i aquesta s'en surt del polígon base (heu de
+tenir en compte que l'ombra és un conjunt de polígons projectats sobre
+un pla, i que per tant té entitat independentment del tamany i posició
+d'aquest polígon base). Fixeu-vos en el que passa en el següent
+exemple:
+
+<br>
+<div align=center><img src="imatges/FlamingoSortint.png"></div>
+
+<p> A la següent pàgina veurem com es pot programar, en OpenGL, una
+aplicació que generi ombres per projecció sobre un pla.
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m3b01_Ombres.html">[Anterior]</a>
+<a href="m3b12_OmbresProjOpenGL.html">[Següent]</a>
+</div>
+</body>
+</html>

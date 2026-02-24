@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","reflex");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+[Anterior]
+<a href="m3d40_ObjectesVirtuals.html">[Següent]</a>
+<a href="m3c01_introduccio.html">[Apartat anterior]</a>
+</div>
+<br><br>
+
+<div class=tit1>Reflexió de llum entre objectes</div>
+
+<p> Com ja hem vist en capítols anteriors, en el càlcul del color d'un
+punt de la superfície d'un objecte intervé la llum que arriba a aquest
+punt provinent dels altres objectes de l'escena. Aquesta llum es suma
+a la provinent dels focus i es reflecteix de manera difosa i especular en
+funció de les propietats del material de l'objecte.  <!--<img
+src="imatges/falti">-->
+
+<p> Recordem que l'observador només observa la reflexió especular si
+es troba dins d'un con definit a l'entorn de la direcció
+d'especularitat. En objectes altament especulars com els miralls es
+considera que l'obertura del con és nul·la, és a dir, que l'observador
+només veurà la llum reflectida si es troba sobre la direcció de
+reflexió. Aquesta direcció es troba en el pla definit per la
+normal a la superfície i la llum incident, i forma un angle amb la
+normal igual al que hi ha entre la normal i la llum incident:
+
+<div align=center><img src="imatges/RaigReflexat.png"></div>
+
+<P>Les reflexions de la llum en objectes polits ja són modelades amb
+velocitat raonable per les llibreries gràfiques. OpenGL ens permet
+donar les propietats especulars dels materials, i calcularà els
+<i>highlights</i>. Si en canvi volem modelar un o més miralls, podem
+calcular el seu efecte amb <i>Ray Tracing</i>, però el cost és, en
+general, prohibitiu (i en tot cas, excepte per escenes trivials, no és
+gens interactiu).
+
+<p> En aquest apartat s'explicaran diferents procediments per a
+pintar escenes que contenen miralls plans, aprofitant els recursos que
+ens aporta OpenGL per a fer-ho de forma eficient.
+
+
+<br><br>
+<DIV CLASS="nav">
+[Anterior]
+<a href="m3d40_ObjectesVirtuals.html">[Següent]</a>
+<a href="m3c01_introduccio.html">[Apartat anterior]</a>
+</div>
+</body>
+</html>

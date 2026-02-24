@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","reflex");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m3d45_StencilBufGL.html">[Torna a l'algorisme]</a>
+</div>
+<br><br>
+
+<div class=tit3><b>Implementació en OpenGL de les reflexions amb
+Stencil Buffer.</b> Explicació - part 2</div>
+
+<p>Abans de pintar els objectes virtuals necessitem assignar els bits
+de l'<i>stencil buffer</i> que corresponen al mirall.
+
+<pre class=algoritme>
+   <b>glEnable</b>(GL_STENCIL_TEST);
+   <b>glStencilFunc</b>(GL_ALWAYS, 1, 0);
+   <b>glStencilOp</b>(GL_KEEP, GL_KEEP, GL_REPLACE);
+</pre>
+
+<P>Primer activem el <i>test d'stencil</i> que ens disposem a fer
+servir. La segona crida especifica que el <i>test d'stencil</i> es
+passa sempre, sense importar el que hi hagi al buffer. El segon
+argument estableix com a valor de referència l'1. Aquest és el valor que
+s'assignarà als elements del buffer que corresponguin a bits en què
+s'apliqui l'opció <tt>GL_REPLACE</tt>. El tercer paràmetre fa
+referència a la màscara de l'<i>stencil buffer</i>, que permet usar
+sols certs bits en les comparacions corresponents. No té cap
+rellevància quan s'ha triat la funció <tt>GL_ALWAYS</tt>.  
+
+<p>La següent crida estableix l'operació a fer servir. Si el fragment
+no passa el <i>test d'stencil</i> o el <i>test de profunditat</i>,
+hem especificat l'operació <tt>GL_KEEP</tt>, pel que el valor
+emmagatzemat a l'<i>stencil buffer</i> no es modificarà en aquests
+casos. En canvi, pels fragments que passen totes dues proves, s'ha
+especificat l'operació <tt>GL_REPLACE</tt>, pel que aquests valors es
+faran iguals al valor de referència triat a la crida anterior.
+
+<p>Ara estem llestos per a pintar el polígon, però sense que tingui
+efecte en el <i>frame-buffer</i> ni en el <i>z-buffer</i>, perquè en
+cas contrari tots els objectes virtuals (que estan darrera el mirall)
+fallarien el <i>test</i> de profunditat.
+
+<pre class=algoritme>
+   <b>glDepthMask</b>(GL_FALSE);
+   <b>glColorMask</b>(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
+   pintaPoligonMirall();
+</pre>
+
+<P>Observem que el resultat és que les entrades de l'<i>stencil
+buffer</i> que corresponen a pixels visibles del mirall es faran
+iguals al valor de referència (1), mentre que les restants romandran
+iguals a zero.
+
+<p>Un cop inicialitzats els valors de l'<i>stencil buffer</i>, tornem
+a activar l'actualització del <i>frame buffer</i> i del
+<i>z-buffer</i>. A més canviem la programació del mateix <i>stencil
+buffer</i>. Ara la funció a usar és <tt>GL_EQUAL</tt>, pel que els
+fragments que tinguin un valor diferent del de referència (1) seran
+rebutjats. En canvi establim que el valor acumulat a l'<i>stencil
+buffer</i> romangui constant independentment de si el fragment supera
+o no el <i>test d'stencil</i> i el <i>test de profunditat</i>.
+
+<pre class=algoritme>
+   <b>glDepthMask</b>(GL_TRUE);
+   <b>glColorMask</b>(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+   <b>glStencilFunc</b>(GL_EQUAL, 1, 1);
+   <b>glStencilOp</b>(GL_KEEP, GL_KEEP, GL_KEEP);
+</pre>
+
+<P>Ara ja estem llestos per passar a la següent fase de l'algorisme.
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m3d45_StencilBufGL.html">[Torna a l'algorisme]</a>
+</div>
+</body>
+</html>

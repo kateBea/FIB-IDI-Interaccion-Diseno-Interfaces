@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("realvirt","perif");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m5c02t01t01t01_posMag.html">[Anterior]</a>
+<a href="m5c02t01t01t03_posAcus.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Perifèrics.
+<span class=tit2>Dispositius d'entrada.</span>
+<span class=tit3>Posicionadors òptics</span>
+</div>
+
+<p>Els posicionadors òptics es basen en el processament d'imatges,
+podent adoptar diferents estratègies.</p>
+
+<p>Els sistemes basats en <b>càmeres estèreo </b>usen múltiples
+càmeres (dos com a mínim) que enfoquen l'objecte. A partir de les
+imatges capturades per les càmeres, es detecta la posició (X, Y) de
+diferents punts de l'objecte en cada imatge (problema de la
+correspondència), i es resol un sistema d'equacions que permet
+esbrinar la posició i/o orientació de l'objecte. A vegades es fixen
+elements a la superfície de l'objecte per fer més fàcil el
+reconeixement d'aquest objecte en cada imatge. Aquests elements,
+anomenats <b>marcadors</b>, poden ser passius (punts colorejats) o
+actius (emissors d'infraroigs, IREDS), i permeten que el posicionament
+sigui molt més acurat.</p>
+
+<p>Els sistemes basats en <b>escombrats làser</b> creen un patró de
+línies làser que és projectat sobre l'objecte. En cada etapa de
+l'escombrat una càmera captura la línia poligonal 3D que dependrà de
+la forma i posició de l'objecte. Alguns d'aquests sistemes permeten
+detectar la posició d'un punt, d'altres de tot l'objecte.</p>
+
+<p class=noind><b>Avantatges</p></b>
+
+<p>El principal avantatge és que, amb només un parell de
+càmeres, es pot capturar la posició de gran quantitat d'objectes.</p>
+
+<p class=noind><b>Inconvenients</b>
+
+<p>El principal inconvenient dels posicionadors òptics és la seva
+sensibilitat a l'oclusió de la direcció de visió (que els anglesos
+anomenen <i>line-of-sight</i>), ja que només són operatius quan cap
+altre objecte no s'interposa entre la càmera i l'objecte en
+seguiment. L'espai de treball està limitat pel camp visual de les
+càmeres.</p>
+
+<p>Un altre inconvenient és que normalment requereixen un computador
+dedicat exclusivament a aquesta tasca, ja que la captura de les
+imatges, la identificació dels punts claus en cada imatge, i els
+càlculs amb les dades llegides són processos que requereixen un temps
+de càlcul considerable.</p>
+
+<p>Degut a la complexitat dels càlculs, els posicionadors òptics tenen
+sovint un temps de latència molt elevat.</p>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m5c02t01t01t01_posMag.html">[Anterior]</a>
+<a href="m5c02t01t01t03_posAcus.html">[Següent]</a>
+</div>
+</body>
+</html>

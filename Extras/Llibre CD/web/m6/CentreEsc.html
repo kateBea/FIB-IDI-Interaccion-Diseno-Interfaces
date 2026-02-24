@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M7.1 Procés de visualització 2D.Sistemes de coordenades.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("vis3D","cam");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+<a href="PosObs.html">[Anterior]</a>
+<a href="VAmunt.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class="tit1">Model de la càmera. 
+<span class="tit2">Centre de l'escena</span>
+</div>
+
+<p>És un punt a l'espai en la direcció cap on es mira. També s'anomena
+          VRP (<i>View Reference Point</i>) o
+          <i>target</i>. L'anomenarem punt C. És el punt que es
+          projectarà al centre de la <A CLASS="glossari"
+          HREF="javascript:glossari('Vista.html','*','400','300','no','no','no','yes')"
+          onMouseOver="window.status='Glossari';return true"
+          onMouseOut="window.status='';return
+          true">vista</A>. Fixeu-vos que el punt C dóna la direcció
+          central de visió. És important la direcció però no la
+          distància de C a O. En una fotografia tradicional, el punt C
+          podria ser qualsevol dels punts que es veuen al centre del
+          visor quan ens preparem per fer la foto.
+
+<p class=exercici>
+           <span class=exernum>Exercici:</span> a la següent escena
+           senzilla, proveu de modificar la posició del centre de
+           l'escena i veieu com va canviant la imatge que obtenim a la
+           vista a la <A
+           CLASS="glossari"
+           HREF="javascript:glossari('FinGraf.html','*','400','300','no','no','no','yes')"
+           onMouseOver="window.status='Glossari';return true"
+           onMouseOut="window.status='';return true">finestra
+           gràfica</A> (abans podeu consultar el funcionament
+           d'aquesta
+           <A HREF="javascript:MuestraFin('VisuInter.html','500','400','yes')" title="">
+           visualització interactiva</A>). Podeu canviar
+           interactivament els paràmetres de visualització.
+
+<p>
+ <CENTER><table><tr><td>
+  <APPLET CODE ="AppletG2.class" archive="AppletG2.jar,../comuns.jar" WIDTH=640 HEIGHT=480>
+  <PARAM NAME=NApplet VALUE="2">
+  <PARAM NAME=Vrpx    VALUE="5.0">
+  <PARAM NAME=Vrpy    VALUE="5.0">
+  <PARAM NAME=Vrpz    VALUE="5.0">
+  <PARAM NAME=Angx    VALUE="30.0">
+  <PARAM NAME=Angy    VALUE="45.0">
+  <PARAM NAME=Angz    VALUE="0.0">
+  <PARAM NAME=D       VALUE="20.0">
+  <PARAM NAME=Winy    VALUE="5.0">
+  <PARAM NAME=Zfar    VALUE="105.0">
+  <PARAM NAME=Znear   VALUE="1.0">
+  <PARAM NAME=fich    VALUE="">
+  <PARAM NAME=AngExtx VALUE ="30.0">
+  <PARAM NAME=AngExty VALUE="10.0">
+  <PARAM NAME=fichero VALUE="/DAT/2cuboG.dat">
+  <PARAM NAME=Camara VALUE="1">
+  <PARAM NAME=Alfa VALUE="15.0">
+  </APPLET>
+  </td></tr></table></CENTER>
+
+  <p class=exercici>
+          Cal que situeu el punt C de manera que dins la vista es vegi
+          només mig cub - la seva part esquerra -.
+
+<br><br>
+<DIV CLASS="nav">
+<a href="PosObs.html">[Anterior]</a>
+<a href="VAmunt.html">[Següent]</a>
+</div>
+</body>
+</HTML>

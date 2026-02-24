@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M6.1 Procés de visualització 3D.MapaSensible.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("vis3D","estr");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+<a href="MSTransmet2.html">[Anterior]</a>
+<a href="AlgFil2.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Subprocessos.
+<span class=tit2>Retallat antero-posterior.</span>
+</div>
+
+<P>
+En aquest bloc es modifica la geometria i topologia del <A CLASS="glossari" HREF="javascript:glossari('ModelTr.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">model transformat</A>,
+retallant els elements geomètrics dels objectes i eliminant tot el que
+no està comprès entre els dos plans de retallat.
+
+Els paràmetres d'entrada són la posició dels <A CLASS="glossari" HREF="javascript:glossari('PlansRet.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">plans de retallat anterior i posterior</A> (zProp, zLluny).
+
+L'algorisme de principi és el següent:
+
+<PRE class=algoritme>
+<B>Per</B> cada cara c del model transformat <B>fer</B>
+  <B>Si</B>
+    CoordZmin (c) > zProp  <B>--></B>  esborra (c)
+    CoordZmax (c) < zLluny <B>--></B>  esborra (c)
+    CoordZmin (c) < zProp <B>i</B> CoordZmax (c) > zProp <B>--></B> retalla (c,zProp)
+    CoordZmin (c) < zLluny <B>i</B> CoordZmax (c) > zLluny <B>--></B> retalla (c,zLluny)
+  <B>fSi</B>
+<B>fPer</B>
+</PRE>
+
+<P>
+(Veure enllaç a l'algorisme en el cas particular de retallat només d'arestes).
+En el cas de retallat només d'arestes, cal una nova taula d'arestes al
+model transformat, per a guardar les arestes retallades (veure enllaç a
+la "informació que es transmet" després del retallat). En el cas
+general de retallat d'arestes i cares, calen dues noves taules, de
+cares i d'arestes. Així, en el model transformat hem acabat
+duplicant tota la informació del model geomètric de
+<A CLASS="glossari" HREF="javascript:glossari('representFronteres.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">fronteres</A> inicial
+(cares, arestes i vèrtexs).
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="MSTransmet2.html">[Anterior]</a>
+<a href="AlgFil2.html">[Següent]</a>
+</div>
+</BODY>
+</HTML>

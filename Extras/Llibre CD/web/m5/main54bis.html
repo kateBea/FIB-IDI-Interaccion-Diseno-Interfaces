@@ -1,0 +1,145 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.61 [en] (Win95; I) [Netscape]">
+   <title>M5.4.Representeció d'objectes Sòlids </title>
+<link REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+</head>
+<body>
+<script>
+top.passara("model","soli");
+</script>
+<a NAME="inici"></a>
+<div CLASS="nav">
+      <a href="main54.html">[Anterior]</a>
+      <a href="main54-2.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class="tit1">Representació d'objectes Sòlids.
+<span class="tit2">Característiques dels sòlids</span>
+</div>
+
+<p>El fet de poder parlar de dins i fora permet definir l'operació
+bàsica de classificació. Donat un sòlid A, es pot
+parlar de la classificació de punts i rectes respecte S. En la classificació
+de punts donat un sòlid S i un punt P, la classificació de
+P respecte a S és una operació que ens retorna dins, sobre
+o fora en funció de si el punt P és a l'interior de S, sobre
+la seva superfície o bé és a l'exterior del sòlid
+S. De la mateixa manera, la classificació d'una recta r respecte
+S ens diu quins intervals de la recta són dins, sobre o fora
+del sòlid. Més formalment, tot sòlid ha de disposar
+d'un mètode per a la classificació de punts, que podem suposar
+que és una funció:
+<p>                         
+
+<b>funció</b> ClassificaPuntSòlid (P: Punt3D, S: Sòlid)
+<b>retorna</b>
+ClassPunt
+<p>On el tipus retornat, ClassPunt, pot prendre tres valors {dins, sobre,
+fora}. En el cas de la classificació de rectes, el resultat de la
+classificació d'una recta r respecte un sòlid S és
+una llista d'intervals sobre r, on per a cada interval es guarda
+també la seva classificació {dins, sobre, fora}.
+<p>Tot sòlid ha de complir les següents característiques:
+
+<ul>
+<li>
+El sòlid ha de ser finit (el volum del conjunt de punts que es classifiquen
+dins del sòlid ha de ser finit).</li>
+
+<li>
+La superfície del <a href="javascript:glossari('solid.html','*','400','300','no','no','no','yes')" CLASS="glossari" onMouseOver="window.status='Glossari';return true" onMouseOut="window.status='';return true">sòlid</a>
+ha de ser orientada i tancada. Orientada vol dir que la superfície
+té dues bandes, que donat un punt qualsevol de la superfície
+Sup(S) sabem a quina banda té els punts interiors a S i a quina
+té els punts exteriors a S. Tancada vol dir que no és possible
+anar de cap punt interior a S a cap punt exterior a S sense passar per
+algun punt de la superfície SupS. El fet que la superfície
+sigui orientada i tancada, junt amb el requeriment que no s'autointersequi,
+ens assegura que el sòlid queda determinat per la seva superfície.
+Coneixent la superfície del sòlid tenim tota la informació
+geomètrica del sòlid i podem, per exemple, classificar punts
+i rectes.</li>
+
+<li>
+El sòlid ha de ser regular. Un objecte regular S és
+aquell en què la seva superfície Sup (S) sempre separa punts "dins" de
+punts "fora". Més formalment, un sòlid regular és
+tal que per tot punt P de Sup (S), si construïm una bola - esfera - de
+radi èpsilon Bola (P) centrada en P, la intersecció entre
+Bola(P) i S conté sempre punts Q tals que ClassificaPuntSòlid
+(Q,S) = dins i punts R tals que ClassificaPuntSòlid (R,S) = fora.
+Exemples d'objectes no regulars són objectes que tenen cares o arestes
+sueltes (un cub amb una aresta que li surt d'un dels vèrtexs, un
+cub al que se li ha afegit una cara més que vol fer de tapa, un
+cub al que se li ha tret una cara). En aquests casos, la solució
+és donar gruix a aquestes cares i/o arestes.</li>
+</ul>
+
+<p>Les operacions més importants que es defineixen sobre els objectes
+sòlids són les operacions booleanes. Les operaciones booleanes
+es basen directament en l'operació de classificació de punts.
+Si definim que un punt P pertany a un sòlid S si ClassificaPuntSòlid
+(P,S) = dins o bé ClassificaPuntSòlid (P,S) = sobre, podem
+definir les quatre operacions booleanes possibles entre dos sòlids
+A i B:
+ 
+<ul>
+<li>
+Unió (A,B):          
+Un punt P pertany a C=Unió(A,B) si i sols si (P pertany a A) o bé
+(P pertany a B)</li>
+
+<li>
+Intersecció (A,B):  Un punt P pertany a C=Intersecció(A,B)
+si i sols si (P pertany a A) i (P pertany a B)</li>
+
+<li>
+Diferència A-B:     Un punt P pertany a C=A-B
+si i sols si (P pertany a A) i no (P pertany a B)</li>
+
+<li>
+Diferència B-A:     Un punt P pertany a C=B-A
+si i sols si (P pertany a B) i no (P pertany a A)</li>
+
+
+</li>
+</ul>
+
+<p class=noind>(cal observar que amb aquesta definició, és possible que
+l'objecte resultant C no sigui regular; la solució, que aquí
+no veurem, és aplicar un postprocés de regularització del
+resultat).
+
+<p>Com que la superfície del sòlid és el lloc geomètric
+dels punts que separen l'interior de l'exterior, també l'anomenarem
+frontera del sòlid. A l'apartat següent presentarem la <a href="javascript:glossari('representFronteres.html','*','400','300','no','no','no','yes')" CLASS="glossari" onMouseOver="window.status='Glossari';return true" onMouseOut="window.status='';return true">representació
+per fronteres</a>, que ens permet emmagatzemar de forma no ambigua tota
+la informació geomètrica d'un sòlid guardant únicament
+informació de les cares de la seva frontera.
+
+<p>A la resta del llibre només tractarem amb sòlids delimitats
+per cares planes i que siguin dos-varietat. Les característiques
+dels sòlids delimitats per cares planes es veuran al proper apartat.
+D'altra banda, un sòlid dos-varietat és aquell que no té
+parts infinitament primes. Més formalment, en un sòlid dos-varietat
+S, per tot punt P de Sup(S), la intersecció entre Bola(P) i Sup(S)
+és homeomorfa a un disc (en els objectes dos-varietat, aquesta intersecció
+pot ser homeomorfa a més d'un disc). Una propietat pràctica
+dels sòlids dos-varietat i delimitats per cares planes, que ens
+simplificarà considerablement els algorismes i les estructures de
+dades, és que tota aresta de l'objecte és sempre contigua
+a dues i només dues cares.
+
+<br> <br> 
+<div CLASS="nav">
+	<a href="main54.html">[Anterior]</a>
+	<a href="main54-2.html">[Següent]</a>
+</div>
+
+</body>
+</html>

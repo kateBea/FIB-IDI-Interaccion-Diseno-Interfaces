@@ -1,0 +1,43 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.6 [en] (Win98; I) [Netscape]">
+   <title>M7.1 Proc&eacute;s de visualitzaci&oacute; 2D.Implementaci&oacute;.</title>
+<link REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</head>
+<body>
+<script>
+top.passara("vis2D","impl");
+</script>
+<div CLASS="nav">
+<a href="MSExplicacio7.html">[Anterior]</a>
+<a href="RastSeg.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Mapa sensible del PV2D.
+<span class=tit2>Rasterització de Punts</span>
+</div>
+
+<p>Donat un punt en coordenades de dispositiu, directament les seves
+coordenades estan associades a una component del buffer de la finestra
+gràfica corresponent. Per tant, la rasterització, simplement
+consisteix en inicialitzar una component del buffer.
+
+<pre class=algoritme>
+<b>accio</b> Rasteritza_Punt(Punt,color)
+   setPixel (Punt[1],Punt[2],color)
+   //el color inicialitzat amb l'atribut corresponent
+<b>fiaccio</b>
+</pre>
+
+
+<br><br>
+<div CLASS="nav">
+<a href="MSExplicacio7.html">[Anterior]</a>
+<a href="RastSeg.html">[Següent]</a>
+</div>
+</body>
+</html>

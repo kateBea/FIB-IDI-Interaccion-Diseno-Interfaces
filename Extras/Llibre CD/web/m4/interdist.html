@@ -1,0 +1,385 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M4.1.Interseccions i distàncies entre elements geomètrics a l'espai</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;
+charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("geom","3D");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+      <A HREF="rectesespai.html">[Anterior]</a>
+      [Següent]
+      <a href="main43.html">[Següent apartat]</a>
+     </div>
+<br><br>
+
+<div class="tit1">Elements geomètrics a l'espai.
+<span class="tit2">Interseccions i distàncies entre elements geomètrics a l'espai</span>
+</div>
+
+
+<P>Amb freqüència necessitarem calcular la relació entre diferents
+elements geomètrics a l'espai. Els casos més útils es resumeixen a la
+taula següent:<br>
+
+<CENTER><table class=m4 border>
+      <tr>
+        <td><blockquote>
+          <p>&nbsp;</p>
+        </blockquote>
+        </td>
+        <td><h3>Punt</h3>
+        </td>
+        <td><h3>Recta</h3>
+        </td>
+        <td valign="middle"><h3>Pla</h3>
+        </td>
+      </tr>
+      <tr>
+        <td><h3>Punt</h3>
+        </td>
+        <td><a HREF="#punt-punt">distància</a></td>
+        <td><a HREF="#punt-recta">distància</a></td>
+        <td><a HREF="#punt-pla">distància</a></td>
+      </tr>
+      <tr>
+        <td><h3>Recta</h3>
+        </td>
+        <td>&nbsp;</td>
+        <td><a HREF="#recta-recta">distància</a></td>
+        <td><a HREF="#recta-pla">intersecció</a></td>
+      </tr>
+      <tr>
+        <td><h3>Pla</h3>
+        </td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td><a HREF="#pla-pla">intersecció</a></td>
+      </tr>
+    </table></CENTER>
+
+<p class=noind> on cada cel·la rellevant conté un link a la
+    discussió corresponent més avall. Observeu que algunes caselles
+    diuen "distància" i d'altres "intersecció". Amb això hem volgut
+    indicar l'operaciò més natural entre cada parella d'entitats. És a
+    dir, per exemple, que dues rectes a l'espai normalment no
+    s'intersequen (tot i que poden fer-ho). En aquest cas doncs
+    l'operació més natural és el càlcul de distàncies: el cas especial
+    en que les dues rectes es tallen vindrà assenyalat per una
+    distància zero entre elles. Per aquesta raó, a l'espai
+    tridimensional, hom parla de "rectes
+    en posició general" per referir-se a rectes que no es tallen,
+    igual que a "punts en posició general" quan no hi ha més de dos
+    colineals ni més de tres en un pla. Altrament (quan la
+    posició no és general), diem que estem en un cas singular.</P>
+
+<a name="punt-punt"></a><h5>Distància entre dos punts.</h5>
+<P>Siguin dos punts
+<!--$P=(P_x, P_y,P_z)$--><IMG WIDTH="116" HEIGHT="28" ALIGN="MIDDLE" BORDER="0"
+ SRC="imatges/img38.gif"
+ ALT="$P=(P_x, P_y,P_z)$">  i <!--$Q=(Q_x, Q_y,Q_z)$--><IMG WIDTH="123" HEIGHT="28" ALIGN="MIDDLE" BORDER="0"
+ SRC="imatges/img39.gif"
+ ALT="$Q=(Q_x, Q_y,Q_z)$">.
+La distància entre els dos punts es calcula a partir de les seves
+coordenades de la següent forma:</P>
+
+<!--
+\[
+d(P,Q)=\sqrt{(Q_x-P_x)^2+(Q_y-P_y)^2+(Q_z-P_z)^2}
+\]
+--><div CLASS=formula><IMG WIDTH="358" HEIGHT="34"
+ SRC="imatges/img40.gif"
+ ALT="\begin{displaymath}
+d(P,Q)=\sqrt{(Q_x-P_x)^2+(Q_y-P_y)^2+(Q_z-P_z)^2}\end{displaymath}">.</div>
+
+<p>Aquesta fórmula s'obté per una simple aplicació del teorema de Pitàgoras.</p>
+
+<a name="punt-recta"></a><h5>Distància d'un punt a una recta.</h5>
+<p>Siguin donats un punt <!--$P=(P_x, P_y, P_z)$--><IMG WIDTH="116"
+HEIGHT="28" ALIGN="MIDDLE" BORDER="0" SRC="imatges/img38.gif" ALT="$P=(P_x,
+P_y,P_z)$"> i una recta <!-- $l\sim(A,\vec v)$ --><IMG WIDTH="68"
+HEIGHT="28" ALIGN="MIDDLE" BORDER="0" SRC="imatges/img41.gif"
+ALT="$l\sim(A,\vec v)$"> (a on <!--$A=(A_x,A_y, A_z)$--><IMG
+WIDTH="121" HEIGHT="28" ALIGN="MIDDLE" BORDER="0" SRC="imatges/img42.gif"
+ALT="$A=(A_x,A_y, A_z)$"> és un punt de pas i <!-- $\vec v=(v_x, v_y,
+v_z)$ --><IMG WIDTH="105" HEIGHT="28" ALIGN="MIDDLE" BORDER="0"
+SRC="imatges/img43.gif" ALT="$\vec v=(v_x, v_y, v_z)$"> és un vector director
+unitari, (veure <a href="rectespla.html#recta_parametrica_2">definició</a>). Per a
+trobar la distància entre el punt i la recta (és a dir la distància
+entre el punt i aquell punt de la recta que està més a prop d'ell),
+
+<center><table><td>
+<img class="left" src="imatges/distptr.gif">
+</td></table></center>
+
+<p class=noind>calculem primer aquest punt més
+proper <!--$Q$--><IMG WIDTH="15" HEIGHT="25" ALIGN="MIDDLE" BORDER="0"
+SRC="imatges/img44.gif" ALT="$Q$">.
+
+
+Un punt qualsevol sobre la recta pot
+escriure's com <!-- $Q=A+\lambda\vec v$ --><IMG WIDTH="85" HEIGHT="26"
+ALIGN="MIDDLE" BORDER="0" SRC="imatges/img45.gif" ALT="$Q=A+\lambda\vec
+v$">. Si <!--Q--><IMG WIDTH="15" HEIGHT="25" ALIGN="MIDDLE" BORDER="0"
+SRC="imatges/img44.gif" ALT="$Q$"> és el punt més proper a <!--P--><IMG
+WIDTH="15" HEIGHT="13" ALIGN="BOTTOM" BORDER="0" SRC="imatges/img46.gif"
+ALT="$P$">, aleshores el vector <!--$\vec{PQ}$--><IMG WIDTH="27"
+HEIGHT="34" ALIGN="MIDDLE" BORDER="0" SRC="imatges/img47.gif"
+ALT="$\vec{PQ}$"> ha de ser perpendicular a la recta, i per tant al
+seu vector director <!--$\vec v$--><IMG WIDTH="11" HEIGHT="14"
+ALIGN="BOTTOM" BORDER="0" SRC="imatges/img4.gif" ALT="$\vec v$">. Aquesta
+condició queda expressada en forma d'equació imposant que el producte
+escalar d'aquests vectors sigui zero: <!-- $0=\vec v\cdot
+(A+\lambda\vec v-P)=\vec v\cdot(A-P)+ \lambda\vec v\cdot\vec v=\vec
+v\cdot(A-P)+\lambda$ --><IMG WIDTH="424" HEIGHT="28" ALIGN="MIDDLE"
+BORDER="0" SRC="imatges/img48.gif" ALT="$0=\vec v\cdot (A+\lambda\vec
+v-P)=\vec v\cdot(A-P)+ \lambda\vec v\cdot\vec v=\vec
+v\cdot(A-P)+\lambda$"> i per tant
+
+ <div class="formula">
+<!-- \[ \lambda=\vec v\cdot(P-A) \] --><IMG WIDTH="105" HEIGHT="26"
+SRC="imatges/img49.gif" ALT="\begin{displaymath} \lambda=\vec
+v\cdot(P-A)\end{displaymath}">.</div>
+
+<p>Substituint
+a l'expressió de <!--$Q$--><IMG WIDTH="15" HEIGHT="25" ALIGN="MIDDLE"
+BORDER="0" SRC="imatges/img44.gif" ALT="$Q$"> aquest valor de
+<!--$\lambda$--><IMG WIDTH="12" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+SRC="imatges/img12.gif" ALT="$\lambda$">, obtindrem les seves coordenades, que
+podrem fer servir per a calcular la <a href="#punt-punt">distància</a>
+a <!--$P$--><IMG WIDTH="15" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+SRC="imatges/img46.gif" ALT="$P$">.
+<BR>
+<a name="punt-pla"></a><h5>Distància d'un punt a un pla.</h5>
+
+<p>Sigui <!--$P=(P_x, P_y, P_z)$--><IMG WIDTH="116" HEIGHT="28"
+ ALIGN="MIDDLE" BORDER="0" SRC="imatges/img38.gif" ALT="$P=(P_x, P_y,P_z)$">
+ un punt a l'espai, i sigui <!--$\Pi$--><IMG WIDTH="14" HEIGHT="13"
+ ALIGN="BOTTOM" BORDER="0" SRC="imatges/img50.gif" ALT="$\Pi$"> un pla
+ donat per un punt <!--$A=(A_x, A_y, A_z)$--><IMG WIDTH="121"
+ HEIGHT="28" ALIGN="MIDDLE" BORDER="0" SRC="imatges/img42.gif"
+ ALT="$A=(A_x,A_y, A_z)$"> i un vector normal unitari <!--$\vec n=(n_x, n_y,
+ n_z)$--><IMG WIDTH="111" HEIGHT="28" ALIGN="MIDDLE" BORDER="0"
+ SRC="imatges/img51.gif" ALT="$\vec n=(n_x, n_y, n_z)$">.
+
+<center><table><td>
+<img class="left"
+ vspace=12px src="imatges/distptpl.gif">
+</td></table></center>
+
+
+<p> Per calcular la
+ distància del punt al pla hi ha prou amb observar que per
+ qualsevol vector <!--$\vec v$--><IMG WIDTH="11" HEIGHT="14"
+ ALIGN="BOTTOM" BORDER="0" SRC="imatges/img4.gif" ALT="$\vec v$">, el producte
+ escalar <!--$\vec v\cdot \vec n$--><IMG WIDTH="32" HEIGHT="14"
+ ALIGN="BOTTOM" BORDER="0" SRC="imatges/img52.gif" ALT="$\vec v\cdot \vec n$">
+ dóna la llargada de la projecció de <!--$\vec v$--><IMG WIDTH="11"
+ HEIGHT="14" ALIGN="BOTTOM" BORDER="0" SRC="imatges/img4.gif" ALT="$\vec v$">
+ en la direcció de <!--$\vec n$--><IMG WIDTH="12" HEIGHT="14"
+ ALIGN="BOTTOM" BORDER="0" SRC="imatges/img18.gif" ALT="$\vec n$">. Per tant
+ hi ha prou amb construir un vector que vagi des de <!--$P$--><IMG
+ WIDTH="15" HEIGHT="13" ALIGN="BOTTOM" BORDER="0" SRC="imatges/img46.gif"
+ ALT="$P$"> a qualsevol punt del pla (per exemple <!--$A$--><IMG
+ WIDTH="14" HEIGHT="13" ALIGN="BOTTOM" BORDER="0" SRC="imatges/img53.gif"
+ ALT="$A$">), i calcular la llargada de la projecció: 
+
+<!--
+ $$dist(P,\Pi)=(P-A)\cdot\vec n$$.  -->
+<div CLASS=formula><IMG
+ WIDTH="168" HEIGHT="26" SRC="imatges/img54.gif" ALT="\begin{displaymath}
+ dist(P,\Pi)=(P-A)\cdot\vec n\end{displaymath}"></div>
+
+ <p>Si el pla ens ve
+determinat per una equació (<!--$\Pi\sim a x+ b y + c z + d=0$--><IMG
+WIDTH="179" HEIGHT="26" ALIGN="MIDDLE" BORDER="0" SRC="imatges/img55.gif"
+ALT="$\Pi\sim a x+ b y + c z + d=0$">), aleshores hom pot calcular la
+distància usant que <!--$\vec w=(a,b,c)$--><IMG WIDTH="84" HEIGHT="28"
+ALIGN="MIDDLE" BORDER="0" SRC="imatges/img56.gif" ALT="$\vec w=(a,b,c)$"> és
+un vector normal al pla (no unitari), i que per tot punt
+<!--$Q$--><IMG WIDTH="15" HEIGHT="25" ALIGN="MIDDLE" BORDER="0"
+SRC="imatges/img44.gif" ALT="$Q$"> del pla <!--$\Pi$--><IMG WIDTH="14"
+HEIGHT="13" ALIGN="BOTTOM" BORDER="0" SRC="imatges/img50.gif" ALT="$\Pi$"> és
+<!--$Q\cdot\vec w=-d$--><IMG WIDTH="80" HEIGHT="26" ALIGN="MIDDLE"
+BORDER="0" SRC="imatges/img57.gif" ALT="$Q\cdot\vec w=-d$">. Aleshores, la
+normal unitària és <!-- $\vec n={\vec w\over\sqrt{a^2+b^2+c^2}}$
+--><IMG WIDTH="104" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+SRC="imatges/img58.gif" ALT="$\vec n={\vec w\over\sqrt{a^2+b^2+c^2}}$"> i per
+tant tenim <!-- $dist(P,\Pi)=(P-A)\cdot {\vec
+w\over\sqrt{a^2+b^2+c^2}}={P\cdot\vec w+d\over\sqrt{a^2+b^2+c^2}}$
+--><IMG WIDTH="323" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+SRC="imatges/img59.gif" ALT="$dist(P,\Pi)=(P-A)\cdot {\vec
+w\over\sqrt{a^2+b^2+c^2}}={P\cdot\vec
+w+d\over\sqrt{a^2+b^2+c^2}}$">. Obtenim doncs que <!-- $dist(P,
+\Pi)={a P_x+b P_y+ c P_z+d\over\sqrt{a^2+b^2+c^2}}$ -->&nbsp <IMG
+WIDTH="195" HEIGHT="35" ALIGN="MIDDLE" BORDER="0" SRC="imatges/img60.gif"
+ALT="$dist(P, \Pi)={a P_x+b P_y+ c P_z+d\over\sqrt{a^2+b^2+c^2}}$">
+<br>
+
+<hr>
+<p class=exercici><span class=exernum>Exercici:</span> Podeu arribar a
+aquesta mateixa fórmula calculant el punt del pla que és al peu de la
+perpendicular al pla que passa per <!--$P$--><IMG WIDTH="15"
+HEIGHT="13" ALIGN="BOTTOM" BORDER="0" SRC="imatges/img46.gif"
+ALT="$P$"> (el punt <!--$Q$--><IMG WIDTH="15" HEIGHT="25"
+ALIGN="MIDDLE" BORDER="0" SRC="imatges/img44.gif" ALT="$Q$"> a la
+figura),
+
+
+<center><table><td>
+<img class="left" alt="Distància d'un punt a un pla calculant el peu de la perpendicular al pla."
+ src="imatges/distptpla.gif">
+</td></table></center>
+
+
+<p class=exercici>i calculant la distància entre <!--$P$--><IMG WIDTH="15" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="imatges/img46.gif"
+ ALT="$P$"> i el punt
+trobat. [indicació: Feu servir que <!--$\vec n$--><IMG WIDTH="12" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="imatges/img18.gif"
+ ALT="$\vec n$"> és perpendicular al pla,
+la forma paramètrica de la recta, i la <a href="#recta-pla">intersecció de pla i recta</a>]<br></p>
+<hr>
+
+<a name="recta-recta"></a><h5>Distància entre dues rectes.</h5>
+
+<p>Dues rectes a l'espai, en posició general, es creuaran com mostra
+la figura.
+
+<center><table><td>
+<img class=left src="imatges/distrr.gif">
+</td></table></center>
+
+<p>A vegades ens caldrà
+calcular la distància entre elles, és a dir la distància entre aquells
+dos punts (un a cada recta) que estiguin més propers. Un altre cop
+podrem calcular-la fàcilment usant el truc de la projecció. Per això
+necessitarem calcular un vector perpendicular simultàniament a les
+dues rectes, cosa que ens proporciona el producte vectorial: <!--
+$\vec u={\vec v_1\wedge\vec v_2\over||\vec v_1\wedge\vec v_2||}$
+--><IMG WIDTH="85" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+SRC="imatges/img61.gif" ALT="$\vec u={\vec v_1\wedge\vec
+v_2\over\vert\vert\vec v_1\wedge\vec v_2\vert\vert}$">. Hi ha prou
+doncs amb prendre un vector qualsevol que vagi d'un punt a la recta
+<!--$r_1$--><IMG WIDTH="17" HEIGHT="24" ALIGN="MIDDLE" BORDER="0"
+SRC="imatges/img62.gif" ALT="$r_1$"> a un a la recta <!--$r_2$--><IMG
+WIDTH="17" HEIGHT="24" ALIGN="MIDDLE" BORDER="0" SRC="imatges/img63.gif"
+ALT="$r_2$"> (com el vector <!--$\vec{P_1P_2}$--><IMG WIDTH="37"
+HEIGHT="34" ALIGN="MIDDLE" BORDER="0" SRC="imatges/img64.gif"
+ALT="$\vec{P_1P_2}$"> de la figura), i projectar-lo sobre la direcció
+de <!--$\vec u$--><IMG WIDTH="12" HEIGHT="14" ALIGN="BOTTOM"
+BORDER="0" SRC="imatges/img65.gif" ALT="$\vec u$"> mitjançant el producte
+escalar <!-- $dist(r_1,r_2)=\vec u\cdot (P_1-P_2)$ --><IMG WIDTH="186"
+HEIGHT="28" ALIGN="MIDDLE" BORDER="0" SRC="imatges/img66.gif"
+ALT="$dist(r_1,r_2)=\vec u\cdot (P_1-P_2)$">. Observeu que si les dues
+rectes són paral·leles (que no és una posició general), no
+podem usar directament la fórmula anterior, car <!--$\vec u$--><IMG
+WIDTH="12" HEIGHT="14" ALIGN="BOTTOM" BORDER="0" SRC="imatges/img65.gif"
+ALT="$\vec u$"> serà nul. Tanmateix en aquest cas podem prendre un
+punt qualsevol d'una de les rectes i calcular la seva <a
+href="#punt-recta">distància a l'altra recta</a>. Aquesta distància
+serà zero si les dues rectes són coincidents, i altrament donarà la
+distància que hi ha entre les dues rectes (que s'ateny per a infinites
+parelles de punts). Si les rectes es tallen però no són
+paral·leles, la fórmula general donarà (correctament) una
+distància igual a zero.<br>
+
+<a name="recta-pla"></a><h5>Intersecció d'una recta i un pla.</h5>
+
+<p>Un càlcul molt freqüent en els gràfics per computador és el de la
+intersecció entre una recta i un pla (que ja hem fet servir en
+l'exercici sobre càlcul de la distància d'un punt a un pla).
+
+<center><table><td>
+<img
+class=left vspace=10px alt="Intersecció entre una recta (paramètrica)
+i un pla."  src="imatges/interrpla.gif">
+</td></table></center>
+
+
+<p>El cas més senzill és quan la recta
+està donada en la seva forma paramètrica, com a la figura. Aleshores
+tots els punts de la recta són de la forma <!--$A+\lambda \vec
+v$--><IMG WIDTH="51" HEIGHT="26" ALIGN="MIDDLE" BORDER="0"
+SRC="imatges/img67.gif" ALT="$A+\lambda \vec v$"> per algun valor del
+paràmetre <!--$\lambda$--><IMG WIDTH="12" HEIGHT="14" ALIGN="BOTTOM"
+BORDER="0" SRC="imatges/img12.gif" ALT="$\lambda$">. Els punts del pla
+satisfan, per altra banda, que <!--$(P-B)\cdot\vec n=0$--><IMG
+WIDTH="110" HEIGHT="28" ALIGN="MIDDLE" BORDER="0" SRC="imatges/img68.gif"
+ALT="$(P-B)\cdot\vec n=0$">, ja que <i>P-B</i> és un vector al pla i
+per tant ha de ser perpendicular a la normal al pla. Ajuntant les dues
+equacions tenim que pel punt <i>P</i>, que està a la recta i al pla,
+ha de valdre que <!-- $(A+\lambda\vec v-B)\cdot\vec n=0$ --><IMG
+WIDTH="146" HEIGHT="28" ALIGN="MIDDLE" BORDER="0" SRC="imatges/img69.gif"
+ALT="$(A+\lambda\vec v-B)\cdot\vec n=0$">, i per tant obtenim
+
+<div class=formula> <!-- \[ \lambda ={(B-A)\cdot \vec n\over \vec v\cdot\vec
+n} \] --><IMG WIDTH="110" HEIGHT="38" SRC="imatges/img70.gif"
+ALT="\begin{displaymath} \lambda ={(B-A)\cdot \vec n\over \vec
+v\cdot\vec n}\end{displaymath}"></div>
+
+<p>En el cas
+particular en que <!--$\vec v$--><IMG WIDTH="11" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="imatges/img4.gif"
+ ALT="$\vec v$"> i <!--$\vec n$--><IMG WIDTH="12" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="imatges/img18.gif"
+ ALT="$\vec n$"> són perpendiculars, aquesta
+fórmula no ens serveix, car el denominador s'anul·la. Observeu
+tanmateix que en aquest cas la recta és paral·lela al pla, pel
+que tots els seus punts són a una distància constant del pla. Podem
+triar un punt qualsevol (per exemple <i>A</i>) i calcular la <a
+href="#punt-pla">seva distància al pla</a>.
+<br>
+
+<a name="pla-pla"></a><h5>Intersecció de dos plans.</h5>
+
+<center><table><td>
+<img class=left alt="intersecció entre dos plans"
+src="imatges/interplpl.gif">
+</td></table></center>
+
+<p>Aquesta intersecció dóna una recta, excepte en el
+cas en que els plans siguin paral·lels (cas singular en el qual
+la intersecció és buida o coincideix en tots dos plans). De fet és la
+transformació de recta en equació implícita a recta paramètrica que
+abans haviem postergat. És evident que el vector director de la recta
+intersecció ha de ser perpendicular a <!--$\vec n_1$--><IMG WIDTH="19"
+HEIGHT="26" ALIGN="MIDDLE" BORDER="0" SRC="imatges/img71.gif" ALT="$\vec
+n_1$"> i també a <!--$\vec n_2$--><IMG WIDTH="19" HEIGHT="26"
+ALIGN="MIDDLE" BORDER="0" SRC="imatges/img72.gif" ALT="$\vec n_2$"> (perquè
+està continguda a tots dos plans). Per tant podem prendre <!-- $\vec
+v=\vec n_1\wedge \vec n_2$ --><IMG WIDTH="83" HEIGHT="26"
+ALIGN="MIDDLE" BORDER="0" SRC="imatges/img73.gif" ALT="$\vec v=\vec n_1\wedge
+\vec n_2$">. Perquè l'equació paramètrica de la recta estigui completa,
+ens cal trobar les coordenades d'un punt qualsevol. Això es fa
+intersecant amb un tercer pla, i calculant les coordenades del punt
+intersecció (és a dir resolent un sistema lineal de tres equacions i
+tres incògnites). Per tal de fer el càlcul més senzill, i donat que
+tenim llibertat per a triar aquest tercer pla, hom tria un dels plans
+coordenats. Es recomana seleccionar el pla dels punts que tenen igual
+a zero aquella coordenada que correspongui a la més gran de les
+components de <!--$\vec v$--><IMG WIDTH="11" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="imatges/img4.gif"
+ ALT="$\vec v$">. Aquest és el pla coordenat que la recta
+talla "més perpendicularment", i per tant el que donarà més gran
+estabilitat numèrica. En triar un pla coordenat el sistema es redueix
+automàticament a un sistema de dues equacions amb dues incògnites (ja
+que sabem el valor que ha de prendre una de les coordenades: zero).</p>
+
+
+<br><br>
+<DIV CLASS="nav">
+      <A HREF="rectesespai.html">[Anterior]</a>
+      [Següent]
+      <a href="main43.html">[Següent apartat]</a>
+    </div>
+
+</BODY>
+
+</HTML>
+

@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<BODY>
+<br>
+
+<div class=tit2> Un jardí amb arbres i plantes </div>
+
+<pre class=algoritme>
+#vrml V2.0 utf8
+
+DEF Entry Viewpoint {
+    position 0.0 8.0 40.0
+    description "Punt de Vista"
+}
+
+NavigationInfo {
+    type [ "EXAMINE", "ANY" ]
+    headlight TRUE
+}
+
+Background {
+    skyColor [ 0.0 0.0 0.2 ]
+}
+
+Transform {
+    translation 0.0 0.0 0.0
+    children Shape {
+	         appearance Appearance { 
+                              material  Material { diffuseColor 0.1 0.7 0.1
+                                                   emissiveColor 0. 0.4 0. }
+                            }
+	         geometry Box { size 20. .4 20. }
+             }
+}
+
+DEF Planta1 Transform {
+               translation 0.0 .6 6.0
+               scale 1.0 .6 1.0
+	       children Shape {
+			    appearance Appearance {
+					 material  Material {diffuseColor 0. 0.9 0.}
+				       }
+			    geometry Sphere { }
+                        }
+            }
+
+DEF Planta2 Transform {
+               translation 0.0 .5 0.0
+               scale 1.0 .8 1.0
+	       children Shape {
+			    appearance Appearance {
+					 material  Material {diffuseColor 1. 0.5 0.
+                                                             emissiveColor .5 0. 0.}
+				       }
+			    geometry Sphere { }
+                        }
+            }
+
+Transform {
+      translation 3.0 0.0 -6.0
+      children [ USE Planta1 ]
+}
+
+Transform {
+      translation 3.0 0.0 6.0
+      children [ USE Planta2 ]
+}
+
+Transform {
+      translation 6.0 0.0 0.0
+      children [ USE Planta1
+                 USE Planta2 ]
+}
+
+Transform {
+      translation -6.0 0.0 -6.0
+      rotation 0. 1. 0. 1.57
+      children [ USE Planta1
+                 USE Planta2 ]
+}
+
+Transform {
+      translation -8.0 0.0 6.0
+      rotation 0. 1. 0. 3.1416
+      scale .8 .8 .8
+      children [ USE Planta1
+                 USE Planta2 ]
+}
+
+Transform {
+      translation 2.0 2.0 4.0
+      children [ Inline {url "Arbre1.wrl"} ]
+}
+
+Transform {
+      translation -2.0 2.0 4.0
+      children [ Inline {url "Arbre2.wrl"} ]
+}
+
+Transform {
+      translation -5.0 2.0 4.0
+      children [ Inline {url "Arbre3.wrl"} ]
+}
+
+Transform {
+      translation -5.0 2.0 -4.0
+      children [ Inline {url "Arbre1.wrl"} ]
+}
+
+Transform {
+      translation -2.0 2.0 -4.0
+      children [ Inline {url "Arbre2.wrl"} ]
+}
+
+Transform {
+      translation 2.0 2.0 -4.0
+      children [ Inline {url "Arbre3.wrl"} ]
+}
+</pre>
+
+
+<p align=right><a href="javascript:window.close()">tornar </a>
+</body>
+</html>

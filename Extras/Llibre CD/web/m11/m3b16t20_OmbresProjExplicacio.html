@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","ombres");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m3b16_OmbresProj2OpenGL.html">[Torna a l'algorisme]</a>
+</div>
+<br><br>
+
+<div class=tit3><b>Generació d'ombres usant OpenGL i Stencil Buffer.</b> Explicació - part 2</div>
+
+<p>
+<pre class=algoritme>
+    <b>glDisable</b>(GL_DEPTH_TEST);
+    <b>glColorMask</b>(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
+    <b>glStencilFunc</b>(GL_EQUAL, 1, 1);
+    <b>glStencilOp</b>(GL_KEEP, GL_KEEP, GL_ZERO);
+    <b>glPushMatrix</b>();
+    <b>glMultMatrixf</b>((GLfloat*) MatriuProjeccio );
+    <b>Dibuixa</b>(ObjecteQueFaOmbra);
+    <b>glPopMatrix</b>();
+</pre>
+
+<p> Aquest tros de codi modifica l'stencil buffer (que haviem
+inicialitzat a la zona on es projecta la paret), a les zones on es
+projecta l'objecte que fa ombra. El que es fa és el següent:
+
+<ul>
+<li> Es desactiva el test de profunditat de l'algorisme de
+Z-Buffer. Això es fa perque dibuixarem els polígons d'ombra en el
+mateix pla de la paret que ja hem dibuixat, i el dibuix de polígons
+coplanars sempre dona problemes de superposició aleatòria.</li>
+<li> Es posa la màscara de color a fals, per tal que quan pintem
+l'ombra ens modifiqui l'Stencil buffer però no ens modifiqui els plans
+de color del frame buffer.</li>
+<li> Es defineix l'operació de l'Stencil buffer de manera que els
+pixels que ara pintarem s'els hi assigni el valor zero a l'Stencil
+buffer.</li>
+<li> S'empila la matriu de projecció i es fa el producte per la
+transformació actual (aquesta part és idèntica al que feiem en el cas
+de projecció d'ombres sense stencil buffer).</li>
+<li> Es dibuixa l'objecte que fa ombra. Com que hem empilat i
+multiplicat la matriu de projecció, el que dibuixem és realment la
+projecció de l'objecte sobre la paret. L'stencil buffer es va posant
+a zero en tots els pixels de l'ombra que es dibuixen.</li>
+<li> Es desempila la darrera transformació, per deixar-ho en l'estat
+anterior.</li>
+</ul>
+
+<p> Abans de fer el dibuix de l'objecte que fa ombra, hi ha diverses
+opcions pel que fa al retallat de cares: podem fer un retallat de les
+cares que miren enrera o no, amb crides a
+<b>glEnable</b>(GL_CULL_FACE) i <b>glCullFace</b>(GL_BACK), o bé
+cridant a <b>glDisable</b>(GL_CULL_FACE). En els exercicis d'aquest
+apartat podreu practicar i veure l'efecte d'activar o no el retallat
+de cares.
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m3b16_OmbresProj2OpenGL.html">[Torna a l'algorisme]</a>
+</div>
+</body>
+</html>

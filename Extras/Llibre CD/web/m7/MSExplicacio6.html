@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M7.1 Procés de visualització 2D.Sistemes de coordenades.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("vis2D","impl");
+</SCRIPT>
+<A NAME="inici"></A>
+<DIV CLASS="nav">
+<a href="MSTransmet2.html">[Anterior]</a>
+<a href="RetPunt.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Mapa sensible del PV2D.
+<span class=tit2>Retallat</span>
+</div>
+
+<p>S'anomena <b><i>retallat</i></b> (<i>clipping</i> en anglès) al
+subprocés que permet eliminar la geometria exterior a una <i>finestra</i>
+(Finestra_2D o Vista dins el PV2D).
+
+<p>En la nostra estructuració del PV2D, donat un element geomètric
+(primitiva gràfica) analitzarem si es visualitza dins de la Vista.
+Si la resposta és negativa, no es rasteritza l'element (no es continua
+el procés de visualització amb aquest element). Si es visualitza
+parcialment, es modifica (retalla) l'element geomètric de manera
+que s'obtingui un element geomètric del mateix tipus però
+limitat a un conjunt de punts interiors a la Vista.
+
+<p>Es podria optar per desactivar el subprocés
+de retallat respecte a la Vista (Finestra_2D), en aquest cas es pintaria
+tota la geometria de l'escena malgrat no estigui emmarcada per la càmera.
+No obstant, sempre existirà retallat respecte a la finestra gràfica.
+No es poden pintar pixels de fora del frame-buffer.
+
+<p>De fet, el retallat el podem ubicar en el procés de visualització
+abans o després de la transformació món-dispositiu,
+per aquest motiu podem parlar tant de retallat respecte a la Finestra_2D
+com de retallat respecte a la Vista. En qualsevol cas obtindrem el mateix
+efecte visual en la imatge resultant. Escollir una opció o una altra
+és un compromís entre velocitat de càlcul amb aritmètica
+en coma flotant o entera, i que la transformació món-dispositiu
+s'apliqui a tota la geometria o només a la que es visualitzarà
+dins la Vista. En aquesta implementació hem optat pel retallat respecte
+a la Vista (fet comú en moltes llibreries gràfiques). Però,
+en l'anàlisi específic dels algorismes, en parlarem genèricament
+de retallat respecte d'una <a CLASS="glossari" HREF="javascript:glossari('FinGraf.html','*','400','150','no','no','no','yes')" onMouseOver="window.status='Glossari';return true" onMouseOut="window.status='';return true">finestra</a>
+amb rectes limitadores x=xm, y=ym, x=xM, y=yM que es consideren orientades
+de manera que els punts interiors a la finestra verifiquen la inigualtat:
+aix + biy + ci <= 0.
+
+<CENTER>
+<TABLE><tr><TD>
+<img src="imatges/simpleXYminmax.jpg" alt="">
+</TD></tr></TABLE>
+</CENTER>
+
+<p>
+Recordeu que el retallat sempre ha de generar un element
+geomètric del mateix tipus que el que es compara amb la finestra,
+per tant, l'algorisme de retallat a aplicar serà específic
+per a cada tipus de primitiva gràfica. A més a més,
+cal esmentar que serà necessari optimitzar la seva eficiència
+ja que s'haurà d'executar molts cops en la visualització
+d'una escena mínimament complexa.
+
+<p>A continuació es presenten els algorismes específics
+de retallat de primitives de tipus: punt, segment, polígon i s'il·lustren
+amb exemples de la seva execució. El propòsit és que sigueu
+capaços d'avaluar la complexitat d'aquests algorismes i les seves
+limitacions, usualment estant implementats en els acceleradors gràfics
+i/o llibreries gràfiques.
+
+<br>
+<h2>Subapartats:</h2>
+
+<UL>
+<li><A HREF="RetPunt.html" target="explica">retalla punt</a></li>
+<li><A HREF="RetSeg.html" target="explica">retalla segment</a></li>
+<li><A HREF="RetPol.html" target="explica">retalla polígon.</a></li>
+</ul>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="MSTransmet2.html">[Anterior]</a>
+<a href="RetPunt.html">[Següent]</a>
+</div>
+</body>
+</html>

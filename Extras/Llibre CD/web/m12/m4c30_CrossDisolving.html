@@ -1,0 +1,233 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html lang="CA">
+
+<head>
+
+<title></title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+
+<script type="text/javascript" src="../upc.js"></script>
+
+<SCRIPT>
+
+top.passara("anim","morph");
+
+</SCRIPT>
+
+<BODY>
+
+<DIV CLASS="nav">
+
+<a href="m4c20_Warping.html">[Anterior]</a>
+
+<a href="m4c40_Morphing.html">[Següent]</a>
+
+</div>
+
+<br><br>
+
+
+
+<div class=tit1>Morphing. 
+
+<span class=tit2>Interpolació entre dues imatges (Cross disolving)</span>
+
+</div>
+
+
+
+<p> La interpolació entre imatges és la manera més simple de convertir
+
+una imatge en una altra. Es un mètode que s'utilitza molt en la
+
+generació d'efectes especials.
+
+
+
+<p> En el cas d'interpolació uniforme, que és el més habitual, el que
+
+es fa és una simple interpolació lineal entre els pixels de les
+
+imatges inicial i final. Suposem que la imatge inicial és I1 i la
+
+final és I2. En aquest cas, el pixel (x,y) de la imatge interpolada
+
+intermitja tindrà el color,
+
+
+
+<div class=formula>
+
+ Color [x,y] := (1-t) * ColorPixel (I1,x,y) + t * ColorPixel (I2,x,y)
+
+</div>
+
+
+
+<p> On la funció <b>ColorPixel</b>(I,x,y) torna el color del pixel
+
+(x,y) de la imatge I. Fixeu-vos que el paràmetre <b>t</b> varia
+
+entre 0 i 1. Quan <b>t = 0.0</b>, aquesta expressió ens torna el
+
+valor del color del pixel de la imatge I1. Quan <b>t = 1.0</b>, ens
+
+torna el valor del color del pixel de I2. Per valors intermitjos de
+
+<b>t</b>, ens dóna valors interpolats.
+
+
+
+<p> El principal problema que té aquest mètode, però, és que en molts
+
+casos no és prou realista perquè la interpolació fa desaparèixer els
+
+contorns i els límits entre regions de la imatge. Observeu el següent
+
+applet:
+
+
+
+<p>
+
+<div align=center>
+
+  <applet code="Interficie.class" archive="Morphing2.jar,../comuns.jar" height=570 width=505>
+  </applet>
+
+</div>
+
+
+
+<p> El que veieu són dues copes (de fet són polígons texturats, cada
+
+un amb una imatge diferent). A la darrera finestra veieu el resultat
+
+de fer la interpolació de les dues copes, pintant els dos polígons en
+
+OpenGL amb alpha blending.
+
+
+
+<p class=exercici><span class=exernum>Exercici:</span> Podeu variar el
+
+valor del paràmetre <b>t</b> amb la barra de desplaçament que veieu
+
+a la dreta, i veure l'efecte de la interpolació. Observeu bé el que
+
+passa a les zones de color uniforme, a les zones en que tenim contorns
+
+similars a les imatges inicial i final, i a les zones que són molt
+
+diferents a les dues imatges. Podeu explicar-ho, raonant-ho a partir
+
+de la fórmula d'interpolació?</p>
+
+
+
+<p> Una millora que es pot fer és que la "velocitat" d'interpolació no
+
+sigui constant a les diferents zones de la imatge. Això s'aconsegueix
+
+fent que el paràmetre <b>t</b> no sigui constant, sinó que depengui
+
+del pixel que estem interpolant. En tot cas, el que sí cal és que tots
+
+els valors t[x,y] siguin monòtons creixents en l'intèrval [0,1]. Ara,
+
+en algunes zones crítiques -per exemple les zones properes a contorns
+
+que apareixen de nou- podem decidir que el valor del paràmetre es
+
+manté proper a zero fins a un cert moment, canvia ràpidament i a
+
+partir d'aquest moment té un valor ja proper al valor unitat final. En
+
+aquest cas, el pixel (x,y) de la imatge interpolada intermitja tindrà
+
+el color,
+
+
+
+<div class=formula>
+
+ Color [x,y] := (1-t[x,y]) * ColorPixel (I1,x,y) + t[x,y] * ColorPixel (I2,x,y)
+
+</div>
+
+
+
+<p> La implementació d'aquesta interpolació entre imatges en OpenGL és
+
+immediata, com haureu observat, usant Alpha blending i assignant al
+
+paràmetre alfa, el valor de t. Tot i que el valor d'alfa és depenent
+
+del pixel i que per tant OpenGL pot treballar amb paràmetres <b>t</b>
+
+no constants, el més habitual és usar interpolació uniforme amb
+
+paràmetre <b>t</b> constant per a tota la imatge, per tal d'evitar
+
+la complexitat d'haver d'estimar el valor de <b>t</b> adequat per
+
+a cada regió de la imatge.
+
+
+
+<p> A part del mètode que acabem de veure, hi ha també altres mètodes
+
+que permeten convertir una imatge en una altra. Són les diferents
+
+tècniques que s'usen en TV i en els passadors de diapositives:
+
+persianes que escobren la pantalla tot convertint la primera imatge en
+
+la segona, polígons que es van ampliant i que fan aparèixer la segona
+
+imatge, petites zones quadrades de la primera imatge que actuen com a
+
+partícules i que es mouen des de pixels de la primera imatge als
+
+pixels corresponents de la segona imatge (en aquest cas l'efecte és
+
+com si la primera imatge es desintegrés per a reestructurar-se tot
+
+seguit formant la segona imatge), etc.  Aquests mètodes converteixen
+
+una imatge en una altra, però no es poden considerar algorismes
+
+d'interpolació entre imatges.
+
+
+
+<p> En tot cas, per tal de tenir efectes de metamorfosi de suficient
+
+qualitat, aquest mètode d'interpolació és clarament insuficient i ens
+
+cal usar tècniques més sofisticades. Les més utilitzades són les
+
+tècniques de morphing que veurem al següent apartat.  
+
+
+
+
+
+<br><br>
+
+<DIV CLASS="nav">
+
+<a href="m4c20_Warping.html">[Anterior]</a>
+
+<a href="m4c40_Morphing.html">[Següent]</a>
+
+</div>
+
+</body>
+
+</html>
+

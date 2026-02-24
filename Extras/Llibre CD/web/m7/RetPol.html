@@ -1,0 +1,121 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.6 [en] (Win98; I) [Netscape]">
+   <title>M7.1 Proc&eacute;s de visualitzaci&oacute; 2D.Implementaci&oacute;.</title>
+<link REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</head>
+<body>
+<script>
+top.passara("vis2D","impl");
+</script>
+<div CLASS="nav">
+<a href="RetSeg.html">[Anterior]</a>
+<a href="MSTransmet6.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Mapa sensible del PV2D.
+<span class=tit2>Retallat de Polígon</span>
+</div>
+
+<p>Analitza si un polígon simple definit per <i>n</i> punts, és interior,
+exterior o parcialment interior a una finestra. L'algorisme corresponent
+ens indicarà si el polígon és visible o no, i retornarà el
+polígon frontera de la intersecció entre els punts interiors
+al polígon original i la finestra.
+
+<p>Un dels algorismes més eficients és el de Sutherland-Hodgman.
+
+<p>Per a cada recta <i>r_i</i> que limita la finestra
+es realitza el següent procediment:
+
+<ul>
+<li>
+Es <b>classifiquen</b> els vèrtexs del polígon respecte a
+la recta <i>r_i</i> (D=dins, F=fora).</li>
+<li>
+S'analitzen ordenadament les arestes del polígon avaluant la classificació
+dels seus vèrtexs extrems respecte a la recta <i>r_i</i>, i es generen
+els vèrtexs d'un nou polígon (polígon retallat) d'acord
+amb la següent taula de decisió:</li>
+</ul>
+
+<center><table border>
+<tr>
+<td><b>Punt Inicial</b></td>
+<td><b>Punt Final</b></td>
+<td><b>Guardar</b></td>
+</tr>
+<tr>
+<td>Dins</td>
+<td>Dins</td>
+<td>P_inicial</td>
+</tr>
+<tr>
+<td>Fora</td>
+<td>Fora</td>
+<td>Res</td>
+</tr>
+<tr>
+<td>Dins</td>
+<td>Fora</td>
+<td>P_inicial + P_inter</td>
+</tr>
+<tr>
+<td>Fora</td>
+<td>Dins</td>
+<td>P_inter</td>
+</tr>
+</table></center>
+
+<p>P_inter es la intersecció de l'aresta amb la recta de la finestra
+corresponent.
+
+<p>Podeu observar un exemple en la figura i fer el seguiment de l'algorisme
+per a comprovar el seu funcionament.
+
+<center><table>
+<tr>
+<td><applet code="browin" archive="browin.jar" width=325 height=345 ><param NAME="fitxer" VALUE="images.lis"><param NAME="numero" VALUE="1" ><param NAME="orientacio" VALUE="h" ></applet></td>
+</tr>
+</table></center>
+
+<p>Si implementeu l'algorisme fixeu-vos que per a classificar els vèrtexs
+és suficient amb fer comparacions.
+
+<pre class=algoritme>
+<b>accio</b> Retalla_Poligon (poligon,xm,ym,xM,yM,visible)
+   <b>per</b> recta <b>en</b> [1..4] <b>fer</b>
+      classificar_vertexs (poligon,recta,pol_cla)
+      inicialitzar_poligon_auxiliar
+      <b>per</b> cada aresta <b>fer</b>
+         <b>si</b> dins(P_inicial) <b>i</b> dins(P_final) <b>llavors</b>
+            guardar_vertex (P_inicial)
+         <b>altrament si</b> fora (P_inicial) <b>i</b> fora (P_final) <b>llavors</b>
+            no_guardar_res
+         <b>altrament si</b> dins (P_inicial) <b>i</b> fora (P_final) <b>llavors</b>
+            guardar_vertex (P_inicial)
+            P_inter = calcul_interseccio (recta, aresta)
+            guardar_vertex(P_inter)
+         <b>altrament si</b> fora(P_inicial) <b>i</b> dins(P_final) <b>llavors</b>
+            P_inter = calcul_interseccio (recta, aresta)
+            guardar_vertex(P_inter)
+         <b>fsi</b>
+         poligon:= poligon_auxiliar
+      <b>fper</b>
+      visible:= num_vertex_poligon =/0
+   <b>fper</b>
+<b>faccio&nbsp;</b>
+</pre>
+
+
+<br><br>
+<div CLASS="nav">
+<a href="RetSeg.html">[Anterior]</a>
+<a href="MSTransmet6.html">[Següent]</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M5.5.Representeció per fronteres </TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;
+charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("model","brep");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+      <A HREF="classevertex.html">[Anterior]</a>
+      <a href="main55-4.html">[Següent]</a>
+     </div>
+<br><br>
+
+<div class="tit1">Representació per fronteres.
+<span class="tit2">La classe Poligon</span>
+</div>
+
+<P>
+Aquesta classe defineix objectes de tipus polígon. Com es veu als
+atributs, un Poligon no és més que una taula dels seus vèrtexs (punts
+3D) i un comptador nvert del nombre de vèrtexs. Els polígons es poden
+crear (com a polígons buits), afegir-hi un nou vèrtex, i es pot
+preguntar el seu nombre de vèrtexs així com les coordenades del punt
+corresponent al vèrtex i-èssim. Els objectes de tipus Poligon els usem
+a la classe Cara, per poder retornar el conjunt (polígon) de vèrtexs
+de la cara. La classe Poligon es farà servir també per a la generació
+de sòlids d'escombrat.
+
+<PRE class=algoritme>
+<B>classe</B> Poligon ()
+
+   <B>atributs</B>
+      nvert:			<B>enter</B>
+      v := <B>Nou</B> Punt3D[MAXV]:    <B>taula</B> [1..MAXV] <B>de</B> Punt3D
+   <B>fatributs</B>
+
+   <B>constructor</B> Poligon ()
+      nvert := 0
+   <B>fconstructor</B>
+
+   <B>mètode públic</B> AfegeixPunt (P: Punt3D)
+      nvert := nvert + 1
+      v[nvert] := P
+   <B>fmètode</B>
+
+   <B>funció pública</B> numvertexs (): <B>enter</B>
+      // retorna el nombre de vèrtexs del polígon
+      <B>retorna</B> nvert
+   <B>ffunció</B>
+
+   <B>funció pública</B> ObtenirPunt (i:<B>enter</B>): Punt3D
+      // retorna el punt corresponent al vèrtex i-èssim del polígon
+      <B>retorna</B> v[i]
+   <B>ffunció</B>
+   ...
+<B>fclasse</B>
+</PRE>
+
+
+<br><br>
+<DIV CLASS="nav">
+      <A HREF="classevertex.html">[Anterior]</a>
+      <a href="main55-4.html">[Següent]</a>
+  </div>
+
+</BODY>
+
+</HTML>
+

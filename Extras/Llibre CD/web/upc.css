@@ -1,0 +1,223 @@
+/* StyleSheet per a la prova */
+
+BODY {font-family: Verdana, Arial, Helvetica, sans-serif;
+background-color: #ffffff;                /* fons blanc */
+line-height: 150%;                        /* + o - doble espai */
+vertical-align: middle;                   /* imatges centrades en la lýnea (fýrmules) */
+margin-left: 5%;
+margin-right: 5%;
+text-align: justify;
+}
+
+#footer{ position:absolute; bottom: 0%}
+
+#appletdiv {position: absolute;}
+
+H1 {background-color: #336699;
+color: #ffffff;
+font-size: 150%;
+text-indent: 2%;
+}
+
+H2 {font-size: 125%;
+text-indent:2%;
+}
+
+H3 {font-size: 115%;
+text-indent: 2%;
+}
+
+H4 {font-size: 105%;
+text-indent: 2%;
+}
+
+BR { clear:both;}
+
+P {text-indent: 5%;
+   text-align: justify;
+}
+
+P.noind {
+   text-indent: 0%;
+}
+
+/* links */
+
+A.glossari:link {			/* link a glossari */
+text-decoration: none;
+font-style: italic;
+color: #118011;
+}
+
+A:link {
+text-decoration: underline;
+color: #000FFF;
+}
+
+A:{
+text-decoration: underline;
+color: #0fff0f;
+}
+
+A:active{
+	color: #ff0000;
+}
+
+
+/* classes */
+
+.nav{ font-size: 75%;
+      color: #BBBBBB;
+      font-family: Verdana, Helvetica; /*Courier, monospace; */
+      text-indent: 0pt;}
+
+DIV.nav A:link {color:#55AA55; text-decoration: none;}
+DIV.nav A:visited {color:#55AA55; text-decoration: none;}
+
+.algoritme {
+	    margin-left: 40px;
+            line-height: 115%;
+	    font-family: monospace ;
+	    font-size: 110%;
+}
+
+.aut1{font-family: Helvetica;
+      font-size: 110%;
+      font-weight: bold;
+      text-indent: 22% }
+
+.aut2{font-family: Helvetica;
+      font-size: 110%;
+      font-weight: bold;
+      text-indent: 34%}
+
+.exercici {color:#DC8484;
+font-weight: 700;
+text-indent: 0%;
+margin-top:5%;				/* per a quedi 'encuadrat' */
+margin-bottom:3%;				/* per a quedi 'encuadrat' */
+text-align:justify			/* suportat? */
+}
+
+
+.solucio {color:#7F93DB;
+font-style:italic;
+margin:10%;
+text-indent: 0%;
+font-size: 85%
+}
+
+.dreta {text-align: right;}
+
+.tit1 {
+color: #336699;
+text-decoration: none;
+background-color: #ffffff;
+line-height: 150%;                        /* + o - doble espai */
+font-size: 17pt
+}
+
+.tit2 {
+background-color: #ffffff;
+text-decoration: none;
+color: #369999;
+line-height: 150%;                        /* + o - doble espai */
+font-size: 12pt
+}
+
+.tit3 {
+
+background-color: #ffffff;
+text-decoration: none;
+color: #369999;
+line-height: 150%;                        /* + o - doble espai */
+font-size: 10pt
+}
+
+.left{
+    align: left;
+    padding: 10px 10px 10px 0px;
+}    
+
+.formula{
+    text-align: center;
+    margin: 10px 10px 20px 30px; /* top right bottom left */
+}
+
+.caption{
+    font-family: Verdana, Helvetica, sans;
+    font-size: small;
+    font-weight: bold;
+}
+
+P{
+  margin-left: 30px;
+  margin-right: 10px;
+  padding: 4px;
+  line-height: 150%;
+  font-family: Verdana, Arial, Helvetica, sans-serif;	
+}
+
+OL,UL,DL{
+  margin-left: 60px;
+  margin-right: 10px;
+  padding: 4px;
+  line-height: 150%;
+  font-family: Verdana, Arial, Helvetica, sans-serif;	
+}
+
+P.exercici{
+    margin-left: 120px;
+    width: auto;
+    margin-right: 75px;
+    color: #000066;
+}
+P.sollnk{
+    margin-left: 8em;
+    width: auto;
+    margin-right: 5em;
+    margin-top: -1.5em;
+    text-align: right;
+}
+P.sollnk A{
+    color: #000066;
+}
+.exernum{
+    font-weight: bold;
+    color: red;
+    display: inline;
+}
+UL.exerc{
+    margin-left: 150px;
+    width: auto;
+    margin-right: 75px;
+    color: #000066;
+    font-weight: 700;
+    text-indent: 0%;
+    text-align:justify			/* suportat? */
+}
+ 
+PRE.algexerc {
+	    margin-left: 150px;
+	    margin-right: 75px;
+            line-height: 115%;
+	    font-family: monospace;
+	    font-size: 110%;
+}
+
+UL LI{
+	margin-left: 8%;
+}
+
+.notes {
+	background-color:#ffffcc;
+	border: 2px solid;
+	padding: 10px 20px 10px 10px;
+}
+
+A.nota {
+	border: 1px solid;
+	background-color:#ffcc66;
+	font-size: 80%;
+	padding: 3px;
+}	

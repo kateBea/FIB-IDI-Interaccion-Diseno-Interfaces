@@ -1,0 +1,143 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.6 [en] (Win98; I) [Netscape]">
+   <title>M7.1 Proc&eacute;s de visualitzaci&oacute; 2D.Exercicis.</title>
+<link REL="stylesheet" type="text/css" HREF="../upc.css">
+</head>
+<body>
+<script>
+top.passara("vis2D","ex");
+</script>
+<a NAME="inici"></a>
+<div CLASS="nav">
+[Anterior]
+[Següent]
+<a href="res.html">[Apartat anterior]</a>
+</div>
+<br><br>
+
+<div class=tit1>Exercicis d'autoavaluació</div>
+
+<P>A continuació alguns exercicis que us permetran avaluar si heu
+assolit els conceptes bàsics d'aquest capítol. No obstant, el millor
+procediment es "jugar" amb els applets dels diferents apartats.
+
+<p class=exercici><span class=exernum>Exercici 1:</span> Després de quines modificacions de la Finestra_2D
+(zoom o pan) i/o Vista es pot deixar de verificar la relació
+d'aspecte entre ambdues finestres.
+
+<p class=exercici><span class=exernum>Exercici 2:</span> Si l'escena a visualitzar és 3D, cal implementar i aplicar-l'hi
+el procés de visualització 2D?
+
+<p class=exercici><span class=exernum>Exercici 3:</span> Modificar l'acció RelacioAspecte per a que modifiqui
+les mides de la Vista.
+
+<p class=exercici><span class=exernum>Exercici 4:</span> Es vol dibuixar una escena composta per una rudimentària
+pantalla (com la de les figures d'exemple d'aquest capítol) en la
+qual s'està visualitzant la mateixa escena (és a dir una pantalla). Indiqueu un algorisme de principi que permeti aconseguir la imatge dessitjada
+utilitzant les accions d'especificació de la Finestra_2D, Vista
+i una acció VisualitzaEscena() que pinta tota la geometria de l'escena
+(la pantalla) mitjançant l'ús de primitives gràfiques.
+
+<p class=exercici><span class=exernum>Exercici 5:</span> Una aplicació gràfica ha de simular l'animació
+d'un cotxe en una escena 2D. L'escena conté altres objectes a més
+del cotxe. Escriu un algorisme de principi per aquesta aplicació:
+utilitza les primitives gràfiques introduïdes i les accions d'especificació
+de la Finestra_2D i de la Vista. Recorda que cal definir sempre el Window
+i el Viewport abans d'utilitzar qualsevol primitiva gràfica i que
+de la seva definició en depèn com quedarà la imatge en pantalla.
+Pots simular la translació del cotxe modificant la Finestra_2D i
+redibuixant el cotxe. Pots pensar que tens una acció esborra_cotxe()
+que esborra de pantalla el cotxe i una acció pinta_cotxe().
+
+<p class=exercici><span class=exernum>Exercici 6:</span> Raona i justifica l'afirmació següent: l'algorisme
+de retallat de segments de recta de Cohen-Sutherland no es pot utilitzar
+per a realitzar polígons però sí per a retallar poligonals
+(seqüència de segments de recta).
+
+<p class=exercici><span class=exernum>Exedrcici 7:</span> Dedueix després de quines comandes de modificació
+de Finestra_2D (zoom o pan) i/o Vista cal verificar que es continua mantenint
+la relació d'aspecte entre ambdues finestres pe tal que no hi
+hagi deformació (suposant que prèviament a la modificació
+no hi havia).
+
+<p class=exercici><span class=exernum>Exercici 8:</span> Reescriu l'<acció d'aspecte> de manera que mai modifiqui
+les mides de la Finestra_2D.
+
+<p class=exercici><span class=exernum>Exercici 9:</span> Verifica el resultat del retallat dels polígons de
+la figura. Posteriorment els podem rasteritzar amb un omplert de polígons
+estudiat?.
+
+<p class=exercici><span class=exernum>Exercici 10:</span> Analitza les simplificacions que es poden realitzar en l'algorisme
+de retallat de polígons i d'omplert si sabem que el polígon
+és sempre un triangle.
+
+<p class=exercici><span class=exernum>Exercici 11:</span> Una aplicació gràfica ha de simular l'animació
+d'un cotxe en una escena 2D. L'escena conté altres objectes a més
+del cotxe. Escriu un algorisme de principi d'aquesta aplicació.
+Recorda que cal definir sempre el Window i el Viewport abans de pintar
+i que cal definir-los d'acord amb les coordenades de l'escena i de la finestra.
+No oblidis esborrar la pantalla i repintar després de cada moviment.
+
+<p class=exercici><span class=exernum>Exdercici 12:</span> Modifiqueu l'algorisme de transformació món-dispositiu
+si l'origen de coordenades de la Vista està definit en el seu vèrtex
+superior esquerra i eix y és positiu en sentit descendet del dispositiu.
+
+<p class=exercici><span class=exernum>Exercici 13:</span> Per què utilitzem algorismes de retallat si en la rasterització
+podem analitzar si el pixel corresponent està dins/fora de la Finestra_2D.
+Eficiència poser?
+
+<p class=exercici><span class=exernum>Exercici 14:</span> Si l'escena a visualitzar és 3D, cal implementar i aplicar-l'hi
+el procés de visualització 2D?
+
+<p class=exercici><span class=exernum>Exercici 15:</span> Donada una escena 3D visualitzada en pantalla, l'usuari introdueix
+una Finestra_2D dibuixant un polígon en pantalla. Quines modificacions
+cal fer en les definicions de les càmeres 3D i/o 2D per a satisfer
+el desig de l'usuari?.
+
+<p class=exercici><span class=exernum>Exercici 16:</span> Comprova si les arestes dels polígons queden rasteritzades
+d'acord amb l'algorisme de Bresenham quan realitzem omplert de polígons.
+
+<p class=exercici><span class=exernum>Exercici 17:</span> Es vol dibuixar una escena en la que apareix una rudimentària
+pantalla en la qual s'està visualitzant la mateixa escena. Indiqueu
+un algorisme que utilitzi modificacions de la transformació de món
+a dispositiu per dibuixar-la.
+
+<br>
+<p class=tit3><b>Avançat:</b></div>
+
+<p class=exercici><span class=exernum>Exercici 18:</span> Modifiqueu l'algorisme de rasterització per a pintar
+un segment segons un tipus de línia preestablert (a ratlles, a punts,
+..). A continuació algunes observacions d'interès. Es dibuixa
+en pantalla degut a l'acció pixel(x,y,color). L'algorisme per continuitat
+ha d'accedir a tots els pixels del segment però segons la iteració
+ha de pintar o no. La seqüència que indica en quina iteració
+es pinta o no es pinta és repetitiva i és funció del tipus de línia
+i es podria representar en una taula de bits o si bit[i]=1 indica que en
+la iteració i-èssima cal pintar.
+
+<p class=exercici><span class=exernum>Exercici 19:</span> Idem que anterior per omplert de polígons amb una mostra.
+
+<p class=exercici><span class=exernum>Exercici 20:</span> Pensa la modificació d'omplert de polígons a
+ratlles. Observació: cal realitzar transformacions geomètriques.
+
+<p class=exercici><span class=exernum>Exercici 21:</span> Dedueix l'algorisme de rasteritzat de circumferències.
+A continuació algunes observacions d'interès. Només
+cal implementar l'algorisme de rasterització d'un octant (per exemple
+el primer) de circumferència els pixels dels altres poden obtenir-se
+per simetries. Penseu, per començar, que la circumferència
+està centrada a l'origen de coordenades. Imagineu l'existència
+d'una funció millory(y1,y2) que donat un valor enter x indica
+quin dels dos valors y1, y2 s'ajusten millor a l'arc real.
+
+
+<br><br>
+<div CLASS="nav">
+[Anterior]
+[Següent]
+<a href="res.html">[Apartat anterior]</a>
+</div>
+</body>
+</html>

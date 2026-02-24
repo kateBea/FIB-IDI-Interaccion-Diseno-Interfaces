@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("realvirt","represc");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m5e01t01t01.html">[Anterior]</a>
+<a href="m5e01t01t03.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Representació d'escenes.
+<span class=tit2>Tipus d'informació en una escena.</span>
+<span class=tit3>Informació fotomètrica</span>
+</div>
+
+<p>La informació fotomètrica inclou les dades que
+permeten definir l'aparença de les superfícies dels objectes, com ara
+materials, focus de llum, textures, etc.</p>
+
+<p>Alguns d'aquests atributs són globals i afecten a tota l'escena.
+Aquest és el cas dels focus de llum.</p>
+
+<p>D'altres atributs poden estar associats a entitats de
+diferents nivells. Per exemple, el color pot ser un atribut dels objectes
+(llavors tots els polígons de l'objecte seran del mateix color), dels
+polígons (cada polígon pot tenir un color diferent) o dels vèrtexs (cada
+vèrtex pot tenir un color diferent).</p>
+
+<p>Evidentment, quan més baix sigui el nivell de l'entitat
+que té associada l'atribut (per exemple, els vèrtexs), més flexibilitat
+tindrem a l'hora de definir l'aparença de l'escena, però també més
+quantitat de memòria necessitarem per emmagatzemar aquesta informació.</p>
+
+<p>Normalment, cada <b>vèrtex</b> té associat:</p>
+
+<ul>
+  <b>
+  <li>Posició </b>(expressada amb coordenades x,y,z)</li>
+  <b>
+  <li>Vector normal al vèrtex </b>(expressat amb les components a,b,c)</li>
+  <b>
+  <li>Color</b> (expressat amb les components r,g,b,a)</li>
+  <b>
+  <li>Coordenades de textura </b>(expressades amb coordenades s,t)</li>
+</ul>
+
+<p>Normalment, cada <b>polígon</b> té associat:</p>
+
+<ul>
+  <b>
+  <li>Material </b>(expressat sovint amb un índex a una taula de materials)</li>  <b>
+  <li>Textura i altres atributs de texturació</li>
+  <li>Vector normal del polígon </b>(expressat amb les components a,b,c)</li>
+</ul>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m5e01t01t01.html">[Anterior]</a>
+<a href="m5e01t01t03.html">[Següent]</a>
+</div>
+</body>
+</html>

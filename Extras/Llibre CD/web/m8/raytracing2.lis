@@ -1,0 +1,27 @@
+./imatges/algor-ray.gif
+5
+1
+./imatges/fig-8-5-2.jpg
+1..5 - Presentació escena.
+./imatges/fig-8-5-3.jpg
+1..5 - Càlcul del window.
+3
+./imatges/Reixa-PixelSelected.jpg
+2..5 - Donat un píxel.
+./imatges/fig-8-5-5.jpg
+2..5 - Traçar raig per píxel.
+6
+./imatges/fig-8-5-6.jpg
+3..5 - Càlcul interseccions.
+./imatges/fig-8-5-6-2.jpg
+3..5 - Obtenir intersecció més propera.
+9
+./imatges/Reixa-PixelPintat.jpg
+4..5 - Pintar píxel del color de la intersecció.
+./imatges/reixat-final.jpg
+4..5 - Resultat en baixa resolució.
+11
+./imatges/fig-8-5-2.jpg
+5..5 - Presentació escena.
+./imatges/fig-8-5-final.jpg
+5..5 - Visió final en resolució estàndard.

@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","textu");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m3e30t02_TextCreacioExemple.html">[Anterior]</a>
+<a href="m3e30t10_TextGenDirect.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Textures.
+<span class=tit2>Aplicació de textures planes.</span>
+<span class=tit3>Conceptes Avançats en l'especificació de textures</span>
+</div>
+
+<p>A continuació algunes consideracions que poden ser d'utilitat en la
+utilització de textures i incrementar la seva eficiència:
+
+<ul>
+<li>Com s'ha mencionat en l'apartat anterior, l'especificació d'una
+textura és un procediment que consumeix un temps important que pot
+afectar a l'eficiència de les nostres aplicacions. Principalment això
+és degut al procés d'alocatament de memòria. Per aquest motiu, en
+algunes aplicacions que hagin de treballar amb moltes textures
+variables al llarg de l'aplicació, pot resultar d'interès en comptes
+d'especificar noves textures, modificar el contingut d'una textura ja
+especificada. A tal efecte cal utilitzar la comanda <a
+href="../m15/m7c60_Textures.html#glTexSubImage2D"><b>glTexSubImage2D(...)</b></a>. Un avantatge addicional és que aquesta sub-imatge NO ha de tenir una
+resolució potència de dos.
+
+<li>Donada una imatge es poden crear un conjunt de textures de
+diferent resolució o <i>nivell de detall</i> (especificades
+individualment o que pot crear OpenGL). Segons l'àrea que ocupi el
+polígon a texturar en pantalla, se li aplicarà un nivell de textura o
+altre. Òbviament, consumim més memòria de textura, però es millora el
+resultat de la texturació i es dissimulen millor els efectes <a
+href="m3e30t30_TextFiltratge.html">d'aliasing de textures</a> <!-- link
+a filtratge-->. La definició d'aquests nivells de detall de textura
+s'anomena <i>MIPMAP</i> en l'entorn d'OpenGL. Si esteu interessats
+mireu el <a href="../Biblio.html#OpenGLGuide">[OpenGL Programming
+Guide]</a>.
+
+<li> Segons la implementació d'OpenGL (arquitectura de la placa
+gràfica), l'eficiència de la texturació es pot veure afectada pel
+format intern escollit en l'especificació de la textura.
+
+<li> No oblideu que la memòria de textura és limitada. Per tant,
+segons la nostra arquitectura i la textura especificada, és factible
+que aquesta no pugui ser tractable. En aquests casos, la solució
+comporta bé treballar amb menys resolució de la textura, o bé
+subdividir la textura i el polígon a texturar a trossos que
+s'especifiquen i texturen seqüencialment. OpenGL permet interrogar
+l'estat del sistema per a analitzar l'espai de memòria disponible <a
+href="../Biblio.html#OpenGLGuide">[OpenGL Programming Guide]</a>.
+
+<li> Quan es requereix especificar n-textures (imatges) a partir d'una
+textura inicial (imatge) que es maparan en polígons coplanars (de
+fet subdivisió d'un mateix polígon), és possible que en un mateix
+pixel s'hagin de mapar vàries textures degut a la rasterització dels
+polígons. Visualment es pot produir un efecte de ratlles superposades
+o de discontinuitat visual de la textura. Una solució consiteix en
+definir per a cada sub-textura una <i>frontera</i> d'un texel de gruix
+i assignar a fronteres colindants valors de propietat tal que en
+sumar-se produeixin un texel com el que s'obtindria en la textura
+original. Si es requereix treballar amb textures amb frontera
+(<i>border</i> en nomenclatura anglosaxona), cal indicar-ho a la
+comanda: <b>glTexImage2D(...)</b>. En aquest cas en cada dimensió la
+resolució de la textura tindrà un valor d'una potència de dos més
+dos (<a href="../Biblio.html#OpenGLGuide">[OpenGL Programming
+Guide]</a>).
+
+<li> La memòria de textura disponible, és especialment important si la
+nostra arquitectura està orientada a treballar amb textures i conté un
+memòria <i>cache</i> específica per textures. Interessarà que en
+aquesta memòria resideixin els <i>Objectes Textura</i> que
+s'utilitzaran més sovint. OpenGL té diferents comandes que permeten
+estratègies per a ubicar textures residents (<a
+href="../Biblio.html#OpenGLGuide">[OpenGL Programming Guide]</a>). En
+aquest cas és obligatori treballar amb <i>Objectes Textura</i>.
+</ul>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m3e30t02_TextCreacioExemple.html">[Anterior]</a>
+<a href="m3e30t10_TextGenDirect.html">[Següent]</a>
+</div>
+</body>
+</html>

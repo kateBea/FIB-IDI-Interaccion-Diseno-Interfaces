@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M3.3.El model cmyk.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("color","cmyk");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+      <A HREF="exerciciCMYK.html">[Anterior]</a>
+      <A HREF="exerciciConvCMY_RGB.html" target="principal">[Següent]</a>
+</div>
+<br><br>
+
+<div class="tit1">El model CMY(K).
+<span class="tit2">Conversió de RGB a CMY(K)</span>
+</div>
+
+<P>
+De la descripció dels models CMY i CMYK al principi de l'apartat es
+dedueixen fàcilment els procediments per a convertir d'aquests a RGB i
+viceversa:
+
+<p class=noind>
+<B>Algorisme de conversió <I>(r,g,b) ==> (C,M,Y)</I>:</B>
+
+<PRE class=algoritme>
+	  C := 1-R;
+	  M := 1-G;
+	  Y := 1-B;
+</PRE>
+
+<P class=noind>
+<B>Algorisme de conversió <I>(c,m,y) ==> (R,G,B)</I>:</B>
+
+<PRE class=algoritme>
+	  R := 1-c;
+	  G := 1-m;
+	  B := 1-y;
+</PRE>
+
+<P class=noind>
+<B>Algorisme de conversió <I>(r,g,b) ==> (C,M,Y,K)</I></B> (amb
+substitució del s% del negre):
+
+<PRE class=algoritme>
+	  K := Mínim((1-r),(1-g),(1-b))*s/100;
+	  C := 1-r-K;
+	  M := 1-g-K;
+	  Y := 1-b-K;
+</PRE>
+
+<P>
+Observem que al passar de CMYK a RGB podem obtenir en principi
+quantitats negatives de R, G o B. Això no té sentit, ja que la tinta no
+pot absorbir més llum que la que li arriba, i per tant hem de tractar
+aquest cas especialment:
+
+<P class=noind>
+<B>Algorisme de conversió <I>(c,m,y,k) ==> (R,G,B)</I>:</B>
+
+<PRE class=algoritme>
+	  R := Màxim(1-c-k,0);
+	  G := Màxim(1-m-k,0);
+	  B := Màxim(1-y-k,0);
+</PRE>
+
+
+<br><br>
+<DIV CLASS="nav">
+      <A HREF="exerciciCMYK.html">[Anterior]</a>
+      <A HREF="exerciciConvCMY_RGB.html" target="principal">[Següent]</a>
+</div>
+</BODY>
+</HTML>

@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M7.1 Procés de visualització 2D.Prim. gràfiques.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("vis2D","defs");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+<a href="VistaDef.html">[Anterior]</a>
+<a href="ZoomPan.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class="tit1">Definicions.
+<span class="tit2">Primitives gràfiques.</span>
+</div>
+
+<P>
+Anomenarem
+<A CLASS="glossari" HREF="javascript:glossari('PrimGraf.html','*','400','150','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">primitiva gràfica</A>
+ al procés complet que permet representar un element geomètric en pantalla.
+
+<P>Les primitives gràfiques representen les eines de dibuix que podem utilitzar
+dins d'una aplicació informàtica per a visualitzar la informació.
+Les llibreries gràfiques actuals (i molts acceleradors gràfics)
+recullen aquestes primitives i, per tant, implementen, total o parcialment,
+els subprocessos del procés de visualització 2D que descriurem
+en el següent apartat.
+
+<p>Veiem alguns exemples:
+
+<ul>
+<li>
+<b>Punt (tPunt2D P)</b>: Es requereix per a visualitzar un punt en dispositiu
+de sortida, P designa les coordenades del Punt.</li>
+<li>
+<b>Segment (tPunt2D P1, tPunt2D P2)</b>: Es requereix per a visualitzar
+un tram recte en el dispositiu de sortida, P1 i P2 designen les coordenades
+dels seus Punts extrems. La visualització d'una poligonal s'efectuarà
+amb un conjunt de crides a aquesta acció bàsica.</li>
+<li>
+<b>Polígon (tPol2D pol)</b>: Es requereix per a visualitzar un polígon
+omplert d'un cert color en dispositiu de sortida. El tipus tPol2D es una
+taula de tPunt2D, per tant, <i>pol</i> especifica seqüencialment les
+coordenades dels vèrtexs del polígon.</li>
+</ul>
+
+<P>Anomenaren <a CLASS="glossari" HREF="javascript:glossari('Atributs.html','*','400','150','no','no','no','yes')" onMouseOver="window.status='Glossari';return true" onMouseOut="window.status='';return true">atributs</a>
+als paràmetres que defineixen l'aspecte gràfic de les primitives
+com el color, tipus de línia, etc, que afecten al subprocés
+de rasterització i també estan implementats en les llibreries
+gràfiques.
+
+<p>Exemples d'atributs:
+
+<ul>
+<li>
+<b>setLíniaGruix (enter g)</b>: Especifica el gruix amb que es
+pintaran totes les línies a partir de la seva crida. El paràmetre
+g està relacionat amb el nombre de pixels.</li>
+<li>
+<b>setPolColor (tColor color)</b>: Especifica el color amb que es pintaran
+tots els pixels interiors a un polígon a partir de la seva crida.</li>
+</ul>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="VistaDef.html">[Anterior]</a>
+<a href="ZoomPan.html">[Següent]</a>
+</div>
+</BODY>
+</HTML>

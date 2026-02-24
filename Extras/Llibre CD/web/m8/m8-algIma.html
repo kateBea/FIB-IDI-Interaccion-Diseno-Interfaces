@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title>8.2.2 Algorismes d'espai imatge</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" TYPE="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</head>
+<BODY >
+<SCRIPT>
+top.passara("visib","calg");
+</SCRIPT>
+<DIV CLASS="nav">
+<a href="m8-algObj.html">[Anterior]</a>
+<a href="m8-rayCasting.html">[Següent]</a>
+</div>
+<br><br>
+
+<div CLASS="tit1">Classificació dels algorismes de determinació de visibilitat.
+<span CLASS="tit2">Algorismes d'espai imatge</span>
+</div>
+
+<P>
+Parteixen de la geometria de l'escena i d'acord amb la posició de
+l'observador calculen la cara visible en cada píxel de la <A
+CLASS="glossari" HREF="javascript:glossari('Vista.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">vista</A>. S'anomenen
+algorismes d'espai imatge precisament perquè determinen la visibilitat
+per cada píxel que constituirà la imatge final. En la <i>figura
+sensible</i> següent mostrem el diagrama funcional d'un algorisme
+genèric i il·lustrem el seu funcionament amb un exemple concret.
+
+<CENTER>
+<TABLE><tr><TD>
+<img src="imatges/esquema8-4.jpg" alt="" height="180" width="380" usemap="#espimg">
+<MAP NAME="espimg">
+<area onmouseover="window.status='Geometria escena';return true" onmouseout="window.status='';return true" shape="RECT" coords="1,61,105,189" href="javascript:javascript:oWin('imatges/fig-8-4-1.jpg','','340','260','','','','yes')" alt="">
+<area onmouseover="window.status='Imatge final';return true" onmouseout="window.status='';return true" shape="RECT" coords="260,61,385,189" href="javascript:javascript:oWin('imatges/fig-8-4-2.jpg','','340','260','','','','yes')" alt="">
+</MAP>
+</TD></tr></TABLE>
+</CENTER>
+
+<P>
+Els diferents algorismes existents es diferencien pel procediment de
+càlcul de la visibilitat. Pot realitzar-se píxel a píxel (algorisme de
+<A HREF= "m8-rayCasting.html">ray-casting</A>), conjuntament per als
+píxels de cada línia d'escombrat
+(algorismes d'scan-line), o incrementalment per a cada píxel de la
+vista mentre es processen les diferents cares de l'escena (algorisme
+de <A HREF="m8-4.html">depth-buffer o z-buffer</A>). Per qualsevol de les
+tècniques utilitzades, posteriorment al còmput de la visibilitat, cal
+determinar el color del píxel, el que requereix conèixer el punt
+concret de la cara que és visible en ell. Els algorismes d'espai
+imatge s'utilitzen en dispositius de sortida de tipus raster.
+
+<P>
+Per a determinar la complexitat d'aquesta família d'algorismes, cal
+considerar que donada la posició de l'observador i la resolució de la
+vista, es realitza el còmput de la visibilitat geomètrica tants cops
+com píxels conté la vista. Es tracta de calcular per a cada píxel
+quines cares de l'escena s'hi projecten en ell i d'aquestes quina es
+la més propera a l'observador. Així doncs, la seva complexitat serà
+O(N*M) on M és el nombre de píxels de la vista i N és el nombre de
+cares de l'escena.
+
+<h2>Subapartats</h2>
+<ul>
+<li><A HREF='m8-rayCasting.html'> Algorisme de Ray Casting</A></li>
+<li><A HREF='m8-rayLimit.html'> Limitacions dels algorismes d'espai imatge</A></li>
+</ul>
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m8-algObj.html">[Anterior]</a>
+<a href="m8-rayCasting.html">[Següent]</a>
+</div>
+</body>
+</html>

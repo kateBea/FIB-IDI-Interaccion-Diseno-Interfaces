@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M6.1 Procés de visualització 3D.MapaSensible.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("vis3D","estr");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+<a href="AlgFil1.html">[Anterior]</a>
+<a href="MSTransmet2.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Subprocessos. 
+<span class=tit2>Sistema de coordenades de l'observador</span>
+</div>
+
+<P>
+    El sistema de coordenades de l'observador és un sistema
+   que té el seu origen a la posició O de l'observador, l'eix z dirigit en la
+   direcció contrària al vector OC - de manera que el punt C es troba sempre
+   sobre la part negativa de l'eix z -,  l'eix y en el pla definit per
+   l'eix z i el vector cap amunt - perpendicular a z i en el semiplà
+   respecte z que conté el vector cap amunt -, i l'eix x perpendicular a
+   y, z. El triedre és directe, i per tant
+
+<IMG WIDTH="92" HEIGHT="24" ALIGN="MIDDLE" BORDER="0"
+ SRC="imatges/img4.gif"
+ ALT="$u_z = u_x \wedge u_y$"> on <I>u</I><SUB><I>x</I></SUB>,
+ <I>u</I><SUB><I>y</I></SUB> i
+<I>u</I><SUB><I>z</I></sub>
+
+són els vectors unitaris en la direcció dels tres eixos. El podem
+   veure a la imatge, centrat a la posició de l'observador, amb els
+   eixos x (vermell), y (verd) i z (blau). Com que el cub talla el pla
+   de retallat anterior, a la vista només es veuen els trossos d'aresta
+   que cauen dins de la piràmide de visió.
+
+
+<DIV align=center>
+  <APPLET CODE ="AppletG2.class" archive="AppletG2.jar,../comuns.jar" WIDTH=640 HEIGHT=480>
+  <PARAM NAME=NApplet VALUE="11">
+  <PARAM NAME=Vrpx    VALUE="5.0">
+  <PARAM NAME=Vrpy    VALUE="5.0">
+  <PARAM NAME=Vrpz    VALUE="5.0">
+  <PARAM NAME=Angx    VALUE="20.0">
+  <PARAM NAME=Angy    VALUE="0.0">
+  <PARAM NAME=Angz    VALUE="0.0">
+  <PARAM NAME=D       VALUE="8.0">
+  <PARAM NAME=Winy    VALUE="5.0">
+  <PARAM NAME=Zfar    VALUE="15.0">
+  <PARAM NAME=Znear   VALUE="6.3">
+  <PARAM NAME=fich    VALUE="">
+  <PARAM NAME=AngExtx VALUE ="0.0">
+  <PARAM NAME=AngExty VALUE="90.0">
+  <PARAM NAME=fichero VALUE="/DAT/cuboG.dat">
+  <PARAM NAME=Camara VALUE="1">
+  <PARAM NAME=Alfa VALUE="50.0">                    
+  </APPLET>
+ </DIV>
+<BR>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="AlgFil1.html">[Anterior]</a>
+<a href="MSTransmet2.html">[Següent]</a>
+</div>
+</BODY>
+</HTML>

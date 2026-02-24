@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","textu");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m3e30_TextMapejat.html">[Anterior]</a>
+<a href="m3e30t02_TextCreacioExemple.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Textures.
+<span class=tit2>Aplicació de textures planes.</span>
+<span class=tit3>Especificació de Textures</span>
+</div>
+
+<P>L'especificació d'una textura consisteix en crear en memòria una taula
+n-dimensional tal que la informació de les seves components
+s'utilitzarà per a ser mapada sobre polígons (objectes en general).
+
+<P>Ens centrarem en l'especificació de textures dins d'OpenGL i
+concretament en textures 2D (planes). No obstant, com podeu comprovar al
+<a href= "../m15/m7c60_Textures.html">capítol d'OpenGL</a> quasi
+totes les comandes existeixen per treballar amb textures d'una, dos i
+tres dimensions. Pràcticament, només varia l'espeficificació d'alguna
+constant simbòlica i/o el nom de la funció donat que inclou de manera
+explícita la dimensió. D'ara endavant s'anomenaran les comandes i les
+seves característiques fonamentals, però per informació concreta haureu
+de consultar l'apartat corresponent del capítol d'OpenGL.
+
+<p>Volem fer notar que un cop especificada una textura, aquesta no
+comença a ser activa (utilitzable) fins que s'habilita la utilització
+de textures mitjançant <a href=
+"../m15/m7c60_Textures.html"><b>glEnable</b> (GL_TEXTURE_2D)</a>.
+
+<p>Per a especificar la textura s'utilitza la comanda: <a
+href="../m15/m7c60_Textures.html#glTexImage2D"><b>glTexImage2D</b></a>.
+Els seus paràmetres determinen:
+<ul>
+<li> la resolució (amplada i alçada) de la textura</li>
+
+<li> els valors a assignar als texels (una imatge o taula
+bidimensional que dins d'aquest apartat anomenarem <i>texels</i>)</li>
+
+<li> el format i el tipus de les components de la taula
+<i>texels</i>. El format indica si emmagatzema color (r,g,b) o color i
+opacitat (r,g,b,&#945) o altres possibilitats.</li>
+
+<li> el format intern en què es vol guardar la textura. El tipus
+intern de les dades és funció del valor de la variable d'estat
+corresponent indicada per <a href=
+"../m15/m7c30_PuntLiniaPoligonPixel.html#glPixelStore"><b>glPixelStore(...)</b>
+</a> i determinarà el nombre de bits per texel.</li>
+</ul>
+
+<p><b>glTexImage2D</b> alocata la memòria de textura requerida per a
+guardar la taula <i>texels</i> que configura la textura d'acord amb la
+seva resolució i el format i tipus interns requerits. És molt
+important recordar que:
+
+<ul>
+<li> la resolució en cada dimensió (amplada i alçada) HA DE SER
+potència de dos. Si la nostra textura inicial no compleix aquest
+requeriment, OpenGL ofereix la comanda <a
+href="../m15/m7c60_Textures.html#gluScaleImage"><b>gluScaleImage(...)</b></a>
+que permet re-escalar imatges fins a obtenir-ne la resolució
+requerida.</li>
+</ul>
+
+<p>En cada moment només pot existir una <i>textura activa</i>, els
+valors de la qual s'utilitzaran en la texturació dels polígons que
+tinguin assignades coordenades de textura i es pintin a
+continuació. La textura activa serà la darrera textura especificada
+amb <b>glTexImage2D</b>.
+
+<p>Com que l'especificació de les textures és un procés
+computacionalment costós en el qual s'alocata memòria, OpenGL permet
+assignar identificadors a textures, especificar-les en un pre-procés i
+activar-les a mesura que siguin requerides.
+
+<p>S'anomena <b><i>Objecte Textura</i></b> a una textura especificada
+a la que s'ha assignat un identificador. Les comandes d'OpenGL a
+utlitzar per a crear i utilitzar <i>Objectes Textura</i> són:
+
+<ul>
+<li><a
+href="../m15/m7c60_Textures.html#glGenTextures"><b>glGenTextures(...)</b></a>
+que retorna noms d'identificadors lliures que poden ser utilitzats per
+designar noves textures</li>
+
+<li><a
+href="../m15/m7c60_Textures.html#glBindTexture"><b>glBindTexture</b>(...,identificador)</a>. La
+primera textura que s'especifiqui amb la comanda glTexImage2D, tindrà
+associat l'<i>identificador</i> indicat i passarà a ser l'activa. Un
+cop inicialitzats un conjunt d'<i>Objectes Textura</i>, crides
+successives a la comanda <b>glBindTexture(...,identificador)</b> el
+que comporten és activar un <i>Objecte Textura</i> ja especificat (és
+a dir, amb un identificador conegut).</li>
+
+<li> OpenGL permet treballar en mode <i>Objecte Textura</i> o
+especificar les textures en el moment de ser requerides i tenir només
+una textura resident en el sistema. Per treballar amb aquest darrer
+mode de funcionament, n'hi ha prou amb cridar a <b>glBindTexture</b>
+amb valor zero d'identificador.</li>
+</ul>
+
+<p> Analitzeu aquest <a href="m3e30t02_TextCreacioExemple.html">
+exemple</a> d'especificació de textures utilitzant OpenGL.
+
+<p> Altres comandes d'especificació de textures es poden trobar en
+aquest apartat <a href="m3e30t03_TextCreacioAdvan.html"> Conceptes
+Avançats </a>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m3e30_TextMapejat.html">[Anterior]</a>
+<a href="m3e30t02_TextCreacioExemple.html">[Següent]</a>
+</div>
+</body>
+</html>

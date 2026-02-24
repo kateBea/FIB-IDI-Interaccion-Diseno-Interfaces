@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("realvirt","visester");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m5d01t06_cal.html">[Anterior]</a>
+<a href="m5d01t06t02.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Visió estereoscòpica.
+<span class=tit2>Càlcul del parell estereoscòpic.</span>
+<span class=tit3>Consideracions preliminars</span>
+</div>
+
+<p>El model clàssic de visualització fa servir una analogia entre
+la generació d'imatges sintètiques i la fotografia. En el model clàssic, per
+obtenir la imatge d'un model 3D corresponent a un determinat punt de vista, hem
+d'especificar la posició, orientació i propietats òptiques d'una <i>càmera
+virtual</i>, de forma que el procés de visualització obté la imatge que es
+projectaria en la pel·lícula d'aquesta hipotètica càmera. La figura següent
+mostra els dos elements bàsics que intervenen en el model de visualització
+clàssic: el model 3D (representat per la tetera) i la càmera virtual
+(representat per una càmera fotogràfica):</p>
+
+<div align="center"><img border="0" src="imatges/cameramodel1f.jpg" width="463" height="361"></div>
+
+<p>En les aplicacions que no requereixen treballar amb visió
+estereoscòpica, sovint <b>s'identifica l'usuari amb la càmera virtual</b>. Això vol dir que la càmera virtual es situa a la
+mateixa posició que l'observador virtual, i que s'orienta cap a la direcció en
+que mira aquest observador, de forma que obtenim la
+imatge que veuria un usuari situat en la mateixa posició i orientació que la
+càmera virtual:</p>
+
+<div align="center"><img border="0" src="imatges/cameramodel2.jpg" width="480" height="372"></div>
+
+<p>En aquesta suposició hem fet una simplificació força
+important, que sovint passa inadvertida: no estem considerant que, de fet, la
+imatge del frame buffer no es projecta directament a la retina de l'usuari,
+sinó que es projectarà en una pantalla determinada, i que serà observada per
+un usuari situat en una determinada posició respecte la pantalla.&nbsp;</p>
+
+<p> La
+simplificació anterior és adient en aplicacions que no fan servir visió
+estereoscòpica, perquè permet calcular imatges sense tenir cap informació
+sobre les dimensions físiques de la pantalla i la situació de l'observador
+real respecte a aquesta pantalla, però pel càlcul d'imatges estereoscòpiques aquesta
+simplificació és inadmissible. Com podem estimar la disparitat que tindran les
+imatges a la retina de l'observador si no coneixem la seva posició respecte la
+pantalla? Per aquest motiu, en visió estereoscòpica, la càmera virtual s'ha
+de calcular tenint en compte la situació de l'observador respecte la pantalla
+on es visualitzaran les imatges.</p>
+
+<p>Per fer més entenedors els càlculs, és convenient introduir
+els elements <i>pantalla </i>i <i>observador </i>dins el nostre model de
+visualització, com a entitats separades de la càmera virtual:</p>
+
+<div align="center"><img border="0" src="imatges/cameramodel3.jpg" width="480" height="360"></div>
+
+<p>Fixeu-vos que la imatge que hem de calcular és la imatge que es
+projecta en la pantalla, no en la retina de l'observador. Per tant, no seria
+correcte calcular la imatge simplement definint una càmera virtual en la
+mateixa posició i orientació que l'observador, sense tenir en compte la
+posició i orientació de la pantalla. Fixeu-vos que si, per exemple,
+l'observador no està enfilat amb el centre de la pantalla, o si la pantalla no
+és perpendicular a la direcció de visió, s'obtindran resultats diferents en
+un cas i en l'altre.&nbsp;</p>
+
+<p>Per tant, tota
+modificació de la ubicació de la pantalla afecta a la imatge que s'hi
+projecta, i el mateix passa amb la ubicació de l'observador.</p>
+
+<p>En els apartats que segueixen, cal no confondre la <b>posició de l'observador
+virtual</b> i la <b>posició de l'observador real</b>.</p>
+
+<p>La <b>posició de l'observador virtual </b>ens permet bàsicament
+situar-nos en una determinada posició <b>en relació amb el model geomètric</b>
+3D. Per tant és tracta d'un paràmetre <b>calculat
+</b>per l'aplicació, normalment en funció de la voluntat de l'usuari
+expressada en forma de la direcció en la qual vol avançar.</p>
+
+<p>La posició de l'<b>observador real</b> ens permet situar l'observador <b>en
+relació a la pantalla real</b>. Per exemple, la única forma de generar imatges amb
+una perspectiva matemàticament correcta en una CAVE és disposar de la posició
+dels ulls de l'usuari. Per tant es tracta d'un paràmetre <b>proporcionat
+pels posicionadors</b> que es fixen al cap de l'usuari.</p>
+
+<p>Tant l'observador virtual com l'observador real representen la mateixa
+entitat (l'ull de l'usuari), però mentre que el primer està referenciat en el
+sistema de coordenades de l'aplicació, el segon està referenciat en un sistema
+de coordenades de l'espai real on es mou l'usuari.</p>
+
+<p>La mateixa distinció podem fer entre la <b> pantalla real</b>, que és la pantalla on es projecten físicament les imatges, i la
+<b> pantalla virtual</b>, que és una representació idealitzada de la pantalla dins el món virtual que s'utilitza com a nexe d'unió entre l'espai real i l'espai virtual. Encara que la
+pantalla real sigui és fixa, la pantalla virtual es pot moure lliurament per l'escena. Per exemple, en un simulador de vol, la pantalla virtual
+segueix els moviments de la cabina de l'avió, a l'hora que l'usuari també es pot moure dins l'espai de la cabina.
+</p>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m5d01t06_cal.html">[Anterior]</a>
+<a href="m5d01t06t02.html">[Següent]</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html lang="CA">
+
+<head>
+
+<title></title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+
+<script type="text/javascript" src="../upc.js"></script>
+
+<SCRIPT>
+
+top.passara("visreal","antial");
+
+</SCRIPT>
+
+<BODY>
+
+<DIV CLASS="nav">
+
+<a href="m3f30t20_AntialPoligExercicis.html">[Anterior]</a>
+
+<!--a href="m3f30t10_AntialPoligOpenGL.html">[Anterior]</a-->
+
+<a href="m3f40t10_AntialiasingAccBufTaules.html">[Següent]</a>
+
+</div>
+
+<br><br>
+
+
+
+<div class=tit1>Antialiasing.
+
+<span class=tit2>Antialiasing basat en l'ús del buffer d'acumulació</span>
+
+</div>
+
+
+
+<p> Un mètode alternatiu per l'antialiasing de polígons és usar el
+
+buffer d'acumulació. Com veurem, és més fàcil de programar, encara
+
+que és molt més costós en temps de càlcul. El que cal fer és, enlloc
+
+de dibuixar els objectes una vegada, dibuixar-los N vegades,
+
+lleugerament desplaçats, sobre el buffer d'acumulació (la conseqüència
+
+és que estem multiplicant per N el temps de visualització). Un cop
+
+s'ha acabat aquest bucle de dibuix sobre el buffer d'acumulació, ja es
+
+pot enviar l'escena al frame buffer:
+
+
+
+<pre class=algoritme>
+
+  <b>glClearAccum</b> (0., 0., 0., 0.);
+
+  <b>glClear</b> (GL_ACCUM_BUFFER_BIT);
+
+
+
+  <b>for</b> (jitter=0; jitter < N; jitter++) {
+
+
+
+     <b>glClear</b> (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+
+     <b>glMatrixMode</b> (GL_PROJECTION);
+
+     <b>glLoadIdentity</b> ();
+
+
+
+     /*<a href="m3f40t20_AntialiasingAccBufExplic.html"> Veure comentaris </a>*/
+
+     dx := DesplaçamentX [jitter] * (2.*FrustX) / (AmpladaVista);
+
+     dy := DesplaçamentY [jitter] * (2.*FrustY) / (AlçadaVista);
+
+     <b>glFrustum</b> (-FrustX+dx, FrustX+dx, -FrustY+dy, FrustY+dy, Near, Far);
+
+
+
+     <b>glMatrixMode</b> (GL_MODELVIEW);
+
+     <b>DibuixaObjectes</b> ();
+
+     <b>glAccum</b> (GL_ACCUM, 1.0 / N );
+
+  }
+
+  <b>glAccum</b>(GL_RETURN, 1.0);
+
+  <b>glFlush</b>();
+
+</pre>
+
+
+
+<p> Tal com s'indica als comentaris detallats, la part clau d'aquest
+
+algorisme, després de les incialitzacions, és el bucle on es dibuixen
+
+N vegades tots els objectes de l'escena amb petits desplaçaments de
+
+magnitut inferior a un pixel. El fet que cada vegada que es dibuixa
+
+l'escena es faci havent carregat una matriu de perspectiva
+
+lleugerament diferent, fa que les imatges que s'acumulen al buffer
+
+d'acumulació quan es fa la crida a <b>glAccum (GL_ACCUM, 1.0/N )</b>
+
+estiguin desplaçades menys d'un pixel entre elles, i que es vagi
+
+calculant una imatge promig. La imatge acumulada s'envia al frame
+
+buffer un cop acabat el bucle, quan fem la crida <b>glAccum
+
+(GL_RETURN, 1.0)</b>.
+
+
+
+<p> Com hem dit abans, un dels avantatges d'aquest algorisme és la
+
+seva simplicitat. Un altre avantatge és que serveix automàticament
+
+per la supressió de l'efecte d'escala en qualsevol tipus de primitiva
+
+gràfica (línies, polígons, etc). És un algorisme interessant quant el
+
+temps de càlcul no és crític.
+
+
+
+<p> A les següents imatges podeu veure el resultat de la visualització
+
+d'una escena sense i amb antialiasing, usant el buffer
+
+d'acumulació. Com veieu, els resultats són molt similars als dels
+
+algorismes discutits als anteriors apartats. Fixeu-vos especialment en
+
+les diferències a les siluetes dels objectes, a la base del con, i a
+
+les rajoles del terra.
+
+
+
+<br>
+
+<div align=center><img src="imatges/pere2senseaa.png" width=350 height=400>&nbsp;&nbsp;
+
+<img src="imatges/pere2acumaa.png" width=350 height=400></div>
+
+
+
+
+
+<br><br>
+
+<DIV CLASS="nav">
+
+<a href="m3f30t20_AntialPoligExercicis.html">[Anterior]</a>
+
+<!--a href="m3f30t10_AntialPoligOpenGL.html">[Anterior]</a-->
+
+<a href="m3f40t10_AntialiasingAccBufTaules.html">[Següent]</a>
+
+</div>
+
+</body>
+
+</html>
+

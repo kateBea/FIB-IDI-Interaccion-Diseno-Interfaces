@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("realvirt","tecacc");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m5f01t03.html">[Anterior]</a>
+[Següent]
+<a href="m5g01_coli.html">[Següent apartat]</a>
+</div>
+<br><br>
+
+<div class=tit1>Tècniques d'acceleració d'imatge.
+<span class=tit2>Image-based rendering</span>
+</div>
+
+<p>Aquesta tècnica es basa en utilitzar imatges (bitmaps)
+precalculats en substitució de geometria complexa. Per exemple, un edifici amb
+molt detall es pot representar com un cub amb les seves cares texturades.</p>
+
+<p>La forma més simple d'aquesta tècnica són els <i>sprites</i>.
+Un sprite és una imatge que es pot moure lliurament per la pantalla. L'apuntador
+del ratolí, per exemple, és un sprite. Als sprites més senzills hi ha una
+correspondència 1:1 entre els punts del bitmap i els pixels de la pantalla.</p>
+
+<p>La idea dels sprites es pot ampliar de diferents formes. Els
+sprites es poden escalar de forma trivial (especialment si el factor d'escalat
+és un enter), creant la sensació que s'apropa o s'allunya de l'observador.
+També permeten recrear animacions senzilles, mitjançant la visualització d'una
+successió d'elements d'imatge diferents.</p>
+
+<p>L'aplicació de textures als polígons es pot considerar
+com una extensió del concepte d'<i>sprite</i>. Entre els diferents efectes
+visuals basats en textures, destaquen els <i>billboards, </i>que són polígons
+texturats que s'orientan cada frame de forma que sempren estiguin de cara a l'observador.
+Els billboards permeten representar amb realisme objectes amb simetria axial,
+com ara els arbres.</p>
+
+<p>La forma més avançada d'image-based rendering permet
+d'obtenir diferents punts de vista d'una escena a partir d'una imatge
+mitjançant tècniques de deformació d'imatges (<i>image warping</i>). Els
+sistemes més coneguts són QuickTime VR i Lumigraph.</p>
+
+<p>El sistema <b> Quicktime VR</b> utilitza una imatge panoràmica de
+360 graus que captura totes les direccions possibles des d'un determinat punt
+de vista, i que es representa mitjançant una imatge cilíndrica. Quan s'altera
+l'orientació de la càmera virtual, la part corresponent de la imatge és
+recuperada, transformada i visualitzada. Encara que la tècnica està limitada a
+una posició estàtica, s'aconsegueix un nivell d'immersió visual superior
+al d'una imatge clàssica. Un ús molt habitual d'aquestes escenes és com a
+escenari de fons, sobre els quals es dibuixa la resta de l'escena de forma
+poligonal.</p>
+
+<p>El sistema <b> Lumigraph</b> és similar, però s'utilitzen imatges
+preses des de diferents punts de vista. Donat un nou punt de vista, es duu a
+terme la interpolació necessària entre les imatges emmagatzemades per crear
+una nova vista. Donat que el problema abordat és molt més complex, aquesta
+tècnica requereix quantitats considerables de memòria per emmagatzemar les
+imatges.</p>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m5f01t03.html">[Anterior]</a>
+[Següent]
+<a href="m5g01_coli.html">[Següent apartat]</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","antial");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m3f40t10_AntialiasingAccBufTaules.html">[Anterior]</a>
+[Següent]
+<a href="m3g10_Resum.html">[Següent apartat]</a>
+</div>
+<br><br>
+
+<div class=tit1>Antialiasing.
+<span class=tit2>Altres mètodes</span>
+</div>
+
+<p>Apart dels mètodes que hem vist, existeixen altres mètodes per
+l'eliminació de l'efecte d'escala, que no podem detallar per manca
+d'espai. Dos d'ells, el mètode basat en multi-mostreig i el
+d'antialiasing usant textures, els descrivim breument a continuació.
+
+<p><b>Multi-mostreig</b>
+
+<p> El mètode de multi-mostreig (multisampling) és un mètode
+d'antialiasing que permet generar imatges d'alta qualitat. El problema
+que té és que requereix un hardware gràfic especial, que no tots els
+computadors tenen. En concret, cal que la memòria del frame buffer, a
+més dels buffers de color, profunditat i stencil, pugui emmagatzemar
+informació a nivell de subpixels. De fet, si es pot emmagatzemar
+informació de profunditat, color i stencil a nivell de subpixel, podem
+treballar amb màscares de recobriment de subpixels i obtenir
+directament els valors finals de color de pixel per acumulació directa
+dels valors dels seus subpixels. Aquest mètode és complementari als
+que hem vist, en el sentit que es pot usar conjuntament amb els
+mètodes basats en la transparència (valor alfa) i amb els que usen el
+buffer d'acumulació. Les implementacions actuals usen quatre, vuit o
+setze mostres a cada pixel.
+
+<p><b>Antialiasing amb textures </b>
+
+<p> En aquest cas el que es fa és usar textures aplicades al paràmetre
+alfa (textures de transparència o alfa-textures) per aconseguir
+eliminar l'efecte d'escala. La imatge de la textura es crea en un
+pre-procés, com la imatge d'un petit cercle amb intensitat màxima al
+seu interior i decreixent radialment de forma suau a partir d'un cert
+radi. Durant la visualització, els valors del paràmetre alfa es
+calculen a partir dels texels de la textura, i es fan servir per
+promitjar els valors dels pixels de les línies o polígons que estem
+dibuixant, amb els valors dels pixels que ja són al frame buffer:
+
+<ul>
+<li>Per dibuixar punts amb antialiasing, es dibuixa un polígon regular
+i texturat centrat al punt, tot calculant els paràmetres de
+l'aplicació de la textura de manera que el centre del cercle es
+transformi en el centre del polígon i usant el paràmetre d'entorn
+<b>GL_MODULATE</b>. Evidentment, es pot modificar la "forma" del punt
+si usem la imatge de textura d'una el·lipse enlloc de la d'un cercle,
+per exemple. </li>
+
+<li>Per dibuixar línies de qualsevol gruix amb antialiasing, es
+dibuixa un rectangle texturat de longitud igual a la del segment recte
+i d'amplada igual al gruix desitjat. Si es vol que els extrems quedin
+arrodonits cal dibuixar, a més del polígon anterior, dos punts amb
+antialiasing a cada una de les dues posicions extremes del segment
+recte.</li>
+
+<li>Finalment, per dibuixar polígons amb eliminació de l'efecte
+d'escala només cal dibuixar el polígon omplert de color, i després
+dibuixar les seves arestes usant l'algorisme d'antialiasing per
+línies.</li>
+</ul>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m3f40t10_AntialiasingAccBufTaules.html">[Anterior]</a>
+[Següent]
+<a href="m3g10_Resum.html">[Següent apartat]</a>
+</div>
+</body>
+</html>

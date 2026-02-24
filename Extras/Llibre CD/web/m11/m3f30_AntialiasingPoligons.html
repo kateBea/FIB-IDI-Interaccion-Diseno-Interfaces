@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html lang="CA">
+
+<head>
+
+<title></title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+
+<script type="text/javascript" src="../upc.js"></script>
+
+<SCRIPT>
+
+top.passara("visreal","antial");
+
+</SCRIPT>
+
+<BODY>
+
+<DIV CLASS="nav">
+
+<a href="m3f20_AntialiasingLinies.html">[Anterior]</a>
+
+<a href="m3f30t10_AntialPoligOpenGL.html">[Següent]</a>
+
+</div>
+
+<br><br>
+
+
+
+<div class=tit1>Antialiasing.
+
+<span class=tit2>Supressió de l'efecte d'escala en polígons</span>
+
+</div>
+
+
+
+<p> Observeu aquesta imatge:
+
+
+
+<div align=center><img src="imatges/aliasing1bis.jpg"></div>
+
+
+
+<p> La imatge s'ha generat visualitzant amb OpenGL una escena
+
+poligonal. Clarament, podem observar un bon nombre d'efectes d'escala:
+
+
+
+<ul>
+
+<li> Tenim efectes d'escala (molt visibles en arestes quasi
+
+horitzontals) a les zones entre els polígons de l'escena i el fons
+
+negre </li>
+
+
+
+<li> Tenim efectes d'escala a les zones entre diferents polígons de
+
+l'escena: observeu els contorns del polígon frontal que conté les
+
+finestres. En alguns casos, l'efecte és més pronunciat degut a la
+
+visualització dels xamfrans entre polígons, que apareixen com si
+
+fossin línies rectes </li>
+
+
+
+<li> En alguns casos, en canvi, l'efecte no és tan pronunciat:
+
+fixeu-vos per exemple en les arestes antero-posteriors del polígon del
+
+sostre. Això és degut a que l'efecte depèn fortament de l'orientació
+
+de les arestes dels polígons </li>
+
+</ul>
+
+
+
+<p> A les pàgines que segueixen veurem com es pot programar, en
+
+OpenGL, una rutina per visualitzar escenes poligonals amb eliminació
+
+de l'efecte d'escala. L'algorisme és semblant al que hem vist fins ara
+
+per la supressió de l'efecte d'escala en línies: el color final és la
+
+suma ponderada del color anterior del pixel i del color del polígon
+
+que estem pintant.
+
+
+
+<p> A continuació teniu un applet que us permet veure alguns objectes
+
+de forma interactiva des de diferentes posicions. La interacció us
+
+permet veure l'escena des de diferents punts de vista. Moveu-vos al
+
+voltant dels objectes i aneu observant els efectes d'escala. En
+
+qualsevol moment podeu prémer el botó de Zoom, i veureu l'efecte amb
+
+més detall, amb els pixels ampliats:
+
+
+
+<div align=center>
+
+<applet code="Interficie.class" archive="Antialiasing.jar" height=400 width=400>
+
+</applet>
+
+</div>
+
+
+
+<h2>subapartats:</h2>
+
+
+
+<UL>
+
+<LI><a href="m3f30t10_AntialPoligOpenGL.html" target="principal">Programació d'antialiasing de polígons en OpenGL</a></LI>
+
+<LI><a href="m3f30t20_AntialPoligExercicis.html" target="principal">Exemples i exercicis</a></LI>
+
+</UL>
+
+
+
+
+
+<br><br>
+
+<DIV CLASS="nav">
+
+<a href="m3f20_AntialiasingLinies.html">[Anterior]</a>
+
+<a href="m3f30t10_AntialPoligOpenGL.html">[Següent]</a>
+
+</div>
+
+</body>
+
+</html>
+

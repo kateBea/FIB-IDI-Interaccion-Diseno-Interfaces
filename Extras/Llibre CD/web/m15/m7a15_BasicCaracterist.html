@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("opengl","cridbas");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m7a10_BasicIntroduccio.html">[Anterior]</a>
+<a href="m7a20_BasicInstruccPrincipals.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1> Crides bàsiques d'OpenGL.
+<span class=tit2>Introducció i característiques que OpenGL implementa</span>
+</div>
+
+<P>
+OpenGL treballa com una màquina d'estats. Un estat o mode és un
+conjunt de variables que defineixen el comportament d'altres comandes
+OpenGL. Exemples de variables poden ser el color actual, transformació
+de projecció actual, il·luminació, etc. Tota variable d'estat té un
+<I>valor per defecte</I>. Existeixen comandes que permeten consultar i
+alterar el valor d'aquestes variables.
+
+<P>
+L'execució de comandes OpenGL segueix un model
+<I>client-servidor</I>, on el client és qui executa l'aplicació que
+llença comandes OpenGL i el servidor és el que rep i interpreta
+aquestes comandes i realitza la visualització. El client i el servidor
+poden no ser a la mateixa màquina.
+
+<P>
+Sense entrar en detall podem descriure algunes de les característiques
+que OpenGL implementa:
+
+<UL>
+<LI><B>Primitives geomètriques:</B> permeten construir descripcions
+matemàtiques dels objectes. Les primitives actuals són: punts, línies,
+polígons, imatges i bitmaps.</LI>
+<LI><B>Modelat i visualització:</B> permet col·locar objectes en una
+escena 3D, moure la <A class=glossari Href="javascript:glossari('camara.html')">càmera</A> en l'espai i seleccionar el punt de vista
+per a visualitzar l'escena (<I>rendering</I>).</LI>
+<LI><B>Transformacions:</B> rotació, escalat, traslació,
+perspectiva en 3D, etc...</LI>
+<LI><B>Codificació del color:</B> en RGBA
+(<A class=glossari Href="javascript:glossari('rgb.html')"><I>Red-Green-Blue</I></A> més component d'opacitat <I>Alpha</I>) o en mode color índex.</LI>
+<LI><B>Z-buffering:</B> guarda memòria de la coordenada Z d'un objecte
+3D. El <a href="../m10/m2h40_Buffers.html">Z-bufer</a> s'usa per a guardar informació de la proximitat de
+l'objecte a l'observador. També és crucial per a eliminar parts
+amagades.</LI>
+<LI><A class=glossari Href="javascript:glossari('aliasing.html')"><B>Anti-aliasing:</B></A> redueix l'efecte <I>d'escala</I> en línies
+pintades en una pantalla de computador. Aquest efecte apareix sovint
+quan les línies es pinten en una resolució baixa. L'<i>anti-aliasing</i> és
+una tècnica comú en gràfics que modifica el color i la intensitat dels
+píxels propers a la línia per tal de reduir l'efecte de
+``zig-zag''.</LI>
+<LI><B>Il·luminació de materials:</B> és un punt indispensable en els
+gràfics 3D. OpenGL ofereix comandes per a calcular el color a cada
+punt donades les propietats del material i les fonts de llum de
+l'escena.</LI>
+<LI><B>Colorat (<i>shading</i>) de Gouraud:</B> és una tècnica usada per a aplicar
+colorat suau a objectes 3D, donant subtils diferències de color al
+llarg de les seves superfícies.</LI>
+<LI><B>Mapejat de textures:</B> ajuda a donar realisme als models
+dibuixant imatges que simulen tipus de superfícies i materials a les
+cares dels objectes del model.</LI>
+<LI><B>Transparència:</B> usa el valor <I>Alpha</I> (nivell d'opacitat
+del material) del codi RGBA permetent combinar el color del fragment
+que s'està processant amb el del píxel guardat al <A class=glossari Href="javascript:glossari('FrmBuffer.html')">frame buffer</A>.</LI>
+<LI><B>Efectes atmosfèrics:</B> la boira, el fum i altres efectes
+atmosfèrics poden fer que les imatges siguin més realistes. <I>Fog</I>
+és un terme que realment descriu un algoritme que simula boirina, fum,
+polució o simplement l'efecte de l'aire, afegint profunditat a la
+imatge.</LI>
+<LI><B>Plans d'<I>stencil</I>:</B> restringeix l'àrea de dibuixat a
+certes parts de la pantalla.</LI>
+<LI><B>Display lists:</B> permeten guardar comandes de pintat en una
+llista per un <I>rendering</I> posterior. Quan s'usen de forma
+apropiada poden millorar fortament el rendiment del
+<I>rendering</I>.</LI>
+<LI><B>Interacció i selecció:</B> permeten crear aplicacions en que
+l'usuari pot seleccionar una regió de la pantalla o escollir un
+objecte dibuixat.</LI>
+<LI><B>Avaluadors polinomials:</B> serveixen per a suportar B-splines
+racionals no uniformes. Ajuden a pintar corbes suaus mitjançant uns
+quants punts de referència, estalviant la necessitat de guardar molts
+altres punts entre mig.</LI>
+<LI><B>Primitives raster:</B> (bitmaps i rectangles de píxels).</LI>
+<LI><B>Operacions de <A class=glossari Href="javascript:glossari('pixel.html')">píxels</A>.</B></LI>
+</UL>
+
+<P>
+Una altra característica força utilitzada en programes implementats
+amb OpenGL però que no és directament una implementació d'OpenGL és el
+<B>Doble buffering</B>. Aquesta característica és normalment
+implementada per la llibreria que comunica directament amb el sistema
+de finestres (pex. glX en el cas de màquines unix, l'API de windows,
+la llibreria glut, o la tk en Mesa per MS-DOS, etc); però la nombrem
+aquí perque acostuma a ser molt utilitzada en programes que usen
+OpenGL. El <B>Doble buffering</B> ajuda a eliminar l'efecte de
+repintat en animacions. Cada frame successiu en una animació es
+construeix en un buffer de memòria separat, i només es pinta quan el
+dibuixat del frame s'ha acabat.  
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m7a10_BasicIntroduccio.html">[Anterior]</a>
+<a href="m7a20_BasicInstruccPrincipals.html">[Següent]</a>
+</div>
+</body>
+</html>

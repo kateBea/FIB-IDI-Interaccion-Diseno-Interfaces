@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M2.3 El frame buffer. Paletes de colors.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;
+charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("hard","fb");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+      <A HREF="fb.html">[Anterior]</a>
+      <a href="lut.html">[Següent]</a>
+     </div>
+<br><br>
+
+<div class="tit1">El Frame Buffer.
+<span class="tit2">Doble Buffer</span>
+</div>
+
+<P> Quan s'hi escriu directament a la memòria de vídeo, cal tenir
+especials cures per tal que no es produeixin efectes indessitjables a
+la imatge (com tremolors, o presentació d'imatges incorrectes per
+estar parcialment actualitzades). Per això quan es fa necessari
+fer-ho, o quan es modifica l'escena continuament (com en animacions o
+aplicacions gràfiques 3D que permeten manipulació directa), és
+desitjable disposar de dos <I>frame buffers</I>, de tal forma que es
+pot actualitzar el que no està usant-se per a controlar la pantalla, i
+quan s'ha completat l'actualització es conmuta el paper de
+cadascun. Aquesta conmutació consumeix molt poc temps i el propi
+controlador s'encarrega de que ocorri en el moment del retorn vertical
+del feix, pel que no genera cap altre efecte visible que la
+modificació que es volia introduir.
+<P>
+<center><table><td>
+<img class="centrada" alt="Doble memòria de vídeo" src="imatges/framebuf2.gif">
+</td></table></center>
+<P> Típicament cada
+color disposa d'un byte per a cada <I>pixel</I> en aquests
+dispositius, pel que poden representar
+<I>(2<SUP>8</SUP>)<SUP>3</SUP></I> colors diferents (16.777.216 colors
+diferents).
+
+<br><br>
+<DIV CLASS="nav">
+      <A HREF="fb.html">[Anterior]</a>
+      <a href="lut.html">[Següent]</a>
+    </div>
+
+</BODY>
+
+</HTML>
+

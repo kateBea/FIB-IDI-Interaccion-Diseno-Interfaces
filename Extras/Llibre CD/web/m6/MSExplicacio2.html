@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M6.1 Procés de visualització 3D.MapaSensible.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("vis3D","estr");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+<a href="MSTransmet1.html">[Anterior]</a>
+<a href="MatriuTG.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Subprocessos. 
+<span class=tit2>Transformació de coordenades</span>
+</div>
+
+<P>
+En aquest bloc es modifica la geometria del
+<A CLASS="glossari" HREF="javascript:glossari('modelAp.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">model de l'aplicació</A>,
+transformant les coordenades dels vèrtexs i expressant-les en el
+sistema de coordenades de l'observador. No es modifica la informació
+topològica del model geomètric.
+
+<p>Els paràmetres d'entrada són la
+<A CLASS="glossari" HREF="javascript:glossari('PosObs.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">posició de l'observador</A> (O), la
+posició del
+<A CLASS="glossari" HREF="javascript:glossari('CentreEsc.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">centre de l'escena</A> (C)
+i el <A CLASS="glossari" HREF="javascript:glossari('VAmunt.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">vector cap amunt</A> (u).
+
+<p>L'algorisme de principi és el següent:
+
+<pre class=algoritme>
+  CalculMatriuDeTransformació (O,C,u, M)
+  <b>Per</b> cada vèrtex v del model de l'aplicació <b>fer</b>
+    vProjectat := Transformació Geomètrica (v, M)
+    Guardar (vProjectat)
+  <b>fPer</b>
+</pre>
+
+<P>
+L'algorisme primer calcula la matriu de transformació M a partir dels
+paràmetres d'entrada (veure enllaç "Matriu de Transformació" ) i
+després l'aplica a tots els vèrtexs del model (veure enllaç a
+l'algorisme).
+
+<p>Ara bé, cal observar que no podem destruir la informació inicial de
+la geometria dels vèrtexs. Ens cal guardar les coordenades dels
+vèrtexs transformats (taula PuntsProj a l'algorisme). Això comporta que
+al final tinguem un model geomètric diferent al model inicial de
+l'aplicació, en que la taula de vèrtexs ha estat substituïda per la
+nova taula de vèrtexs transformats. A aquest model l'anomenarem
+<A CLASS="glossari" HREF="javascript:glossari('ModelTr.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">model transformat</A>.
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="MSTransmet1.html">[Anterior]</a>
+<a href="MatriuTG.html">[Següent]</a>
+</div>
+</BODY>
+</HTML>

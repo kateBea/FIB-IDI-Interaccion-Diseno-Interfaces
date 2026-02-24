@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("realvirt","visester");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m5d01t07_cod.html">[Anterior]</a>
+<a href="m5d01t07t02.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Visió estereoscòpica.
+<span class=tit2>Codificació i visualització d'imatges estereoscòpiques.</span>
+<span class=tit3>Estèreo actiu</span>
+</div>
+
+<p>L'estèreo actiu es basa en projectar les imatges de l'ull dret i de l'ull
+esquerre sobre una única pantalla, de forma alternada. Per tant, es basa en fer
+una <b>separació en el temps</b> del parell estereoscòpic:</p>
+
+<div align="center"><img border="0" src="imatges/activestereo2.gif" width="180" height="143"></div>
+
+<p>Per utilitzar estèreo actiu n'hi ha prou amb que el nostre computador
+disposi d'un <b>canal de vídeo. </b>Un canal és una sortida de vídeo
+independent. La majoria de computadors personals incorporen una única sortida
+de vídeo, a la qual es connecta el monitor o el projector.</p>
+
+<p class=noind><b>Codificació de les imatges al frame buffer</b></p>
+
+<p>Recordeu que les aplicacions gràfiques interactives, encara que no siguin
+estereoscòpiques, fan servir la tècnica de doble-buffering per tal d'evitar que es
+mostrin a la pantalla imatges parcialment actualitzades. Aquesta tècnica es
+basa en tenir dos buffers de color: el <i>back buffer, </i>on es fa el repintat
+de l'escena, i el <i>front buffer, </i>que conté la imatge que es tradueix en
+un senyal de vídeo.</p>
+
+<p>Per generar imatges amb estèreo actiu, cal duplicar el nombre de buffers de
+color, i per tant haurem de disposar de <b>quatre buffers</b> (quad-buffering):
+El repintat de les imatges per l'ull dret i l'ull esquerre s'efectua en els <i>back-left</i>
+i <i>back-right </i>buffers, respectivament, mentre que el hardware gràfic
+visualitzarà els buffers <i>front-left </i>i&nbsp; <i>front-right</i> de forma
+alterna.</p>
+
+<p class=noind><b>Codificació del senyal de vídeo</b></p>
+
+<p>En estèreo actiu, hi ha un únic senyal de vídeo en el qual es codifiquen
+les dues imatges de forma alterna. Aquesta figura mostra com evoluciona la
+imatge que codifica el senyal en funció del temps:</p>
+
+<div align="center"><img border="0" src="imatges/estereoactiu2.jpg" width="500" height="187"></div>
+
+<p class=noind><b>Dispositiu de visualització</b></p>
+
+<p>L'estèreo actiu requereix que una única senyal de vídeo es visualitzi en
+una única pantalla. Per tant és compatible amb tota mena de dispositius de
+visualització: pantalles, projectors, etc. Tanmateix, hi ha una restricció
+important: <b>el dispositiu ha de suportar una freqüència de refresc vertical
+de com a mínim 120 Hz</b>, ja que la freqüència que rebrà cada ull serà de
+només la meitat, 60 Hz.&nbsp;</p>
+
+<p>Malauradament, la majoria de projectors basats en LCD i DLP, i fins i tot els
+CRT de gamma baixa, són incapaços de treballar amb freqüències de refresc
+tan elevades.&nbsp;</p>
+
+<p class=noind><b>Separació del parell estereoscòpic</b></p>
+
+<p>De cara a que cada ull de l'usuari pugui veure només les imatges que li
+corresponen, l'usuari ha de dur unes <b>ulleres d'obturació</b> (<i>shutter
+glasses</i>) que porten un LCD especial davant de cada ull que obstrueix el pas de
+la llum de forma sincronitzada amb el senyal de vídeo. Quan la pantalla
+visualitza la imatge per a un ull determinat, el LCD situat davant d'aquest ull
+serà transparent, mentre que el LCD de l'altre ull s'enfosquirà. Si la
+freqüència de refresc és prou elevada, l'obturació és imperceptible (degut
+a la retenció de la retina) i aconseguim de forma efectiva que cada ull rebi
+únicament les imatges que li pertoquen.&nbsp;&nbsp;</p>
+
+<p>La següent fotografia mostra les ulleres d'obturació del fabricant
+Stereographics Corp.:</p>
+
+<div align="center"><img border="0" src="imatges/crystaleyes.jpg" width="300" height="211"></div>
+
+<p class=noind><b>Requeriments</b></p>
+
+<p>En síntesi, per utilitzar estèreo actiu necessitem:</p>
+
+<ul>
+  <li>Hardware gràfic amb un canal de vídeo, suport de quad-buffering, i que
+    sigui capaç de generar senyals de vídeo a 120Hz.</li>
+  <li>Pantalla o projector que suportin la visualització de senyals de vídeo a
+    120Hz</li>
+  <li>Ulleres d'obturació (ulleres amb LCD actiu)</li>
+  <li>Sincronització entre el hardware gràfic i les ulleres (sovint
+    s'utilitzen raigs infraroigs).&nbsp;</li>
+</ul>
+
+<p class=noind><b>Visualització</b></p>
+
+<pre class=algoritme>
+  // dibuixem imatge per l'ull dret
+  calculCamera(ull dret);		  // calculem els paràmetres de la càmera virtual
+  <b>glDrawBuffer</b>(GL_BACK_RIGHT);      // buffer actual = buffer de l'ull dret
+  <b>glClear</b>(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+  dibuixarEscena(...);
+  <b>glFlush</b>();
+
+  // dibuixem imatge per l'ull esquerre
+  calculCamera(ull esquerre);	  // calculem els paràmetres de la càmera virtual
+  <b>glDrawBuffer</b>(GL_BACK_LEFT);       // buffer actual = buffer de l'ull esquerre
+  <b>glClear</b>(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+  dibuixarEscena(...);
+  <b>glFlush</b>();
+  swapbuffers();
+</pre>
+
+<p class=noind><b>Valoració</b></p>
+
+<p>El principal avantatge és que és possible utilitzar-lo amb monitors de
+computador (si suporta freqüències de refresc vertical per damunt del 120Hz).</p>
+
+<p>El principal inconvenient és que les ulleres són cares, doncs incorporen
+elements actius (LCD, electrònica de control).</p>
+
+<p>Aquest és el sistema utilitzat amb monitors i amb sistemes de projecció com
+la CAVE.&nbsp;</p>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m5d01t07_cod.html">[Anterior]</a>
+<a href="m5d01t07t02.html">[Següent]</a>
+</div>
+</body>
+</html>

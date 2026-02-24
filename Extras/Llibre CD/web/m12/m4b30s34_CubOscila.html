@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<BODY>
+<br>
+
+<div class=tit2>Cub que oscil·la</div>
+
+<pre class=algoritme>
+#vrml V2.0 utf8
+
+DEF Entry Viewpoint {
+    position 0.0 4.0 20.0
+    description "Punt de Vista"
+}
+
+NavigationInfo {
+    type [ "EXAMINE", "ANY" ]
+    headlight TRUE
+}
+
+Background {
+    skyColor [ 0.2 0.2 0.0 ]
+}
+
+# Posem una esfera
+Transform {
+	center 0.0 0.0 0.0
+	children [
+		 Transform {
+			children Shape {
+				appearance Appearance {
+					material  Material { }
+				}
+				geometry Sphere { }
+			}
+		}
+	]
+}
+
+#  Cub
+DEF Cub Transform {
+	center 0.0 0.0 0.0
+	children [
+		 Shape {
+			appearance Appearance {
+				material Material {
+					diffuseColor 0.2 0.5 1.0
+				}
+			}
+			geometry Box { size 1.0 1.0 1.0}
+		}
+	]
+}
+
+#  Animació del cub
+
+DEF Clock TimeSensor {
+	cycleInterval 3.0
+	loop TRUE
+	startTime 1.0
+	stopTime 0.0
+}
+
+DEF Motor PositionInterpolator {
+	key [ 0.0, .25, .5, .75, 1.0 ]
+	keyValue [
+                -4.0 0.0  3.0,
+                 0.0 0.0  2.0,
+                 4.0 0.0  3.0,
+                 0.0 0.0  2.0,
+                -4.0 0.0  3.0,
+	]
+}
+
+ROUTE Clock.fraction_changed TO Motor.set_fraction
+ROUTE Motor.value_changed TO Cub.set_translation
+</pre>
+
+
+<p align=right><a href="javascript:window.close()">tornar </a>
+</body>
+</html>

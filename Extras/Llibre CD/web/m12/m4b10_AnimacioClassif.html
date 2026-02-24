@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("anim","concclass");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+[Anterior]
+[Següent]
+<a href="m4a20_AnimacioObjectius.html">[Apartat anterior]</a>
+<a href="m4b30_AnimacioVRML.html">[Següent apartat]</a>
+</div>
+<br><br>
+
+<div class=tit1>Concepte i classificació de les tècniques existents d'animació</div>
+
+<p> Tal com ja hem comentat, les animacions ens mostren canvis d'una
+escena en base a un guió preestablert. En general, el guió especifica
+com es transforma l'escena i com es mouen, canvien de color i es
+deformen els seus objectes.
+
+<p> En el cas de l'animació 3D (que és la que veurem en aquest
+apartat), el model inherent és un model 3D. En aquest cas, a més del
+propi canvi de l'escena produït per l'animació, ens podrem moure i la
+podrem examinar interactivament des de diferents punts de vista. Això
+simplifica l'animació en molts casos: Una de les diferències
+importants entre la generació d'una pel·lícula animada usant tècniques
+2D o usant tècniques 3D (penseu en Toy Story o en Matrix) és que en
+aquest darrer cas només cal animar l'escena i els personatges; els
+moviments de la càmera es poden anar ajustant durant "la filmació" per
+tal de generar els plans més adequats. Evidentment, el resultat final
+és una película digital (format MPEG o similar) que podrem generar per
+captura de pantalla durant la filmació virtual. Però l'avantatge de
+l'animació 3D és que podem fer diverses proves i generar diferents
+filmacions sense haver de canviar l'escena animada.
+
+<p> Les tècniques d'animació es poden classificar (A.Watt,
+F.Policarpo, "The Computer Image", Addison Wesley 1999) de la següent
+manera:
+
+<ul>
+<li> Tècniques per l'animació d'objectes rígids. Són les més
+senzilles, i les que veurem amb més detall en aquest capítol. Tenim
+una escena 3D, i l'animació consisteix en el moviment de diferents
+objectes rígids per dins de l'escena. El guió de l'animació
+especifica la trajectòria que haurà de seguir cada objecte que es
+mou. El moviment al llarg de la trajectòria permet variar la posició i
+orientació dels objectes, però també és habitual que permetem
+modificar el seu escalat i el seu color i material. Per simplificar
+l'especificació de les trajectòries, el que es fa en el guió és
+indicar la posició i orientació de l'objecte en diferents moments de
+la seva trajectòria. A aquests moments s'els anomena <a
+class="glossari" href="javascript:glossari('KeyFrames.html');">
+posicions clau ó key-frames</a>. Quan es visualitza l'animació, el
+sistema interpola automàticament entre les posicions clau per tal de
+generar la trajectòria completa. </li>
+
+<li> Tècniques per l'animació d'estructures articulades. Quan tenim
+estructures articulades (robots, palanques i màquines, moviment
+d'animals i persones en que modelem l'animació del seu esquelet), cal
+animar de forma coordinada les diferents parts. L'animació de cada una
+de les parts es fa amb les tècniques d'animació d'objectes rígids que
+ja hem comentat; l'única dificultat afegida aquí, és el lligam entre
+les diferents parts que s'articulen: quan movem la mà, per exemple,
+s'ha de moure l'avantbraç i el braç a través del colze. En aquest cas
+s'utilitzen recursos de la cinemàtica, per a relacionar els diferents
+moviments. </li>
+
+<li> Tècniques per l'animació de malles i estructures deformables: En
+aquest cas, l'animació implica un canvi de la pròpia forma geomètrica
+dels objectes. Nosaltres veurem algun exemple senzill, però l'animació
+de deformacions en general és força complexa i es basa molts cops en
+la simulació de la deformació de malles de triangles i en tècniques
+basades en la física. Les aplicacions inclouen la deformació de
+vestits i teixits o les deformacions d'òrgans en aplicacions en
+medicina. Aquestes tècniques es poden combinar, evidentment, amb les
+tècniques ja comentades de moviment, trajectòries i animació
+d'estructures articulades. </li>
+
+<li> Tècniques per l'animació basades en la física. Direm que un
+sistema d'animació es basa en la física (phisically-based animation)
+quan el càlcul concret dels moviments, trajectòries o deformacions no
+es fa segons lleis empíriques sinó que es fa a partir d'una simulació
+seguint les lleis de la física. En aquest cas els càlculs previs a
+l'animació són força complexes, pero el resultat és clarament més
+realista. En aplicacions reals i que requereixen precisió (medicina,
+aerodinàmica, etc), és imprescindible usar aquestes tècniques.  </li>
+
+<li> Tècniques per l'animació procedural. Es diu que una animació és
+procedural si els valors dels paràmetres al llarg de l'animació
+(trajectòries, moviment dels objectes, paràmetres de deformació) són
+calculats per un procediment que els calcula al llarg del
+temps. L'animació procedural simplifica l'entrada de dades a les
+key-frames en animacions complicades. El procediment de càlcul pot
+usar lleis senzilles de la física (en un tir parabòlic, per exemple),
+resoldre una simulació física complexa, o bé usar una base de dades
+(experimental o de resultats de simulacions ja fetes). Un exemple
+clàssic és l'animació de resultats de simulacions d'aerodinàmica,
+simulant el moviment de partícules que es mouen al llarg de les línies
+de flux. </li>
+
+<li> Animació del comportament. En aquest cas, els objectes tenen
+comportament propi i reaccionen als estímuls externs. Podem pensar en
+casos de baixa dificultat d'animació (una porta que s'obre al prémer
+el seu pom), però altres casos poden arribar a ser força més
+complicats (per exemple, l'animació d'un eixam d'ocells o de
+peixos, en que cada un d'ells adapta automàticament el seu moviment en
+funció de la seva posició relativa respecte als seus veïns).  En
+aquests casos d'animació del comportament, el guió es simplifica. Ja
+no cal modelitzar el moviment de cada un dels objectes, sinó únicament
+els paràmetres al moviment dels objectes/animals i del grup: en el cas
+d'un grup de peixos, caldrà modelar els corrents d'aigua i/o la
+presència d'aliments, en el cas d'un eixam d'ocells caldrà només
+modelar el vol del primer ocell.</li>
+
+<li> Animació del cos humà i tècniques per a l'animació facial. Són de
+les més complexes, pel grau de qualitat que es requereix al
+resultat. Els mecanismes de percepció humana fan que els petits errors
+en aquest cas siguin molt més visibles i aparents que quan s'animen
+altres objectes. Es tracta d'un camp on actualment s'hi treballa
+intensament. </li>
+</ul>
+
+
+<p> L'apartat següent ens introduirà el llenguatge vrml'97 i les seves
+prestacions i possibilitats per a generar models d'escenes
+animades. El llenguatge vrml'97 ens permet animar objectes rígids i
+conjunts d'objectes, animar algunes estructures articulades i animar
+certes deformacions simples. També permet definir objectes amb
+comportament. Finalment, al final d'aquest apartat d'animació, farem
+referència a tècniques més avançades per fer animació procedural,
+animació basada en la física i animació avançada del comportament dels
+objectes.  
+
+
+<br><br>
+<DIV CLASS="nav">
+[Anterior]
+[Següent]
+<a href="m4a20_AnimacioObjectius.html">[Apartat anterior]</a>
+<a href="m4b30_AnimacioVRML.html">[Següent apartat]</a>
+</div>
+</body>
+</html>

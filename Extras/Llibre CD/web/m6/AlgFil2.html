@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M6.1 Procés de visualització 3D.MapaSensible.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("vis3D","estr");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+<a href="MSExplicacio3.html">[Anterior]</a>
+<a href="MSTransmet3.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Subprocessos.
+<span class=tit2>Algorisme per a la visualització en filferros 2</span>
+</div>
+
+<p>
+<pre class=algoritme>
+/* Retallat anterior i construcci&oacute; de les arestes a dibuixar*/
+
+na := 0
+
+<B>Per</B> cada aresta a de l'objecte <B>fer</B>
+   /* Busca un k1 tal que PuntsProj[k1].Vertex = PrimerVertexAresta(a)*/
+   /* Busca un k2 tal que PuntsProj[k2].Vertex = SegonVertexAresta(a) */
+   k1 := Cerca (PrimerVertexAresta(a), PuntsProj)
+   k2 := Cerca (SegonVertexAresta(a), PuntsProj)
+   P1 := PuntsProj[k1].Punt
+   P2 := PuntsProj[k2].Punt
+   <B>Si</B>
+      P1.z > zProp <B>i</B> P2.z > zProp <B>--></B> Continuar
+      P1.z <= zProp <B>i</B> P2.z <= zProp <B>--></B> na := na+1
+		                        Arestes[na].P1 := k1
+		                        Arestes[na].P2 := k2
+      P1.z > zProp <B>i</B> P2.z <= zProp <B>--></B> P3 := PuntInters (P1, P2, zProp)
+		                       np := np+1
+		                       PuntsProj[np].Punt := P3
+		                       na := na+1
+		                       Arestes[na].P1 := np
+		                       Arestes[na].P2 := k2
+      P1.z <= zProp <B>i</B> P2.z > zProp <B>--></B> P3 := PuntInters (P1, P2, zProp)
+		                       np := np+1
+		                       PuntsProj[np].Punt := P3
+		                       na := na+1
+		                       Arestes[na].P1 := k1
+		                       Arestes[na].P2 := np
+   <B>fsi</B>
+<B>fper</B>
+
+/* RetallatPosterior: Opcional pero idèntic a l'anterior */
+</PRE>
+<br>
+
+<div class=tit3><b>Observacions:</b></div>
+
+<ul>
+<li><B>PuntInters</B> És una funció
+<pre class=algoritme>
+<B>funció</B> PuntInters (P1: Punt3D, P2: Punt3D, zProp: real) <B>retorna</B> Punt3D 
+</pre>
+que retorna el punt d'intersecció del segment P1 - P2 amb el pla
+z=zProp. Aquest és un punt interpolat linealment entre P1 i P2, fent
+<PRE class=algoritme>
+alfa := (zProp - P1.z) / (P2.z - P1.z)
+P3.x := P1.x + alfa * (P2.x - P1.x)
+P3.y := P1.y + alfa * (P2.y - P1.y)
+P3.z := P1.z + alfa * (P2.z - P1.z)
+</PRE>
+</li>
+</ul>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="MSExplicacio3.html">[Anterior]</a>
+<a href="MSTransmet3.html">[Següent]</a>
+</div>
+</BODY>
+</HTML>

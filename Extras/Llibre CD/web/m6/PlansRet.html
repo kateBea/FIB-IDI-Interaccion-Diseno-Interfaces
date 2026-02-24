@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M7.1 Procés de visualització 2D.Sistemes de coordenades.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("vis3D","cam");
+</SCRIPT>
+<DIV CLASS="nav">
+<a href="TamFin.html">[Anterior]</a>
+<a href="SCObs.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class="tit1">Model de la càmera. 
+<span class="tit2">Plans de retallat anterior i posterior</span>
+</div>
+
+<P>No tota la informació geomètrica dins de la zona d'espai definida
+         per l'angle d'obertura de la càmera o per la finestra 2D
+         apareix a la <A CLASS="glossari"
+         HREF="javascript:glossari('Vista.html','*','400','300','no','no','no','yes')"
+         onMouseOver="window.status='Glossari';return true"
+         onMouseOut="window.status='';return true">vista</A>. El model
+         de càmera inclou dos plans, anomenats plans de retallat
+         anterior i posterior, que delimiten també la informació
+         geomètrica que es visualitza: només apareix a la vista el que
+         està comprés entre els dos plans. Els plans de retallat són
+         perpendiculars a l'eix z (sistema de coordenades de
+         l'observador). Els caracteritzarem per la seva coordenada z
+         en aquest sistema de coordenades: zProp, zLluny. Aquests
+         plans es poden considerar -en una interpretació laxe de la
+         seva funcionalitat- com a plans que defineixen una
+         "profunditat de camp discreta": enlloc de tenir una zona
+         d'enfoc correcte i dues zones -propera i llunyana-
+         desenfocades, aquí tenim una zona que es visualitza bé i dues
+         zones -propera i llunyana- que no es visualitzen.
+
+<P class=exercici>
+         <span class=exernum>Exercici:</span>a la següent escena
+           senzilla, proveu de modificar la posició dels plans de
+           retallat i veieu com va canviant la imatge que obtenim a la
+           vista</A> a la <A CLASS="glossari"
+           HREF="javascript:glossari('FinGraf.html','*','400','300','no','no','no','yes')"
+           onMouseOver="window.status='Glossari';return true"
+           onMouseOut="window.status='';return true">finestra
+           gràfica</A>. Podeu canviar interactivament els paràmetres
+           de visualització.  Observeu que els plans de retallat i els
+           límits laterals del camp de visió (donats per l' <A
+           CLASS="glossari"
+           HREF="javascript:glossari('angleO.html','*','400','300','no','no','no','yes')"
+           onMouseOver="window.status='Glossari';return true"
+           onMouseOut="window.status='';return true">angle d'obertura
+           de la càmera</A> o per la <A CLASS="glossari"
+           HREF="javascript:glossari('TamFin.html','*','400','300','no','no','no','yes')"
+           onMouseOver="window.status='Glossari';return true"
+           onMouseOut="window.status='';return true">grandària de la
+           finestra 2D</A>) defineixen una regió de l'espai, anomenada
+           <i>frustrum</i> en anglés o <A CLASS="glossari"
+           HREF="javascript:glossari('PiramVis.html','*','400','300','no','no','no','yes')"
+           onMouseOver="window.status='Glossari';return true"
+           onMouseOut="window.status='';return true">piràmide de
+           visió</A>.  El <i>frustrum</i> és la zona d'espai que conté
+           tot el que sortirà projectat a la vista dins la finestra
+           gràfica.
+
+<!--
+                 Applet 2 que visualitza el cub
+                 Botó de modificació dels plans de retallat (2.7)
+                 Visualització del frustrum i del sist de
+                       coordenades de l'observador
+-->
+<p>
+ <CENTER> <TABLE><TR><TD>
+  <APPLET CODE ="AppletG2.class" archive="AppletG2.jar,../comuns.jar" WIDTH=640 HEIGHT=480>
+  <PARAM NAME=NApplet VALUE="6">
+  <PARAM NAME=Vrpx    VALUE="5.0">
+  <PARAM NAME=Vrpy    VALUE="5.0">
+  <PARAM NAME=Vrpz    VALUE="5.0">
+  <PARAM NAME=Angx    VALUE="30.0">
+  <PARAM NAME=Angy    VALUE="45.0">
+  <PARAM NAME=Angz    VALUE="0.0">
+  <PARAM NAME=D       VALUE="20.0">
+  <PARAM NAME=Winy    VALUE="5.0">
+  <PARAM NAME=Zfar    VALUE="25.0">
+  <PARAM NAME=Znear   VALUE="1.0">
+  <PARAM NAME=fich    VALUE="">
+  <PARAM NAME=AngExtx VALUE ="30.0">
+  <PARAM NAME=AngExty VALUE="10.0">
+  <PARAM NAME=fichero VALUE="/DAT/2cuboG.dat">
+  <PARAM NAME=Camara VALUE="1">
+  <PARAM NAME=Alfa VALUE="15.0">
+  </APPLET>
+  </TD></TABLE></CENTER>
+
+  <P class=exercici>
+          Cal que situeu el pla de retallat anterior (i/o posterior) de manera
+          que s'en retalli la meitat i dins la vista només s'en vegi
+          l'altre meitat. Observeu com es va modificant la piràmide de visió.
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="TamFin.html">[Anterior]</a>
+<a href="SCObs.html">[Següent]</a>
+</div></BODY>
+</HTML>

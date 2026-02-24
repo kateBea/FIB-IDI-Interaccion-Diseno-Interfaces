@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","ombres");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m3b20t10_OmbresOpenGL.html">[Torna a l'algorisme]</a>
+</div>
+<br><br>
+
+<div class=tit3><b>Generació de volums d'ombres.</b> Explicació - part 3</div>
+
+<pre class=algoritme>
+<b>void redraw_shadow</b>(void)
+{
+   .....
+   .....
+   <b>glStencilOp</b>(GL_KEEP, GL_KEEP, GL_DECR);
+   <b>glCullFace</b>(GL_FRONT);
+   <b>Dibuixa</b>(SHADOWVOL);
+
+   <b>glDepthMask</b>(GL_TRUE);
+   <b>glColorMask</b>(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+   <b>glCullFace</b>(GL_BACK);
+   <b>glDepthFunc</b>(GL_LEQUAL);
+   <b>glStencilOp</b>(GL_KEEP, GL_KEEP, GL_KEEP);
+   <b>glDisable</b>(GL_CULL_FACE);
+</pre>
+
+<p> Les darreres sis línies d'aquest tros deixen les màscares i
+l'stencil buffer en els valors per defecte, a punt de visualitzar
+l'escena.
+
+<p> A les primeres tres línies, el que fem és tornar a dibuixar les
+cares laterals de la piràmide del volum d'ombra, pintant ara només les
+que estan d'esquena a l'observador. La crida a <b>glStencilOp</b> fa
+que, en tot pixel d'un polígon lateral del volum d'ombra que passi el
+test de l'stencil buffer i que per tant hauria de ser pintat, es
+decrementi el valor de l'stencil buffer. Això passa evidentment en
+tots els punts dels polígons posteriors del volum d'ombra que no
+quedin tapats per altres objectes a la imatge final. La conseqüència
+és que:
+
+<ul>
+<li> En tots els pixels en que, des de la posició de l'observador,
+veiem la projecció de les cares laterals del volum d'ombra sense cap
+objecte dins d'aquest volum (els punts intermitjos entre el con i
+l'esfera a la figura, per exemple), el valor de l'stencil buffer serà
+zero ja que l'hem incrementat i decrementat el mateix valor. </li>
+<li> En tots els pixels en que, des de la posició de l'observador,
+veiem un objecte dins el volum d'ombra (per exemple, els punts de la
+zona central del con, a la figura), el valor de l'stencil buffer serà
+positiu ja que l'hem incrementat al pintar les cares del davant de la
+piràmide d'ombra i en canvi no l'hem decrementat al pintar les cares
+d'esquena (les cares d'esquena no han passat el test de profunditat
+perquè el con ja havia estat pintat, i el con és més proper a
+l'observador).</li>
+<li> En tots els pixels en què, des de la posició de l'observador,
+veiem un objecte davant del volum d'ombra (per exemple, els punts prop
+del vèrtex del con, a la figura), el valor de l'stencil buffer serà
+nul ja que no l'hem incrementat al pintar les cares del davant de la
+piràmide d'ombra i tampoc l'hem decrementat al pintar les cares
+d'esquena (cap d'elles han passat el test de profunditat perquè el con
+ja havia estat pintat, i el seu vèrtex és més proper a l'observador
+que totes les cares de la piràmide d'ombra).</li>
+<li> En resum, en acabar, els únics punts que queden amb un valor no
+nul de l'stencil buffer són els punts on es projecten els polígons que
+són dins del volum d'ombra. </li>
+</ul>
+
+<p> La rutina <b>Dibuixa</b>(SHADOWVOL) conté el bucle de crides a
+OpenGL que dibuixen els polígons laterals de la piràmide del volum
+d'ombra, veure la figura.
+
+
+<center>
+<img src="imatges/SemitranspSolidVolume.png">
+</center>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m3b20t10_OmbresOpenGL.html">[Torna a l'algorisme]</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title>8 Algorismes de z-buffer</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" TYPE="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</head>
+<BODY >
+<SCRIPT>
+top.passara("visib","izbf");
+</SCRIPT>
+<DIV CLASS="nav">
+<A HREF="m8-8.html">[Anterior]</a>
+<A HREF="m8-col-exeConst.html">[Següent]</a>
+</div>
+<br><br>
+
+<div CLASS="tit1">Models d'il·luminació i Z-buffer.
+<span CLASS="tit2">Colorat constant</span>
+</div>
+
+<P>
+Aquesta tècnica, aplica l'equació del model d'il·luminació per a cada
+cara a un punt determinat (generalment un vèrtex) i assigna el mateix
+color a tota la resta de punts. Usualment, es calcula prèviament a
+inicialitzar el procés de visualització 3D.
+
+<P>
+L'avantatge principal és que simplifica molt els
+càlculs. L'inconvenient és que les cares queden de color
+uniforme. Fàcilment es pot deduir que d'utilitzar-se aquesta tècnica
+de colorat no és necessari utilitzar un model d'il·luminació molt
+complex perquè tampoc s'observaran els seus efectes; o fins i tot
+poden ser perjudicials: imaginem que el punt escollit és de gran
+especularitat, tota la cara es veuria molt brillant.</P>
+
+<CENTER>
+<TABLE><TR><TD>
+<img src="imatges/fig8-13-b-FLAT.jpg" alt="Exemple de Flat shading">
+</TD></TR></TABLE>
+</CENTER>
+
+<P>
+El resultat que s'obté amb colorat constant és similar al que
+obtindríem si apliquem el model empíric a cada punt sota les
+restriccions:
+
+<UL>
+<LI>Fonts de llum a l'infinit. Per tots els polígons N·L és
+constant.</LI>
+<LI>Observador a l'infinit i per tant R*V constant en tots els
+punts.</LI>
+<LI>Superfície de l'objecte aproximada per cares planes.</LI>
+</UL>
+
+<P><A HREF='m8-col-exeConst.html'> Exercici demostració</A>
+
+
+<br><br>
+<DIV CLASS="nav">
+<A HREF="m8-8.html">[Anterior]</a>
+<A HREF="m8-col-exeConst.html">[Següent]</a>
+</div>
+</body>
+</html>

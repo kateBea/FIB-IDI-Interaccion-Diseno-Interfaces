@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","ombres");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m3b20t20_OmbresExercicis.html">[Anterior]</a>
+<a href="m3b30_OmbresAltres.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Ombres.
+<span class=tit2>Càlcul per volums d'ombres.</span>
+<span class=tit3>Conclusions</span>
+</div>
+
+<p> La técnica dels volums d'ombra pot ser molt eficient si els
+objectes que produeixen l'ombra són simples, ja que en aquest cas és
+senzill calcular la silueta, les arestes del contorn i la piràmide
+d'ombra. El problema ens apareix quan ens trobem amb objectes de forma
+i silueta complexa. En aquest cas, el mateix càlcul de la silueta ja
+és complex (la silueta és el conjunt tancat d'arestes de l'objecte
+tals que separen cares orientades cap el focus de llum i cares
+orientades d'esquena al focus de llum). D'altra banda, si la silueta
+és complicada el volum d'ombra pot contenir moltes cares, i en alguns
+casos patològics la seva forma pot produir problemes i errors numèrics
+en les operacions amb l'stencil buffer. En tot cas, la tècnica és
+clarament superior a la de projecció d'ombres, ja que permet
+visualitzar ombres que es projecten sobre superfícies i objectes de
+forma complexa.
+
+<p> La tècnica dels volums d'ombra va ser inicialment proposada per
+Crow (1977), tot i que després ha estat desenvolupada per altres com
+Brotman i Badler (1984) que la van estendre per representar ombres
+degudes a fonts no puntuals.  Les referències inicials són:
+
+<ul>
+<li>Crow,F.C., "Shadow algorithms for
+Computer Graphics", Siggraph 1977, pp 242-247 </li>
+<li>Brotman,L.S. and Badler,N.I., "Generating soft shadows with a
+depth buffer algorithm", IEEE Computer Graphics and Applications
+Vol. 4 (10), 1984, pp 5-12 </li>
+</ul>
+
+<p> El problema de l'enfoc inicial de Crow és que els objectes que
+generen ombres han de ser convexes. Hi ha una extensió per objectes no
+convexes que podeu trobar a:
+
+<ul>
+<li>P. Bergeron, "A general version of Crow's shadow volumes", IEEE
+Computer Graphics and Applications Vol. 6 (9), 1986, pp 17-28
+</li>
+</ul>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m3b20t20_OmbresExercicis.html">[Anterior]</a>
+<a href="m3b30_OmbresAltres.html">[Següent]</a>
+</div>
+</body>
+</html>

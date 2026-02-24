@@ -1,0 +1,105 @@
+#VRML V2.0 utf8
+
+
+DEF Entry Viewpoint {
+    position 0.0 4.0 20.0
+    description "Punt de Vista"
+}
+
+NavigationInfo {
+    type [ "EXAMINE", "ANY" ]
+    headlight TRUE
+}
+
+Background {
+    skyColor [ 0.3 0.3 0.0 ]
+}
+
+
+# Cilindre central
+
+Transform {
+	center 0.0 0.0 0.0
+	children [
+		DEF Cilindre Transform {
+			children Shape {
+				appearance Appearance {
+					material DEF ColorCilindre Material { }
+				}
+				geometry Cylinder {height 6.0 radius 0.5 }
+			}
+		}
+	]
+}
+
+#  Cub
+
+DEF Cub Transform {
+	center 0.0 -3.0 0.0
+	children [
+		 Shape {
+			appearance Appearance {
+				material Material {
+					diffuseColor 0.2 0.5 1.0
+				}
+			}
+			geometry Box { size 1.0 1.0 1.0}
+		}
+	]
+}
+
+
+
+#  Animació del cub
+
+
+DEF Clock TimeSensor {
+	cycleInterval 3.0
+	loop TRUE
+	startTime 1.0
+	stopTime 0.0
+}
+
+DEF Motor PositionInterpolator {
+	key [ 0.0, .05, 0.1, .15, 0.2, .25, 0.3, .35, 0.4, .45, 0.5, 
+                .55, 0.6, .65, 0.7, .75, 0.8, .85, 0.9, .95, 1.0 ]
+	keyValue [
+                -4.0 0.0  0.0,
+               -3.24 0.5 -2.35
+	       -1.23 1.0 -3.8,
+                1.24 1.5 -3.8,
+		 3.8 2.0 -1.23,
+                 4.0 2.5  0.0,
+		 3.8 3.0  1.23,
+                1.24 3.5  3.8,
+               -1.23 4.0  3.8,
+               -3.24 4.5  2.35,
+                -4.0 5.0  0.0,
+               -3.24 4.5 -2.35
+	       -1.23 4.0 -3.8,
+                1.24 3.5 -3.8,
+		 3.8 3.0 -1.23,
+                 4.0 2.5  0.0,
+		 3.8 2.0  1.23,
+                1.24 1.5  3.8,
+               -1.23 1.0  3.8,
+               -3.24 0.5  2.35,
+                -4.0 0.0  0.0,
+	]
+}
+
+ROUTE Clock.fraction_changed TO Motor.set_fraction
+ROUTE Motor.value_changed TO Cub.set_translation
+
+
+DEF CanviColor ColorInterpolator {
+	key [ 0.0, 0.5, 1.0 ]
+	keyValue [
+		0.0 0.5 1.0,
+		1.0 0.0 0.0,
+		0.0 0.5 1.0,
+	]
+}
+
+ROUTE Clock.fraction_changed TO CanviColor.set_fraction
+ROUTE CanviColor.value_changed  TO ColorCilindre.set_diffuseColor

@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M7.1 Procés de visualització 2D.Visualització escena 2D.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("vis2D","vis");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+<a href="main75.html">[Anterior]</a>
+<a href="VisuLL.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class="tit1">Visualització d'escenes 2D.
+<span class="tit2">Algorisme per al dibuixat d'una escena.</span>
+</div>
+
+<p>Analitzarem l'algorisme de visualització d'una escena bidimensional
+en model de fronteres.
+Considerarem que l'única acció gràfica
+de la que es disposa és l'elemental <i>setPixel(x,y,color)</i>. Per tant,
+l'algorisme anirà processant els diferents elements geomètrics
+a través del PV2D. Òbviament caldrà definir prèviament
+la càmera (Finestra_2D) i la Vista. Com a implementació dels
+subprocessos del PV2D es suposa la definida en apartats anteriors.
+
+<pre class=algoritme>
+<b>algorisme</b> visualització_escena
+   calcula_Finestra2D (origenf, ampf, llargf)
+   calcula_Vista (origenv, ampv, llarv)
+   relacio_d'aspecte (origenf, ampf, llargf, origenv, ampv, llargv)
+   setFinestra2D (origenf, ampf, llargf)
+   setVista (origenv, ampv, llargv)
+   <b>per</b> cada element geomètric <b>fer</b>
+      elementd:=transformació_mon_dispositiu (element)
+      atributs:= agafa_informació (element)
+      <b>segons</b> tipus(elementd) <b>fer</b>
+         punt: retalla_Punt (elementd,visible)
+         segment: retalla_Segment (elementd,visible)
+         poligon: retalla_Poligon (elementd,visible)
+      <b>fsegons</b>
+      <b>si</b> visible <b>llavors</b>
+         <b>segons</b> tipus(elementd) <b>fer</b>
+            punt: rateritza_Punt (elementd, atributs)
+            segment: rasteritza_Segment (elementd,atributs)
+            poligon: rasteritza_Poligon (elementd,atributs)
+         <b>fsegons</b>
+      <b>fsi</b>
+   <b>fper</b>
+<b>falgorisme</b>
+</pre>
+	
+<P>
+El procediment per a definir la Vista i Finestra_2D, pot variar amb
+l'aplicació.  Una possibilitat es definir la Vista de la mateixa
+grandària que la finestra gràfica establerta, i la Finestra_2D com la
+<a CLASS="glossari"
+HREF="javascript:glossari('CMin.html','*','400','150','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">capsa mínima contenidora</a>
+de l'escena (finestra amb costats paral·lels als eixos tal que els
+seus vèrtexs extrems corresponen a les ordenades/abscisses
+màximes/mínimes dels vèrtexs de l'escena). Amb aquesta inicialització
+tota l'escena sortirà visualitzada en la Vista.  Recordeu que si no es
+vol deformació es requereix verificar que la relació d'aspecte de la
+Finestra_2D coincideix amb la de la Vista i modificar les mides de una
+de les dues finestres si s'escau.
+
+<p>Recordeu que segons la llibreria gràfica i/o accelerador gràfic
+de que es disposi, part de les accions anteriors ja estan implementades.
+
+<p>Recordeu que en cas de connectar el Procés de Visualització 2D amb
+la sortida del Procés de Visualització 3D, la finestra_2D i la Vista
+ja estan definides en els paràmetres de la <a CLASS="glossari"
+HREF="javascript:glossari('camara.html','*','400','150','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">càmera virtual 3D</a>, i que
+segons el tipus de visualització requerit (filferros, z_buffer,...)
+l'ordre dels subprocessos pot variar.
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="main75.html">[Anterior]</a>
+<a href="VisuLL.html">[Següent]</a>
+</div>
+</BODY>
+</HTML>

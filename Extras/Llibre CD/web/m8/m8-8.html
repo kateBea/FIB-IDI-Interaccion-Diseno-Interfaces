@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title>8.8.Models de il·luminació i z-buffer</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" TYPE="text/css" HREF="../upc.css">
+</head>
+<BODY >
+<SCRIPT>
+top.passara("visib","izbf");
+</SCRIPT>
+<DIV CLASS="nav">
+[Anterior]
+<A HREF="m8-col-const.html">[Següent]</a>
+<A HREF="m8-7.html">[Apartat anterior]</a>
+</div>
+<br><br>
+
+<div class=tit1>Models d'il·luminació i Z-buffer</div>
+
+<P>
+L'algorisme de determinació de visibilitat mitjançant
+<!--<A HREF="m8-ZBuf-descr.html">-->
+<A HREF="m8-4.html">
+depth-buffer</A>, requereix calcular el color d'un
+punt d'una cara cada cop que es detecta que aquesta es projecta sobre
+un píxel en que és més propera a l'observador que qualsevol altre cara
+processada abans que ella.
+
+<P>
+Aquest fet comporta:
+
+<UL>
+<LI>calcular la il·luminació (color) en punts que posteriorment poden
+ser tapats per altres cares</LI>
+<LI>realitzar un ordre de càlculs d'il·luminació molt superior al
+nombre N de píxels (proporcional a N*M en el cas pitjor, on M és el
+nombre de cares de l'escena)</LI>
+<LI>calcular la il·luminació amb models empírics comporta el càlcul
+real d'angles entre vectors, per tant cal realitzar-los en el model de
+l'observador o en el de l'aplicació. Donat un píxel haurem de calcular
+el punt de la cara que es projecta en ell (multiplicar per matrius
+inverses a les del Procés de Visualització 3D) i desprès realitzar el
+còmput d'angles.</LI>
+</UL>
+
+<P>
+Per tant les optimitzacions i simplicitats de l'algorisme de
+visibilitat z-buffer es veuen altament desvirtuades pel càlcul del
+color del píxel.
+
+<P>
+Una solució és l'anomenat colorat de cares (<I>shading</I> en
+nomenclatura anglesa) que interpola el color en punts de la cara a
+partir del color en punts determinats (generalment els vèrtexs de la
+cara). La idea és utilitzar la interpolació de càlculs d'il·luminació
+realitzats per tal de no haver de calcular l'equació d'il·luminació en
+tots els punts.
+
+<P><A NAME=colorejat></A>
+Els mètodes clàssics de colorat són: Constant (<I>Flat shading</I>),
+Gouraud i Phong (no confondre amb el mètode d'il·luminació).
+
+<H2>Subapartats:</h2>
+
+<UL>
+<LI><A HREF='m8-col-const.html'> Colorat constant</A></LI>
+<LI><A HREF='m8-col-gouraud.html'> Colorat de Gouraud</A></LI>
+<LI><A HREF='m8-col-phong.html'> Colorat de Phong</A></LI>
+</UL>
+
+<br><br>
+<DIV CLASS="nav">
+[Anterior]
+<A HREF="m8-col-const.html">[Següent]</a>
+<A HREF="m8-7.html">[Apartat anterior]</a>
+</div>
+</body>
+</html>

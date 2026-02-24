@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title>8</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" TYPE="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</head>
+<BODY >
+<SCRIPT>
+top.passara("visib","iemp");
+</SCRIPT>
+<DIV CLASS="nav">
+<A HREF="m8-empir-exeAmb.html">[Anterior]</a>
+<A HREF="m8-empir-exeLamb.html">[Següent]</a>
+</div>
+<br><br>
+
+<div CLASS="tit1">Models d'il·luminació empírics.
+<span CLASS="tit2">Model empíric difós: Lambert</span>
+</div>
+
+<P>
+En aquest model es considera que els focus de llum són puntuals i que
+els objectes tenen només reflexió difosa pura. De manera intuïtiva,
+podem imaginar que el punt Q en que volem calcular el color irradia la
+mateixa llum en totes les direccions i per tant el color del punt no
+depèn de la direcció de visió. La llum emesa serà una proporció de la
+llum incident donada per <I>k<sub>d</sub></I> i <!-- $o_{d\lambda}$
+--><IMG WIDTH="25" HEIGHT="24" ALIGN="MIDDLE" BORDER="0"
+SRC="imatges/formula8.gif" ALT="$o_{d\lambda}$">.
+
+<CENTER>
+<TABLE><tr><TD>
+<img src="imatges/difusa.jpg" alt="Esquema model Lambert">
+</TD></tr></TABLE>
+</CENTER>
+
+<P>
+Per el càlcul de la llum incident, fem la hipòtesi inicial d'un únic
+focus de llum; la quantitat d'energia (llum) incident en un punt Q,
+per unitat de superfície serà directament proporcional a l'àrea de
+superfície exposada a la font de llum (imagineu una estufa, quan més
+perpendicular arriba la seva energia a vosaltres, més noteu la seva
+calor). Per tant, quant més perpendicular sigui la llum incident a la
+superfície més llum serà rebuda. Es dedueix que una manera d'aproximar
+aquest efecte és mitjançant el cosinus de l'angle (<!-- $\theta$
+--><IMG WIDTH="10" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+SRC="imatges/formula19.gif" ALT="$\theta$">) entre la normal a la
+superfície en el punt Q en que volem calcular el color i la direcció
+de la llum incident en ell. Òbviament, aquest angle pot variar entre 0
+i 90º, quan <!-- $\theta$ --><IMG WIDTH="10" HEIGHT="14"
+ALIGN="BOTTOM" BORDER="0" SRC="imatges/formula19.gif"
+ALT="$\theta$">=0 el <!-- $\cos(\theta)$ --><IMG WIDTH="44"
+HEIGHT="28" ALIGN="MIDDLE" BORDER="0" SRC="imatges/formula13.gif"
+ALT="$\cos(\theta)$">=1, l'energia rebuda serà màxima.
+
+<P>
+D'aquesta llum incident, una certa proporció (<I>k<sub>d</sub></I>) es
+reflexa de manera difosa pura (en totes direccions) essent el seu
+color afectat per el color difós de l'objecte (<!-- $o_{d\lambda}$
+--><IMG WIDTH="25" HEIGHT="24" ALIGN="MIDDLE" BORDER="0"
+SRC="imatges/formula8.gif" ALT="$o_{d\lambda}$">).
+
+<P>
+L'equació empírica corresponent per al càlcul del color emès difós per
+un punt Q, anomenada equació de Lambert, serà doncs la següent:
+
+<!-- $$I_{d\lambda}(Q) = I_{f\lambda} o_{d\lambda} k_d \cos(\theta)$$ -->
+<CENTER>
+<IMG WIDTH="172" HEIGHT="27" SRC="imatges/formula11.gif"
+ALT="Equació de Lambert">
+</CENTER>
+
+<UL>
+<LI><!-- $I_{f\lambda}$ --><IMG WIDTH="25" HEIGHT="25" ALIGN="MIDDLE"
+BORDER="0" SRC="imatges/formula12.gif" ALT="$I_{f\lambda}$">:
+és el color (r,g,b) de la llum del focus puntual.</LI>
+<LI><I>k<sub>d</sub></I>: és el coeficient de reflexió
+difosa. Proporció de la llum incident que es reflecteix de manera
+difosa. El seu valor estarà comprès entre [0,1].</LI>
+<LI><!-- $o_{d\lambda}$ --><IMG WIDTH="25" HEIGHT="24" ALIGN="MIDDLE"
+BORDER="0" SRC="imatges/formula8.gif" ALT="$o_{d\lambda}$">:
+representa la proporció de cada color fonamental de la llum ambient
+que s'emet degut al color de l'objecte. Representa el color de
+l'objecte il·luminat per llum blanca.</LI>
+<LI><!-- $\cos(\theta)$ --><IMG WIDTH="44" HEIGHT="28" ALIGN="MIDDLE"
+BORDER="0" SRC="imatges/formula13.gif" ALT="$\cos(\theta)$">: angle
+entre la llum incident i la normal de la superfície en el punt Q. El
+seu valor estarà comprès en [0º,90º] degut a que la llum sempre ha
+d'incidir en el punt Q per la banda visible de la superfície (no pot
+venir de punts interiors a l'objecte). Es pot calcular com el producte
+escalar dels vectors N i L normalitzats (veure figura anterior), on N
+és el vector normal a la superfície en el punt Q i L és el vector
+director de la recta que uneix el punt Q amb el focus de llum.</LI>
+</UL>
+
+<P>
+La figura següent mostra un exemple de la visualització d'una esfera
+blanca (<!-- $o_{d\lambda}$ --><IMG WIDTH="25" HEIGHT="24"
+ALIGN="MIDDLE" BORDER="0" SRC="imatges/formula8.gif"
+ALT="$o_{d\lambda}$">=(1.0,1.0,1.0), il·luminada amb llum blanca <!--
+$I_{f\lambda}$ --><IMG WIDTH="25" HEIGHT="25" ALIGN="MIDDLE"
+BORDER="0" SRC="imatges/formula12.gif"
+ALT="$I_{f\lambda}$">=(1.0,1.0,1.0), d'esquerra a dreta variem
+<I>k<sub>d</sub></I> en {0.4, 0.55, 0.7, 0.85, 1.0).
+</P>
+
+
+<CENTER>
+<TABLE><tr><TD>
+<img src="imatges/image3.jpg" alt="Exemple model Lambert">
+</TD></TR></TABLE>
+</CENTER>
+
+
+<BR>
+<CENTER>
+<TABLE><tr><TD>
+<img src="imatges/fig8-13-b-GOURAUD.jpg" alt="Exemple model Lambert">
+</TD></TR></TABLE>
+</CENTER>
+
+<P>
+Si hi ha més d'un focus de llum la difusió total es calcula com la
+suma de les degudes a cada focus aïllat:
+
+<!-- $$I_{d\lambda}(Q) = \sum (I_{f_i\lambda} o_{d\lambda} k_d \cos(\theta_i))$$ -->
+<CENTER>
+<IMG WIDTH="210" HEIGHT="43" SRC="imatges/formula14.gif"
+ALT="Per més d'un focus">
+</CENTER>
+
+<P>
+La fórmula empírica global considerant reflexió difosa ambient i deguda a
+focus de llums és:
+
+<!-- $$I_{\lambda}(Q) = I_a k_a o_d + \sum (I_{f_i\lambda} o_{d\lambda} k_d \cos(\theta_i))$$ -->
+<CENTER>
+<IMG WIDTH="274" HEIGHT="43" SRC="imatges/formula15.gif"
+ALT="Equació global">
+</CENTER>
+
+<P><A HREF='m8-empir-exeLamb.html'> Exercici demostració</A>
+
+
+<br><br>
+<DIV CLASS="nav">
+<A HREF="m8-empir-exeAmb.html">[Anterior]</a>
+<A HREF="m8-empir-exeLamb.html">[Següent]</a>
+</div>
+</body>
+</html>

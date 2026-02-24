@@ -1,0 +1,245 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html lang="CA">
+
+<head>
+
+<title></title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+
+<script type="text/javascript" src="../upc.js"></script>
+
+<SCRIPT>
+
+top.passara("realvirt","visester");
+
+</SCRIPT>
+
+<BODY>
+
+<DIV CLASS="nav">
+
+<a href="m5d01t07t02.html">[Anterior]</a>
+
+[Següent]
+
+<a href="m5e01_Escena.html">[Següent apartat]</a>
+
+</div>
+
+<br><br>
+
+
+
+<div class=tit1>Visió estereoscòpica.
+
+<span class=tit2>Codificació i visualització d'imatges estereoscòpiques.</span>
+
+<span class=tit3>Estèreo anàglif</span>
+
+</div>
+
+
+
+<p>L'estèreo anàglif es basa en projectar les imatges de l'ull dret i de l'ull
+
+esquerre sobre una única pantalla, però amb colors complementaris, de forma
+
+que amb ulleres amb filtres de color es pugui dur a terme la separació del parell
+
+estereoscòpic:</p>
+
+
+
+<div align="center"><img border="0" src="imatges/anagliph.jpg" width="621" height="137"></div>
+
+
+
+<p>Per utilitzar estèreo actiu n'hi ha prou amb que el nostre computador
+
+disposi d'<b>un</b> <b>canal de vídeo.&nbsp;</b></p>
+
+
+
+<p class=noind><b>Codificació de les imatges al frame buffer</b>&nbsp;</p>
+
+
+
+<p>En l'estèreo anàglif, un mateix frame buffer conté les dues imatges.
+
+Normalment, els plans de color R contenen la imatge per l'ull esquerre, i els
+
+plans de color G i B contenen la imatge per l'ull dret. Aquest és el motiu pel
+
+qual una imatge es veu vermella i l'altre es veu de color cyan.</p>
+
+
+
+<p class=noind><b>Codificació del senyal de vídeo</b></p>
+
+
+
+<p>En estèreo anàglif, hi ha un únic senyal de vídeo en el qual es
+
+codifiquen les dues imatges de forma simultània.</p>
+
+
+
+<div align="center"><img border="0" src="imatges/estereoanaglif.jpg" width="500" height="205"></div>
+
+
+
+<p class=noind><b>Dispositiu de visualització</b></p>
+
+
+
+<p>L'estèreo anàglif&nbsp; requereix que una única senyal de vídeo
+
+estàndard es visualitzi en una pantalla estàndard. Per tant és compatible amb
+
+tota mena de dispositius de visualització: pantalles, projectors,
+
+etc.&nbsp;&nbsp;</p>
+
+
+
+<p class=noind><b>Separació del parell estereoscòpic</b></p>
+
+
+
+<p>De cara a que cada ull de l'usuari pugui veure només les imatges que li
+
+corresponen, l'usuari ha de dur unes <b>ulleres anaglífiques</b> que porten un
+
+filtre vermell davant l'ull esquerre i un filtre blau davant l'ull dret.&nbsp;El
+
+primer filtre només deixa passar la component R de la llum; el segon filtre
+
+només deixa passar les components G i B.</p>
+
+
+
+<div align="center"><img border="0" src="imatges/anaglis.jpg" width="250" height="144"></div>
+
+
+
+<p class=noind><b>Requeriments</b></p>
+
+
+
+<p>En síntesi, per utilitzar estèreo anàglif necessitem:</p>
+
+
+
+<ul>
+
+  <li>Hardware gràfic amb un canal de vídeo</li>
+
+  <li>Pantalla o projector estàndard</li>
+
+  <li>Ulleres anaglífiques</li>
+
+</ul>
+
+
+
+<p class=noind><b>Visualització</b></p>
+
+
+
+<pre class=algoritme>
+
+  <b>glClear</b>(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+  // Establim una màscara perquè només s'actualitzi la component R:
+
+  <b>glColorMask</b>(GL_TRUE, GL_FALSE, GL_FALSE, GL_TRUE);
+
+  calculCamera(ull esquerre)
+
+  dibuixaEscena(...)
+
+
+
+  // esborrem el Z-buffer, deixant intacte el buffer de color:
+
+  <b>glClear</b>(GL_DEPTH_BUFFER_BIT);
+
+  // Establim una màscara perquè només s'actualitzin les components G i B:
+
+  <b>glColorMask</b>(GL_FALSE, GL_TRUE, GL_TRUE, GL_TRUE);
+
+  calculCamera(ull dret)
+
+  dibuixaEscena(...)
+
+</pre>
+
+
+
+<p class=noind><b>Exemple</b></p>
+
+
+
+<p> El següent applet us permet experimentar amb aquest sistema:
+
+
+
+<div align=center>
+
+  <applet code="InterficieEstereoscopia.class" archive="Estereoscopia.jar,../comuns.jar" height=600 width=500>
+  </applet> 
+
+</div>
+
+
+
+<p class=noind><b>Valoració</b></p>
+
+
+
+<p>El principal avantatge és que possible utilitzar-lo amb qualsevol
+
+equipament, amb la única ajuda d'unes ulleres molt econòmiques.</p>
+
+
+
+<p>El principal inconvenient és que, al fer un filtrat i separació dels
+
+colors, la major part de la informació de color es perd, i l'usuari té la
+
+sensació d'estar veient imatges en escala de grisos.</p>
+
+
+
+<p>Donat que forcem al sistema visual a que fusioni el parell estereoscòpic
+
+basant-se en la lluminositat (no en el color),&nbsp; aquestes ulleres <b>produeixen
+
+ràpidament fatiga visual</b>, per la qual cosa <b>no és recomanable el seu ús
+
+prolongat</b>.</p>
+
+
+
+
+
+<br><br>
+
+<DIV CLASS="nav">
+
+<a href="m5d01t07t02.html">[Anterior]</a>
+
+[Següent]
+
+<a href="m5e01_Escena.html">[Següent apartat]</a>
+
+</div>
+
+</body>
+
+</html>
+

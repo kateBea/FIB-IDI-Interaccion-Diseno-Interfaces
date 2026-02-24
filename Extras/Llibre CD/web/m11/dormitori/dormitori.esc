@@ -1,0 +1,136 @@
+# Escena Exemple
+
+# ========================================================================
+# CAMERES
+# ========================================================================
+# num 
+  2
+
+# nom fitxers
+  dormitori/persona.cam
+  dormitori/truc.cam
+
+# ========================================================================
+# LLUMS
+# ========================================================================
+# llum ambient
+  0.3 0.3 0.3
+# num llums
+  2
+
+# >>>>> Llum 0 <<<<<
+# tipus: POSICIONAL, DIRECCIONAL o FOCUS
+  posicional
+# llum difosa
+  1.0 1.0 1.0
+# llum especular
+  1.0 1.0 1.0
+# posicio
+  175.0 235.0 200.0
+
+# >>>>> Llum 1 <<<<<
+# tipus: POSICIONAL, DIRECCIONAL o FOCUS
+  focus
+# llum difosa
+  1.0 1.0 1.0
+# llum especular
+  1.0 1.0 1.0
+# posicio
+  325.0 110 150.0
+# direccio
+#  -0.5426  -0.5738  0.0  #O.K.
+   -0.87   -0.92   0.0
+# angObertura
+   80.0          
+# exponent 
+   3.0
+#   10.0
+
+# ========================================================================
+# OBJECTES
+# ========================================================================
+# num 
+  10
+
+
+# >>>>> Habitacio <<<<<
+# nom del fitxer que defineix l'objecte
+  dormitori/habitacio.dat
+# transformacions geometriques
+  false
+
+# >>>>> Tauleta1 <<<<<
+# nom del fitxer que defineix l'objecte
+  dormitori/tauleta.dat
+# transformacions geometriques
+  true
+# posicio      		rotacio respecte eix X, Y i Z	escalat
+  205.0 25.0 25.0		0.0 0.0 0.0			1.0 1.0 1.0  
+
+# >>>>> Tauleta2 <<<<<
+# nom del fitxer que defineix l'objecte
+  dormitori/tauleta2.dat
+# transformacions geometriques
+  true
+# posicio      		rotacio respecte eix X, Y i Z	escalat
+  25.0 25.0 200.0		0.0 0.0 0.0			1.0 1.0 1.0  
+
+# >>>>> Llit <<<<<
+# nom del fitxer que defineix l'objecte
+  dormitori/llit.dat
+# transformacions geometriques
+  true
+# posicio      		rotacio respecte eix X, Y i Z	escalat
+  300.0 25.0 100.0		0.0 0.0 0.0			1.0 1.0 1.0  
+
+# >>>>> Coixi <<<<<
+# nom del fitxer que defineix l'objecte
+  dormitori/coixi.dat
+# transformacions geometriques
+  true
+# posicio      		rotacio respecte eix X, Y i Z	escalat
+  300.0 50.0 70.0		0.0 -45.0 0.0			1.0 1.0 1.0  
+
+# >>>>> Estanteria <<<<<
+# nom del fitxer que defineix l'objecte
+  dormitori/estanteria.dat
+# transformacions geometriques
+  true
+# posicio      		rotacio respecte eix X, Y i Z	escalat
+  335.0 120.0 150.0		0.0 0.0 0.0			1.0 1.0 1.0  
+
+# >>>>> Adorn <<<<<
+# nom del fitxer que defineix l'objecte
+  dormitori/adorn.dat
+# transformacions geometriques
+  true
+# posicio      		rotacio respecte eix X, Y i Z	escalat
+  30.0 60.0 170.0		0.0 0.0 0.0			1.0 1.0 1.0  
+
+# >>>>> Lampara <<<<<
+# nom del fitxer que defineix l'objecte
+  dormitori/lampara.dat
+# transformacions geometriques
+  true
+# posicio      		rotacio respecte eix X, Y i Z	escalat
+  175.0 232.0 200.0		0.0 0.0 0.0			1.0 1.0 1.0  
+
+# >>>>> Focus <<<<<
+# nom del fitxer que defineix l'objecte
+  dormitori/focus.dat
+# transformacions geometriques
+  true
+# posicio      		rotacio respecte eix X, Y i Z	escalat
+  325.0 118.5 150.0		0.0 0.0 -22.62			1.0 1.0 1.0  
+
+
+
+# >>>>> Mirall <<<<<
+# nom del fitxer que defineix l'objecte
+  dormitori/mirall.dat
+# transformacions geometriques
+  true
+# posicio      		rotacio respecte eix X, Y i Z	escalat
+  0.0 125.0 200.0		0.0 0.0 0.0			1.0 1.0 1.0  
+
+# ========================================================================

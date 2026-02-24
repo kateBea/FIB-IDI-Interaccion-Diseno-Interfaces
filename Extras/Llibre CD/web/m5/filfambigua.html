@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M5.2. Característiques dels models geomètrics</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;
+charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("model","geom");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+      <a href="filferros.html">[Tornar a la representació en filferros]</a>
+     </div>
+<br><br>
+
+<div class="tit1">Representació d'objectes geomètrics.
+<span class="tit2">Representació per filferros</span>
+</div>
+
+	  <P>
+	    La representació per filferros també pot ser ambigua. Observeu
+	    els següents tres objectes:
+
+	  <CENTER>
+	    <TABLE BORDER=0>
+	      <TR>
+		<TD>
+		  <APPLET NAME="apl1" CODE ="AppletRep.class" archive="AppletRep.jar,../comuns.jar" WIDTH=220 HEIGHT=280 hspace=1px>
+		    <PARAM NAME=AppId VALUE="2">
+		    <PARAM NAME=fichero0 VALUE="/DAT/modelFr2.dat">
+		    <PARAM NAME=fichero1 VALUE="/DAT/modelFr2.dat">
+		    <PARAM NAME=Angx VALUE="30.0">
+		    <PARAM NAME=Angy VALUE="45.0">
+		  </APPLET>
+		</td>
+		<TD>  <APPLET NAME="apl2" CODE ="AppletRep.class" archive="AppletRep.jar,../comuns.jar" WIDTH=220 HEIGHT=280 hspace=1px>
+		    <PARAM NAME=AppId VALUE="2">
+		    <PARAM NAME=fichero0 VALUE="/DAT/modelFr3.dat">
+		    <PARAM NAME=fichero1 VALUE="/DAT/modelFr3.dat">
+		    <PARAM NAME=Angx VALUE="30.0">
+		    <PARAM NAME=Angy VALUE="45.0">
+		  </APPLET></td>
+		<td>
+		  <APPLET NAME="apl3" CODE ="AppletRep.class" archive="AppletRep.jar,../comuns.jar" WIDTH=220 HEIGHT=280 hspace=1px>
+		    <PARAM NAME=AppId VALUE="2">
+		    <PARAM NAME=fichero0 VALUE="/DAT/modelFr4.dat">
+		    <PARAM NAME=fichero1 VALUE="/DAT/modelFr4.dat">
+		    <PARAM NAME=Angx VALUE="30.0">
+		    <PARAM NAME=Angy VALUE="45.0">
+		  </APPLET>
+		</td>
+	      </tr>
+	    </TABLE>
+	  </CENTER>
+
+	  <P>
+	    Aquí teniu una <A CLASS="glossari"
+HREF="javascript:glossari('representFilferros.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">representació per
+filferros</A>, repetida tres vegades. Si compteu bé (gireu els
+objectes) veureu que hem de guardar 16 vèrtexs i 32 arestes.  La
+pregunta que ens podem fer ara és si aquesta representació per
+filferros correspon a algun objecte (sòlid) real. I la resposta és que
+aquesta representació per filferros no sols correspon a un sòlid real,
+sinó a tres!. Premeu, a cada una de les finestres, el botó de pas a
+visualització amb il·luminació i veureu els tres objectes diferents. Feu-los
+girar. Els tres objectes són realment diferents -tenen per exemple
+volums i masses diferents- però tots ells tenen les mateixes arestes i
+per tant tenen la mateixa representació per filferros.
+</P>
+
+<P>
+   La representació per filferros és ambigua perquè si rebem, com a
+   tota informació sobre un objecte, la que hem vist a l'exemple
+   anterior, no tenim cap manera de saber quin dels tres objectes reals
+   que hem vist estem representant. No els podem visualitzar de forma
+   realista, no podem fer càlculs amb ells ...
+</P>
+<P>
+   La solució per a representar objectes reals 3D de forma no ambigua, que
+   veurem en els següents tres apartats, és afegir més informació a la
+   representació per filferros. Concretament, veurem que els problemes
+   d'ambigüitat es solucionen si afegim informació geomètrica sobre les
+   cares dels objectes.
+
+<br><br><DIV CLASS="nav">
+      <a href="filferros.html">[Tornar a la representació en filferros]</a>
+  </div>
+
+</BODY>
+
+</HTML>
+

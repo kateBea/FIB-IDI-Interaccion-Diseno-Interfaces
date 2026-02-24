@@ -1,0 +1,82 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.6 [en] (Win98; I) [Netscape]">
+   <title>M7.1 Proc&eacute;s de visualitzaci&oacute; 2D.Sistemes de coordenades.</title>
+<link REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</head>
+<body>
+<script>
+top.passara("vis2D","defs");
+</script>
+<a NAME="inici"></a>
+<div CLASS="nav">
+<a href="Coord.html">[Anterior]</a>
+<a href="VistaDef.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class="tit1">Definicions.
+<span class="tit2"> Finestra_2D</span>
+</div>
+
+<p>La <b><i>Finestra_2D</i></b> (<i>window</i> en anglès) es defineix
+com un rectangle amb els costats paral·lels als eixos coordenats
+de l'aplicació que determina l'àrea de l'escena que enfoca
+la càmera_2D. Usualment s'especifica donant les coordenades del
+seus vèrtexs inferior esquerra i superior dret o bé les coordenades
+del seu vèrtex inferior esquerra i les seves mides (amplada i alçada),
+sempre respecte al <b><i>sistema de coordenades de l'aplicació</i></b>.
+
+<p>Per a la seva definició utilitzarem l'acció:
+
+<center>
+<h4>
+setFinestra_2D (tPunt2D org, real amplada, real alçada)
+</h4></center>
+
+<p class=noind>
+i en el capítol "OpenGL:referència" introduïrem la seva especificació
+en OpenGL.
+
+<p>Si l'escena (model geomètric 2D) s'ha obtingut com a projecció
+d'una escena tridimensional, la càmera (finestra 2D) queda directament
+determinada a partir de la càmera 3D. La finestra_2D és la
+intersecció entre la piràmide de visió i el pla de
+projecció. Per tant no ens caldrà utilitzar l'acció
+<b><i>setFinestra_2D</i></b>.
+
+<p>L'exemple següent mostra a l'esquerra el model d'una escena que
+es desitja visualitzar. L'escena està referenciada respecte el
+sistema de coordenades de l'aplicació (eixos dibuixats en línies
+continues). S'ha definit una finestra_2D (window) el centre de la qual
+es troba en la intersecció dels eixos a trams. La finestra de la
+dreta simula una pantalla (fons gris) en la que s'ha definit una vista
+(fons negre). Interactivament, mitjançant l'ús dels scrollbars, podem 
+variar les mides de la finestra_2D que sempre estarà
+centrada respecte del seu centre. El posicionament de la finestra_2D es
+pot modificar directament sobre l'escena (arrosegant la finestra_2D) o
+entrant les coordenades del seu origen i prement el botó <i>Origen
+Window.</i> Observeu com va canviant el que es visualitza en la vista quan
+modifiqueu la finestra_2D. Tanmateix, observeu la deformació de
+l'escena visualitzada en la vista quan la relació amplada/alçada
+del window no es correspon a la del viewport i que mai es visualitza en
+el dispositiu de sortida la geometria exterior a la finestra_2D.
+
+<center><table>
+<tr>
+<td><applet CODE ="Applet2D.class" archive="../comuns.jar" WIDTH=520 HEIGHT=370>
+<param NAME=AppId VALUE="2">
+</applet></td>
+</tr>
+</table></center>
+
+<br><br>
+<div CLASS="nav">
+<a href="Coord.html">[Anterior]</a>
+<a href="VistaDef.html">[Seg&uuml;ent]</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M2.3 El frame buffer. Paletes de colors.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;
+charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("hard","fb");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+      <A HREF="main23.html">[Anterior]</a>
+      <a href="db.html">[Següent]</a>
+     </div>
+<br><br>
+
+<div class="tit1">El Frame Buffer.
+<span class="tit2">Memòria de video</span>
+</div>
+
+<P>
+Allunyant-nos ara del component mateix que és capaç de presentar
+la imatge als ulls de l'usuari, cal que introduïm també algunes
+nocions relacionades amb els sistemes que controlen aquests
+dispositius. Tractant-se de dispositius <I>raster</I>, i donada la
+naturalesa de les imatges digitals <a href="discret.html#imatgedigital">rasteritzades</a>
+aquests dispositius tenen una memòria específica destinada a
+emmagatzemar el valor d'intensitat per a cada color i pixel de la
+imatge, anomenada <I>frame buffer</I> o memòria de vídeo.
+<P>
+
+<CENTER><TABLE><TD>
+<img src="imatges/framebuf.gif" alt="Representació
+simbòlica de la memòria de vídeo">
+</td></TABLE></CENTER>
+
+<P>L'usuari col&middot;loca
+(directa o indirectament) valors en aquesta memòria que automàticament
+es refecteixen a la pantalla al següent refresc. L'usuari hi escriu
+indirectament quan el <I>hardware</I> li proporciona mecanismes més
+abstractes per accedir-hi. Per exemple tots els controladors usats
+avui dia contenen un microprocessador que enten primitives
+específiques per al manegament del <i>frame buffer</I>, i permeten a
+l'usuari d'especificar operacions abstractes que ells tradueixen en
+modificacions de la memòria de vídeo. Això es denomina comercialment
+"acceleració" perquè efectivament ateny velocitats més altes sempre
+que les primitives proporcionades es corresponguin amb les que
+necessita l'aplicació. En particular els controladors que publiciten
+"acceleració&nbsp;3D" entenen directament certes primitives
+tridimensionals, i realitzen per tant part del
+<A CLASS="glossari"  HREF="javascript:glossari('ProcVisu3D.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">procés de visualització 3D</a> per
+<I>hardware</I>.
+
+<br><br>
+<DIV CLASS="nav">
+      <A HREF="main23.html">[Anterior]</a>
+      <a href="db.html">[Següent]</a>
+    </div>
+
+</BODY>
+
+</HTML>
+

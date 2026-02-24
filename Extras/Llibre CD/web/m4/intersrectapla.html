@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M4.1.Intersecció de rectes al pla</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;
+charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("geom","2D");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+      <A HREF="puntrectapla.html">[Anterior]</a>
+      [Següent]
+      <a href="main42.html">[Següent apartat]</a>
+     </div>
+<br><br>
+
+<div class="tit1">Elements geomètrics al pla.
+<span class="tit2">Intersecció de rectes al pla</span>
+</div>
+
+
+<p>Donades dues rectes, en representacions qualsevols, pot ser necessari
+calcular les coordenades del punt intersecció (si existeix). En molts
+d'aquests casos, acabarem resolent un sistema lineal de dues equacions amb
+dues incògnites. Aquests sistemes estaran mal condicionats (i per
+tant la seva solució numèrica serà poc fiable) quan les dues rectes
+siguin aproximadament paral·leles. Per tant hem de procurar
+evitar haver de calcular interseccions en aquests casos. Observeu que
+des del punt de vista de la geometria resulta molt clar perquè aquests
+sistemes són inestables quan les rectes són quasi paral·leles:
+en aquest cas una lleugera pertorbació d'una de les rectes produeix un
+fort canvi en la posició de la intersecció.
+
+<p>Un exemple és el càlcul de la intersecció de dues rectes donades
+cadascuna d'elles per dos punts de pas, que deriva en el sistema
+
+<!--
+\[
+\left\{\begin{array}{rcl}
+		\lambda P_x+(1-\lambda)Q_x&=&\mu R_x+(1-\mu)S_x\\
+		                \lambda P_y+(1-\lambda)Q_y&=&\mu R_y+(1-\mu)S_y
+				    \end{array}\right.
+\]
+--><div CLASS=formula><IMG WIDTH="294" HEIGHT="43"
+ SRC="imatges/img22.gif"
+ ALT="\begin{displaymath}
+\left\{\begin{array}
+{rcl}
+ \lambda P_x+(1-\lambda)Q_x&=&\mu...
+ ...da P_y+(1-\lambda)Q_y&=&\mu R_y+(1-\mu)S_y
+ \end{array}\right. \end{displaymath}"></div>
+
+<p>El cas més senzill és quan necessitem intersecar una recta en
+alguna de les formes paramètriques amb una recta donada en forma
+implícita. En aquest cas, substituir la forma paramètrica en el lloc
+del punt genèric que apareix a la forma implícita dóna lloc a una
+única equació lineal en el paràmetre. Per exemple, si volem
+intersecar la recta definida per un punt <i>P</i> i un vector
+direcció <!--$\vec v$--><IMG WIDTH="11" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="imatges/img4.gif"
+ ALT="$\vec v$">, amb la recta definida per un punt <i>R</i> i
+una normal <!--$\vec n$--><IMG WIDTH="12" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="imatges/img18.gif"
+ ALT="$\vec n$">, substituint l'equació paramètrica de la
+primera a l'equació implícita de la segona tenim l'equació (lineal)
+
+<!--
+\[\left(\vec n \cdot R\right)-\left(\vec n \cdot (P+\lambda\vec
+v)\right)=0\]
+--><div CLASS=formula><IMG WIDTH="189" HEIGHT="26"
+ SRC="imatges/img23.gif"
+ ALT="\begin{displaymath}
+\left(\vec n \cdot R\right)-\left(\vec n \cdot (P+\lambda\vec
+v)\right)=0\end{displaymath}"></div>
+
+<p>Amb el que podem calcular fàcilment el valor del paràmetre al punt d'intersecció:
+
+<!--\[\lambda=\frac{\left(\vec n\cdot (R-P)\right)}{\left(\vec n\cdot\vec
+v\right)}\]-->
+<div CLASS=formula><IMG WIDTH="122" HEIGHT="42"
+ SRC="imatges/img24.gif"
+ ALT="\begin{displaymath}
+\lambda=\frac{\left(\vec n\cdot (R-P)\right)}{\left(\vec n\cdot\vec
+v\right)}\end{displaymath}"></div>
+
+<p>Observeu que en aquest cas també resulta problemàtic el cas en que
+les rectes siguin aproximadament paral·leles, en el qual el
+denominador de la darrera fracció serà aproximadament zero. No és
+sorprenent, tota vegada que hem pogut veure abans que aquesta
+dificultat tenia una explicació geomètrica, i ara estem tractant la
+mateixa geometria amb una formulació diferent.
+
+
+
+<br><br>
+<DIV CLASS="nav">
+      <A HREF="puntrectapla.html">[Anterior]</a>
+      [Següent]
+      <a href="main42.html">[Següent apartat]</a>
+   </div>
+
+</BODY>
+
+</HTML>
+

@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","ombres");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+[Anterior]
+<a href="m3b10_OmbresProj.html">[Següent]</a>
+<a href="m3a20_RayTracIntro.html">[Apartat anterior]</a>
+</div>
+<br><br>
+
+<div class=tit1>Ombres.
+<span class=tit2>Creació d'ombres</span>
+</div>
+
+<p>Les ombres són una de les maneres bàsiques d'afegir realisme a les
+escenes, i com veurem no són fàcils d'aconseguir. De fet, si volem
+generar ombres realistes en escenes complexes, ens veurem obligats a
+usar algorismes més sofisticats (com el de traçat de raigs que ja hem
+vist) i no podrem usar els recursos que ens dóna OpenGL i les plaques
+gràfiques avançades. Aquest és un principi general en la visualització
+realista d'escenes: podem anar a nivells més i més elevats de
+realisme, pero això ho haurem de fer a costa d'una disminució del
+rendiment i de la velocitat de visualització perque no podrem usar les
+llibreries gràfiques estàndard.
+
+<p>En general, les ombres es composen de dues parts: l'ombra
+propiament dita i la penombra. Les ombres són les àrees dels objectes
+de l'escena que no veuen en absolut cap dels punts del focus de
+llum. La penombra és tota àrea dels objectes de l'escena que rep part
+de la llum del focus, però no tota (des de la penombra, podem veure
+part del focus de llum). Les penombres són una transició entre les
+ombres i les zones il·luminades de l'objecte, i varien en funció de la
+forma geomètrica de la llum i de l'objecte. A la següent figura, veiem
+una habitació amb dos objectes (un con i una esfera), i amb una font
+de llum no puntual (representada per una petita esfera blanca damunt
+de l'esfera marró). Observeu la penombra que es genera al terra,
+deguda a que la llum es genera des dels diferents punts de la
+superfície de la font de llum. Observeu també que la part superior de
+l'esfera marró queda més il·luminada:
+
+<br>
+<div align=center><img src="imatges/OmbraIPenombra.png"></div>
+
+<p>(En aquest exemple, estem usant els recursos d'OpenGL per aproximar
+l'efecte de penombra a base de repetir l'ombra des de diferents punts
+de la superfície del focus, i per aquest motiu la gradació de llum
+dins la penombra no és gradual; d'altra banda, estem usant la
+simulació OpenGL d'ombres al terra, però no a la paret lateral ni a la
+del fons. Tot això ho veurem als següents subapartats)
+
+<p>Les ombres compleixen les següents propietats:
+
+<ul>
+<li> Si la font de llum és puntual, no hi ha penombra. En aquest cas
+les ombres són ben delimitades, amb límits clars, i és senzill usar
+algorismes d'ombres geomètriques. </li> 
+<li>Si l'ombra d'un polígon A deguda a una font puntual cau totalment
+dins d'un altre polígon B, la forma geomètrica de l'ombra es pot
+calcular projectant el polígon A sobre el pla de B des del focus de
+llum </li>
+<li>Si col·loquem el punt de vista al focus de llum no es veuen
+ombres. Per tant, les ombres es poden calcular com les àrees que no es
+veuen des del focus de llum. Això ens dona la possibilitat d'usar
+adaptacions i modificacions dels algorismes clàssics d'eliminació de
+parts ocultes i determinació de la visibilitat </li>
+<li>Per escenes estàtiques, les ombres són fixes i no canvien si
+canvia el punt de vista. Només canvien i s'han de recalcular si canvia
+la posició relativa entre el focus i els objectes </li>
+</ul>
+
+<p>En aquest capítol parlarem només d'ombres produïdes per fonts
+puntuals en escenes polièdriques i estàtiques, que són força
+corrents. En aquest cas, i encara que OpenGL no suporta directament la
+visualització d'ombres, disposem de recursos que ens permeten
+visualitzar-les usant la llibreria. Els algorismes corresponents, que
+veurem a continuació, són força diferents tan pel que fa a qualitat
+del resultat final com a la seva dificultat d'implementació.
+
+
+<br><br>
+<DIV CLASS="nav">
+[Anterior]
+<a href="m3b10_OmbresProj.html">[Següent]</a>
+<a href="m3a20_RayTracIntro.html">[Apartat anterior]</a>
+</div>
+</body>
+</html>

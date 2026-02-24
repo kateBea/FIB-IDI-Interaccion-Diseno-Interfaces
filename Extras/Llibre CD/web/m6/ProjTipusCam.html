@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M7.1 Procés de visualització 2D.Sistemes de coordenades.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("vis3D","estr");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+<A HREF="main63.html">[Anterior]</a>
+<a href="ARatio.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class="tit1">Estructuració del procés de visualització 3D. 
+<span class="tit2">Projecció segons el tipus de càmera</span>
+</div>
+
+<P>
+Cada un dels dos tipus de càmera implica un tipus diferent de
+projecció. Hem vist ja dos tipus de projeccions: la axonomètrica i la
+perspectiva. A les projeccions axonomètriques, les línies de projecció
+dels diferents vèrtexs són paral·leles entre sí. A les projeccions de
+perspectiva, les línies de projecció convergeixen al punt O, posició
+de l'observador. Un cas particular de projecció axonomètrica és la
+ortogràfica, que es dona quan la recta OC és paral·lela a un dels eixos
+coordenats del sistema de coordenades de l'aplicació. També existeixen
+altres projeccions - com les oblíqües - que no veiem en aquest llibre i en
+les que les línies de projecció són paral·leles entre sí però no són
+perpendiculars al pla de projecció: projeccions caballera, cabinet.
+
+
+<!--
+           Exercici: a la seguent escena senzilla, proveu de modificar
+           el tipus de la càmera i l'angle d'orientació de
+           l'observador respecte el punt C. Veieu com va canviant la
+           projecció de l'escena:
+
+                 Applet 2 que visualitza el cub i la piràmide
+                 Botons de modificació del tipus de càmera i de
+                                  l'angle d'orientació de l'observador
+
+-->
+<CENTER><table><tr><td>
+  <APPLET CODE ="AppletG2.class" archive="AppletG2.jar,../comuns.jar" WIDTH=640 HEIGHT=480>
+  <PARAM NAME=NApplet VALUE="8">
+  <PARAM NAME=Vrpx    VALUE="5.0">
+  <PARAM NAME=Vrpy    VALUE="5.0">
+  <PARAM NAME=Vrpz    VALUE="5.0">
+  <PARAM NAME=Angx    VALUE="30.0">
+  <PARAM NAME=Angy    VALUE="45.0">
+  <PARAM NAME=Angz    VALUE="0.0">
+  <PARAM NAME=D       VALUE="20.0">
+  <PARAM NAME=Winy    VALUE="5.0">
+  <PARAM NAME=Zfar    VALUE="25.0">
+  <PARAM NAME=Znear   VALUE="1.0">
+  <PARAM NAME=fich    VALUE="">
+  <PARAM NAME=AngExtx VALUE ="30.0">
+  <PARAM NAME=AngExty VALUE="10.0">
+  <PARAM NAME=fichero VALUE="/DAT/2cuboG.dat">
+  <PARAM NAME=Camara VALUE="1">
+  <PARAM NAME=Alfa VALUE="15.0">
+  </APPLET>
+</td></table></CENTER>
+
+<p>
+Intenteu variar els paràmetres de la visualització de manera que
+l'escena es visualitzi en planta (vista des de dalt), en alçat (vista
+des de la direcció z) i en perfil (vista des de la direcció x). Les
+projeccions en planta, alçat i perfil són casos particulars de
+projeccions axonomètriques. Intenteu variar els paràmetres de manera
+que l'escena es visualitzi en projecció isomètrica. La projecció
+isomètrica és un cas particular d'axonomètrica en que totes les
+arestes dels cubs queden projectades a la <A CLASS="glossari"
+HREF="javascript:glossari('Vista.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true"> vista </A> amb la mateixa
+dimensió 2D.  
+
+
+<br><br>
+<DIV CLASS="nav">
+<A HREF="main63.html">[Anterior]</a>
+<a href="ARatio.html">[Següent]</a>
+</div>
+</BODY>
+</HTML>

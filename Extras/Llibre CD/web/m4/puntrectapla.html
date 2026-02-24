@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M4.1. Classificació d'un punt respecte una recta</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;
+charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("geom","2D");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+      <A HREF="conversio.html">[Anterior]</a>
+      <a href="intersrectapla.html">[Següent]</a>
+     </div>
+<br><br>
+
+<div class="tit1">Elements geomètrics al pla.
+<span class="tit2">Classificació d'un punt respecte una recta</span>
+</div>
+
+<p>Una recta divideix el pla en dues meitats, o semiplans. En certs
+casos ens interessarà saber a quina de les dues meitats pertany un
+punt donat. Aquest problema és especialment senzill quan la recta està
+donada per la seva representació implícita. Aleshores disposem d'un
+vector normal a la recta, i podem parlar del semiplà cap a on apunta
+el vector normal, i l'oposat al vector normal (observeu que en aquest
+sentit hi ha una diferència entre les rectes <i>ax+by+c=0</i> i
+<i>-ax-by-c=0</i>, ja que malgrat consistir dels mateixos punts tenen
+l'orientació canviada: els vectors normals apunten en direccions
+contràries).
+
+<p>Donat un punt <i>R</i>, calculem <!--$(\vec n \cdot P)-(\vec n \cdot
+R)$--><IMG WIDTH="113" HEIGHT="28" ALIGN="MIDDLE" BORDER="0"
+ SRC="imatges/img21.gif"
+ ALT="$(\vec n \cdot P)-(\vec n \cdot
+R)$">. Si el resultat és negatiu, <i>R</i> és al semiplà apuntat per la
+normal, i si és positiu <i>R</i> és al semiplà oposat a la normal.
+
+<p> Quan la recta està representada en alguna de les altres formes que
+hem mencionat més amunt, la identitat dels dos semiplans no queda
+determinada sinó implícitament: les altres formes de representació de
+la recta ens donen un sentit de recorregut de la recta (valors
+creixents del paràmetre, valors creixents de <i>x</i>). Podem doncs
+imaginar que caminem sobre la recta i parlar així del semiplà que
+queda a la nostra esquerra i el semiplà que queda a la nostra
+dreta. Les fórmules de conversió de representacions de la taula
+anterior fan correspondre sempre el semiplà de la nostra esquerra amb
+el semiplà apuntat per la normal, pel que hi ha prou amb usar la
+conversió corresponent de la taula i aplicar la regla donada al
+punt anterior per a rectes en forma implícita.
+
+
+<br><br>
+<DIV CLASS="nav">
+     <A HREF="conversio.html">[Anterior]</a>
+      <a href="intersrectapla.html">[Següent]</a>
+   </div>
+
+</BODY>
+
+</HTML>
+

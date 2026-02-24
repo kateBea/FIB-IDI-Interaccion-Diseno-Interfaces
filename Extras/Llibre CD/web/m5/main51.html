@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M2.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;
+charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("model","sist");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+      [Anterior]
+      [Següent]
+      <a href="object.html">[Apartat anterior]</a>
+      <a href="main52.html">[Següent apartat]</a>
+    </div>
+<br><br>
+
+<div class=tit1>Sistemes de modelatge geomètric</div>
+
+<P>
+Els sistemes de <A CLASS="glossari" HREF="javascript:glossari('modelatgeGeometric.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">modelatge geomètric</A>
+ són programes que permeten
+representar objectes i escenes 3D i ens donen eines per a
+visualitzar-los i operar amb ells. El nucli de tot Sistema
+de Modelatge Geomètric (SMG) és el model geomètric 3D de
+l'objecte o objectes representats. S'entén que tot SMG ha
+d'incloure a més, eines algorísmiques per,
+<OL>
+	<LI>Entrada interactiva (construcció i entrada de nous models
+        d'objectes, per exemple mitjançant l'<A CLASS="glossari" HREF="javascript:glossari('algorEscombrat.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">algorisme d'escombrat</A>)
+
+	<LI>Transformació a d'altres models (per exemple, pas de models
+        curvats a un model aproximat de cares planes per poder-lo
+        visualitzar amb una llibreria gràfica com Open-GL...)
+        i eines per a la conversió des d'altres models.
+
+	<LI>Fer transformacions geomètriques. Les transformacions
+        geomètriques són operacions que modifiquen la posició dels objectes
+        però que no afecten a la seva forma (translacions, rotacions,
+        escalats). Poden ser útils per exemple per situar correctament els
+        objectes dins d'una escena.
+
+	<LI>Fer operacions que afecten a la forma: Operacions booleanes i
+        seccions planes. Les operacions booleanes obtenen l'objecte
+        reunió, la intersecció o la diferència entre dos objectes
+        donats A i B. Els objectes han de ser sòlids (han de tenir un cert
+        gruix, han de tenir punts a l'interior de l'objecte). En aquest
+        cas, l'objecte reunió es defineix com l'objecte que té com a punts
+        interiors els punts que són interiors a A o bé interiors a
+        B. L'objecte intersecció és l'objecte que té com a punts interiors
+        només els que són a la vegada interiors a A i a B, i en canvi els
+        punts interiors a l'objecte diferència A - B són els que són interiors
+        a A i a la vegada exteriors a B. Els algorismes que realitzen aquest
+        tipus d'operacions se'n van més enllà de l'àmbit d'aquest llibre.
+
+	<LI>Fer interrogacions del model. Les eines d'interrogació serveixen
+        per a la generació d'informació no gràfica:
+		<OL>
+			<LI>Dimensions, angles
+			<LI>Àrea de la superfície de l'objecte
+			<LI>Centre de masses, moments d'inèrcia, etc
+		</OL>
+
+	<LI>Visualització dels objectes de l'escena. Aquesta visualització
+        pot ser en filferros (quan només es representen les arestes dels
+        objectes) o realista (quan les cares es representen amb simulació
+        d'il·luminació). Els algorismes corresponents de visualització els
+        veurem als capítols 6, 7 i 8 d'aquest llibre.
+</OL>
+
+
+<br><br>
+<DIV CLASS="nav">
+      [Anterior]
+      [Següent]
+      <a href="object.html">[Apartat anterior]</a>
+      <a href="main52.html">[Següent apartat]</a>
+    </div>
+
+</BODY>
+
+</HTML>
+

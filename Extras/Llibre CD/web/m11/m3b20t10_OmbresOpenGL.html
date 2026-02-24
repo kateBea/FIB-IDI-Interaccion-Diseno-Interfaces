@@ -1,0 +1,266 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html lang="CA">
+
+<head>
+
+<title></title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+
+<script type="text/javascript" src="../upc.js"></script>
+
+<SCRIPT>
+
+top.passara("visreal","ombres");
+
+</SCRIPT>
+
+<BODY>
+
+<DIV CLASS="nav">
+
+<a href="m3b20_OmbresVol.html">[Anterior]</a>
+
+<a href="m3b20t20_OmbresExercicis.html">[Següent]</a>
+
+</div>
+
+<br><br>
+
+
+
+<div class=tit1>Ombres.
+
+<span class=tit2>Càlcul per volums d'ombres.</span>
+
+<span class=tit3>Utilització d'OpenGL</span>
+
+</div>
+
+
+
+<p>L'algorisme de simulació d'ombres usant volums d'ombra es basa en
+
+l'ús de l'stencil buffer i realitza els passos següents (en el cas
+
+senzill d'un únic focus de llum i d'un únic objecte que produeix
+
+ombra):
+
+
+
+<ul>
+
+<li> Visualitzem tota l'escena sobre el buffer de profunditat
+
+(desactivant el buffer de color).</li>
+
+<li> Inicialitzem l'stencil buffer.</li>
+
+<li> Visualitzem els polígons de les cares laterals del volum d'ombra,
+
+modificant l'stencil buffer a tots els pixels on pintem polígons
+
+d'ombra de manera que al final l'stencil buffer codifica les zones de
+
+pantalla on es projecten els polígons de l'escena que es troben a
+
+l'ombra. </li>
+
+<li> Apaguem el focus de llum.</li>
+
+<li> Visualitzem tota l'escena. Durant aquesta visualització,
+
+l'stencil buffer fa que només pintem els polígons que es visualitzen
+
+en color d'ombra.</li>
+
+<li> Encenem el focus de llum.</li>
+
+<li> Visualitzem tota l'escena. Durant aquesta visualització,
+
+l'stencil buffer ens impedeix que tornem a pintar els polígons que ja
+
+haviem pintat en color d'ombra.</li>
+
+</ul>
+
+
+
+<p> A continuació teniu un tros de programa que genera la imatge que
+
+hem vist de l'habitació amb ombres projectades sobre les parets i els
+
+objectes. Observeu que els comentaris són enllaços a les explicacions
+
+corresponents a les diferents parts de l'algorisme.
+
+
+
+<p> Aquest fragment de codi s'ha extret del programa
+
+<b>shadowvol.c</b>, de l'<i>Advanced OpenGL Programming</i> tutorial
+
+del Siggraph'1999.
+
+
+
+<pre class=algoritme>
+
+<b>void redraw_shadow</b>(void)
+
+{
+
+   <b>glClear</b>(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+
+
+
+
+
+       /* <a href="m3b20t50_Explicacio.html"> Visualitzem l'escena desactivant el buffer de color </a> */
+
+   <b>glColorMask</b>(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
+
+   <b>render</b>(); /* <a href="m3b20t40_RutinaRender.html"> visualitza l'escena </a> */
+
+
+
+
+
+       /* <a href="m3b20t60_Explicacio.html"> Activem l'stencil buffer i el modifiquem amb les cares frontals </a> */
+
+   <b>glEnable</b>(GL_STENCIL_TEST);
+
+   <b>glDepthMask</b>(GL_FALSE);
+
+   <b>glStencilFunc</b>(GL_ALWAYS, 0, 0);
+
+   <b>glEnable</b>(GL_CULL_FACE);
+
+   <b>glStencilOp</b>(GL_KEEP, GL_KEEP, GL_INCR);
+
+   <b>glCullFace</b>(GL_BACK);
+
+   <b>Dibuixa</b>(SHADOWVOL);
+
+
+
+       /* <a href="m3b20t70_Explicacio.html"> Modifiquem l'stencil buffer amb les cares posteriors del volum d'ombra </a> */
+
+   <b>glStencilOp</b>(GL_KEEP, GL_KEEP, GL_DECR);
+
+   <b>glCullFace</b>(GL_FRONT);
+
+   <b>Dibuixa</b>(SHADOWVOL);
+
+   <b>glDepthMask</b>(GL_TRUE);
+
+   <b>glColorMask</b>(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+
+   <b>glCullFace</b>(GL_BACK);
+
+   <b>glDepthFunc</b>(GL_LEQUAL);
+
+   <b>glStencilOp</b>(GL_KEEP, GL_KEEP, GL_KEEP);
+
+   <b>glDisable</b>(GL_CULL_FACE);
+
+
+
+       /* <a href="m3b20t80_Explicacio.html"> Apaguem la llum i visualitzem els polígons foscos </a> */
+
+   <b>glStencilFunc</b>(GL_EQUAL, 1, 1);
+
+   <b>glDisable</b>(GL_LIGHT0);
+
+   <b>render</b>(); /* <a href="m3b20t40_RutinaRender.html"> visualitza l'escena </a> */
+
+
+
+
+
+       /* <a href="m3b20t90_Explicacio.html"> Encenem la llum i pintem els polígons clars de l'escena </a> */
+
+   <b>glStencilFunc</b>(GL_EQUAL, 0, 1);
+
+   <b>glEnable</b>(GL_LIGHT0);
+
+   <b>render</b>(); /* <a href="m3b20t40_RutinaRender.html"> visualitza l'escena </a> */
+
+
+
+
+
+   <b>glDepthFunc</b>(GL_LESS);
+
+   <b>glDisable</b>(GL_STENCIL_TEST);
+
+
+
+   <b>glutSwapBuffers</b>();
+
+   <b>glFlush()</b>;
+
+}
+
+</pre>
+
+
+
+<p> La técnica dels volums d'ombra pot ser molt eficient si els
+
+objectes que produeixen l'ombra són simples, ja que en aquest cas és
+
+senzill calcular la silueta, les arestes del contorn i la piràmide
+
+d'ombra. El problema ens apareix quan ens trobem amb objectes de forma
+
+i silueta complexa. D'altra banda, en alguns casos patològics la forma
+
+del volum d'ombra pot produir problemes i errors numèrics en les
+
+operacions amb l'stencil buffer. En tot cas, la técnica és clarament
+
+superior a la de projecció d'ombres, ja que permet visualitzar ombres
+
+que es projecten sobre superfícies i objectes de forma complexa.
+
+
+
+<P> Podeu experimentar amb aquest algoritme en el següent applet. Amb
+
+els botons esquerre i dret del ratolí podeu desplaçar la llum, i si
+
+trieu la casella "Rotació" podreu rotar l'escena amb el botó esquerre
+
+del ratolí, i apropar-vos i allunyar-vos amb el dret:
+
+
+
+<center>
+
+<applet code="Interficie.class" archive="ShadowVolume.jar" height=400 width=750></applet>
+
+</center>
+
+
+
+
+
+<br><br>
+
+<DIV CLASS="nav">
+
+<a href="m3b20_OmbresVol.html">[Anterior]</a>
+
+<a href="m3b20t20_OmbresExercicis.html">[Següent]</a>
+
+</div>
+
+</body>
+
+</html>
+

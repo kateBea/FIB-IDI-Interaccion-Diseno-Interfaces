@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","ombres");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m3b20t10_OmbresOpenGL.html">[Torna a l'algorisme]</a>
+</div>
+<br><br>
+
+<div class=tit3><b>Generació de volums d'ombres.</b> Explicació - part 2</div>
+
+<pre class=algoritme>
+<b>void redraw_shadow</b>(void)
+{
+   .....
+   .....
+   <b>glEnable</b>(GL_STENCIL_TEST);
+   <b>glDepthMask</b>(GL_FALSE);
+   <b>glStencilFunc</b>(GL_ALWAYS, 0, 0);
+   <b>glEnable</b>(GL_CULL_FACE);
+   <b>glStencilOp</b>(GL_KEEP, GL_KEEP, GL_INCR);
+   <b>glCullFace</b>(GL_BACK);
+   <b>Dibuixa</b>(SHADOWVOL);
+</pre>
+
+<p> La rutina <b>Dibuixa</b>(SHADOWVOL) conté un bucle de crides a
+OpenGL que dibuixen els polígons laterals de la piràmide del volum
+d'ombra, veure figura.
+
+<p> Aquí, el que fem és activar l'stencil buffer i inicialitzar-lo amb
+les cares del volum d'ombra que miren cap a l'observador. La primera
+crida és la que activa l'stencil buffer. La crida a
+<b>glDepthMask</b> desactiva l'escriptura en el buffer de profunditat
+del frame buffer, i ens garanteix per tant que el dibuixat que farem
+no modificarà l'estat del frame buffer. Després, la següent crida ens
+diu que el test d'stencil buffer s'aplicarà sempre. Les crides a
+<b>glEnable</b>(GL_CULL_FACE) i a <b>glCullFace</b>(GL_BACK) fan que,
+quan dibuixem les cares laterals del volum d'ombra quan fem la crida a
+<b>Dibuixa</b>, es faci un retallat de les cares d'esquena i només es
+pinten les cares que miren a l'observador. Finalment, la crida a
+<b>glStencilOp</b> és la crida clau en aquest tros: l'efecte és que,
+en tot pixel d'un polígon lateral del volum d'ombra que passi el test
+de l'stencil buffer i que per tant hauria de ser pintat -de fet no es
+pintarà perque hem desactivat la màscara-, s'incrementa el valor de
+l'stencil buffer. Això passa evidentment en tots els punts dels
+polígons frontals del volum d'ombra que no quedin tapats per altres
+objectes a la imatge final.
+
+<center>
+<img src="imatges/SemitranspSolidVolume.png">
+</center>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m3b20t10_OmbresOpenGL.html">[Torna a l'algorisme]</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M4.1. Punts al pla</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;
+charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("geom","2D");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+      <A HREF="main41.html">[Anterior]</a>
+      <a href="vectorpla.html">[Següent]</a>
+     </div>
+<br><br>
+
+<div class="tit1">Elements geomètrics al pla.
+<span class="tit2">Sistema de referència. Punts al pla</span>
+</div>
+
+
+<P>L'element geomètric més senzill amb que haurem de tractar és un
+punt a un pla. Per tal de representar-lo en el computador, usarem la
+<i>geometria analítica</I>: definirem al pla una <i>referència</i>,
+      <i>sistema de referència</i> o
+<i>sistema de coordenades</i> de la següent manera:
+
+<ol>
+<li>Triem un punt especial, que en direm l'origen de coordenades.
+<li>Triem dues rectes <i>(l<SUB>1</SUB>,&nbsp;l<SUB>2</SUB>)</I> no
+coincidents que s'intersequin en l'origen de coordenades. Aquestes
+rectes poden ser en general dues rectes qualsevols del pla, però aquí
+les triarem sempre perpendiculars entre sí. A aquestes rectes se'ls hi
+diu <i>eixos coordenats</i>. Observeu que l'ordre en les rectes és
+important. No és el mateix triar <i>(l<SUB>1</SUB>,&nbsp;l<SUB>2</SUB>)</I>
+que triar <i>(l<SUB>2</SUB>,&nbsp;l<SUB>1</SUB>)</I>.
+<li>Triem dos punts a igual distància de l'origen, un sobre cada una
+de les dues rectes. Aquests punts tindran coordenades <i>(1,0)</i> i <i>(0,1)</i>.
+</ol>
+
+<p>Aleshores qualsevol punt del pla té una representació única com una
+parella de números reals.
+<!--
+<div class="nota"> Applet de GeomAnalit2D:
+deixa moure un punt i veure les coords, o moure les coords i
+ veure com es mou el punt, o moure els eixos i veure que passa amb
+ les coords...</div>
+-->En els nostres programes representarem doncs els punts mitjançant dos
+reals:
+
+<center>
+<u>tipus tPunt2D = taula [0..1] de real;</u>
+</center>
+
+<p class=noind>
+i en el que segueix farem servir la notació <I>P=(x,y)</I> per  a
+designar el punt amb primera coordenada igual a <I>x</I> i segona
+coordenada igual a <i>y</I>. Incidentalment és corrent anomenar a la
+primera coordenada <I>x</I> i a la segona <i>y</I>, i a vegades
+parlarem de <I>P<SUB>x</SUB></I> i <I>P<sub>y</sub></I> per a
+referir-nos a la primera i segona coordenada respectivament. En
+geometria al pla hom
+designa aquestes coordenades també com a <i>abscissa</i> i
+<i>ordenada</i>, referint-se a la primera i segona coordenada respectivament.
+
+
+<br><br><DIV CLASS="nav">
+     <A HREF="main41.html">[Anterior]</a>
+      <a href="vectorpla.html">[Següent]</a>
+   </div>
+
+</BODY>
+
+</HTML>
+

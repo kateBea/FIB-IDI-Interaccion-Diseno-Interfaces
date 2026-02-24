@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M4.1.Producte vectorial</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;
+charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("geom","3D");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+      <A HREF="puntvectespai.html">[Anterior]</a>
+      <a href="plansespai.html">[Següent]</a>
+     </div>
+<br><br>
+
+<div class="tit1">Elements geomètrics a l'espai.
+<span class="tit2">Producte vectorial</span>
+</div>
+
+
+<p>A l'espai hi ha un altre producte de
+vectors que necessitarem, i que també opera entre dos vectors, però
+dóna per resultat un tercer vector. Aquest producte el designarem per
+<!--$\vec v\wedge\vec w$--><IMG WIDTH="40" HEIGHT="14" ALIGN="BOTTOM"
+BORDER="0" SRC="imatges/img26.gif" ALT="$\vec v\wedge\vec w$">. El resultat
+del producte vectorial de dos vectors és un tercer vector
+perpendicular simultàniament a tots dos, i tal que el triedre
+<!--$(\vec v, \vec w, \vec v \wedge\vec w)$--><IMG WIDTH="87"
+HEIGHT="28" ALIGN="MIDDLE" BORDER="0" SRC="imatges/img27.gif" ALT="$(\vec v,
+\vec w, \vec v \wedge\vec w)$"> és dextrogir (és a dir que un vis
+alineat amb <!--$\vec v\wedge\vec w$--><IMG WIDTH="40" HEIGHT="14"
+ALIGN="BOTTOM" BORDER="0" SRC="imatges/img26.gif" ALT="$\vec v\wedge\vec w$">
+que giri des de <!--$\vec v$--><IMG WIDTH="11" HEIGHT="14"
+ALIGN="BOTTOM" BORDER="0" SRC="imatges/img4.gif" ALT="$\vec v$"> a <!--$\vec
+w$--><IMG WIDTH="14" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+SRC="imatges/img7.gif" ALT="$\vec w$"> pel camí més curt es mourà en la
+direcció en que apunta <!--$\vec v\wedge\vec w$--><IMG WIDTH="40"
+HEIGHT="14" ALIGN="BOTTOM" BORDER="0" SRC="imatges/img26.gif" ALT="$\vec
+v\wedge\vec w$">. De tota manera, usarem aquesta operació sobre tot
+per a calcular un vector perpendicular a dos donats. No cal que pareu
+ara massa esment a la tria d'orientació al resultat.
+
+<p>La norma del vector producte vectorial es defineix com <!--$||\vec
+v||\;||\vec w||\;\sin(ang(\vec v,\vec w))$--><IMG WIDTH="167" HEIGHT="28" ALIGN="MIDDLE" BORDER="0"
+ SRC="imatges/img28.gif"
+ ALT="$\vert\vert\vec
+v\vert\vert\;\vert\vert\vec w\vert\vert\;\sin(ang(\vec v,\vec w))$">, que és l'àrea del
+paralelogram que té a <!--$\vec v$--><IMG WIDTH="11" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="imatges/img4.gif"
+ ALT="$\vec v$"> i a <!--$\vec w$--><IMG WIDTH="14" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="imatges/img7.gif"
+ ALT="$\vec w$"> per costats. En particular
+el producte vectorial és zero quan els dos vectors estan alineats.
+
+<p>Podem calcular les components del producte vectorial de dos vectors
+amb les següents fórmules:
+<!--
+\[
+\begin{array}{rl}
+(\vec v\wedge\vec w)_x &=v_yw_z-v_zw_y\\
+(\vec v\wedge\vec w)_y &=v_zw_x-v_xw_z\\
+(\vec v\wedge\vec w)_z &=v_xw_y-v_yw_x\end{array}
+\]
+--><div CLASS=formula><IMG WIDTH="178" HEIGHT="62"
+ SRC="imatges/img29.gif"
+ ALT="\begin{displaymath}
+\begin{array}
+{rl}
+(\vec v\wedge\vec w)_x &=v_yw_z-v_zw_y\\ ...
+ ...zw_x-v_xw_z\\ (\vec v\wedge\vec w)_z &=v_xw_y-v_yw_x\end{array}\end{displaymath}"></div>
+
+<p>Per recordar aquestes fórmules hom pot recordar que si <!--$\vec i$--><IMG WIDTH="8" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="imatges/img30.gif"
+ ALT="$\vec i$">,
+<!--$\vec j$--><IMG WIDTH="10" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="imatges/img31.gif"
+ ALT="$\vec j$"> i <!--$\vec k$--><IMG WIDTH="11" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="imatges/img32.gif"
+ ALT="$\vec k$"> denoten els vectors unitaris dels tres eixos
+coordenats, aleshores formalment podem escriure
+
+<!--
+\[
+\vec v\wedge \vec w=\left|\begin{array}{ccc}
+\vec i& \vec j & \vec k\\
+v_x&v_y&v_z\\
+w_x&w_y&w_z\end{array}\right|
+\]
+--><div CLASS=formula><IMG WIDTH="173" HEIGHT="64"
+ SRC="imatges/img33.gif" ALIGN=ABSMIDDLE
+ ALT="\begin{displaymath}
+\vec v\wedge \vec w=\left\vert\begin{array}
+{ccc}
+\vec i& \vec j & \vec k\\ v_x&v_y&v_z\\ w_x&w_y&w_z\end{array}\right\vert\end{displaymath}"></div>
+
+<p class=noind>
+on en expandir el determinant obtindrem les mateixes fórmules que
+hem donat abans.
+
+
+<br><br>
+<DIV CLASS="nav">
+      <A HREF="puntvectespai.html">[Anterior]</a>
+      <a href="plansespai.html">[Següent]</a>
+    </div>
+
+</BODY>
+
+</HTML>
+

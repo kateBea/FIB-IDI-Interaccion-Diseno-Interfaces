@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<BODY>
+<br>
+
+<div class=tit2>Solució exercici 12.1.1</div>
+
+<p> Si modifiquem els valors clau d'un dels oscil·ladors, i per exemple
+substituïm el que tenim ara:
+
+<pre class=algoritme>
+DEF Oscilador2 OrientationInterpolator {
+        key [ 0.0, 0.2, 0.5, 0.8, 1.0 ]
+        keyValue [
+                0.0 0.0 1.0  0.8,
+                0.0 0.0 1.0  0.5,
+                0.0 0.0 1.0  0.2,
+                0.0 0.0 1.0  0.5,
+                0.0 0.0 1.0  0.8,
+        ]
+}
+</pre>
+
+<p> Per uns nous valors on els angles primer i darrer els hem
+incrementat:
+
+<pre class=algoritme>
+DEF Oscilador2 OrientationInterpolator {
+        key [ 0.0, 0.2, 0.5, 0.8, 1.0 ]
+        keyValue [
+                0.0 0.0 1.0  1.0,
+                0.0 0.0 1.0  0.5,
+                0.0 0.0 1.0  0.2,
+                0.0 0.0 1.0  0.5,
+                0.0 0.0 1.0  1.0,
+        ]
+}
+</pre>
+
+<p> El que ens passarà és que el moviment dels dos pènduls deixa de
+ser simètric, ja que l'amplitut del segon serà més gran que la del
+primer. Si el que féssim fos no assignar el mateix valor a l'angle 0.0
+i a l'angle final 1.0, observariem un salt a l'animació.
+
+
+<p align=right><a href="javascript:window.close()">tornar </a>
+</body>
+</html>

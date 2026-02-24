@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M3.3.El model HSB.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("color","hsb");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+      <A HREF="hsb.html">[Anterior]</a>
+      <A HREF="convrgb-hsb.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class="tit1">El model HSB.
+<span class="tit2">Exercici</span>
+</div>
+
+<P>
+Aquest programa, semblant a l'usat abans per RGB, genera colors
+aleatòriament cada vegada que prems el botó "Nou Color". Movent les
+barres lliscants o entrant valors numèrics pots especificar un color
+en el model HSB, i aquest apareixerà a una altra caixa (inicialment
+blanca).<BR>
+
+<APPLET code="TestColorHSB.class" archive="TestColorHSB.jar" hspace = 20 vspace = 20 width=335 height=400 ALIGN="left" HSPACE=10>
+<B>L'Applet no s'ha carregat adequadament!</B></APPLET>
+
+Quan creguis que has reproduït el color proposat, prem el botó
+"Resultat" i veuràs a la caixa inferior els errors que has comès.  No
+esperis encertar sempre exactament els valors correctes. Una
+desviació de 5 a 10 mil.lèsimes és suficient i mostra que has entès
+com especificar un determinat color en el model HSB. De fet, com abans
+amb el model RGB, el que pretenem és senzillament això: que puguis
+trobar la representació en el model d'un color que busques, no
+comprovar l'agudesa de la teva percepció del color. Comprovaràs que
+no tots els paràmetres són igualment fàcils de determinar. En general
+trobar un valor acurat de la saturació és molt difícil, per la majoria
+de colors.</P>
+
+<P>Com en el cas de l'exercici d'RGB, tingues present que per
+	    l'arrodoniment, no qualsevol valor d'HSB pot atènyer-se
+	    aquí. Tingues present també que el nostre ull no
+	    distingeix el mateix nombre de matisos de color a tots
+	    els nivells d'intensitat. En aquest sentit el con HSB
+	    representa correctament els colors propers al negre (amb
+	    valors del paràmetre <i>B</i> més petits) com més propers
+	    entre sí. Com que l'applet usat aquí sorteja els
+	    paràmetres en tot el seu intèrval, quan un color té un
+	    valor de <i>B</i> petit és molt difícil que puguis
+	    encertar amb precissió els altres paràmetres. Hauràs de
+	    jutjar doncs la precissió del teu encert en funció
+	    d'això. No podem donar-te aquí regles tan senzilles com en
+	    el cas d'RGB.
+
+<P>Quelcom semblant passa amb el paràmetre <I>S</i>, que mesura la
+	    saturació. Tingues present que si <I>S=0</i> ets a sobre
+	    de l'eix del con i tots els valors d'<i>H</i> donen el mateix
+	    color. Per tant altre cop, per valors de saturació baixos
+	    et serà molt difícil encertar amb precissió el valor
+	    d'<I>H</i>. En canvi sí hauries de poder afinar el de
+	    <i>B</i>.
+
+<P>En general l'estratègia que funciona millor és cercar el to de
+	    color més proper deixant <i>S</i> i <i>B</i> al valor
+	    màxim, i ajustar aquests després, però prova quina
+	    estratègia funciona millor per a tú. Recorda que no tots
+	    som igualment sensibles a diferències de color. Dos colors
+	    que per una persona són diferents poden semblar idèntics a
+	    un altre, que en canvi distingeix dos colors que el primer
+	    troba idèntics!
+
+<br><br>
+<DIV CLASS="nav">
+      <A HREF="hsb.html">[Anterior]</a>
+      <A HREF="convrgb-hsb.html">[Següent]</a>
+</div>
+</BODY>
+</HTML>

@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("proj","diagfunc");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m2h10_TecniquesBasiques.html">[Anterior]</a>
+[Següent]
+<a href="m2h15_Geometria.html">[Següent apartat]</a>
+</div>
+<br><br>
+
+<div class=tit1>Diagrama funcional.
+<span class=tit2>Diagrama complet</span>
+</div>
+
+<P>Si voleu podeu consultar el <a href="statev1.1.pdf"
+target="DiagFuncOpenGL">diagrama de blocs complet</A>. Aquí el fluxe
+de dades es representa per línies que conecten els diferents processos
+que conformen el pipeline. Al llarg del camí que les dades han de
+recórrer entre ambdós extrems, hi ha diversos "interruptors" que
+representen alternatives depenents de l'estat en què es troba
+l'OpenGL. És per tant molt important tenir en compte no sols com
+flueixen les dades, sinó també com va canviant l'estat al llarg d'un
+determinat procés.
+
+<P>Si heu seguit l'<em>hyperlink</em> del paràgraf anterior, haureu
+vist que el dit diagrama de la màquina de renderització d'OpenGL pot
+resultar aclaparador. Tanmateix si teniu presents un parell
+d'indicacions, esdevé força clar i en podreu extreure molta informació
+del seu estudi, especialment quan dubteu de com es realitza alguna
+operació. El propòsit d'aquesta secció és precisament explicar-vos
+com llegir aquest diagrama.
+
+<div class=tit3><b>Components del diagrama</b></div>
+
+<P>El diagrama es composa primordialment de
+<ul>
+<li><b>Caixes rectangulars:</b> designen operacions que es realitzen dintre
+de la màquina de renderització.</li>
+<li><b>Caixes arrodonides:</b> designen variables internes que
+emmagatzemen estat o dades.</li>
+<li><b>Conmutadors:</b> dibuixats amb la notació d'un esquema elèctric
+com el de la figura: <img src="imatges/smswitch.png" align=center>. La
+informació flueix per les línies connectades. Quan a l'interruptor
+arriba una línia perpendicular, aquesta indica la informació que
+controla l'estat de l'interruptor (que en alguns casos, si us hi
+fixeu, veureu que té més de dues posicions).</li>
+<li><b>Línies de conexió entre components:</b> designen els camins
+que segueix la informació. Poden tenir fletxes assenyalant la direcció
+en que hi fueix, i ocassionalment una etiqueta indicant la naturalesa
+de la informació que transporten.</li>
+<li><b>Etiquetes al començament d'una línia:</b> designen una crida
+d'OpenGL (sense el prefix <tt>gl</tt>)</li>
+</ul>
+
+<P>El diagrama inclou algunes de les variables d'estat d'OpenGL, però
+sense el prefix <tt>GL_</tt>. Vegeu les notes a la cantonada inferior
+esquerra del diagrama que indiquen també quines crides a OpenGL no
+estan incloses al diagrama. El diagrama tampoc descriu les crides a la
+llibreria GLU, ja que aquestes estan íntegrament implementades usant
+crides a la llibreria GL, i per tant no afecten directament el
+comportament intern de la màquina de rasterització.
+
+<P>Finalment, tingueu present que la major part de les variables
+d'estat d'OpenGL estan implícites. Es troben, per dir-ho així, dins
+les caixes que defineixen els processos corresponents.
+
+<div class=tit3><b>Ús del diagrama</b></div>
+
+<P>Amb aquesta informació podeu ara estudiar el diagrama per a
+conèixer més d'aprop com funciona OpenGL, i valorar l'efecte de
+diverses crides. Naturalment trobareu moltes al diagrama que encara no
+coneixeu. Aquest capítol i el següent estan dedicats a que us
+familiaritzeu amb aspectes més avançats de la llibreria.
+
+<P class="exercici"><span class=exernum>Exercici 10.1:</span> Esteu
+implementant una aplicació gràfica que manega informació geomètrica
+molt abundant. En les primeres proves, es comprova que la velocitat de
+resposta no és suficient. Un programador proposa fer servir crides a
+<tt>glClipPlane()</tt> perquè l'usuari pugui especificar una porció de
+les dades en què està interessat, i la resta no es processi, guanyant
+corresponentment temps. Vosaltres sabeu que el temps s'està consumint
+en la conversió de la geometria a coordenades d'observador i
+d'il·luminació. A la vista del diagrama funcional, què podeu concloure
+sobre la validesa d'aquesta proposta?
+
+<br><br>
+<!--<span class=sollnk><A
+href='javascript:WinB("m2h13t10_Sol2-8-1.html");'>Solució</A></span>
+</A></span>-->
+<span class=sollnk><A
+href="javascript:oWin('m2h13t10_Sol2-8-1.html','*','600','350','no','no','no','yes')">Solució</A></span>
+
+<P>En general les aplicacions es poden classificar segons el coll
+d'ampolla que es produeixi en la transformació de la geometria o en la
+rasterització de primitives. El punt en que una cosa passa a pesar més
+que l'altra depèn de la implementació concreta (quines coses estan
+accelerades per <i>hardware</i>, quines no, característiques del
+processador, configuració,...). La manera d'optimitzar una aplicació
+depèn d'en quin d'aquests dos casos es troba l'aplicació. El problema
+anterior descriu una aplicació dominada pel cost de les
+transformacions geomètriques, però la conclusió seria diferent si la
+component dominant del cost hagués estat la rasterització.
+
+<P>És important tenir en compte que com ja hem dit, aquest diagrama
+funcional representa una forma compacta d'especificar el comportament
+de la màquina de rasterització d'OpenGL. Tanmateix, l'especificació no
+requereix que la implementació s'adhereixi a aquest esquema, sino sols
+que els resultats siguin equivalents. Per tant l'única manera de saber
+del cert quin guany (o pèrdua) representa en termes de cost una certa
+estratègia en una certa plataforma és a través d'ambdues
+implementacions i mesures acurades del rendiment en els dos casos que
+es comparin.
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m2h10_TecniquesBasiques.html">[Anterior]</a>
+[Següent]
+<a href="m2h15_Geometria.html">[Següent apartat]</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title>8.6.MODELS D'IL·LUMINACIÓ EMPÍRICS</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" TYPE="text/css" HREF="../upc.css">
+</head>
+<BODY >
+<SCRIPT>
+top.passara("visib","iemp");
+</SCRIPT>
+<DIV CLASS="nav">
+[Anterior]
+<A HREF="m8-empir-amb.html">[Següent]</a>
+<a href="m8-6.html">[Apartat anterior]</a>
+</div>
+<br><br>
+
+<div class=tit1>Models d'il·luminació empírics</div>
+
+<P>
+En aquest capítol ens centrarem en l'estudi de mètodes empírics de càlcul
+de color que són els que es troben implementats en la major part de
+llibreries gràfiques 3D.
+
+<P>
+Com hem analitzat anteriorment, els mètodes d'il·luminació empírics
+pel càlcul del color d'un punt Q consideren: la ubicació geomètrica
+del punt, la llum incident en el punt procedent dels focus de llum
+puntuals que hi hagi a l'escena, les característiques superficials del
+sòlid al que pertany el punt, la posició de l'observador i medis no
+participatius. A més a més, per a calcular la llum transmesa en la
+direcció de l'observador utilitzen fórmules empíriques simples
+d'avaluar i que produeixen imatges amb un grau de realisme acceptable.
+
+<P>
+Les característiques superficials dels l'objectes s'aproximen per
+constants (<!-- $k_{\lambda}$ --><IMG WIDTH="19" HEIGHT="26"
+ALIGN="MIDDLE" BORDER="0" SRC="imatges/formula4.gif"
+ ALT="$k_{\lambda}$">) que representen el
+comportament del material respecte a la llum incident per a cada
+component fonamental del color (RGB), totes aquestes constants
+(excepte n) tenen valors definits en l'interval [0.0,1.0]. Així:
+
+<UL>
+<LI><!-- $k_{d\lambda}$ --><IMG WIDTH="26" HEIGHT="26" ALIGN="MIDDLE"
+BORDER="0" SRC="imatges/formula5.gif" ALT="$k_{d\lambda}$"> representa la
+proporció de la llum incident vermella, verda i blava que el material
+emet de manera difosa, és a dir, en qualsevol direcció a l'entorn de
+qualsevol punt de la superfície. Per tant, representa quan mate és el
+material.</LI>
+<LI><!-- $k_{s\lambda}$ --><IMG WIDTH="25" HEIGHT="26" ALIGN="MIDDLE"
+BORDER="0" SRC="imatges/formula6.gif" ALT="$k_{s\lambda}$"> representa la
+proporció de llum incident vermella, verda i blava que el material
+emet de manera especular pura.</LI>
+<LI><!-- $n_{\lambda}$ --><IMG WIDTH="20" HEIGHT="24" ALIGN="MIDDLE"
+BORDER="0" SRC="imatges/formula7.gif" ALT="$n_{\lambda}$"> representa
+l'especularitat del material. Per un mirall perfecte <!--
+$n_{\lambda}$ --><IMG WIDTH="20" HEIGHT="24" ALIGN="MIDDLE" BORDER="0"
+SRC="imatges/formula7.gif" ALT="$n_{\lambda}$"> hauria de valer
+infinit. Està relacionat amb el grau de polidesa de la
+superfície.</LI>
+</UL>
+
+<P>
+La inicialització d'aquestes variables no respon a cap principi de
+física de materials, sinó que és una manera subjectiva de modelitzar-los
+conegudes les seves característiques, el color i la rugositat de la
+superfície. Per a facilitar l'assignació de valors, usualment es
+descomponen les constants anteriors en dos termes: un representa el
+color de l'objecte (de manera informal, el color amb que s'ha pintat)
+i l'altre les propietats difosa i especular del material. Aquests
+darrers termes s'acostumen a definir constants per als tres colors
+primaris.
+
+<P>
+Així es defineixen per a cada objecte (o superfície segons
+l'aplicació) les següents constants, anomenades propietats de
+material:
+
+<UL>
+<LI><I>k<sub>d</sub></I>: coeficient de reflexió difosa. Valor entre
+[0,1]. Proporció de llum incident que s'emet de manera difosa.</LI>
+<LI><I>k<sub>s</sub></I>: coeficient de reflexió especular. Valor
+entre [0,1]. Proporció de llum incident que s'emet de manera
+especular. Pròpia del material.</LI>
+<LI><I>n</I>: exponent de reflexió especular. Valor més gran que
+1. Mesura el grau d'especularitat del material. Pròpia del
+material.</LI>
+<LI><!-- $o_{d\lambda}$ --><IMG WIDTH="25" HEIGHT="24" ALIGN="MIDDLE"
+BORDER="0" SRC="imatges/formula8.gif" ALT="$o_{d\lambda}$">: color de
+l'objecte. Representa la proporció de llum incident R,G,B que emet de
+manera difosa. Quan l'objecte és i il·luminat per llum blanca no
+direccional (color=(1,1,1)) representa el color amb que "s'ha pintat"
+l'objecte.</LI>
+<LI><!-- $o_{s\lambda}$ --><IMG WIDTH="24" HEIGHT="24" ALIGN="MIDDLE"
+BORDER="0" SRC="imatges/formula9.gif" ALT="$o_{s\lambda}$">: color
+especular de l'objecte. Representa la proporció de llum incident R,G,B
+que emet de manera especular. Generalment es considera que la llum
+especular és del mateix color que la llum incident i <!--
+$o_{s\lambda}$ --><IMG WIDTH="24" HEIGHT="24" ALIGN="MIDDLE"
+BORDER="0" SRC="imatges/formula9.gif"
+ALT="$o_{s\lambda}$">=(1,1,1).</LI>
+</UL>
+
+<P>
+A continuació es relacionen diferents models empírics que aproximen
+diferents aspectes de la transmissió de la llum. Veurem els models:
+ambient, difós i especular.
+
+<h2>Subapartats:</h2>
+
+<UL>
+<LI><A HREF='m8-empir-amb.html'> Model empíric ambient</A></LI>
+<LI><A HREF='m8-empir-lamb.html'> Model empíric difós: Lambert</A></LI>
+<LI><A HREF='m8-empir-phong.html'> Model empíric especular: Phong</A></LI>
+</UL>
+
+
+<br><br>
+<DIV CLASS="nav">
+[Anterior]
+<A HREF="m8-empir-amb.html">[Següent]</a>
+<a href="m8-6.html">[Apartat anterior]</a>
+</div>
+</body>
+</html>

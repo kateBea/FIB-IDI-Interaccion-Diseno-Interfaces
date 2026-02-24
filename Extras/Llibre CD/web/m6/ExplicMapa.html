@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M7.1 Procés de visualització 2D.Sistemes de coordenades.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("vis3D","estr");
+</SCRIPT>
+<A NAME="inici"></a>
+<!--  ---------------------------------------------     -->
+<!--	Explicacio mapa    			   	-->
+<!--  ---------------------------------------------     -->
+<DIV CLASS="nav">
+<a href="MapaIntro.html" target="_parent">[Anterior]</a>
+<a href="MSExplicacio1.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Mapa sensible de subprocessos. 
+<span class=tit2>Explicació</span>
+</div>
+
+<p>
+Aquest diagrama presenta els diferents blocs corresponents als
+<A CLASS="glossari" HREF="javascript:glossari('subProc.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">subprocessos</A> del <A CLASS="glossari" HREF="javascript:glossari('ProcVisu3D.html','*','400','300','no','no','no','yes')"
+onMouseOver="window.status='Glossari';return true"
+onMouseOut="window.status='';return true">procés de visualització 3D</A>. Cada un dels blocs té entrades
+i sortides ben definides i implementa una operació o transformació
+geomètrica sobre el model. Les dades geomètriques del model passen
+seqüencialment pels diferents subprocessos i es van transformant fins
+arribar a la geometria projectada que veiem en pantalla.
+
+<P>
+En el diagrama podeu veure,
+
+<UL>
+<LI> El model geomètric de l'objecte / escena 3D
+</LI>
+<LI> Els blocs corresponents als subprocessos del procés de
+    visualització 3D (Transformació de coordenades, Retallat
+    antero-posterior, Transformació ortogonal/de perspectiva, Retallat
+    lateral)
+</LI>
+<LI> Fletxes de connexió entre els blocs, que representen el flux
+    d'informació geomètrica que es transmet.
+</LI>
+<LI> Els blocs corresponents als subprocessos del procés de
+    visualització 2D.
+</LI>
+</UL>
+
+<P>
+Al costat esquerra d'alguns blocs veureu una fletxa, que indica els
+paràmetres de visualització (model de càmera, etc) que es requereixen
+com a entrada en l'algorisme del corresponent subprocés.
+
+<P>
+Al costat dret de cada bloc apareixen alguns enllaços que expliquen
+amb més detall el corresponent subprocés. Teniu sempre una explicació
+del subprocés i un algorisme simple - en el cas particular de la
+visualització en filferros d'una escena -. En alguns casos teniu
+també un enllaç a la matriu de transformació corresponent al subprocés.
+
+<P>
+Al costat de cada fletxa us apareixen també alguns enllaços que us
+expliquen amb més detall el flux d'informació. Aquests indiquen la
+informació que es transmet a través de la fletxa, el corresponent
+sistema de coordenades, i un exemple -la visualització d'una escena
+senzilla formada per dos cubs-.
+
+<P>
+Us heu de moure i passar per totes les subfinestres corresponents a
+tots els links dels blocs i de les fletxes. Us recomanem seguir aquest
+ordre:
+
+<OL>
+<LI>
+ Llegiu l'explicació del model geomètric, la de tots els blocs, i
+    la dels sistemes de coordenades i informació que es transmet en cada
+    fletxa. Ajudeu-vos pels exemples que teniu al model 3D i a cada
+    fletxa.
+</LI>
+<LI> Llegiu l'explicació de les matrius de transformació
+</LI>
+<LI> Llegiu els algorismes corresponents a la visualització en
+    filferros. És un algorisme per a visualitzar un objecte a base de
+    dibuixar les seves arestes projectades. Seria un possible algorisme
+    que seguiria el procés dels exemples que teniu al model 3D i a cada
+    fletxa.
+</LI>
+</OL>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="MapaIntro.html" target="_parent">[Anterior]</a>
+<a href="MSExplicacio1.html">[Següent]</a>
+</div>
+</BODY>
+</HTML>

@@ -1,0 +1,256 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("opengl","extop");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m7c10_Culling.html">[Anterior]</a>
+<a href="m7c30_PuntLiniaPoligonPixel.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Extensió de crides d'OpenGL.
+<span class=tit2>Transformacions i matrius</span>
+</div>
+
+<P>
+<div class=tit3><B>Transformació mon-pantalla</B></div>
+
+<P>
+En l'apartat <a
+href="m7a20_BasicInstruccPrincipals.html">d'instruccions
+principals</a> en les crides bàsiques d'OpenGL, ja s'introdueixen
+algunes de les crides que s'usen en la transformació
+mon-pantalla. Crides com <b>gluLookAt</b>, <b>gluPerspective</b>,
+<b>glOrtho</b> i <b>glViewport</b> ens permeten decidir els diferents
+paràmetres de la <A class=glossari
+Href="javascript:glossari('camara.html')">càmera</A> que cal donar-li
+a OpenGL per a que faci la transformació a coordenades de dispositiu.
+
+<a name="glFrustrum"></a>
+<P>
+En aquest punt ens queda per veure encara una crida més que no veiem
+entre les crides bàsiques, i que afecta a la matriu PROJECTION:
+
+<pre class=algoritme>
+          void <b>glFrustrum</b> (GLdouble left, GLdouble right,
+                           GLdouble bottom, GLdouble top,
+                           GLdouble near, GLdouble far)
+</pre>
+
+<P>
+Aquesta crida permet definir el <i>frustrum</i> de visió de
+l'escena. El <i>frustrum</i> es defineix pels següents paràmetres:
+(<i>left, bottom, -near</i>) i (<i>right, top, -near</i>) especifiquen
+les coordenades (x, y, z) de les cantonades baix a l'esquerra i dalt
+a la dreta respectivament del pla de retallat més proper a
+l'observador; <i>near</i> i <i>far</i> donen les distàncies des del
+punt de visió als <A class=glossari Href="javascript:glossari('PlansRet.html')">plans de retallat anterior i posterior</A> (aquests
+valors han de ser sempre positius).
+
+<P>
+<div class=tit3><B>Matrius de transformació</B></div>
+
+<P>
+Algunes de les crides específiques per a operar amb les matrius les
+haviem vist ja en l'apartat de les instruccions principals d'OpenGL
+(<b>glMatrixMode</b>, <b>glLoadIdentity</b>, <b>glScale</b>,
+<b>glTranslate</b>, <b>glRotate</b>).
+
+En aquest apartat, doncs, veurem alguna crida més que encara no haviem
+vist i afegirem algun aclariment a l'ús de les piles de matrius.
+
+<a name="glPushMatrix"></a>
+<P>
+La crida <b>glPushMatrix</b> ens permet empilar matrius per a fer
+transformacions locals de manera que, més tard, podem tornar-les a
+desempilar per a tornar a l'estat anterior (usant <b>glPopMatrix</b>).
+
+<pre class=algoritme>
+          void <b>glPushMatrix</b> (void)
+</pre>
+
+<P>
+Aquesta crida fa una còpia de la matriu actual (aquella escollida amb
+la crida a <b>glMatrixMode</b>) a la pila. D'aquesta manera, com que
+OpenGL opera directament sobre la matriu que té al capdamunt de la
+pila, si després de fer operacions volem recuperar la que haviem
+copiat, només hem de desempilar la que hi ha al capdamunt i tornarem a
+tenir la que haviem copiat. Aquesta crida donarà error si hi ha masses
+matrius a la pila.
+
+<P>
+La pila de matrius per a la matriu MODELVIEW conté com a mínim 32
+posicions per a matrius de 4x4 elements. Algunes implementacions
+d'OpenGL poden permetre més de 32 matrius. Per a saber quin és aquest
+màxim es pot consultar passant com a paràmetre la constant
+GL_MAX_MODELVIEW_STACK_DEPTH a la crida <a
+href="m7c70_Interrogacio.html#glGetIntegerv"<b>glGetIntegerv.</b></a>
+
+<P>
+Generalment, no cal fer composicions de la matriu PROJECTION; per
+aquest motiu, el número que OpenGL preveu per a la pila corresponent a
+aquesta matriu és com a mínim de 2 posicions per a matrius de 4x4
+elements. Algunes implementacions d'OpenGL en poden permetre més. Per
+a consultar el màxim permès en una determinada implementació d'OpenGL
+podem usar la crida <b>glGetIntegerv</b> passant-li com a paràmetre a
+consultar GL_MAX_PROJECTION_STACK_DEPTH.
+
+<a name="glPopMatrix"></a>
+<P>
+Per a desempilar una matriu es crida a:
+
+<pre class=algoritme>
+          void <b>glPopMatrix</b> (void)
+</pre>
+
+<P>
+Aquesta crida desempila la matriu que hi ha al capdamunt de la pila i
+la que hi havia en la segona posició passa a estar al capdamunt. La
+informació de la matriu desempilada s'elimina. En cas que només hi
+hagi una matriu a la pila, la crida donarà error.
+
+<a name="glMultMatrix"></a>
+<P>
+Finalment, una de les crides que encara no haviem vist és la que
+permet fer una multiplicació de la matriu que hi ha a la pila per una
+matriu que haguem calculat, la crida que cal fer en OpenGL es defineix
+de la forma següent:
+
+<pre class=algoritme>
+          void <b>glMultMatrix{fd}</b> (const TYPE *m)
+</pre>
+
+<P>
+on aquest prototipus correspon a dues possibles crides diferents
+depenent del tipus que s'utilitzi en els elements de la matriu que es
+passa com a paràmetre (<b>f</b> si TYPE és GLfloat o GLclampf, i
+<b>d</b> si TYPE és GLdouble o GLclampd).
+
+<P>
+Aquesta crida multiplica la matriu especificada en el paràmetre
+<i>m</i> per la matriu que es troba actualment al capdamunt de la
+pila, sobreescrivint aquesta última.
+
+<P>
+Cal notar que la multiplicació de matrius en OpenGL posa en el primer
+terme del producte la matriu actual de la pila (diem-li <b>c</b>) i en
+el segon terme la matriu que es vol multiplicar (<b>m</b>), així
+doncs, el resultat de la multiplicació d'aquestes dues matrius serà
+<b>cm</b>. És important tenir en compte aquest ordre ja que la
+multiplicació de matrius, en general, no és commutativa.
+
+<P>
+L'ordre que OpenGL considera en els elements de les seves matrius
+també és important en aquest punt. Les 16 posicions de la matriu
+(4x4), OpenGL les interpreta per columnes enlloc de per files, com
+podem estar acostumats en C per exemple, és a dir, la matriu <b>m</b>
+seria:
+
+<P>
+<center><img src="imatges/img1.png"></center>
+
+<P>
+i per tant quan diem <i>m[i][j]</i> s'està interpretant que és
+l'element de la columna <i>i</i> fila <i>j</i> de la matriu de
+transformació d'OpenGL (a la inversa del que podriem considerar en el
+llenguatge C o Java).
+
+<P>
+<a name="glClipPlane"></a>
+<div class=tit3><B>Plans de retallat adicionals</B></div>
+
+<P>
+A més a més dels sis plans de retallat del volum de visió (els que
+defineixen el <i>frustrum</i> de visió), també es poden definir altres
+plans de retallat adicionals per a afegir restriccions al volum de
+visió.
+
+<pre class=algoritme>
+          void <b>glClipPlane</b> (GLenum plane, const GLdouble *equation)
+</pre>
+
+<P>
+Aquesta crida defineix un pla de retallat. el paràmetre
+<i>equation</i> apunta als quatre coeficients de l'equació del pla:
+A<i>x</i> + B<i>y</i> + C<i>z</i> + D = 0. Tots els punts en
+coordenades de l'observador (<i>x<sub>e</sub>, y<sub>e</sub>,
+z<sub>e</sub>, w<sub>e</sub></i>) que compleixen l'equació:
+
+<center>(A B C D)<b>M<sup>-1</sup></b>(<i>x<sub>e</sub>, y<sub>e</sub>,
+z<sub>e</sub>, w<sub>e</sub></i>)<sup>T</sup> >= 0 </center>
+
+<P>
+cauen en el semiespai definit per aquest pla, on <b>M</b> és la matriu
+actual de MODELVIEW quan es crida a <b>glClipPlane</b>. Aquells punts
+que no estan en aquest semiespai són retallats. El paràmetre
+<i>plane</i> és GL_CLIP_PLANEi, on <i>i</i> és un enter que
+especifica quin dels plans adicionals de retallat s'està
+definint. Aquesta <i>i</i> ha d'estar entre 0 i el nombre màxim de
+plans adicionals de retallat que s'acceptin.
+
+<P>
+Totes les implementacions d'OpenGL suporten com a mínim sis plans de
+retallat adicionals, encara que algunes en suporten més. Per a
+averiguar aquest nombre de plans podem usar la crida a
+<b>glGetIntegerv</b> passant-li com a paràmetre de consulta
+GL_MAX_CLIP_PLANES.
+
+<P>
+Per a que sigui efectiu cada un dels plans de retallat adicionals que
+afegim, cal fer una acivació d'ells mitjançant la crida a
+<b>glEnable</b> (GL_CLIP_PLANEi). Usant la crida a
+<b>glDisable</b> amb el mateix paràmetre es desactiva.
+
+<P>
+<a name="gluProject"></a>
+<div class=tit3><B>Transformació d'un punt</B></div>
+
+<P>
+Existeix una crida d'OpenGL que simula la transformació de coordenades
+del seu pipeline de visualització. Donades les coordenades de mon en
+tres dimensions i totes les transformacions que l'afecten, ens retorna
+les coordenades de pantalla transformades. La crida que ofereix això
+és:
+
+<pre class=algoritme>
+          int <b>gluProject</b> (GLdouble objx, GLdouble objy, GLdouble objz,
+                          const GLdouble modelMatrix[16],
+                          const GLdouble projMatrix[16],
+                          const GLint viewport[4],
+                          GLdouble *winx, GLdouble *winy, GLdouble *winz)
+</pre>
+
+<P>
+Aquesta crida mapeja les coordenades especificades en (<i>objx, objy,
+objz</i>) en les coordenades de pantalla, usant les transformacions
+definides per la matriu "modelview" (<i>modelMatrix</i>), la matriu
+"projection" (<i>projMatrix</i>) i el "viewport"
+(<i>viewport</i>). Les coordenades resultants les deixa als paràmetres
+<i>winx, winy, winz</i>. La funció retorna GL_TRUE si tot va bé, o
+GL_FALSE si falla.
+
+<P>
+Les matrius a ser usades com a paràmetres d'aquesta crida poden ser
+obtingudes amb les crides d'interrogació <b>glGetDoublev</b> o
+<b>glGetIntegerv</b> passant-lis com a paràmetres de consulta
+GL_MODELVIEW_MATRIX, GL_PROJECTION_MATRIX, o GL_VIEWPORT (més detalls
+d'aquestes crides a l'apartat <a
+href="m7c70_Interrogacio.html">d'interrogació</a> d'aquest mateix
+capítol.
+
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m7c10_Culling.html">[Anterior]</a>
+<a href="m7c30_PuntLiniaPoligonPixel.html">[Següent]</a>
+</div>
+</body>
+</html>

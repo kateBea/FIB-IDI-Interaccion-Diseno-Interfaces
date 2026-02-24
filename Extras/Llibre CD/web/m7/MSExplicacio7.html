@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M7.1 Procés de visualització 2D.Sistemes de coordenades.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("vis2D","impl");
+</SCRIPT>
+<A NAME="inici"></A>
+<DIV CLASS="nav">
+<a href="MSTransmet6.html">[Anterior]</a>
+<a href="RastPunt.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Mapa sensible del PV2D.
+<span class=tit2>Rasterització. Implementació</span>
+</div>
+
+<p>S'anomena <b><i>rasterització</i></b> al subprocés que
+discretitza una primitiva gràfica en pixels. Serà específica
+per cada element geomètric i és molt important optimitzar la seva
+eficiència ja que s'haurà d'executar molts cops en la visualització
+d'una escena mínimament complexa.
+
+<p>A continuació es presenten els algorismes de rasterització
+de les primitives geomètriques fonamentals que s'il·lustren
+amb exemples de la seva execució. Malgrat la major part de llibreries
+gràfiques tenen implementada la rasterització de les principals
+primitives gràfiques, és important entendre els algorismes
+per avaluar les seves limitacions. En tots els algorismes com a única
+acció d'accés a dispositiu utilitzarem:
+
+<center>
+<h4>setPixel(x,y,color)</h4>
+</center>
+
+<br>
+<h2>Subapartats</h2>
+<ul>
+<li><A HREF="RastPunt.html" target="explica">rasteritza punt.</a></li>
+<li><A HREF="RastSeg.html" target="explica">rasteritza segment.</a></li>
+<li><A HREF="RastPol.html" target="explica">rasteritza polígon.</a></li>
+</ul>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="MSTransmet6.html">[Anterior]</a>
+<a href="RastPunt.html">[Següent]</a>
+</div>
+</BODY>
+</HTML>

@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M7.1 Procés de visualització 2D.Visualització escena 2D.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("vis2D","vis");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+<a href="VisuEsc.html">[Anterior]</a>
+[Següent]
+<A HREF="res.html">[Següent apartat]</a>
+</div>
+<br><br>
+
+<div class="tit1">Visualització d'escenes 2D.
+<span class="tit2">Visualització d'una escena amb OpenGL</span>
+</div>
+
+<p>Les llibreries gràfiques tenen implementats total o parcialment els
+blocs funcionals del procés de visualització 2D. És específic de cada
+llibreria les primitives gràfiques de que disposa i el requeriment de que
+la geometria estigui referenciada respecte a sistema de coordenades de
+l'aplicació o de dispositiu.
+
+<p>En d'OpenGL la geometria es dona en coordenades
+de l'aplicació. Aquest fet facilita que el programador d'aplicacions
+no hagi de programar cap dels processos del procés de visualització.
+Si que serà necessari definir la Finestra2D i la Vista i els atributs.
+L'algorisme de visualització es simplifica.
+
+<p>Per a definir la Finestra_2D podem fer servir les comandes:
+
+<ul>
+<li>
+<b>glOrtho2D (esquerra, dreta, baix, dalt)</b> 
+<br>on esquerra, dreta
+baix i dalt representen les coordenades dels seus vèrtexs inferior esquerra
+i superior dret; o bé<br></li>
+<li>
+<b>gluLookAt (x,y,z,x,y,0.,0.,1.,0.)</b></li>
+<li><b>glOrtho (esquerra, dreta, baix, dalt, prop, lluny)</b>
+<br>imaginant que mirem l'escena amb una càmera 3D axonomètrica
+i en direcció perpendicular al pla x-y. El centre de visió
+seria el centre del window i la posició de l'observador tindria les
+seves mateixas coordenades <i>x</i> i <i>y</i> i la <i>z</i> desplaçada
+sobre l'eix z positiu. Els valors dels plans de retallat prop i lluny seran
+<i>-1.0</i> i <i>1.0</i> respectivament per a englobar el pla x-y de projecció.
+</li>
+</ul>
+
+<p>Per a definir la Vista cal utilitzar la comanda:
+
+<center>
+<b>glViewport (origenx,origeny,amplada,alçada)</b>
+</center>
+
+<p>
+L'algorisme genèric de visualització utilitzant comandes
+OpenGl quedaria (veure en <a href="../m15/m7b30_Exemple.html">dibuix_quadrat</a> un exemple concret en JAVA).
+
+<PRE class=algoritme>
+<b>algorisme visualització_escena</b>
+   calcula_Finestra2D (origenf, ampf, llargf)
+   calcula_Vista (origenv, ampv, llarv)
+   relacio_d'aspecte (origenf, ampf, llargf, origenv, ampv, llargv)
+   //setFinestra2D (origenf, ampf, llargf)
+   gluOrtho2D(origenf[1],origenf[2],origenf[1]+ampf,origenf[1]+ampv)
+   //setVista (origenv, ampv, llargv)
+   glViewport (origenv[1],origenv[2], ampv,llargv)
+   <b>per</b> element_grafic <b>fer</b>
+      <b>segons</b> tipus(elementd) <b>fer</b>
+         punt: glbegin (GL_Points)
+               glvertex2f (x,y)
+               glEnd()
+         segment: glbegin (GL_Lines)
+                  glvertex2f (x,y)
+                  glvertex2f (x,y)
+                  glEnd()
+         poligon: glbegin (GL_POLYGON)
+                  glvertex2f (x,y)
+                  glvertex2f (x,y)
+                  ...
+                  glEnd()
+      <b>fsegons</b>
+   <b>fper</b>
+<b>falgorisme</b>
+</PRE>
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="VisuEsc.html">[Anterior]</a>
+[Següent]
+<A HREF="res.html">[Següent apartat]</a>
+</div>
+</BODY>
+</HTML>

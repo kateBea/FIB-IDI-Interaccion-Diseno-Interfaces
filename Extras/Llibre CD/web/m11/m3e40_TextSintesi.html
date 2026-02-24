@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","textu");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m3e30t40_TextAplicacio.html">[Anterior]</a>
+<a href="m3e50_TextUtilitzacio.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Textures.
+<span class=tit2>Síntesi de Textures</span>
+</div>
+
+<p> S'anomena síntesi de textures al procediment que es fa servir per
+a crear la taula de valors 1D, 2D o 3D que utilitzarem per a
+substituir alguna de les propietats del material de l'objecte
+(recordeu que usualment el color) en el moment de la visualització
+dels polígons.
+
+<p> Existeixen diferents procediments que queden fora de l'abast
+d'aquest llibre. Alguns d'ells es basen en observar la distribució
+d'una determinada propietat del material (les betes de la fusta) i
+intentar determinar una funció estadística o un model sintàctic
+(gramàtica) que les reprodueixi. <!-- Podeu trobar informació aquí.
+- link a llibre de síntesi de textures -->. Un exemple molt simple
+seria una textura 1D tal que les seves components emmagatzemen el
+color d'un terreny en funció de la seva alçada.
+
+<p> Una altre tècnica més usual consisteix en digitalitzar una
+fotografia d'un material, entorn, imatge,...
+
+<p> Aquesta imatge també pot ser obtinguda directament a partir de la
+visualització del model d'una escena (imatge sintètica). OpenGL té
+comandes que permeten capturar els valors actuals del Frame Buffer i
+crear amb ells una textura. Cal utilitzar <a
+href="../m15/m7c60_Textures.html#glCopTexImage">glCopyTexImage(...)</a>
+que obté una finestra de pixels del frame buffer i crea una textura
+que bé passarà a formar part de l'objecte textura que estem
+especificant o bé serà la nova textura activa (si no treballem amb
+objectes textura). Podeu pensar que la comanda <b>glCopyTexImage</b>
+té la mateixa funció que <b>glTexImage</b> però no cal subministra-li
+la taula de valors (texels) perquè l'obté del frame-buffer.
+
+<p> Per últim creiem d'utilitat comentar com obtidriem una imatge que
+fariem servir com textura d'entorn en un environment mapping per
+simular reflexions especulars en un objecte si utilitzem la generació
+automàtica de coordenades de textures <a
+href="m3e30t25_TextGenAutoSh.html"><i>GL_SPHERE_MAP</i></a>. Hi ha
+diferents opcions, aquí n'esmentem dues: <!--però podeu trobar més
+informació en - aquí link o referencia a tutorials del siggraph-->
+
+<ul>
+<li> Obtenint una fotografia amb una càmera del tipus "ull de peix"
+situada en un cert punt interior a l'objecte. El problema és que mai
+es poden obtenir imatges de 360º a l'entorn del punt.</li>
+
+<li> Una altre tècnica utilitzada és:
+   <ol>
+   <li>Imaginar que l'entorn de l'objecte és cúbic i obtenim una
+       fotografia des del punt central de l'objecte de cadascuna de
+       les seves cares. Es pot fer de manera sintètica, amb
+       projeccions axonomètriques de sis càmeres i utilitzant la
+       funció <i>glCopyTexImage</i> per obtenir la imatge del
+       frame-buffer.
+
+   <li>Tenint en consideració la tècnica de generació automàtica de
+       coordenades de textura d'OpenGL amb GL_SPHERE_MAP, per a cada
+       texel calcular la direcció del raig reflectit que es mapeja en
+       ell: 
+       <pre>
+          r<sub>x</sub>= 2 sqrt[-4s<sup>2</sup>+4s-1-4t<sup>2</sup>+4t(2t-1)]
+          r<sub>y</sub>= 2 sqrt[-4s<sup>2</sup>+4s-1-4t<sup>2</sup>+4t(2s-1)]
+          r<sub>z</sub>= -8s<sup>2</sup>+ 8s + 8t<sup>2</sup> + 8t -3
+       </pre>
+       Des del centre del cub trobar la intersecció
+       d'un raig amb aquesta direcció amb una cara del cub (en
+       coordenades d'observador!!). El color del punt d'intersecció
+       serà l'assignat al pixel.</li>
+   </ol></li>
+</ul>
+
+<p> Noteu que OpenGL realitza tots els càlculs en coordenades de
+l'observador i que per tant les direccions del raig reflectit són
+depenents de la seva posició i com a conseqüència la textura resultant
+obtinguda. Si l'observador modifica molt la seva posició i l'entorn no
+està prou allunyat de l'objecte hauríem d'anar recalculant textures en
+funció de la seva ubicació. Altrament obtindrem resultats no
+realistes.
+
+<p>Es podria crear una textura d'entorn no depenent de
+l'observador. Per exemple, imaginant una esfera que envolta l'objecte
+i en funció del nombre de texels crear un nombre distribuït de
+direccions de raigs reflectits. El color obtingut com a intersecció
+dels raigs amb les cares del cub (entorn) s'utilitzaria com a color
+del texel corresponent. El problema és que aleshores la funció de
+generació automàtica de les coordenades de textura no coincidiria amb
+el mode d'haver creat la textura. Hauriem de programar nosaltres la
+funció corresponent utilitzant la parametrització directa amb dues
+fases. En un futur proper s'espera que OpenGL implementi aquest tipus
+d'environment mapping basat en un entorn cúbic i amb generació
+automàtica de coordenades de textura sobre les sis imatges.
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m3e30t40_TextAplicacio.html">[Anterior]</a>
+<a href="m3e50_TextUtilitzacio.html">[Següent]</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("proj","diagfunc");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+[Anterior]
+<a href="m2h13_DiagramaFuncionalComplet.html">[Següent]</a>
+<a href="m2a10_Objectius.html">[Apartat anterior]</a>
+</div>
+<br><br>
+
+<div class=tit1>Diagrama funcional.
+<span class=tit2>Diagrama de blocs </span>
+</div>
+
+<P>Els autors de l'especificació d'OpenGL han triat descriure el
+comportament de la llibreria a través d'una màquina d'estats. És a dir
+que hi ha comandes que determinen l'estat de la màquina, i d'altres
+que li  demanen que processi informació (d'acord amb l'estat que es
+trobi). Finalment n'hi ha que consulten l'estat en què es troba en un
+moment donat. En el que segueix, per a referir-nos a aquest model
+parlarem de <i>màquina formal de rasterització</i> o simplement de
+<i>màquina de rasterització</i>. Tingueu present que es tracta d'un
+model que serveix per descriure el comportament de la llibreria, però
+no necessàriament una implementació concreta.
+
+<P>Vegem una figura simplificada que representa la manera en que la
+informació flueix per la màquina formal de renderització que OpenGL
+defineix:
+<center><img src="imatges/Blocs.png"></center>
+<p>L'extrem esquerra representa la CPU que executa el procés que fa
+servir l'OpenGL. Les seves crides a primitives de dibuix produeixen
+entrades de dades al <i>pipeline</i> de visualització. Segons les
+crides i l'estat de la màquina de rasterització, aquestes dades
+són transferides a un avaluador polinòmic, a una <i>display list</i> o
+a les operacions per píxels.
+
+<p>Les display lists emmagatzemen primitives per a ser reprocessades
+posteriorment. La gran majoria de crides a OpenGL poden
+emmagatzemar-se en aquestes llistes, fent la seva reutilització molt
+més eficient. Al <A href="m2i10_DisplayLists.html">següent apartat</a>
+discutirem les display lists més en detall.
+
+<p>Altrament les dades s'encaminen cap als avaluadors polinòmics o cap
+a les operacions per píxels segons la seva naturalesa. El diagrama no
+mostra el què succeeix amb les assignacions de l'estat que modifiquen
+directament la variable d'estat corresponent. Així, una assignació del
+color en curs (una crida a <tt>glColor*()</tt>) simplement modifica
+l'estat de la manera apropiada i retorna. En aquest diagrama no es
+representa.
+
+<p>Informació com bitmaps, textures, imatges o patrons d'omplert
+(<tt>glPoligonStipple()</tt> s'encamina cap al processat de píxels,
+des d'on pot procedir directament cap a les fases de rasterització i
+aparèixer en pantalla o pot emmagatzemar-se internament (per exemple
+en la memòria de textures).
+
+<P>Finalment la informació que genera o codifica geometria flueix cap
+a l'ensamblatge de primitives, a on s'ajunta la informació geomètrica
+amb altra informació d'aparença (com color i coordenades de textura,
+que es discutiran al capítol següent), i les alimenta a la
+rasterització. Aquesta és l'encarregada de produir una llista de
+fragments corresponents a la primitiva, que corresponen als píxels de
+la seva representació gràfica, amb informació adjuntada, com color
+primari, color secundari (a OpenGL 1.2),
+coordenades de textura i de profunditat. En aquesta fase s'apliquen
+els retallats pertinents, i les transformacions, primer a coordenades
+d'observador i després a coordenades de clipping, a coordenades normalitzades
+de dispositiu, i finalment a coordenades de finestra (de dispositiu)
+aplicant la transformació del viewport. El resultat d'aquest procés es
+rasteritzat, generant fragments que són processats a continuació a
+través d'un seguit d'operacions per fragments (com els tests de
+z-buffer o stencil, l'aplicació d'efectes com per exemple la boira,
+antialiasing o blending) i finalment alimentats al <i>frame buffer</i>
+per la seva actualització.
+
+<P>OpenGL dóna a més la possibilitat de llegir resultats d'aquestes
+operacions per a altres propòsits, però en general això és una
+operació molt més lenta. El hardware sol estar optimitzat per a
+transportar la informació des de la CPU cap al <i>frame buffer</i>, i no al
+revés. Un ús típic (i que pot ser una excepció en quant a l'eficiència
+perquè és una aplicació freqüent) és fer servir la pròpia màquina
+de rasterització per a generar una textura.
+
+
+<br><br>
+<DIV CLASS="nav">
+[Anterior]
+<a href="m2h13_DiagramaFuncionalComplet.html">[Següent]</a>
+<a href="m2a10_Objectius.html">[Apartat anterior]</a>
+</div>
+</body>
+</html>
+

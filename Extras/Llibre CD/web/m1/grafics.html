@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M1.1.Gràfics amb computador.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("aplic","gc");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+      [Anterior]
+      [Següent]
+      <a href="object.html">[Apartat anterior]</a>
+      <a href="main12.html">[Següent apartat]</a>
+    </div>
+<br><br>
+
+<div class=tit1>Els gràfics per computador</div>
+
+
+<P>
+Entenem per gràfics amb computador tot aquell conjunt de tècniques que
+ens permeten obtenir dibuixos i imatges amb un computador, així com
+interaccionar amb elles.
+
+<P>
+La història dels gràfics amb computador ha estat sempre molt lligada a
+l'evolució del hardware. Els gràfics dels anys 1970, per exemple,
+s'havien de generar en pantalles gràfiques vectorials (en blanc i
+negre o amb molt pocs colors) o bé en plotters vectorials de
+ploma. Aquestes limitacions (vectorial, pocs colors) restringien les
+aplicacions a aquelles que comportaven dibuixos vectorials en 2D i
+sense moviment: plànols, esquemes plans de connexionat, etc.
+
+<P>
+El primer gran salt endavant, al principi de la dècada dels 1980, va
+anar lligat a l'aparició de les pantalles d'escombrat. Encara que les
+primeres pantalles eren encara de baixa resolució i de sortida en
+blanc i negre, això va permetre començar a pensar en aplicacions
+interactives amb moviment de la imatge en temps real. Les actuals
+pantalles d'escombrat segueixen el mateix principi, però la major
+potència de càlcul i l'abaratiment de les memòries a la dècada dels
+1990 ha permès disposar de plaques gràfiques amb altes prestacions de
+color i resolució, com podeu veure als següents exemples:
+
+<br>
+<CENTER><table><tr><td>
+<img src="imatges/faro.jpg" HSPACE=20 VSPACE=20>
+</td></table></CENTER>
+
+<P>
+L'augment de potència de càlcul a les plaques gràfiques que hem tingut
+a la dècada dels 1990 ha permès l'aparició de les llibreries gràfiques
+3D (nosaltres, a aquesta assignatura usarem Gl4Java, que és una API
+que implementa una part substancial de la llibreria gràfica 3D
+OpenGL), i la implementació dels algorismes gràfics corresponents en
+hardware, dins de les plaques gràfiques. Poder disposar d'algorismes
+com el Z-Buffer per a eliminació de parts amagades o el de mapejat de
+textures a la mateixa placa gràfica, ens dona eines per a la
+programació d'aplicacions gràfiques de visualització realista
+d'escenes complexes, animació 3D, navegació interactiva i realitat
+virtual.
+
+<P>
+Tots els algorismes de gràfics per a la visualització d'escenes
+geomètriques que veurem aquest llibre es basen en tres eines bàsiques:
+un model geomètric dels objectes de l'escena, algorismes per a la
+visualització interactiva de l'escena, i tècniques d'interacció.
+
+<P>
+El primer requisit en tota aplicació amb sortida gràfica és disposar
+d'un model de la informació geomètrica. Com veurem en el capítol 5,
+el computador cal que disposi d'una representació del model geomètric
+dels objectes de l'escena. Aquesta representació conté les estructures
+de dades necessàries per emmagatzemar la geometria dels objectes, i
+permet que els poguem operar, interrogar, manipular i visualitzar tal
+com fariem amb una maqueta o prototipus físic. En gràfics, la
+representació del model geomètric té els mateixos efectes d'una
+maqueta o prototipus virtual (de fet, se l'anomena <I>virtual
+prototype</I> o <I>digital mock up</I>, maqueta digital). El model
+geomètric pot ser de diferents tipus. Pot ser un model 2D si treballem
+en aplicacions en el pla, o bé 3D si treballem amb objectes i escenes
+a l'espai. Pot modelar un sol objecte, o bé un cojunt format per molts
+objectes. Pot ser geomètricament simple o complex (en aquest darrer
+cas, volem dir que el nombre d'elements geomètrics, per exemple
+polígons, és molt elevat). Finalment podem pensar en models estàtics
+(que modelitzen objectes rígids), models dinàmics o deformables (que
+permeten modelitzar objectes no rígids com pot ser una molla en un
+sistema mecànic, el cor en una aplicació mèdica, etc), així com també
+models variacionals (per a objectes que tenen dimensions variables que
+en tot cas han de cumplir una serie d'equacions anomenades
+restriccions).
+
+<P>
+A part del model geomètric, tot sistema gràfic ha de poder generar
+visualitzacions i per tant ha de disposar (o usar) d'eines i
+algorismes per a la visualització interactiva de l'escena. Per aquest
+punt ens recolzarem en les prestacions que ens pugui donar el hardware
+del dispositiu de sortida (placa gràfica) així com en les llibreries
+gràfiques disponibles (en els exemples i exercicis d'aquest llibre s'utilitza la
+libreria Gl4Java). Algunes aplicacions no necessiten més que
+visualitzacions simples, mentre que d'altres requereixen
+visualitzacions realistes. En alguns casos la visualització realista
+es remarca afegint-hi una visualització simbòlica addicional per a
+remarcar determinats aspectes de les dades.
+
+<P>
+Finalment, el tercer element de tota aplicació gràfica interactiva són
+les tècniques d'interacció amb l'usuari, que permeten que el sistema
+respongui a les peticions de l'usuari en la forma esperada. Els
+elements d'interacció gràfica els veurem al capítol 9. Podem pensar en
+una àmplia gama d'aplicacions gràfiques, que van des de les que no
+suporten cap interacció fins les més avançades d'interacció implícita
+en els sistemes de realitat virtual, passant pels sistemes actuals
+d'interacció basada en events i que usen finestres, icones, el ratolí
+i un cursor (sistemes WIMP).
+
+
+<BR>
+<DIV CLASS="nav">
+      [Anterior]
+      [Següent]
+      <a href="object.html">[Apartat anterior]</a>
+      <a href="main12.html">[Següent apartat]</a>
+    </div>
+</BODY>
+</HTML>

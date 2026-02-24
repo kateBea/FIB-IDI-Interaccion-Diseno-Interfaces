@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title>8</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" TYPE="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</head>
+<BODY >
+<SCRIPT>
+top.passara("visib","iemp");
+</SCRIPT>
+<DIV CLASS="nav">
+<A HREF="m8-empir-exeLamb.html">[Anterior]</a>
+<A HREF="m8-empir-exePhong.html">[Següent]</a>
+</div>
+<br><br>
+
+<div CLASS="tit1">Models d'il·luminació empírics.
+<span CLASS="tit2">Model empíric especular: Phong</span>
+</div>
+
+<P>
+En aquest model es considera que els focus de llum són puntuals,
+no-direccionals i que els objectes (els punts de l'objecte) només
+tenen reflexió especular pura, és a dir en una direcció específica;
+per tant l'observador només podrà observar la reflexió especular d'un
+punt Q si es troba en aquesta direcció. Un mirall és un perfecte
+reflector especular, fixeu-vos que en funció de la vostra posició
+observeu en un mateix punt Q del mirall un color o un altre (un
+objecte o un altre); només veiem la llum que es reflecteix en la direcció
+que uneix el punt Q amb l'observador.</P>
+
+
+<CENTER>
+<TABLE><TR><TD>
+<img src="imatges/especular.jpg" alt="Esquema model Phong">
+</TD></TR></TABLE>
+</CENTER>
+
+<P>
+La direcció d'especularitat de la llum en un punt Q, segons la física,
+és la simètrica de la direcció L de la llum incident en Q respecte a
+la normal N a la superfície en el punt Q i es troba en el mateix pla
+que L i N (veure la figura) i es pot calcular analíticament segons
+l'expressió: 2N(N·L)-L si tots els vectors es consideren
+normalitzats.</P>
+
+
+<CENTER>
+<TABLE><TR><TD>
+<img src="imatges/fig8-13-b-PHONG.jpg" alt="Exemple model Phong">
+</TD></TR></TABLE>
+</CENTER>
+
+<P>
+Si la superfície no és un reflector perfecte, en comptes d'existir una
+direcció preferent d'especularitat, existeixen un conjunt de
+direccions preferents les quals es poden modelitzar geomètricament amb
+un con a l'entorn de R; per tant, es podria parlar d'un con
+d'especularitat en comptes d'una direcció. Una explicació física per
+aquest fenomen és que l'objecte està compost per microscòpiques
+superfícies perfectament especulars. Per cada microsuperfície, la llum
+incident es reflecteix en una única direcció. La llum visible per
+l'observador en un punt Q, és l'efecte de combinar una gran quantitat
+d'aquestes microsuperfícies, per tant, com hem dit anteriorment,
+existeix un conjunt de direccions preferents les quals Phong modelitza
+(amb un cert error) amb un con.
+
+<P>
+Experimentalment, es pot observar que la llum especular té el mateix
+color que la llum incident en el punt. Les dues tenen semblant
+diagrama espectral, però en la llum especular a cada longitud d'ona li
+correspon menys energia. Aquest fenomen es modelitza en el model
+empíric de Phong, considerant con llum incident al punt
+(<I>I<sub>f</sub></I>) la llum procedent del focus, atenuada per un
+factor constant <I>k<sub>d</sub></I> independent de la longitud d'ona
+(<!-- $\lambda$ --><IMG WIDTH="12" HEIGHT="14" ALIGN="BOTTOM"
+BORDER="0" SRC="imatges/formula22.gif" ALT="$\lambda$">) i per un
+factor <!-- $o_{s\lambda}$ --><IMG WIDTH="24" HEIGHT="24"
+ALIGN="MIDDLE" BORDER="0" SRC="imatges/formula9.gif"
+ALT="$o_{s\lambda}$"> que simula una atenuació diferent en les tres
+components RGB degut al color de l'objecte. No obstant, <!--
+$o_{s\lambda}$ --><IMG WIDTH="24" HEIGHT="24" ALIGN="MIDDLE"
+BORDER="0" SRC="imatges/formula9.gif" ALT="$o_{s\lambda}$"> usualment
+s'inicialitza a (1.0,1.0,1.0).
+
+<P>
+L'equació empírica formulada per Phong per al càlcul de la llum
+especular en un punt és:
+
+<!-- $$I_{s\lambda}(Q) = I_{f\lambda} o_{s\lambda} k_s \cos^n(\phi)$$ -->
+<CENTER>
+<IMG WIDTH="172" HEIGHT="27" SRC="imatges/formula16.gif"
+ALT="Equació de Phong">
+</CENTER>
+
+<UL>
+<LI><!-- $I_{f\lambda}$ --><IMG WIDTH="25" HEIGHT="25" ALIGN="MIDDLE"
+BORDER="0" SRC="imatges/formula12.gif" ALT="$I_{f\lambda}$">: és el
+color (r,g,b) de la llum del focus puntual incident en Q en la
+direcció L. Òbviament només es consideren les llums incidents des dels
+punts exteriors a l'objecte al que pertany Q, és a dir, que l'angle
+<!-- $\theta$ --><IMG WIDTH="10" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+SRC="imatges/formula19.gif" ALT="$\theta$"> es troba en
+[0º,90º].</LI>
+<LI><I>k<sub>s</sub></I>: és el coeficient de reflexió
+especular. Proporció de la llum incident que es reflecteix de manera especular.
+El seu valor estarà comprès entre [0,1].</LI>
+<LI><!-- $o_{s\lambda}$ --><IMG WIDTH="24" HEIGHT="24" ALIGN="MIDDLE"
+BORDER="0" SRC="imatges/formula9.gif" ALT="$o_{s\lambda}$">:
+representa la proporció de cada color fonamental de la llum del focus
+que s'emet degut al color de l'objecte. La seva inicialització és
+simplement per "matisar" el color de la llum reflectida.</LI>
+<LI><!-- $\phi$ --><IMG WIDTH="12" HEIGHT="26" ALIGN="MIDDLE"
+BORDER="0" SRC="imatges/formula23.gif" ALT="$\phi$">: és l'angle
+entre la direcció de la llum reflectida R i la direcció de visió V del
+punt Q (recta que uneix Q amb l'observador). Quan més gran sigui <!--
+$\phi$ --><IMG WIDTH="12" HEIGHT="26" ALIGN="MIDDLE" BORDER="0"
+SRC="imatges/formula23.gif" ALT="$\phi$"> més lluny es troba
+l'observador de la direcció preferent de reflexió especular R.</LI>
+<LI><I>n</I>: modela quan especular és la superfície, és a dir quan
+àmplia és l'obertura del con d'especularitat.</LI>
+</UL>
+
+<P>
+Fixeu-vos que <!-- $\cos^n(\phi)$ --><IMG WIDTH="54" HEIGHT="28"
+ALIGN="MIDDLE" BORDER="0" SRC="imatges/formula24.gif"
+ALT="$\cos^n(\phi)$"> modela l'especularitat que es veurà en el punt
+Q. Quan més gran sigui n, només que l'observador s'allunyi de la
+direcció preferent R, el cosinus tendirà a cero. És a dir, a més gran
+n, un con d'especularitat més estret; per tant, només veurà
+l'especularitat de Q un observador situat a prop de R.</P>
+
+<CENTER>
+<TABLE><TR><TD>
+<img src="imatges/image4.jpg" alt="">
+</TD></TR></TABLE>
+</CENTER>
+
+<P>
+A la figura es mostra un exemple de la visualització d'una esfera
+blanca (<!-- $o_{d\lambda}$ --><IMG WIDTH="25" HEIGHT="24"
+ALIGN="MIDDLE" BORDER="0" SRC="imatges/formula8.gif"
+ALT="$o_{d\lambda}$">=(1.0,1.0,1.0)), il·luminada amb llum blanca (<!--
+$I_{f\lambda}$ --><IMG WIDTH="25" HEIGHT="25" ALIGN="MIDDLE"
+BORDER="0" SRC="imatges/formula12.gif"
+ALT="$I_{f\lambda}$">=(1.0,1.0,1.0)), d'esquerra a dreta variem
+<I>n</I> en {3.0, 5.0, 10.0, 27.0, 200} i de dalt a baix
+<I>k<sub>s</sub></I> en {0.1, 0.25, 0.5). Observeu que la variació de
+<I>k<sub>s</sub></I> afecta a la brillantor de la zona especular
+(atenuació de la llum incident), mentre que la variació de <I>n</I>
+afecta a l'amplada de la taca especular. Reflexioneu sobre el fet que
+per a una posició de l'observador, aquest es troba dins el con
+d'especularitat d'uns determinats punts en els que s'observarà la
+reflexió especular. Si l'observador es desplaça la taca especular
+també ho fa. Observeu l'efecte en un objecte real (casc de moto,
+mirall,...).
+
+<P>
+Si hi ha més d'un focus de llum la reflexió especular total en un punt
+es calcula com la suma de les degudes a cada focus aïllat:
+
+<!-- $$I_{s\lambda}(Q) = \sum (I_{f_i\lambda} o_{s\lambda} k_s \cos(f_i)$$ -->
+<CENTER>
+<IMG WIDTH="214" HEIGHT="43" SRC="imatges/formula17.gif"
+ALT="Més d'un focus">
+</CENTER>
+
+<P>
+La fórmula empírica global considerant reflexió difosa ambient i deguda a
+focus de llums <!-- $I_{f_i\lambda}$ --><IMG WIDTH="29" HEIGHT="25"
+ALIGN="MIDDLE" BORDER="0" SRC="imatges/formula25.gif"
+ALT="$I_{f_i\lambda}$"> és:
+
+<!-- $$I_{\lambda}(Q) = I_a k_a o_d + \suma (I_{f_i\lambda} o_{d\lambda} k_d cos(\fita_i) + ...$$ -->
+<CENTER>
+<IMG WIDTH="440" HEIGHT="43" SRC="imatges/formula18.gif"
+ALT="Equació global">
+</CENTER>
+
+<P><A HREF='m8-empir-exePhong.html'> Exercici demostració</A>
+
+
+<br><br>
+<DIV CLASS="nav">
+<A HREF="m8-empir-exeLamb.html">[Anterior]</a>
+<A HREF="m8-empir-exePhong.html">[Següent]</a>
+</div>
+</body>
+</html>

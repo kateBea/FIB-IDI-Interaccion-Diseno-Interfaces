@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M7.1 Procés de visualització 2D.Sistemes de coordenades.</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT type="text/javascript" SRC="../overlib.js"></SCRIPT>       
+<SCRIPT type="text/javascript" SRC="../overlib_cssw3c.js"></SCRIPT>
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("vis3D","cam");
+</SCRIPT>
+<A NAME="inici"></a>
+<div id="overDiv" style="position: absolute; visibility:hidden; z-index:1000"></div><DIV CLASS="nav">
+<a href="CentreEsc.html">[Anterior]</a>
+<a href="TipusC.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class="tit1">Model de la càmera. 
+<span class="tit2">Vector cap amunt</span>
+</div>
+
+<p>Aquest vector ens determina el possible gir de la càmera respecte
+          la direcció central de visió definida per OC. Formalment, el
+          vector cap amunt és qualsevol vector que es projecti en la
+          direcció de l'eix en el sistema de coordenades de
+          l'observador. Variant el vector, es controla el gir de l'eix
+          y del sistema de coordenades de l'observador, al voltant de
+          l'eix z. Evidentment, el vector cap amunt es veu sempre
+          vertical a la <A CLASS="glossari"
+          HREF="javascript:glossari('Vista.html','*','400','300','no','no','no','yes')"
+          onMouseOver="window.status='Glossari';return true"
+          onMouseOut="window.status='';return true">vista</A> a la
+          pantalla. L'anomenarem <b>{u}</b>.
+
+<p class=exercici>
+    <span class=exernum>Exercici:</span> a la següent escena senzilla,
+           proveu de modificar el vector cap amunt i veieu com va
+           canviant la imatge que obtenim a la vista a la <A
+           CLASS="glossari"
+           HREF="javascript:glossari('FinGraf.html','*','400','300','no','no','no','yes')"
+           onMouseOver="window.status='Glossari';return true"
+           onMouseOut="window.status='';return true">finestra
+           gràfica</A>. Podeu canviar interactivament els paràmetres
+           de visualització <A class=nota 
+	   Href="javascript:void(0);"
+	   onMouseOut="nd();"
+	   onMouseOver="return overlib('En aquest applet el vector cap'+
+           ' amunt està representat com un angle de rotació.',WIDTH,400,
+	   ABOVE,CSSW3C,DIVCLASS,'notes')">NOTA</a>.
+
+
+<!--
+                 Applet 2 que visualitza el cub
+                 Botó de modificació del vector cap amunt (2.5)
+                 Visualització del frustrum i del sist de
+                       coordenades de l'observador
+ -->
+<p>
+<CENTER><table><tr><td>
+   <APPLET CODE ="AppletG2.class" archive="AppletG2.jar,../comuns.jar" WIDTH=640 HEIGHT=480>
+  <PARAM NAME=NApplet VALUE="3">
+  <PARAM NAME=Vrpx    VALUE="5.0">
+  <PARAM NAME=Vrpy    VALUE="5.0">
+  <PARAM NAME=Vrpz    VALUE="5.0">
+  <PARAM NAME=Angx    VALUE="30.0">
+  <PARAM NAME=Angy    VALUE="45.0">
+  <PARAM NAME=Angz    VALUE="0.0">
+  <PARAM NAME=D       VALUE="20.0">
+  <PARAM NAME=Winy    VALUE="5.0">
+  <PARAM NAME=Zfar    VALUE="75.0">
+  <PARAM NAME=Znear   VALUE="1.0">
+  <PARAM NAME=fich    VALUE="">
+  <PARAM NAME=AngExtx VALUE ="30.0">
+  <PARAM NAME=AngExty VALUE="10.0">
+  <PARAM NAME=fichero VALUE="/DAT/2cuboG.dat">
+  <PARAM NAME=Camara VALUE="1">
+  <PARAM NAME=Alfa VALUE="15.0">
+  </APPLET>
+  </td></tr></table>
+  </CENTER>
+
+<P class=exercici>
+          Cal que modifiqueu el vector cap amunt de manera que un dels cubs
+          es vegi dins la vista amb la seva aresta superior quedant
+          horitzontal en la pantalla.
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="CentreEsc.html">[Anterior]</a>
+<a href="TipusC.html">[Següent]</a>
+</div>
+</body>
+</HTML>

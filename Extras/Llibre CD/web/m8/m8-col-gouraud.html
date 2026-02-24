@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title>8 Algorismes de z-buffer</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" TYPE="text/css" HREF="../upc.css">
+<script type="text/javascript" src="../upc.js"></script>
+</head>
+<BODY >
+<SCRIPT>
+top.passara("visib","izbf");
+</SCRIPT>
+<DIV CLASS="nav">
+<A HREF="m8-col-exeConst.html">[Anterior]</a>
+<A HREF="m8-col-exeGouraud.html">[Següent]</a>
+</div>
+<br><br>
+
+<div CLASS="tit1">Models d'il·luminació i Z-buffer.
+<span CLASS="tit2">Colorat de Gouraud</span>
+</div>
+
+<P>
+També s'anomena d'interpolació d'intensitat. Es calcula l'equació
+d'il·luminació per cada vèrtex de la cara (en coordenades d'aplicació)
+i s'interpola linealment entre elles en temps de rasterització per a
+calcular el color en un punt (píxel) interior. La figura mostra la
+tècnica d'interpolació:</P>
+
+<CENTER>
+<TABLE><TR><TD>
+<img src="imatges/gouraud.jpg" alt="Tècnica d'interpolació per Gouraud shading">
+</TD></TR></TABLE>
+</CENTER>
+
+<P>
+L'avantatge principal és la utilització de càlculs simples que poden
+realitzar-se incrementalment dins del procés de rasterització de
+polígons que s'efectua en z-buffer. L'inconvenient principal és que
+els colors en punts interiors sempre estaran dins de l'intèrval de
+color dels vèrtexs.</P>
+
+<!--<CENTER>
+<TABLE><TR><TD>
+<img src="imatges/fig8-13-b-GOURAUD.jpg" alt="Exemple colorejat de Gouraud">
+</TD></TR></TABLE>
+</CENTER>
+-->
+
+<P>
+Aquest fet comporta dos efectes indesitjats:
+
+<UL>
+<LI>L'observador només apreciarà la reflexió especular si aquesta es
+produeix en un vèrtex del polígon.</LI>
+<LI>L'observador veurà un degradat de la intensitat especular en un
+vèrtex cap a l'interior del polígon, la qual cosa implica no poder
+modelitzar miralls perfectes.</LI>
+</UL>
+
+<P>
+Donat l'efecte contra-produent del colorat de Gouraud en aplicar el
+model d'il·luminació de Phong, generalment s'utilitza Lambert.
+
+<P><A HREF='m8-col-exeGouraud.html'> Exercici demostració</A>
+
+
+<BR><BR>
+<DIV CLASS="nav">
+<A HREF="m8-col-exeConst.html">[Anterior]</a>
+<A HREF="m8-col-exeGouraud.html">[Següent]</a>
+</div>
+</body>
+</html>

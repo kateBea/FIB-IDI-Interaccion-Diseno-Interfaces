@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+<script type="text/javascript" src="../upc.js"></script>
+<SCRIPT>
+top.passara("visreal","textu");
+</SCRIPT>
+<BODY>
+<DIV CLASS="nav">
+<a href="m3e10_Textures.html">[Anterior]</a>
+<a href="m3e25_TextGenAutoSh.html">[Següent]</a>
+</div>
+<br><br>
+
+<div class=tit1>Textures.
+<span class=tit2>Definicions Generals</span>
+</div>
+
+<p>Anomenarem <b>textura</b> a una taula <i> T </i> de <i>n</i>
+dimensions a on en cada component o <i>texel</i> s'emmagatzema el
+valor d'una propietat del material d'un objecte, usualment el
+color. El nombre de texels en cada dimensió configura la
+<i>resolució</i> de la textura. Aquests texels, a efectes de
+independitzar la gestió de las textures de la seva resolució concreta,
+els considerarem distribuïts uniformement en l'interval [0,1] en cada
+dimensió. Aquest espai n-dimensional s'anomena <i>espai normalitzat de
+textures</i> i de fet en molts dels càlculs que segueixen es considera
+continu, és a dir, con si tinguéssim una textura de precisió infinita.
+
+<p>La <b>parametrització</b> d'una superfície, és el procés mitjançant
+el qual s'explicita el mecanisme d'assignació de la textura sobre la
+superfície/volum de l'objecte (<i>wraping</i> en nomenclatura
+anglosaxona). Tal i com veurem es pot efectuar de diferents maneres,
+per exemple, assignant explícita i interactivament als vèrtexs dels
+objectes unas coordenades normalitzades de textura o bé definint una
+funció matemàtica que donades les coordenades d'un punt calculi les
+seves coordenades de textura.
+
+<p>L'aplicació o <b>mapat</b> (<i>mapping</i>) de textures en una
+superfície comporta la integració de les textures dins dels algorismes
+de càlcul de visibilitat. Es poden definir dues tècniques:
+
+<ul>
+<li>Mapat Directe. Queda il·lustrat en la figura. Si es considera
+definida la parametrització i la càmera 3D, per a cada texel es
+determina en quin tros de superfície s'aplica i aquest es visualitza
+(projecta)
+<br><br>
+<div align=center><img
+src="imatges/TextMapDirecte.png"></div>
+<br></li>
+<li>Mapat Invers. Queda il·lustrat en la figura. Per a cada pixel
+es determina quín tros de superfície es projecta (cal tenir definida
+la càmera 3D) i d'acord amb la parametrització d'aquesta, en quins
+texels es mapa. Aquesta tècnica és la més adient per algorismes
+de determinació de visibilitat que treballen en espai imatge
+<br><br>
+<div align=center><img src="imatges/TextMapInvers.png"></div>
+<br></li>
+</ul>
+
+<p>De la figura anterior podem intuir que segons la resolució del
+dispositiu i de la textura, així com de la definició de la
+parametrització i de la càmera, pot succeir bé que un pixel s'associï
+a més d'un texel o vice-versa, que diferents pixels quedin
+representats per un mateix texel. Aquest fet comporta efectes extranys
+no desitjats (anomenats d'<i>aliasing</i>) en la visualització deguts
+a la discretització de la textura i del dispositiu. Per a resoldre'ls,
+usualment el valor de textura que s'associa a un pixel és la
+integració (promig) dels valors dels texels en que es
+projecta/mapa. Aquest procés se l'anomena <b>filtratge</b> o
+<i>anti-aliasing</i> de textures.
+
+<!-- <p> En les figures següents podeu observar un polígon al que es mapeja
+una textura. Fixeu-vos que segons l'ampliació del polígon en pantalla,
+el mapeig no es del tot correcte i es perd informació. En tots els
+casos el color del pixel és el del texel més proper al que el mapeig
+l'associa. En les darreres diapositives s'ha dut a terme un filtratge
+que suavitza la imatge obtinguda pero disimula l'aliasing.
+
+aqui un applet passador de diapositives amb captures de pantalla de
+la Regina-->
+
+
+<br><br>
+<DIV CLASS="nav">
+<a href="m3e10_Textures.html">[Anterior]</a>
+<a href="m3e25_TextGenAutoSh.html">[Següent]</a>
+<a href="m3e10_Textures.html">[Començament de l'apartat]</a>
+</div>
+</body>
+</html>

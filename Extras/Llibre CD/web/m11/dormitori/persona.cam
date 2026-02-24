@@ -1,0 +1,31 @@
+#  CONFIGURACIO CAMARA
+# ======================
+
+# vrp
+  189.0  133.0  297.0
+  
+# obs
+  309.0  129.0  388.0	
+  
+# eix que mira cap amunt
+0.01  1.00  0.03  # cy
+
+# camera es pot moure lliurement
+false
+
+# limits 
+  10 340  # x
+  10 240  # y
+  10 390  # z
+
+# es projeccio perspectiva
+true
+
+# zNear, zFar
+10.0 800.0
+
+# alfa
+45.0
+
+# aspect ratio   
+1.0

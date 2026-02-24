@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="CA">
+<HEAD><TITLE>M2.4 Impressores a color</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;
+charset=iso-8859-1">
+<LINK REL="stylesheet" type="text/css" HREF="../upc.css" >
+</HEAD>
+<BODY >
+<SCRIPT>
+top.passara("hard","impr");
+</SCRIPT>
+<A NAME="inici"></a>
+<DIV CLASS="nav">
+      [Anterior]
+      [Següent]
+      <a href="main23.html">[Apartat anterior]</a>
+      <a href="resum.html">[Següent apartat]</a>
+    </div>
+<br><br>
+
+<div class=tit1>Impressores de color</div>
+
+<P> El procés d'impresió a color és intrínsecament diferent al que hem
+discutit fins ara, en quant que el paper, evidentment, no emet llum,
+sino sols reflecteix la que  hi incideix. Resulta doncs necessari adoptar
+models i processos diferents. En particular les tintes usades per a
+imprimir a color no són vermelles verdes i blaves, sino de colors
+cian, magenta i groc (i a vegades s'hi afegeix una quarta tinta negra,
+que és redundant). Les raons perquè es trien aquests colors, com
+s'obtenen d'altres i com es relacionen amb els colors especificats com
+barrejes de llum vermella verda i blava es discuteix en l'<a
+href="../m3/cmyk1.html">apartat corresponent</a> del capítol de <a
+href="../m3/main31.html">color</a>.
+
+<P>Hi ha diferents tècniques per a dipositar aquestes tintes sobre el
+paper. Les més corrents avui en dia, però, són totes de tipus
+<I>raster</I>, en el sentit que veuen el paper com un enreixat de
+cel&middot;les (<I>pixels</I>) en cada una de les quals podem
+especificar la quantitat de cada tinta que volem que s'hi dipositi
+(amb restriccions sobre els valors acceptables). El seu tractament
+programàtic serà doncs molt semblant al necessari per a generar una
+imatge sintètica estàtica en una pantalla.
+
+<P> Les principals tecnologies usades a impressores de color avui dia
+són
+<UL>
+	    <LI><b>raig de tinta:</b>  aquestes impressores tenen un capçal que es
+desplaça sobre el paper (en un camí semblant a l'escombrat que fa un
+feix d'electrons sobre una pantalla de <i>raster</i>). Normalment, a
+diferència de les pantalles, aquest capçal és capaç de pintar varies
+línies del <i>raster</i> en cada passada, i en cada possició és capaç
+de dipositar simultàniament tinta de tots els colors (3 ó 4) de què
+disposa. En cada <i>pixel</I> aquestes impressores poden triar deixar
+una gota d'una determinada tinta o no fer-ho, així que són capaces de
+produïr set colors diferents (més el propi del paper). Són típicament
+capaces d'una molt alta resolució (fins a més de mil punts per
+polsada). El cost per full de la impressió és molt baix.
+	    <li><b>laser:</b> són semblants a impressores laser de B/N, però tenen
+<i>toners</i> de diferents colors. Cada full hi passa vàries (3 ó 4)
+vegades pel circuit de la impressora, però cada vegada rep una imatge
+diferent en toner d'un color diferent. Atenyen menys resolució
+(300-600 punts per polsada) però poden representar molts més colors
+per cada pixel (usualment milers).  El cost per full de la
+impressió és un xic més alt que amb les de raig de tinta, però no
+excessivament elevat.
+	    <li><b>Sublimació:</b> Aquesta és la tècnica de més alta qualitat per a
+impessió. Usa un paper molt semblant al paper de fotografia, i
+pel&middot;lícules de plàstic colorejades a manera de tinta. Els
+fulls també passen vàries vegades pel mecanisme d'impressió, i cada
+cop són recoberts amb una d'aquestes pel&middot;lícules, i un làser
+sublima (vaporitza sense passar per l'estat líquid)  porcions de la
+pel&middot;lícula de tinta. Aquests vapors penetren en el paper
+donant-li el seu color. Aquest sistema també té resolucions com les de
+les impressores laser, però es pot controlar molt detalladament la
+quantitat de tinta de cada color, pel que s'aconsegueixen 16 millons
+de colors com a les pantalles de color. El resultat és difícilment
+discernible d'una fotografia, però el cost per full de la impressió és
+elevat.
+
+
+<br><br>
+<DIV CLASS="nav">
+      [Anterior]
+      [Següent]
+      <a href="main23.html">[Apartat anterior]</a>
+      <a href="resum.html">[Següent apartat]</a>
+    </div>
+
+</BODY>
+
+</HTML>
+
