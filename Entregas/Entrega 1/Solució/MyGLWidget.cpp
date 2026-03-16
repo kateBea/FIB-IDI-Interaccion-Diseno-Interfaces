@@ -1,6 +1,8 @@
 #include "MyGLWidget.h"
 
 #include <iostream>
+#include <algorithm>
+#include <iterator>
 
 MyGLWidget::MyGLWidget (QWidget* parent) : QOpenGLWidget(parent), program(NULL)
 {
@@ -34,6 +36,26 @@ void MyGLWidget::paintGL ()
 
   pintaTangram ();
   pintaTauler ();
+
+  if (ajuda) {
+      glViewport(width()-150, height()-150, 150, 150);
+
+      // Backup estat previ de transformacions
+      Part estatPrevi[7];
+      std::copy(tangram, tangram + 7, estatPrevi);
+
+      // Tangram transformacions
+      for (int i=0; i<7; i++) {
+        tangram[i].angle = 0.0;
+        tangram[i].pos = glm::vec3(0.0);
+      }
+
+      pintaTangram ();
+      pintaTauler ();
+
+      // Restaurar estat
+      std::copy(estatPrevi, estatPrevi + 7, tangram);
+  }
       
   // Desactivem el VAO
   glBindVertexArray(0);
@@ -43,6 +65,17 @@ void MyGLWidget::inicialitzaTGsTangram () {
   for (int i=0; i<7; i++) {
     tangram[i].angle = 0.0;
     tangram[i].pos = glm::vec3(0.0);
+
+    // El tangram nombre N està a l'index i-1
+    if (i == 0 || i == 2 || i == 4 || i == 6) {
+      tangram[i].angle = 90.f;
+      tangram[i].pos = glm::vec3{0.4f, 0.6f, 0.f};
+
+    }
+    else {
+      tangram[i].angle = -45.f;
+      tangram[i].pos = glm::vec3{-0.8f, -0.6f, 0.f};
+    }
   }
 }	
 
@@ -50,6 +83,19 @@ void MyGLWidget::pintaTangram () {
   for (int i=0; i<7; i++) {
     glBindVertexArray (VAO_Part[i]);
     modelTransformPart (tangram[i].centre, tangram[i].pos, tangram[i].angle);
+
+    // Markar com seleccionat
+    GLint loc = glGetUniformLocation(program->programId(), "highlight");
+    if (loc == -1) {
+      std::cerr << "Error highligh location" << std::endl;
+    } else {
+      if (i == partSeleccionada && partSeleccionada != -1) {
+        glUniform1i(loc, true);
+      } else {
+        glUniform1i(loc, false);
+      }
+    }
+
     // Les parts 3 i 5 són quadrilàters, la resta triangles
     if ((i == 2) || (i == 4))
       glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
@@ -59,6 +105,14 @@ void MyGLWidget::pintaTangram () {
 }	
 
 void MyGLWidget::pintaTauler () {
+  // El tauler no ha d'aparèixer com a seleccionat
+  GLint loc = glGetUniformLocation(program->programId(), "highlight");
+  if (loc == -1) {
+    std::cerr << "Error highligh location" << std::endl;
+  } else {
+    glUniform1i(loc, false);
+  }
+
   glBindVertexArray (VAO_Tauler);
   modelTransformTauler ();
   glDrawArrays(GL_LINE_LOOP, 0, 4);
@@ -72,8 +126,18 @@ void MyGLWidget::modelTransformTauler ()
 
 void MyGLWidget::modelTransformPart (glm::vec3 centre, glm::vec3 posicio, float gir)
 {
-  glm::mat4 TG (1.0f);
-  glUniformMatrix4fv (TGLoc, 1, GL_FALSE, &TG[0][0]);
+  glm::mat4 TG{1.0f};
+
+  TG = glm::translate(TG, posicio);
+
+  TG = glm::translate(TG, centre);
+
+  // Els quads només es rotan sobre l'eix Z que surt de la pantalla
+  const auto exiGirZ{ glm::vec3{0.0f, 0.0f, 1.0f} };
+  TG = glm::rotate(TG, glm::radians(gir), exiGirZ);
+  TG = glm::translate(TG, -centre);
+
+  glUniformMatrix4fv(TGLoc, 1, GL_FALSE, &TG[0][0]);
 }
 
 void MyGLWidget::resizeGL (int w, int h)
@@ -94,35 +158,44 @@ void MyGLWidget::keyPressEvent(QKeyEvent* event)
 {
   makeCurrent();
   switch (event->key()) {
-    case Qt::Key_1:
-        break;
-    case Qt::Key_2:
-        break;
-    case Qt::Key_3:
-        break;
-    case Qt::Key_4:
-        break;
-    case Qt::Key_5:
-        break;
-    case Qt::Key_6:
-        break;
-    case Qt::Key_7:
-        break;
+    case Qt::Key_0: partSeleccionada = -1; break;
+
+    case Qt::Key_1: partSeleccionada = 0; break;
+    case Qt::Key_2: partSeleccionada = 1; break;
+    case Qt::Key_3: partSeleccionada = 2; break;
+    case Qt::Key_4: partSeleccionada = 3; break;
+    case Qt::Key_5: partSeleccionada = 4; break;
+    case Qt::Key_6: partSeleccionada = 5; break;
+    case Qt::Key_7: partSeleccionada = 6; break;
+
+    case Qt::Key_Left:
+      if(partSeleccionada != -1) tangram[partSeleccionada].pos.x -= 0.1f;
+      break;
+    case Qt::Key_Right:
+      if(partSeleccionada != -1) tangram[partSeleccionada].pos.x += 0.1f;
+      break;
+
     case Qt::Key_Up:
-    	break;
-    case Qt::Key_Down: 
-    	break;
-    case Qt::Key_Right: 
-    	break;
-    case Qt::Key_Left: 
-    	break;
+      if(partSeleccionada != -1) tangram[partSeleccionada].pos.y += 0.1f;
+      break;
+
+    case Qt::Key_Down:
+      if(partSeleccionada != -1) tangram[partSeleccionada].pos.y -= 0.1f;
+      break;
+
     case Qt::Key_A: 
+      if(partSeleccionada != -1) tangram[partSeleccionada].angle += 45.f;
     	break;
     case Qt::Key_D: 
+      if(partSeleccionada != -1) tangram[partSeleccionada].angle -= 45.f;
     	break;	
+
     case Qt::Key_H: 
+      ajuda = !ajuda;
     	break;
     case Qt::Key_R: 
+      partSeleccionada = -1;
+      inicialitzaTGsTangram();
     	break;	
     default: event->ignore(); break;
   }
@@ -130,7 +203,15 @@ void MyGLWidget::keyPressEvent(QKeyEvent* event)
 }
 
 glm::vec3 MyGLWidget::calculCentre (glm::vec3 *Verts, int nverts){
-  return (glm::vec3(0.0));
+  glm::vec3 centre{0.0f, 0.0f, 0.0f};
+
+  for (int i{0}; i < nverts; ++i) {
+      centre += Verts[i];
+  }
+
+  centre /= static_cast<float>(nverts);
+
+  return centre;
 }
 
 void MyGLWidget::creaBuffers (){

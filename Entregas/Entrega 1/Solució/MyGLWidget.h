@@ -67,4 +67,9 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
     GLint ample, alt;    
     
     Part tangram[7];
+
+    // Peça seleccionada
+    int partSeleccionada = -1;
+
+    bool ajuda = false;
 };
